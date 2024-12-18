@@ -6,11 +6,14 @@ using UnityEngine.EventSystems;
 
 public class Cell : MonoBehaviour
 {
+    [SerializeField] public int type;
     private GameManager gamemanager;
-    public UnityEvent<int> Displayinformation;
+    private UIManager UIManager;
+
     void Start()
     {
         gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
     // Update is called once per frame
@@ -21,6 +24,7 @@ public class Cell : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("1");
+        Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform .position );
+        UIManager.displayinfo(sceenpos, type);
     }
 }
