@@ -7,12 +7,13 @@ using UnityEngine.EventSystems;
 public class Cell : MonoBehaviour
 {
     [SerializeField] public int type;
-    private GameManager gamemanager;
+    private GameManager GameManager;
     private UIManager UIManager;
+    public GameObject moveCell;
 
     void Start()
     {
-        gamemanager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
@@ -24,6 +25,9 @@ public class Cell : MonoBehaviour
 
     private void OnMouseDown()
     {
+        GameManager.selected = this.gameObject;
+        GameManager.SelectedCell();
+        moveCell.SetActive(true);
         Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform .position );
         UIManager.displayinfo(sceenpos, type);
     }
