@@ -31,9 +31,8 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void displayinfo(Vector2 position , int type)
+    public void Displayinfo(Vector2 position , int type)
     {
-        //GameObject target = GameObject.Find("Canvas/Cellinfo");
         RectTransform rt = Cellinfo.GetComponent<RectTransform>();
         Camera uiCamera = null;
         Vector3 globalmouseposition;

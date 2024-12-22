@@ -10,7 +10,6 @@ public class Cell : MonoBehaviour
     private GameManager GameManager;
     private UIManager UIManager;
     public GameObject moveCell;
-
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -25,9 +24,24 @@ public class Cell : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.selected = this.gameObject;
-        if(!GameManager.SelectedCell()) moveCell.SetActive(true);
-        Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform .position );
-        UIManager.displayinfo(sceenpos, type);
+            GameManager.selected = this.gameObject;
+            if (!GameManager.SelectedCell()) moveCell.SetActive(true);
+            Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform.position);
+            UIManager.Displayinfo(sceenpos, type);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        {
+            
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        {
+          
+        }
     }
 }

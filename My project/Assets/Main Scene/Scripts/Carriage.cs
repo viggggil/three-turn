@@ -28,5 +28,6 @@ public class Carriage : MonoBehaviour
     public void Move(Vector2 direction)
     {
         transform.position = direction;
+        transform.position-=new Vector3 (0,0,0.01f);
     }
 }

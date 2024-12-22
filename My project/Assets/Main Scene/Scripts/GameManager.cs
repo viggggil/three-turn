@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowMoveRange()
     {
+        CloseSelect();
         foreach (var cell in cells)
         {
             int range = selected.GetComponent<Carriage>().moveRange;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         {
             CloseSelect();
             moveList.Add(selected);
+            toMove = false;
             return false;
         }
         
