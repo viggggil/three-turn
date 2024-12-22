@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
     public GameObject selected;
     private List<GameObject> moveList;
+    public bool toMove=false;
+    public UnityEvent<Vector2> move;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
@@ -29,12 +34,24 @@ public class GameManager : MonoBehaviour
                 moveList.Add(cell);
             }
         }
+        toMove = true;
     }
 
-    public void SelectedCell()
+    public bool SelectedCell()
     {
-        CloseSelect();
-        moveList.Add(selected);
+        if(toMove && moveList.Contains(selected))
+        {
+            move?.Invoke(selected.transform.position);
+            CloseSelect();
+            return true;
+        }
+        else
+        {
+            CloseSelect();
+            moveList.Add(selected);
+            return false;
+        }
+        
     }
     public void CloseSelect()
     {

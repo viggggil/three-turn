@@ -24,4 +24,9 @@ public class Carriage : MonoBehaviour
         GameManager.selected = this.gameObject;
         GameManager.ShowMoveRange();
     }
+
+    public void Move(Vector2 direction)
+    {
+        transform.position = direction;
+    }
 }

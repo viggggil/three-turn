@@ -26,8 +26,7 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         GameManager.selected = this.gameObject;
-        GameManager.SelectedCell();
-        moveCell.SetActive(true);
+        if(!GameManager.SelectedCell()) moveCell.SetActive(true);
         Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform .position );
         UIManager.displayinfo(sceenpos, type);
     }
