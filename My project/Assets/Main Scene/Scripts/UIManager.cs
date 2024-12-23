@@ -10,20 +10,22 @@ public class UIManager : MonoBehaviour
     public Text infotext;
     public GameObject Cellinfo;
     
-    
     enum Celltype
     {
         grass,
         woods,
-        forest
+        forest,
+        flowerfield
     }
     private Dictionary<Celltype, string> celldic = new Dictionary<Celltype, string>()
     {{Celltype.grass,"草坪"},
-     {Celltype.woods,"森林"}
+     {Celltype.woods,"森林"},
+      {Celltype.flowerfield,"花地" }
     };
 
     void Start()
     {
+        Cellinfo.SetActive(false);
     }
 
     void Update()
@@ -34,10 +36,16 @@ public class UIManager : MonoBehaviour
     public void Displayinfo(Vector2 position , int type)
     {
         RectTransform rt = Cellinfo.GetComponent<RectTransform>();
+        Cellinfo.SetActive(true);
         Camera uiCamera = null;
         Vector3 globalmouseposition;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, position, uiCamera, out globalmouseposition);
         Cellinfo.transform.position = globalmouseposition ;
         infotext.text = celldic[(Celltype)type];
+    }
+
+    public void CloseInfo()
+    {
+        Cellinfo.SetActive(false);
     }
 }

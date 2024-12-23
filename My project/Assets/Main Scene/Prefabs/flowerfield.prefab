@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529a901f162a62347a20e5186e9d84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 3
   moveCell: {fileID: 2797528225816677791}
 --- !u!61 &-7227613484743017205
 BoxCollider2D:
