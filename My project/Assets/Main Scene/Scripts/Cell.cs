@@ -31,7 +31,7 @@ public class Cell : MonoBehaviour
             {
                 moveCell.SetActive(true);
                 Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.5f, 0, 0));
-                UIManager.Displayinfo(sceenpos, type);
+                UIManager.DisplayInfo(sceenpos, type);
                 isSelected = true;
             }
             else

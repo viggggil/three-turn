@@ -9,7 +9,9 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     public Text infotext;
     public GameObject Cellinfo;
-    
+    public Slider staminaSlider;
+    public GameObject staminaBar;
+
     enum Celltype
     {
         grass,
@@ -33,7 +35,7 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void Displayinfo(Vector2 position , int type)
+    public void DisplayInfo(Vector2 position , int type)
     {
         RectTransform rt = Cellinfo.GetComponent<RectTransform>();
         Cellinfo.SetActive(true);
@@ -47,5 +49,11 @@ public class UIManager : MonoBehaviour
     public void CloseInfo()
     {
         Cellinfo.SetActive(false);
+    }
+
+    public void UpdateSlider(float currentStamina, float maxStamina)
+    {
+        staminaSlider.maxValue = maxStamina;
+        staminaSlider.value = currentStamina;
     }
 }

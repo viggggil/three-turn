@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public GameObject selected;
     private List<GameObject> moveList;
     public bool toMove=false;
-    public UnityEvent<Vector2> move;
+    public UnityEvent<Vector2> Move;
+    public UnityEvent turnStart;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
@@ -27,9 +28,8 @@ public class GameManager : MonoBehaviour
         CloseSelect();
         foreach (var cell in cells)
         {
-            int range = selected.GetComponent<Carriage>().moveRange;
             if(Mathf.Abs(cell.transform.position .x-selected .transform .position .x)
-                +Mathf.Abs(cell.transform.position .y-selected.transform .position.y) <= range)
+                +Mathf.Abs(cell.transform.position .y-selected.transform .position.y) <= 1)
             {
                 cell.GetComponent<Cell>().moveCell.SetActive(true);
                 moveList.Add(cell);
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     {
         if(toMove && moveList.Contains(selected))
         {
-            move?.Invoke(selected.transform.position);
+            Move?.Invoke(selected.transform.position);
             CloseSelect();
             return true;
         }
@@ -66,6 +66,12 @@ public class GameManager : MonoBehaviour
         }
         moveList.Clear();
     }
+
+    public void TurnStart()
+    {
+        turnStart?.Invoke();
+    }
+
 
  
 
