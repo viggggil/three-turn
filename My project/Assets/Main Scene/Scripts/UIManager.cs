@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Text infotext;
+    public Text infoText;
     public GameObject Cellinfo;
     public Slider staminaSlider;
     public GameObject staminaBar;
-
+    public Text staminaValue;
+    private string _staminaValue;
+    public Button turnNextButton;
+    public UnityEvent turnStart;
     enum Celltype
     {
         grass,
@@ -28,6 +33,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         Cellinfo.SetActive(false);
+        turnNextButton.onClick.AddListener(TurnStart);
     }
 
     void Update()
@@ -43,7 +49,7 @@ public class UIManager : MonoBehaviour
         Vector3 globalmouseposition;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, position, uiCamera, out globalmouseposition);
         Cellinfo.transform.position = globalmouseposition ;
-        infotext.text = celldic[(Celltype)type];
+        infoText.text = celldic[(Celltype)type];
     }
 
     public void CloseInfo()
@@ -55,5 +61,12 @@ public class UIManager : MonoBehaviour
     {
         staminaSlider.maxValue = maxStamina;
         staminaSlider.value = currentStamina;
+        _staminaValue = string.Format("{0}/{1}",currentStamina ,maxStamina );
+        staminaValue.text = _staminaValue;
+    }
+
+    public void TurnStart()
+    {
+        turnStart?.Invoke();
     }
 }

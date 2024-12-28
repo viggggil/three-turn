@@ -42,15 +42,20 @@ public class Carriage : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        transform.position = direction;
-        transform.position-=new Vector3 (0,0,0.01f);
-        curStamina -= 1;
-        StaminaUpdate?.Invoke(curStamina, maxStamina);
-        isSelected = false;
+        if (curStamina >=1)
+        {
+            transform.position = direction;
+            transform.position -= new Vector3(0, 0, 0.01f);
+            curStamina -= 1;
+            StaminaUpdate?.Invoke(curStamina, maxStamina);
+            isSelected = false;
+        }
+       
     }
 
     public void TurnStart()
     {
         curStamina = maxStamina;
+        StaminaUpdate?.Invoke(curStamina, maxStamina);
     }
 }
