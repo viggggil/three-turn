@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
+  m_Name: farm
+  m_EditorClassIdentifier: 
+  m_DefaultSprite: {fileID: 21300000, guid: be5cade101fdddd49b0695e50fc14c2f, type: 3}
+  m_DefaultGameObject: {fileID: 2831859525146694366, guid: 2aa0ae542b7bb5f40b057ee749de1d25, type: 3}
+  m_DefaultColliderType: 1
+  m_TilingRules: []
