@@ -10,14 +10,13 @@ public class Cell : MonoBehaviour
     private GameManager GameManager;
     private UIManager UIManager;
     public GameObject moveCell;
+    public GameObject fog;
     private bool isSelected;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
     public GameObject selected;
+    public GameObject player;
     private List<GameObject> moveList;
     public bool toMove=false;
     public UnityEvent<Vector2> Move;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         moveList = new List<GameObject>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        ClearFog();
     }
     void Update()
     {
@@ -38,11 +41,26 @@ public class GameManager : MonoBehaviour
         toMove = true;
     }
 
+    
+
+    public void ClearFog()
+    {
+        foreach (var cell in cells)
+        {
+            if (Mathf.Abs(cell.transform.position.x - player.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - player.transform.position.y) <= 4)
+            {
+                cell.GetComponent<Cell>().fog.SetActive(false);
+            }
+        }
+    }
+
     public bool SelectedCell()
     {
         if(toMove && moveList.Contains(selected))
         {
             Move?.Invoke(selected.transform.position);
+            ClearFog();
             CloseSelect();
             return true;
         }
