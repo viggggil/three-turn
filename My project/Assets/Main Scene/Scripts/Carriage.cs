@@ -18,6 +18,7 @@ public class Carriage : MonoBehaviour
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        TurnStart();
     }
 
     // Update is called once per frame
