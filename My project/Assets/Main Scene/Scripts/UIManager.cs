@@ -22,12 +22,14 @@ public class UIManager : MonoBehaviour
         grass,
         woods,
         forest,
-        flowerfield
+        flowerfield,
+        mountain
     }
     private Dictionary<Celltype, string> celldic = new Dictionary<Celltype, string>()
     {{Celltype.grass,"草坪"},
      {Celltype.woods,"森林"},
-      {Celltype.flowerfield,"花地" }
+      {Celltype.flowerfield,"花地" },
+       { Celltype.mountain,"山地"}
     };
 
     void Start()

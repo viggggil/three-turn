@@ -25,7 +25,7 @@ public class Cell : MonoBehaviour
     private void OnMouseDown()
     {
         GameManager.selected = this.gameObject;
-        if (!GameManager.SelectedCell() ){
+        if (!GameManager.SelectedCell(type) ){
             if (!isSelected)
             {
                 moveCell.SetActive(true);

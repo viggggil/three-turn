@@ -55,9 +55,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool SelectedCell()
+    public bool SelectedCell(int type)
     {
-        if(toMove && moveList.Contains(selected))
+        if(toMove && moveList.Contains(selected)&& type<4)
         {
             Move?.Invoke(selected.transform.position);
             ClearFog();
