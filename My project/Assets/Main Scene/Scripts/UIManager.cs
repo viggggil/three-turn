@@ -17,7 +17,11 @@ public class UIManager : MonoBehaviour
     private string _staminaValue;
     public Button turnNextButton;
     public UnityEvent turnStart;
-    enum Celltype
+    public GameObject EnemyInfo;
+    public Text EnemyName;
+    public Text EnemyDescribe;
+    public Button battleSceneButton;
+    enum CellType
     {
         grass,
         woods,
@@ -25,17 +29,27 @@ public class UIManager : MonoBehaviour
         flowerfield,
         mountain
     }
-    private Dictionary<Celltype, string> celldic = new Dictionary<Celltype, string>()
-    {{Celltype.grass,"草坪"},
-     {Celltype.woods,"森林"},
-      {Celltype.flowerfield,"花地" },
-       { Celltype.mountain,"山地"}
+    private Dictionary<CellType, string> celldic = new Dictionary<CellType, string>()
+    {{CellType.grass,"草坪"},
+     {CellType.woods,"森林"},
+      {CellType.flowerfield,"花地" },
+       { CellType.mountain,"山地"}
+    };
+
+    enum EnemyType
+    {
+        axeman
+    }
+    private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
+    {
+        {EnemyType.axeman,"还没取好名字的怪" }
     };
 
     void Start()
     {
         Cellinfo.SetActive(false);
         turnNextButton.onClick.AddListener(TurnStart);
+        battleSceneButton.onClick.AddListener(EnterBattleScene);
     }
 
     void Update()
@@ -51,14 +65,21 @@ public class UIManager : MonoBehaviour
         Vector3 globalmouseposition;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rt, position, uiCamera, out globalmouseposition);
         Cellinfo.transform.position = globalmouseposition ;
-        infoText.text = celldic[(Celltype)type];
+        infoText.text = celldic[(CellType)type];
     }
 
     public void CloseInfo()
     {
         Cellinfo.SetActive(false);
+        EnemyInfo.SetActive(false);
     }
 
+    public void DisplayEnemyInformation(int type)
+    {
+        EnemyInfo.SetActive(true);
+        EnemyName.text = EnemyNameDictionary[(EnemyType)type];
+
+    }
     public void UpdateSlider(float currentStamina, float maxStamina)
     {
         staminaSlider.maxValue = maxStamina;
@@ -70,5 +91,10 @@ public class UIManager : MonoBehaviour
     public void TurnStart()
     {
         turnStart?.Invoke();
+    }
+
+    public void EnterBattleScene()
+    {
+        SceneLoader.Instance.LoadBattleScene();
     }
 }
