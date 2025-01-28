@@ -12,10 +12,12 @@ public class Cell : MonoBehaviour
     public GameObject moveCell;
     public GameObject fog;
     private bool isSelected;
+    private bool isOn=false;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        fog.SetActive(true);
     }
     void Update()
     {
@@ -24,37 +26,41 @@ public class Cell : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.selected = this.gameObject;
-        if (!GameManager.SelectedCell(type) ){
-            if (!isSelected)
+        if (!isOn)
+        {
+            GameManager.selected = this.gameObject;
+            if (!GameManager.SelectedCell(type))
             {
-                moveCell.SetActive(true);
-                Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.5f, 0, 0));
-                UIManager.DisplayInfo(sceenpos, type);
-                isSelected = true;
-            }
-            else
-            {
-                moveCell.SetActive(false);
-                GameManager.CloseSelect();
-                UIManager.CloseInfo();
-                isSelected = false;
+                if (!isSelected)
+                {
+                    moveCell.SetActive(true);
+                    Vector2 sceenpos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.5f, 0, 0));
+                    UIManager.DisplayInfo(sceenpos, type);
+                    isSelected = true;
+                }
+                else
+                {
+                    moveCell.SetActive(false);
+                    GameManager.CloseSelect();
+                    UIManager.CloseInfo();
+                    isSelected = false;
+                }
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        if (collision.gameObject.CompareTag("Enemy") )
         {
-            
+            isOn = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.BoxCollider2D")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-          
+            isOn = false;
         }
     }
 }
