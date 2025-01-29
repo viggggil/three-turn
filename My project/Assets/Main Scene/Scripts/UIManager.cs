@@ -15,6 +15,10 @@ public class UIManager : MonoBehaviour
     public GameObject staminaBar;
     public Text staminaValue;
     private string _staminaValue;
+    public Slider staminaSlider2;
+    public GameObject staminaBar2;
+    public Text staminaValue2;
+    private string _staminaValue2;
     public Button turnNextButton;
     public UnityEvent turnStart;
     public GameObject EnemyInfo;
@@ -80,12 +84,21 @@ public class UIManager : MonoBehaviour
         EnemyName.text = EnemyNameDictionary[(EnemyType)type];
 
     }
-    public void UpdateSlider(float currentStamina, float maxStamina)
+    public void UpdateSlider(float currentStamina, float maxStamina,int ID)
     {
-        staminaSlider.maxValue = maxStamina;
-        staminaSlider.value = currentStamina;
-        _staminaValue = string.Format("{0}/{1}",currentStamina ,maxStamina );
-        staminaValue.text = _staminaValue;
+        if (ID == 1)
+        {
+            staminaSlider.maxValue = maxStamina;
+            staminaSlider.value = currentStamina;
+            _staminaValue = string.Format("{0}/{1}", currentStamina, maxStamina);
+            staminaValue.text = _staminaValue;
+        }else if (ID == 2)
+        {
+            staminaSlider2.maxValue = maxStamina;
+            staminaSlider2.value = currentStamina;
+            _staminaValue2 = string.Format("{0}/{1}", currentStamina, maxStamina);
+            staminaValue2.text = _staminaValue2;
+        }
     }
 
     public void TurnStart()

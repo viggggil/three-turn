@@ -13,7 +13,8 @@ public class Carriage : MonoBehaviour
     public int curStamina;
     private bool isSelected;
     public UIManager UIManager;
-    public UnityEvent<float,float> StaminaUpdate;
+    public UnityEvent<float,float,int> StaminaUpdate;
+    public int playerID;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -30,7 +31,7 @@ public class Carriage : MonoBehaviour
     {
         UIManager.CloseInfo();
         if (!isSelected){ 
-        GameManager.selected = this.gameObject;
+        GameManager.selectedPlayer = this.gameObject;
         GameManager.ShowMoveRange();
             isSelected = true;
         }
@@ -48,7 +49,7 @@ public class Carriage : MonoBehaviour
             transform.position = direction;
             transform.position -= new Vector3(0, 0, 0.01f);
             curStamina -= 1;
-            StaminaUpdate?.Invoke(curStamina, maxStamina);
+            StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
             isSelected = false;
         }
        
@@ -57,6 +58,6 @@ public class Carriage : MonoBehaviour
     public void TurnStart()
     {
         curStamina = maxStamina;
-        StaminaUpdate?.Invoke(curStamina, maxStamina);
+        StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
     }
 }

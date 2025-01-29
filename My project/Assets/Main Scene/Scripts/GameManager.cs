@@ -9,16 +9,14 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
     public GameObject selected;
-    public GameObject player;
+    public GameObject selectedPlayer;
     private List<GameObject> moveList;
     public bool toMove=false;
-    public UnityEvent<Vector2> Move;
     public UnityEvent turnStart;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         moveList = new List<GameObject>();
-        player = GameObject.FindGameObjectWithTag("Player");
         ClearFog();
     }
     void Update()
@@ -31,8 +29,8 @@ public class GameManager : MonoBehaviour
         CloseSelect();
         foreach (var cell in cells)
         {
-            if(Mathf.Abs(cell.transform.position .x-selected .transform .position .x)
-                +Mathf.Abs(cell.transform.position .y-selected.transform .position.y) <= 1)
+            if(Mathf.Abs(cell.transform.position .x-selectedPlayer .transform .position .x)
+                +Mathf.Abs(cell.transform.position .y-selectedPlayer.transform .position.y) <= 1)
             {
                 cell.GetComponent<Cell>().moveCell.SetActive(true);
                 moveList.Add(cell);
@@ -47,8 +45,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (var cell in cells)
         {
-            if (Mathf.Abs(cell.transform.position.x - player.transform.position.x)
-                + Mathf.Abs(cell.transform.position.y - player.transform.position.y) <= 4)
+            if (Mathf.Abs(cell.transform.position.x - selectedPlayer.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - selectedPlayer.transform.position.y) <= 4)
             {
                 cell.GetComponent<Cell>().fog.SetActive(false);
             }
@@ -59,7 +57,7 @@ public class GameManager : MonoBehaviour
     {
         if(toMove && moveList.Contains(selected)&& type<4)
         {
-            Move?.Invoke(selected.transform.position);
+            selectedPlayer.GetComponent<Carriage>().Move(selected.transform.position);
             ClearFog();
             CloseSelect();
             return true;
