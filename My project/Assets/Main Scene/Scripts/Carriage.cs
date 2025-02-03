@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -14,11 +15,13 @@ public class Carriage : MonoBehaviour
     private bool isSelected;
     public UIManager UIManager;
     public UnityEvent<float,float,int> StaminaUpdate;
+    public CameraFollower CameraFollower;
     public int playerID;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        CameraFollower= GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         TurnStart();
     }
 
@@ -30,6 +33,7 @@ public class Carriage : MonoBehaviour
     private void OnMouseDown()
     {
         UIManager.CloseInfo();
+        CameraFollower.ChangeSelected(this.gameObject);
         if (!isSelected){ 
         GameManager.selectedPlayer = this.gameObject;
         GameManager.ShowMoveRange();
