@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Knight : MonoBehaviour
 {
+    CharaterProperty charaterProperty;
+
+    private void Start()
+    {
+        charaterProperty = this.GetComponent<CharaterProperty>();
+    }
     void skill1(GameObject enemy,int attack)//¹¥»÷Ò»¸öµÐÈË
     {
         Enemy e = enemy.GetComponent<Enemy>();
