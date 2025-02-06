@@ -25,6 +25,14 @@ public class UIManager : MonoBehaviour
     public Text EnemyName;
     public Text EnemyDescribe;
     public Button battleSceneButton;
+    public GameObject bsButton;
+    public Button eventButton1;
+    public GameObject eButton1;
+    public Text eButton1text;
+    public Button eventButton2;
+    public GameObject eButton2;
+    public Text eButton2text;
+    public Button closePanelButton;
     enum CellType
     {
         grass,
@@ -39,14 +47,37 @@ public class UIManager : MonoBehaviour
       {CellType.flowerfield,"花地" },
        { CellType.mountain,"山地"}
     };
-
     enum EnemyType
     {
         axeman
     }
+    enum EventType 
+    { 
+        fountain
+    }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
         {EnemyType.axeman,"还没取好名字的怪" }
+    };
+    private Dictionary<EnemyType, string> EnemyDescribeDictionary = new Dictionary<EnemyType, string>()
+    {
+        {EnemyType.axeman,"怪物的描述" }
+    };
+    private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
+    {
+        {EventType.fountain,"活力喷泉" }
+    };
+    private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
+    {
+        {EventType.fountain,"rpg游戏里常见的泉水，显然是用来恢复的" }
+    };
+    private Dictionary<EventType, string> EventButton1Dictionary = new Dictionary<EventType, string>()
+    {
+        {EventType.fountain,"饮用" }
+    };
+    private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
+    {
+        {EventType.fountain,"原地休息" }
     };
 
     void Start()
@@ -54,6 +85,7 @@ public class UIManager : MonoBehaviour
         Cellinfo.SetActive(false);
         turnNextButton.onClick.AddListener(TurnStart);
         battleSceneButton.onClick.AddListener(EnterBattleScene);
+        closePanelButton.onClick.AddListener(CloseInfo);
     }
 
     void Update()
@@ -81,8 +113,23 @@ public class UIManager : MonoBehaviour
     public void DisplayEnemyInformation(int type)
     {
         EnemyInfo.SetActive(true);
+        bsButton.SetActive(true);
+        eButton1.SetActive(false);
+        eButton2.SetActive(false);
+        EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)type];
         EnemyName.text = EnemyNameDictionary[(EnemyType)type];
+    }
 
+    public void DisplayEventInformation(int type)
+    {
+        EnemyInfo.SetActive(true);
+        bsButton.SetActive(false);
+        eButton1.SetActive(true);
+        eButton2.SetActive(true);
+        EnemyName.text = EventNameDictionary[(EventType)type];
+        EnemyDescribe.text = EventDescribeDictionary[(EventType)type];
+        eButton1text.text = EventButton1Dictionary[(EventType)type];
+        eButton2text.text = EventButton2Dictionary[(EventType)type];
     }
     public void UpdateSlider(float currentStamina, float maxStamina,int ID)
     {

@@ -55,10 +55,18 @@ public class Cell : MonoBehaviour
         {
             isOn = true;
         }
+        if (collision.gameObject.CompareTag("Event"))
+        {
+            isOn = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            isOn = false;
+        }
+        if (collision.gameObject.CompareTag("Event"))
         {
             isOn = false;
         }
