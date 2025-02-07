@@ -19,11 +19,23 @@ public class UIManager : MonoBehaviour
     public GameObject staminaBar2;
     public Text staminaValue2;
     private string _staminaValue2;
+
+    public Slider healthSlider;
+    public GameObject healthBar;
+    public Text healthValue;
+    private string _healthValue;
+    public Slider healthSlider2;
+    public GameObject healthBar2;
+    public Text healthValue2;
+    private string _healthValue2;
+
     public Button turnNextButton;
     public UnityEvent turnStart;
+
     public GameObject EnemyInfo;
     public Text EnemyName;
     public Text EnemyDescribe;
+
     public Button battleSceneButton;
     public GameObject bsButton;
     public Button eventButton1;
@@ -33,6 +45,9 @@ public class UIManager : MonoBehaviour
     public GameObject eButton2;
     public Text eButton2text;
     public Button closePanelButton;
+
+    public Event_Map selectedEvent;
+
     enum CellType
     {
         grass,
@@ -86,6 +101,8 @@ public class UIManager : MonoBehaviour
         turnNextButton.onClick.AddListener(TurnStart);
         battleSceneButton.onClick.AddListener(EnterBattleScene);
         closePanelButton.onClick.AddListener(CloseInfo);
+        eventButton1.onClick.AddListener(EventChoiceOne);
+        eventButton2.onClick.AddListener(EventChoiceTwo);
     }
 
     void Update()
@@ -103,13 +120,11 @@ public class UIManager : MonoBehaviour
         Cellinfo.transform.position = globalmouseposition ;
         infoText.text = celldic[(CellType)type];
     }
-
     public void CloseInfo()
     {
         Cellinfo.SetActive(false);
         EnemyInfo.SetActive(false);
     }
-
     public void DisplayEnemyInformation(int type)
     {
         EnemyInfo.SetActive(true);
@@ -119,9 +134,9 @@ public class UIManager : MonoBehaviour
         EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)type];
         EnemyName.text = EnemyNameDictionary[(EnemyType)type];
     }
-
-    public void DisplayEventInformation(int type)
+    public void DisplayEventInformation(int type,GameObject thisEvent)
     {
+        selectedEvent = thisEvent.GetComponent<Event_Map>();
         EnemyInfo.SetActive(true);
         bsButton.SetActive(false);
         eButton1.SetActive(true);
@@ -131,7 +146,17 @@ public class UIManager : MonoBehaviour
         eButton1text.text = EventButton1Dictionary[(EventType)type];
         eButton2text.text = EventButton2Dictionary[(EventType)type];
     }
-    public void UpdateSlider(float currentStamina, float maxStamina,int ID)
+
+    public void EventChoiceOne()
+    {
+        selectedEvent.EventOne();
+    }
+    public void EventChoiceTwo()
+    {
+        selectedEvent.EventTwo();
+    }
+
+    public void UpdateStaminaSlider(float currentStamina, float maxStamina,int ID)
     {
         if (ID == 1)
         {
@@ -147,7 +172,23 @@ public class UIManager : MonoBehaviour
             staminaValue2.text = _staminaValue2;
         }
     }
-
+    public void UpdateHealthSlider(float currentHealth, float maxHealth, int ID)
+    {
+        if (ID == 1)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+            _healthValue = string.Format("{0}/{1}", currentHealth, maxHealth);
+            healthValue.text = _healthValue;
+        }
+        else if (ID == 2)
+        {
+            healthSlider2.maxValue = maxHealth;
+            healthSlider2.value = currentHealth;
+            _healthValue2 = string.Format("{0}/{1}", currentHealth, maxHealth);
+            healthValue2.text = _healthValue2;
+        }
+    }
     public void TurnStart()
     {
         turnStart?.Invoke();
