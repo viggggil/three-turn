@@ -17,11 +17,13 @@ public class Carriage : MonoBehaviour
     public UnityEvent<float,float,int> StaminaUpdate;
     public CameraFollower CameraFollower;
     public int playerID;
+    private PlayerTeamState PlayerTeamState;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        CameraFollower= GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
+        CameraFollower = GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
+        PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         TurnStart();
     }
 
@@ -34,6 +36,7 @@ public class Carriage : MonoBehaviour
     {
         UIManager.CloseInfo();
         CameraFollower.ChangeSelected(this.gameObject);
+        PlayerTeamState.ChangeSelected(playerID);
         if (!isSelected){ 
         GameManager.selectedPlayer = this.gameObject;
         GameManager.ShowMoveRange();
@@ -58,7 +61,6 @@ public class Carriage : MonoBehaviour
         }
        
     }
-
     public void TurnStart()
     {
         curStamina = maxStamina;
