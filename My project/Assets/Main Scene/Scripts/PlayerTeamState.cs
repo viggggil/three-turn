@@ -17,7 +17,7 @@ public class PlayerTeamState : MonoBehaviour
         {
             isHere = new bool[3] { false, false, false };
             curHealth = new int[3];
-            maxHealth = new int[3];
+            maxHealth = new int[3] { 5, 5, 5 };
             curMagic = new int[3];
             maxMagic = new int[3];
         }

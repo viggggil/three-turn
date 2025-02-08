@@ -6,10 +6,12 @@ public class Event_Map : MonoBehaviour
 {
     private UIManager UIManager;
     private PlayerTeamState PlayerTeamState;
+    private GameManager GameManager;
     [SerializeField] public int type;
     void Start()
     {
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
     }
 
@@ -20,7 +22,8 @@ public class Event_Map : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        UIManager.DisplayEventInformation(type,this.gameObject);
+        bool flag = GameManager.TestDistance(this.gameObject);
+        UIManager.DisplayEventInformation(type,this.gameObject,flag);
     }
 
     public void EventOne()
@@ -30,6 +33,10 @@ public class Event_Map : MonoBehaviour
             case 0:
                 {
                     PlayerTeamState.UpdateHealth(10000);
+                    break;
+                }
+            case 1:
+                {
                     break;
                 }
         }

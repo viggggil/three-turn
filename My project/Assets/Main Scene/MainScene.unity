@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 10037778}
   - component: {fileID: 10037780}
   - component: {fileID: 10037779}
+  - component: {fileID: 10037781}
   m_Layer: 0
   m_Name: grass
   m_TagString: Untagged
@@ -5822,6 +5823,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &10037781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10037777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c8d9707ad4804da3f7a29ca4a7fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &27724846
 GameObject:
   m_ObjectHideFlags: 0
@@ -6358,7 +6372,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4541168062378548719, guid: c8ebef5482e9f3c44ac939bbbf78509f, type: 3}
       propertyPath: m_Name
-      value: spring
+      value: fountain
       objectReference: {fileID: 0}
     - target: {fileID: 4541168062378548719, guid: c8ebef5482e9f3c44ac939bbbf78509f, type: 3}
       propertyPath: m_TagString
@@ -6366,11 +6380,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7702526836570600269, guid: c8ebef5482e9f3c44ac939bbbf78509f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7702526836570600269, guid: c8ebef5482e9f3c44ac939bbbf78509f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7702526836570600269, guid: c8ebef5482e9f3c44ac939bbbf78509f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8296,8 +8310,8 @@ MonoBehaviour:
   turnStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7463459626724818478}
-        m_TargetAssemblyTypeName: Carriage, Assembly-CSharp
+      - m_Target: {fileID: 1854837412}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: TurnStart
         m_Mode: 1
         m_Arguments:
@@ -8888,7 +8902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1067091748
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9522,7 +9536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1325230367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10119,7 +10133,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 834002370}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: UpdateSlider
+        m_MethodName: UpdateStaminaSlider
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11254,23 +11268,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cells: []
   selected: {fileID: 0}
-  selectedPlayer: {fileID: 662031538284903925}
+  Players:
+  - {fileID: 662031538284903925}
+  - {fileID: 1576470883}
+  selectedID: 1
   toMove: 0
-  turnStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7463459626724818478}
-        m_TargetAssemblyTypeName: Carriage, Assembly-CSharp
-        m_MethodName: TurnStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &1854837413
 Transform:
   m_ObjectHideFlags: 0
@@ -11723,6 +11725,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054057030}
   m_CullTransparentMesh: 1
+--- !u!1 &2072345330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2491723956754901854, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+  m_PrefabInstance: {fileID: 8982523828366951068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2072345334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072345330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c8d9707ad4804da3f7a29ca4a7fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
 --- !u!1 &2082919157
 GameObject:
   m_ObjectHideFlags: 0
@@ -12173,7 +12193,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 834002370}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: UpdateSlider
+        m_MethodName: UpdateStaminaSlider
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12200,6 +12220,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8982523828366951068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588659516744004246, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2491723956754901854, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      propertyPath: m_Name
+      value: well
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2491723956754901854, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2072345334}
+  m_SourcePrefab: {fileID: 100100000, guid: e2e01ace046fdb9458deaf759df6922f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -12218,3 +12298,4 @@ SceneRoots:
   - {fileID: 358034762}
   - {fileID: 211451544}
   - {fileID: 1209411515}
+  - {fileID: 8982523828366951068}

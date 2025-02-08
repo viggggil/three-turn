@@ -68,7 +68,8 @@ public class UIManager : MonoBehaviour
     }
     enum EventType 
     { 
-        fountain
+        fountain,
+        well
     }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
@@ -80,15 +81,18 @@ public class UIManager : MonoBehaviour
     };
     private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
     {
-        {EventType.fountain,"活力喷泉" }
+        {EventType.fountain,"活力喷泉" },
+        {EventType.well,"许愿井" }
     };
     private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
     {
-        {EventType.fountain,"rpg游戏里常见的泉水，显然是用来恢复的" }
+        {EventType.fountain,"rpg游戏里常见的泉水，显然是用来恢复的" },
+        {EventType.well,"一口神秘的水井，据说丢入硬币会获得随机的回报" }
     };
     private Dictionary<EventType, string> EventButton1Dictionary = new Dictionary<EventType, string>()
     {
-        {EventType.fountain,"饮用" }
+        {EventType.fountain,"饮用" },
+        {EventType.well,"投入硬币" }
     };
     private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
     {
@@ -134,17 +138,23 @@ public class UIManager : MonoBehaviour
         EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)type];
         EnemyName.text = EnemyNameDictionary[(EnemyType)type];
     }
-    public void DisplayEventInformation(int type,GameObject thisEvent)
+    public void DisplayEventInformation(int type,GameObject thisEvent,bool flag)
     {
         selectedEvent = thisEvent.GetComponent<Event_Map>();
         EnemyInfo.SetActive(true);
-        bsButton.SetActive(false);
-        eButton1.SetActive(true);
-        eButton2.SetActive(true);
         EnemyName.text = EventNameDictionary[(EventType)type];
         EnemyDescribe.text = EventDescribeDictionary[(EventType)type];
-        eButton1text.text = EventButton1Dictionary[(EventType)type];
-        eButton2text.text = EventButton2Dictionary[(EventType)type];
+        bsButton.SetActive(false);
+        if (flag)
+        {
+            eButton1.SetActive(true);
+            eButton1text.text = EventButton1Dictionary[(EventType)type];
+            if (type % 2 == 0)
+            {
+                eButton2.SetActive(true);
+                eButton2text.text = EventButton2Dictionary[(EventType)(type/2)];
+            }
+        }
     }
 
     public void EventChoiceOne()

@@ -38,7 +38,7 @@ public class Carriage : MonoBehaviour
         CameraFollower.ChangeSelected(this.gameObject);
         PlayerTeamState.ChangeSelected(playerID);
         if (!isSelected){ 
-        GameManager.selectedPlayer = this.gameObject;
+        GameManager.selectedID = playerID;
         GameManager.ShowMoveRange();
             isSelected = true;
         }
