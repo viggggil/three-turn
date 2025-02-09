@@ -6,10 +6,14 @@ public class Enemy_Map : MonoBehaviour
 {
     // Start is called before the first frame update
     private UIManager UIManager;
+    private GameManager GameManager;
+    private PlayerTeamState PlayerTeamState;
     [SerializeField] public int type;
     void Start()
     {
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
     }
 
     // Update is called once per frame
@@ -20,6 +24,13 @@ public class Enemy_Map : MonoBehaviour
 
     private void OnMouseDown()
     {
-        UIManager.DisplayEnemyInformation(type);
+        bool[] arr = GameManager.TestDistance_(this.gameObject);
+        bool flag = true;
+        if (arr[0] == false && arr[1] == false && arr[2] == false) flag = false;
+        else
+        {
+            PlayerTeamState.PlayerState.isHere = arr;
+        }
+        UIManager.DisplayEnemyInformation(type,flag);
     }
 }

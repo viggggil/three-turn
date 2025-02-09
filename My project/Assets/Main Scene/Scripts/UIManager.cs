@@ -35,6 +35,7 @@ public class UIManager : MonoBehaviour
     public GameObject EnemyInfo;
     public Text EnemyName;
     public Text EnemyDescribe;
+    public GameObject EnemyTip;
 
     public Button battleSceneButton;
     public GameObject bsButton;
@@ -126,17 +127,23 @@ public class UIManager : MonoBehaviour
     }
     public void CloseInfo()
     {
+        EnemyTip.SetActive(false);
         Cellinfo.SetActive(false);
         EnemyInfo.SetActive(false);
     }
-    public void DisplayEnemyInformation(int type)
+    public void DisplayEnemyInformation(int type, bool flag)
     {
         EnemyInfo.SetActive(true);
-        bsButton.SetActive(true);
         eButton1.SetActive(false);
         eButton2.SetActive(false);
+        bsButton.SetActive(false);
         EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)type];
         EnemyName.text = EnemyNameDictionary[(EnemyType)type];
+        if (flag)
+        {
+            bsButton.SetActive(true);
+            EnemyTip.SetActive(true);
+        }
     }
     public void DisplayEventInformation(int type,GameObject thisEvent,bool flag)
     {

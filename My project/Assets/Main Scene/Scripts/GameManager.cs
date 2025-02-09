@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
-
     public void ShowMoveRange()
     {
         CloseSelect();
@@ -44,6 +43,28 @@ public class GameManager : MonoBehaviour
         if (Mathf.Abs(Players[selectedID - 1].transform.position.x - thisEvent.transform.position.x)
                 + Mathf.Abs(Players[selectedID - 1].transform.position.y - thisEvent.transform.position.y) <= 1) return true;
         return false;
+    }
+
+    public bool[] TestDistance_(GameObject thisEnemy)
+    {
+        bool[] result = new bool[3] { false,false,false};
+        if (Mathf.Abs(Players[selectedID - 1].transform.position.x - thisEnemy.transform.position.x)
+                + Mathf.Abs(Players[selectedID - 1].transform.position.y - thisEnemy.transform.position.y) >1) return result;
+        for (int i = 0; i < 3; i++)
+        {
+            if (Mathf.Abs(Players[i].transform.position.x - thisEnemy.transform.position.x)
+                + Mathf.Abs(Players[i].transform.position.y - thisEnemy.transform.position.y) <= 3) result[i] = true;
+        }
+        foreach (var cell in cells)
+        {
+            if (Mathf.Abs(cell.transform.position.x - thisEnemy.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - thisEnemy.transform.position.y) <= 3)
+            {
+                cell.GetComponent<Cell>().moveCell.SetActive(true);
+                moveList.Add(cell);
+            }
+        }
+        return result;
     }
 
     public void ClearFog()
