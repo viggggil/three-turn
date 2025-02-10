@@ -8,11 +8,15 @@ public class PlayerTeamState : MonoBehaviour
     public int selectedID;
     public static class PlayerState
     {
+        [Header("PlayerStateInfo")]
         public static bool[] isHere;
         public static int[] curHealth;
         public static int[] maxHealth;
         public static int[] curMagic;
         public static int[] maxMagic;
+        public static int[] playerPosition;//位置
+        public static int[] playerSpeed;//速度
+        public static int[] playerKind;//职业,目前怎么写待定
         static PlayerState()
         {
             isHere = new bool[3] { false, false, false };
@@ -20,6 +24,8 @@ public class PlayerTeamState : MonoBehaviour
             maxHealth = new int[3] { 5, 5, 5 };
             curMagic = new int[3];
             maxMagic = new int[3];
+            playerPosition = new int[3];
+            playerSpeed = new int[3];
         }
             
     }
