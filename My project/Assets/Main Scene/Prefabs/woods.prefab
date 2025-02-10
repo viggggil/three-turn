@@ -242,6 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8138137401377992057}
   - component: {fileID: 716291629421515047}
+  - component: {fileID: 7004321666911617288}
   m_Layer: 0
   m_Name: smoke1
   m_TagString: Untagged
@@ -258,9 +259,9 @@ Transform:
   m_GameObject: {fileID: 7477119863939522760}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.022, y: -0.0306, z: 0}
-  m_LocalScale: {x: 0.50733334, y: 0.43051514, z: 3.030303}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.022, y: -0.0306, z: -0.5}
+  m_LocalScale: {x: 0.39, y: 0.3309479, z: 2.3294706}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3795895058956693900}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,3 +317,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &7004321666911617288
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477119863939522760}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.23

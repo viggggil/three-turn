@@ -70,7 +70,10 @@ public class UIManager : MonoBehaviour
     enum EventType 
     { 
         fountain,
-        well
+        well,
+        smithy,
+        inn,
+        bigTree
     }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
@@ -83,21 +86,33 @@ public class UIManager : MonoBehaviour
     private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
     {
         {EventType.fountain,"活力喷泉" },
-        {EventType.well,"许愿井" }
+        {EventType.well,"许愿井" },
+        {EventType.inn,"克里特村的客栈" },
+        {EventType.smithy,"克里特村的铁匠铺" },
+        {EventType.bigTree,"村口的大树" },
+
     };
     private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
     {
         {EventType.fountain,"rpg游戏里常见的泉水，显然是用来恢复的" },
-        {EventType.well,"一口神秘的水井，据说丢入硬币会获得随机的回报" }
+        {EventType.well,"一口神秘的水井，据说丢入硬币会获得随机的回报" },
+        {EventType.inn,"旅行者可以在这里休息，跳过回合回满生命值\n只需要花费5金币" },
+        {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n铁匠拿出两张图纸让你挑选" },
+        {EventType.bigTree,"树下的告示栏写有可供接取的任务" },
     };
     private Dictionary<EventType, string> EventButton1Dictionary = new Dictionary<EventType, string>()
     {
         {EventType.fountain,"饮用" },
-        {EventType.well,"投入硬币" }
+        {EventType.well,"投入硬币" },
+        {EventType.inn,"休息" },
+        {EventType.smithy,"选项一" },
+        {EventType.bigTree,"接取任务一" },
     };
     private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
     {
-        {EventType.fountain,"原地休息" }
+        {EventType.fountain,"原地休息" },
+        {EventType.smithy,"选项二" },
+        {EventType.bigTree,"接取任务二" }
     };
 
     void Start()
@@ -148,6 +163,8 @@ public class UIManager : MonoBehaviour
     public void DisplayEventInformation(int type,GameObject thisEvent,bool flag)
     {
         selectedEvent = thisEvent.GetComponent<Event_Map>();
+        eButton1.SetActive(false);
+        eButton2.SetActive(false);
         EnemyInfo.SetActive(true);
         EnemyName.text = EventNameDictionary[(EventType)type];
         EnemyDescribe.text = EventDescribeDictionary[(EventType)type];
@@ -159,7 +176,7 @@ public class UIManager : MonoBehaviour
             if (type % 2 == 0)
             {
                 eButton2.SetActive(true);
-                eButton2text.text = EventButton2Dictionary[(EventType)(type/2)];
+                eButton2text.text = EventButton2Dictionary[(EventType)(type)];
             }
         }
     }

@@ -113,7 +113,8 @@ public class GameManager : MonoBehaviour
     {
         foreach (var player in Players)
         {
-            player.GetComponent<Carriage>().TurnStart();
+            Carriage temp = player.GetComponent<Carriage>();
+            if (temp.playerID != -1) temp.TurnStart();
         }
     }
 
