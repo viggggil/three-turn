@@ -12,23 +12,29 @@ public class Knight : MonoBehaviour
     {
         charaterProperty = this.GetComponent<CharaterProperty>();
     }
-    void skill1(GameObject enemy,int attack)//攻击一个敌人
+    public void skill1(GameObject enemy)//攻击一个敌人
     {
-        Enemy e = enemy.GetComponent<Enemy>();
-        int damage = attack - e.physicalResistivity;
-        e.beDamaged(damage);
+        CharaterProperty enemyProperty = enemy.GetComponent<CharaterProperty>();
+        PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
     }
 
-    void skill2(GameObject enemy1,GameObject enemy2,GameObject enemy3,int attack)//攻击前方三个敌人
+    public void skill2(GameObject enemy1,GameObject enemy2,GameObject enemy3)//攻击前方三个敌人
     {
-        Enemy e1 = enemy1.GetComponent<Enemy>();
-        Enemy e2 = enemy2.GetComponent<Enemy>();
-        Enemy e3 = enemy3.GetComponent<Enemy>();
-        int damage1 = (int)(attack * 0.5f - e1.physicalResistivity);
-        int damage2 = (int)(attack * 0.5f - e2.physicalResistivity);
-        int damage3 = (int)(attack * 0.5f - e3.physicalResistivity);
-        e1.beDamaged(damage1);
-        e2.beDamaged(damage2);
-        e3.beDamaged(damage3);
+        CharaterProperty enemyProperty1 = enemy1.GetComponent<CharaterProperty>();
+        CharaterProperty enemyProperty2 = enemy2.GetComponent<CharaterProperty>();
+        CharaterProperty enemyProperty3 = enemy3.GetComponent<CharaterProperty>();
+        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty1.PR, charaterProperty.CritVaule,
+            enemyProperty1.CritResis, charaterProperty.CritDMGRate, enemyProperty1.CritDMGResisRate);
+        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty2.PR, charaterProperty.CritVaule,
+            enemyProperty2.CritResis, charaterProperty.CritDMGRate, enemyProperty2.CritDMGResisRate);
+        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty3.PR, charaterProperty.CritVaule,
+            enemyProperty3.CritResis, charaterProperty.CritDMGRate, enemyProperty3.CritDMGResisRate);
+    }
+
+    public void skill3()
+    {
+        charaterProperty.PR = (int)(charaterProperty.PR * 1.6f);
+        charaterProperty.MR = (int)(charaterProperty.MR * 1.2f);
     }
 }

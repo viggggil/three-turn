@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Profession : MonoBehaviour
 {
-    enum Professions { archer,wizard,cleric,assassin,knight}//弓兵，术士，牧师，刺客，骑士
+    enum Professions { archer,wizard,cleric,knight}//弓兵，术士，牧师，骑士
 
 }

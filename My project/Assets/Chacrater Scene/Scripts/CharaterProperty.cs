@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public class CharaterProperty : MonoBehaviour
     [SerializeField] private float criticalHitDamageResistivityRate;//±©»÷ÉËº¦µÖ¿¹ÂÊ
     [SerializeField] private int accurateValue;//ÃüÖÐÖµ
     [SerializeField] private int evasiveValue;//ÉÁ±ÜÖµ
+    public List<Buff> Buffs { get; private set; }
 
     public int HP { get; set; }
     public int ATK { get; set; }
@@ -26,6 +28,8 @@ public class CharaterProperty : MonoBehaviour
     public int CritResis { get; set; }
     public float CritDMGRate {  get; set; }
     public float CritDMGResisRate { get; set; }
+
+    public bool Marked {  get; set; }
 
     private void Start()
     {
@@ -38,5 +42,29 @@ public class CharaterProperty : MonoBehaviour
         CritResis = criticalHitResistivity;
         CritDMGRate = criticalHitDamageRate;
         CritDMGResisRate = criticalHitDamageResistivityRate;
+        Marked = false;
+        Buffs = new List<Buff>();
+    }
+
+    public void AddBuff(Buff buff)
+    {
+        Buffs.Add(buff);
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        Buffs.Remove(buff);
+    }
+
+    public void UpdateBuffs()
+    {
+        foreach (var buff in Buffs.ToList())
+        {
+            buff.Apply(this);
+            if (buff.IsExpired())
+            {
+                RemoveBuff(buff);
+            }
+        }
     }
 }
