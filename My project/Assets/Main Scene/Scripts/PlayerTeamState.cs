@@ -9,7 +9,10 @@ public class PlayerTeamState : MonoBehaviour
     public static class PlayerState
     {
         [Header("PlayerStateInfo")]
-        public static bool[] isHere;
+        public static bool[] isHere;//判断人物会不会进入战斗场景
+        public static bool[] actAssigned;//判断人物是否被分配了行动
+        public static bool[] haveActed;//判断人物是不是已经有过操作了
+        public static bool[] isDead;//有没有回合内死亡
         public static int[] curHealth;
         public static int[] maxHealth;
         public static int[] curMagic;
@@ -17,9 +20,11 @@ public class PlayerTeamState : MonoBehaviour
         public static int[] playerPosition;//位置
         public static int[] playerSpeed;//速度
         public static int[] playerKind;//职业,目前怎么写待定
+        public static int[] pla;
         static PlayerState()
         {
             isHere = new bool[3] { false, false, false };
+            isDead = new bool[3] { false, false, false };
             curHealth = new int[3];
             maxHealth = new int[3] { 5, 5, 5 };
             curMagic = new int[3];

@@ -8,6 +8,8 @@ public class BattleManager : MonoBehaviour
 
    static public int round;
 
+   private bool isGameOver;
+
    private void Awake()
    {
       spawner = GetComponent<Spawner>();

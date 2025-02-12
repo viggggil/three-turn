@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class BattleUIManager : MonoBehaviour
 {
-    public void testFunc()
+    Nodes nodes;
+
+    private void Start()
     {
-        gameObject.SetActive(true);
+        nodes = GetComponent<Nodes>();
+    }
+    public void OnNodeClick()
+    {
+        if (gameObject.activeInHierarchy && nodes.isPlayerNode)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false && nodes.isPlayerNode);
+        }
     }
 }
