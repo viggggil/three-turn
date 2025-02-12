@@ -49,6 +49,9 @@ public class UIManager : MonoBehaviour
 
     public Event_Map selectedEvent;
 
+    private bool isPause;
+    public GameObject gamePausePanel;
+
     enum CellType
     {
         grass,
@@ -123,11 +126,36 @@ public class UIManager : MonoBehaviour
         closePanelButton.onClick.AddListener(CloseInfo);
         eventButton1.onClick.AddListener(EventChoiceOne);
         eventButton2.onClick.AddListener(EventChoiceTwo);
+        isPause = false;
     }
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPause)
+            {
+                ContinueGame();
+            }
+            else
+            {
+                pausegame();
+            }
+        }
+    }
+
+    private void ContinueGame()
+    {
+        gamePausePanel.SetActive(false);
+        Time.timeScale = 1.0f;
+        isPause = false;
+    }
+
+    private void pausegame()
+    {
+        gamePausePanel.SetActive(true);
+        Time.timeScale = 0;
+        isPause = true;
     }
 
     public void DisplayInfo(Vector2 position , int type)

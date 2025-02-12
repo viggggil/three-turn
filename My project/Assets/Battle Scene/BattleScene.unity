@@ -3382,10 +3382,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f3266a14c4c9644b352f3b61bc5dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1: {fileID: 0}
+  Player1: {fileID: 1611101352}
   Player2: {fileID: 0}
   Player3: {fileID: 0}
-  transform1: {fileID: 0}
+  transform1: {fileID: 1611101351}
   transform2: {fileID: 0}
   transform3: {fileID: 0}
   spawnList:
@@ -4883,6 +4883,11 @@ PrefabInstance:
 --- !u!4 &1611101351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3863787771948216706, guid: bf74b57a0b39f0245b871c90ba1482a6, type: 3}
+  m_PrefabInstance: {fileID: 1611101350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1611101352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3133316119005132979, guid: bf74b57a0b39f0245b871c90ba1482a6, type: 3}
   m_PrefabInstance: {fileID: 1611101350}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1696258425
