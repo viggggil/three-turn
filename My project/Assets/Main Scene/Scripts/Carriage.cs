@@ -18,12 +18,14 @@ public class Carriage : MonoBehaviour
     public CameraFollower CameraFollower;
     public int playerID;
     private PlayerTeamState PlayerTeamState;
+    public GameData GameData;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         CameraFollower = GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
+        GameData = GameObject.Find("GameData").GetComponent<GameData>();
         TurnStart();
     }
 
@@ -57,9 +59,15 @@ public class Carriage : MonoBehaviour
             transform.position -= new Vector3(0, 0, 0.01f);
             curStamina -= 1;
             StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
+            GameData.SaveStamina(curStamina, playerID);
             isSelected = false;
         }
        
+    }
+
+    public void UpdateStamina(int[]arr)
+    {
+        curStamina = arr[playerID - 1];
     }
     public void TurnStart()
     {

@@ -32,7 +32,6 @@ public class PlayerTeamState : MonoBehaviour
             playerPosition = new int[3];
             playerSpeed = new int[3];
         }
-            
     }
     public UIManager UIManager;
 
