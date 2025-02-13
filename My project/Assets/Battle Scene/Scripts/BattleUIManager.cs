@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class BattleUIManager : MonoBehaviour
 {
+    GameObject actionPanel;
+
     Nodes nodes;
 
-    private void Start()
+    private void Awake()
     {
-        nodes = GetComponent<Nodes>();
+        actionPanel = GameObject.FindWithTag("ActionPanel");
     }
-    public void OnNodeClick()
+
+    
+
+    public void OnPlayerNodeClick()
     {
-        if (gameObject.activeInHierarchy && nodes.isPlayerNode)
+        if (!actionPanel.activeInHierarchy)
         {
-            gameObject.SetActive(true);
+            actionPanel.SetActive(true);
         }
-        else
+        else if(actionPanel.activeInHierarchy)
         {
-            gameObject.SetActive(false && nodes.isPlayerNode);
+            actionPanel.SetActive(false);
         }
     }
 }

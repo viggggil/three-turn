@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Nodes : MonoBehaviour
 {
-   [SerializeField] int nodeCode;
+    GameObject actionPanel;
+    GameObject BattleUIManager;
 
-   private bool isUnderAtk;//跟角色的移动有关，如果遭受攻击则该格不能移到；
-   public bool isPlayerNode;
+    BattleUIManager battleUIManager;
 
-   public void NodeOnClick()
-   {
+    [SerializeField] int nodeCode;
 
-   }
+    private bool isUnderAtk;//跟角色的移动有关，如果遭受攻击则该格不能移到；
+    public bool isPlayerNode;
+
+    private void Awake()
+    {
+        actionPanel = GameObject.FindWithTag("ActionPanel");
+        BattleUIManager = GameObject.FindWithTag("BattleUIManager");
+        battleUIManager = BattleUIManager.GetComponent<BattleUIManager>();
+    }
+
+    public void OnPlayerNodeClick()
+    {
+        battleUIManager.OnPlayerNodeClick();
+    }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Cell
   - Enemy
   - Event
+  - ActionPanel
+  - Spawner
+  - BattleUIManager
   layers:
   - Default
   - TransparentFX

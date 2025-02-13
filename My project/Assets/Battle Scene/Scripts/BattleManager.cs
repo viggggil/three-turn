@@ -4,25 +4,29 @@ using UnityEngine;
 
 public class BattleManager : MonoBehaviour
 {
-   Spawner spawner;
+    GameObject Spawner;
 
-   static public int round;
+    Spawner spawner;
 
-   private bool isGameOver;
+    static public int round;
 
-   private void Awake()
-   {
-      spawner = GetComponent<Spawner>();
-      //基本对象的载入
-      spawner.LoadPlayers();
-      spawner.LoadEnemies();
-      
-   }
+    private bool isGameOver;
 
-   private void Start()
-   {
-      //确认载入后回合开始
-   }
+    private void Awake()
+    {
+        Spawner = GameObject.FindWithTag("Spawner");
+        spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
+        //基本对象的载入
+        
+       
+    }
+
+    private void Start()
+    {
+        //spawner.LoadPlayers();
+        //spawner.LoadEnemies();
+       //确认载入后回合开始
+    }
 
    
 }

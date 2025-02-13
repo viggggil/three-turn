@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
 
    public List<GameObject> nodeList;
     
-   private int position1 = 0;//测试阶段，先令定值
+   //private int position1 = 0;//测试阶段，先令定值
 
    public void LoadPlayers()
    {
@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
 
       //在此补充进入场景前载入成员的逻辑
       //扫描成员、使其成为某个node下面的子对象，并将成员加入列表，方便后面比较速度决定行动顺序
-      spawnList.Clear();
+      
    }
 
    public void LoadEnemies()
