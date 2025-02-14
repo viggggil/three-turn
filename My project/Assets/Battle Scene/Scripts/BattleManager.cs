@@ -23,10 +23,30 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
-        //spawner.LoadPlayers();
-        //spawner.LoadEnemies();
-       //确认载入后回合开始
+        /*加载阶段*/
+        spawner.LoadPlayers();
+        spawner.LoadEnemies();
+        //确认载入后回合开始
+
+        /*回合准备阶段*/
     }
 
-   
+    private void Attack(int damage, int diffofSpeed, params int[] AtkRange)
+    {//打算使用攻击性行动
+
+    }
+
+    private int DamageCalculator(int rawDamage,int uncertainty,int diffofSpeed)
+    {
+        int ultimateDmg;
+        if (Mathf.Abs(diffofSpeed) == 0f)
+        {
+            ultimateDmg = rawDamage;
+        }
+        else
+        {
+            ultimateDmg = 0;
+        }
+        return ultimateDmg;
+    }
 }

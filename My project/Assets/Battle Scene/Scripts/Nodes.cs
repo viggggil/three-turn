@@ -25,4 +25,6 @@ public class Nodes : MonoBehaviour
     {
         battleUIManager.OnPlayerNodeClick();
     }
+
+    
 }

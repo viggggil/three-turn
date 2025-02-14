@@ -6338,7 +6338,7 @@ GameObject:
   - component: {fileID: 922468526834097773}
   m_Layer: 5
   m_Name: SPUM_20240910232738440
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11006,7 +11006,7 @@ GameObject:
   - component: {fileID: 725047401845238563}
   m_Layer: 5
   m_Name: SPUM_20240910232739810
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
