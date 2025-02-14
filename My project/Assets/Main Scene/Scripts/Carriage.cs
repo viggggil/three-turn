@@ -26,7 +26,7 @@ public class Carriage : MonoBehaviour
         CameraFollower = GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
-        TurnStart();
+        if(playerID!=-1)TurnStart();
     }
 
     // Update is called once per frame
@@ -57,21 +57,28 @@ public class Carriage : MonoBehaviour
         {
             transform.position = direction;
             transform.position -= new Vector3(0, 0, 0.01f);
+            GameManager.ClearFog();
             curStamina -= 1;
             StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
-            GameData.SaveStamina(curStamina, playerID);
+            GameData.SaveStaminaAndPosition(curStamina,transform.position, playerID);
             isSelected = false;
         }
        
     }
 
-    public void UpdateStamina(int[]arr)
+    public void UpdateStaminaAndPosition(int[] arr, Vector3[]arr2)
     {
+        if (playerID == -1) return;
         curStamina = arr[playerID - 1];
+        transform.position = arr2[playerID - 1];
+        StaminaUpdate?.Invoke(curStamina, maxStamina, playerID);
+        GameManager.selectedID = playerID;
+        GameManager.ClearFog();
     }
     public void TurnStart()
     {
         curStamina = maxStamina;
         StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
+        GameData.SaveStaminaAndPosition(curStamina,transform.position, playerID);
     }
 }

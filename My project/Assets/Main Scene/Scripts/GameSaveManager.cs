@@ -7,10 +7,12 @@ using System.Runtime.Serialization;
 public class GameSaveManager : MonoBehaviour
 {
     public GameData gameData;
+    public PlayerTeamState playerTeamState;
     
     public void SaveGame()
     {
         Debug.Log(Application.persistentDataPath);
+        gameData.SavePlayerTeamState();
         if (!Directory.Exists(Application.persistentDataPath + "/game_SaveData"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/game_SaveData");
@@ -29,7 +31,8 @@ public class GameSaveManager : MonoBehaviour
         {
             FileStream file = File.Open(Application.persistentDataPath + "/game_SaveData/PlayerTeamState.txt", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file),gameData.gsd);
-            gameData.LoadStamina();
+            gameData.LoadStaminaAndPosition();
+            playerTeamState.LoadGameData();
             file.Close();
         }
     }

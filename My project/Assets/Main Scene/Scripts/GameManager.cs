@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
         if(toMove && moveList.Contains(selected)&& type<4)
         {
             Players[selectedID - 1].GetComponent<Carriage>().Move(selected.transform.position);
-            ClearFog();
             CloseSelect();
             return true;
         }

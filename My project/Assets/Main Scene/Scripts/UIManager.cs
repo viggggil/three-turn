@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     public Text infoText;
     public GameObject Cellinfo;
+
     public Slider staminaSlider;
     public GameObject staminaBar;
     public Text staminaValue;
@@ -19,6 +20,10 @@ public class UIManager : MonoBehaviour
     public GameObject staminaBar2;
     public Text staminaValue2;
     private string _staminaValue2;
+    public Slider staminaSlider3;
+    public GameObject staminaBar3;
+    public Text staminaValue3;
+    private string _staminaValue3;
 
     public Slider healthSlider;
     public GameObject healthBar;
@@ -28,6 +33,23 @@ public class UIManager : MonoBehaviour
     public GameObject healthBar2;
     public Text healthValue2;
     private string _healthValue2;
+    public Slider healthSlider3;
+    public GameObject healthBar3;
+    public Text healthValue3;
+    private string _healthValue3;
+
+    public Slider magicSlider;
+    public GameObject magicBar;
+    public Text magicValue;
+    private string _magicValue;
+    public Slider magicSlider2;
+    public GameObject magicBar2;
+    public Text magicValue2;
+    private string _magicValue2;
+    public Slider magicSlider3;
+    public GameObject magicBar3;
+    public Text magicValue3;
+    private string _magicValue3;
 
     public Button turnNextButton;
     public UnityEvent turnStart;
@@ -139,25 +161,22 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                pausegame();
+                PauseGame();
             }
         }
     }
-
     private void ContinueGame()
     {
         gamePausePanel.SetActive(false);
         Time.timeScale = 1.0f;
         isPause = false;
     }
-
-    private void pausegame()
+    private void PauseGame()
     {
         gamePausePanel.SetActive(true);
         Time.timeScale = 0;
         isPause = true;
     }
-
     public void DisplayInfo(Vector2 position , int type)
     {
         RectTransform rt = Cellinfo.GetComponent<RectTransform>();
@@ -217,7 +236,6 @@ public class UIManager : MonoBehaviour
     {
         selectedEvent.EventTwo();
     }
-
     public void UpdateStaminaSlider(float currentStamina, float maxStamina,int ID)
     {
         if (ID == 1)
@@ -232,6 +250,12 @@ public class UIManager : MonoBehaviour
             staminaSlider2.value = currentStamina;
             _staminaValue2 = string.Format("{0}/{1}", currentStamina, maxStamina);
             staminaValue2.text = _staminaValue2;
+        }else if (ID==3)
+        {
+            staminaSlider3.maxValue = maxStamina;
+            staminaSlider3.value = currentStamina;
+            _staminaValue3 = string.Format("{0}/{1}", currentStamina, maxStamina);
+            staminaValue3.text = _staminaValue3;
         }
     }
     public void UpdateHealthSlider(float currentHealth, float maxHealth, int ID)
@@ -250,12 +274,42 @@ public class UIManager : MonoBehaviour
             _healthValue2 = string.Format("{0}/{1}", currentHealth, maxHealth);
             healthValue2.text = _healthValue2;
         }
+        else if (ID == 3)
+        {
+            healthSlider3.maxValue = maxHealth;
+            healthSlider3.value = currentHealth;
+            _healthValue3 = string.Format("{0}/{1}", currentHealth, maxHealth);
+            healthValue3.text = _healthValue3;
+        }
+    }
+    public void UpdateMagicSlider(float currentMagic, float maxMagic, int ID)
+    {
+        if (ID == 1)
+        {
+            magicSlider.maxValue = maxMagic;
+            magicSlider.value = currentMagic;
+            _magicValue = string.Format("{0}/{1}", currentMagic, maxMagic);
+            magicValue.text = _magicValue;
+        }
+        else if (ID == 2)
+        {
+            magicSlider2.maxValue = maxMagic;
+            magicSlider2.value = currentMagic;
+            _magicValue2 = string.Format("{0}/{1}", currentMagic, maxMagic);
+            magicValue2.text = _magicValue2;
+        }
+        else if (ID == 3)
+        {
+            magicSlider3.maxValue = maxMagic;
+            magicSlider3.value = currentMagic;
+            _magicValue3 = string.Format("{0}/{1}", currentMagic, maxMagic);
+            magicValue3.text = _magicValue3;
+        }
     }
     public void TurnStart()
     {
         turnStart?.Invoke();
     }
-
     public void EnterBattleScene()
     {
         SceneLoader.Instance.LoadBattleScene();

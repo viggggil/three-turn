@@ -6070,12 +6070,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9816ea47a133841bc02c1fd9abb2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StaminaUpdate:
+  PlayersUpdate:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7463459626724818478}
         m_TargetAssemblyTypeName: Carriage, Assembly-CSharp
-        m_MethodName: UpdateStamina
+        m_MethodName: UpdateStaminaAndPosition
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6087,7 +6087,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1576470884}
         m_TargetAssemblyTypeName: Carriage, Assembly-CSharp
-        m_MethodName: UpdateStamina
+        m_MethodName: UpdateStaminaAndPosition
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6097,6 +6097,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2009315956}
+        m_TargetAssemblyTypeName: Carriage, Assembly-CSharp
+        m_MethodName: UpdateStaminaAndPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playerTeamState: {fileID: 0}
+  GameManager: {fileID: 0}
 --- !u!1 &121321106
 GameObject:
   m_ObjectHideFlags: 0
@@ -9729,12 +9743,27 @@ MonoBehaviour:
   staminaSlider2: {fileID: 1909147352}
   staminaBar2: {fileID: 1804474952}
   staminaValue2: {fileID: 301271163}
+  staminaSlider3: {fileID: 1769701486}
+  staminaBar3: {fileID: 1460670392}
+  staminaValue3: {fileID: 701727946}
   healthSlider: {fileID: 412814700}
   healthBar: {fileID: 1699378227}
   healthValue: {fileID: 1537151248}
   healthSlider2: {fileID: 1814607595}
   healthBar2: {fileID: 1171365746}
   healthValue2: {fileID: 1183932259}
+  healthSlider3: {fileID: 133998889}
+  healthBar3: {fileID: 1484863501}
+  healthValue3: {fileID: 675991865}
+  magicSlider: {fileID: 1071403499}
+  magicBar: {fileID: 661460303}
+  magicValue: {fileID: 1851862663}
+  magicSlider2: {fileID: 192572210}
+  magicBar2: {fileID: 1830466171}
+  magicValue2: {fileID: 661126211}
+  magicSlider3: {fileID: 1510454555}
+  magicBar3: {fileID: 2053584984}
+  magicValue3: {fileID: 315956192}
   turnNextButton: {fileID: 1684198758}
   turnStart:
     m_PersistentCalls:
@@ -11551,6 +11580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff39369923586fb4e851b8391da105c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameData: {fileID: 100170264}
   selectedID: 0
   UIManager: {fileID: 834002370}
 --- !u!1 &1212430695
@@ -13688,7 +13718,7 @@ MonoBehaviour:
         m_CallState: 2
   CameraFollower: {fileID: 0}
   playerID: 2
-  GameData: {fileID: 0}
+  GameData: {fileID: 100170264}
 --- !u!50 &1576470885
 Rigidbody2D:
   serializedVersion: 4
@@ -13873,6 +13903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameData: {fileID: 100170264}
+  playerTeamState: {fileID: 1209411516}
 --- !u!1 &1606393452
 GameObject:
   m_ObjectHideFlags: 0
@@ -15817,7 +15848,7 @@ MonoBehaviour:
       m_Calls: []
   CameraFollower: {fileID: 0}
   playerID: -1
-  GameData: {fileID: 0}
+  GameData: {fileID: 100170264}
 --- !u!1 &2032105877
 GameObject:
   m_ObjectHideFlags: 0
@@ -16627,7 +16658,7 @@ MonoBehaviour:
         m_CallState: 2
   CameraFollower: {fileID: 0}
   playerID: 1
-  GameData: {fileID: 0}
+  GameData: {fileID: 100170264}
 --- !u!4 &7784320016480437490
 Transform:
   m_ObjectHideFlags: 0

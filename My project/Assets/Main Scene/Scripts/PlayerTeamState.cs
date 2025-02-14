@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTeamState : MonoBehaviour
 {
     public static PlayerTeamState Instance { get; private set; }
+    public GameData GameData;
     public int selectedID;
     public static class PlayerState
     {
@@ -25,10 +26,10 @@ public class PlayerTeamState : MonoBehaviour
         {
             isHere = new bool[3] { false, false, false };
             isDead = new bool[3] { false, false, false };
-            curHealth = new int[3];
+            curHealth = new int[3] { 5, 5, 5 };
             maxHealth = new int[3] { 5, 5, 5 };
-            curMagic = new int[3];
-            maxMagic = new int[3];
+            curMagic = new int[3] { 5, 5, 5 };
+            maxMagic = new int[3] { 5, 5, 5 };
             playerPosition = new int[3];
             playerSpeed = new int[3];
         }
@@ -47,6 +48,20 @@ public class PlayerTeamState : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
+    }
+
+    public void LoadGameData()
+    {
+        PlayerState.curHealth = GameData.gsd.curHealth;
+        PlayerState.maxHealth = GameData.gsd.maxHealth;
+        PlayerState.curMagic = GameData.gsd.curMagic;
+        PlayerState.maxMagic = GameData.gsd.maxMagic;
+        for(int i = 1; i <= 3; i++)
+        {
+            UIManager.UpdateHealthSlider(PlayerState.curHealth[i - 1], PlayerState.maxHealth[i - 1], i);
+            UIManager.UpdateMagicSlider(PlayerState.curMagic[i - 1], PlayerState.maxMagic[i - 1], i);
+        }
+        PlayerState.playerSpeed = GameData.gsd.playerSpeed;
     }
 
     public void UpdateHealth(int serialNumber,int change)
