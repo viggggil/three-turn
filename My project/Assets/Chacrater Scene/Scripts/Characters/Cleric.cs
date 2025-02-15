@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class Cleric : MonoBehaviour
 {
-    CharaterProperty charaterProperty;
+    CharacterProperty charaterProperty;
 
     private void Start()
     {
-        charaterProperty = this.GetComponent<CharaterProperty>();
+        charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
     public void skill1(GameObject teammate)
     {
-        CharaterProperty teammateProperty = teammate.GetComponent<CharaterProperty>();
+        CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
         teammateProperty.HP += charaterProperty.ATK;
     }
 
     public void skill2(GameObject teammate1, GameObject teammate2, GameObject teammate3)
     {
-        CharaterProperty teammateProperty1 = teammate1.GetComponent<CharaterProperty>();
-        CharaterProperty teammateProperty2 = teammate2.GetComponent<CharaterProperty>();
-        CharaterProperty teammateProperty3 = teammate3.GetComponent<CharaterProperty>();
+        CharacterProperty teammateProperty1 = teammate1.GetComponent<CharacterProperty>();
+        CharacterProperty teammateProperty2 = teammate2.GetComponent<CharacterProperty>();
+        CharacterProperty teammateProperty3 = teammate3.GetComponent<CharacterProperty>();
         teammateProperty1.HP += (int)(charaterProperty.ATK * 0.6f);
         teammateProperty2.HP += (int)(charaterProperty.ATK * 0.6f);
         teammateProperty3.HP += (int)(charaterProperty.ATK * 0.6f);

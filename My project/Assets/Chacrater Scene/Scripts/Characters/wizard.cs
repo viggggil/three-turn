@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class wizard : MonoBehaviour
 {
-    CharaterProperty charaterProperty;
+    CharacterProperty charaterProperty;
 
     private void Start()
     {
-        charaterProperty = this.GetComponent<CharaterProperty>();
+        charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
     public void skill1(GameObject enemy)//攻击一个敌人
     {
-        CharaterProperty enemyProperty = enemy.GetComponent<CharaterProperty>();
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
             enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
         Buff BurnBuff = new Buff(
@@ -28,7 +28,7 @@ public class wizard : MonoBehaviour
 
     public void skill2(GameObject teammate)//提高队友的魔抗，持续两回合
     {
-        CharaterProperty teammateProperty = teammate.GetComponent<CharaterProperty>();
+        CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
         Buff MRBuff = new Buff(
             name: "",
             duration: 2,

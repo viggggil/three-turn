@@ -9,11 +9,11 @@ public class Buff : MonoBehaviour
     public string Name { get; private set; }
     public int Duration { get; private set; }
     public BuffType BuffType { get; private set; }
-    public Action<CharaterProperty> ApplyEffect { get; private set; }
-    public Action<CharaterProperty> RemoveEffect { get; private set; }
+    public Action<CharacterProperty> ApplyEffect { get; private set; }
+    public Action<CharacterProperty> RemoveEffect { get; private set; }
         
 
-    public Buff(string name, int duration, BuffType buffType, Action<CharaterProperty> applyEffect, Action<CharaterProperty> removeEffect)
+    public Buff(string name, int duration, BuffType buffType, Action<CharacterProperty> applyEffect, Action<CharacterProperty> removeEffect)
     {
         Name = name;
         Duration = duration;
@@ -22,7 +22,7 @@ public class Buff : MonoBehaviour
         RemoveEffect = removeEffect;
     }
 
-    public void Apply(CharaterProperty character)
+    public void Apply(CharacterProperty character)
     {
         ApplyEffect(character);
         Duration--;
@@ -33,7 +33,7 @@ public class Buff : MonoBehaviour
         return Duration <= 0;
     }
 
-    public static void AddBuff(CharaterProperty character, Buff buff)
+    public static void AddBuff(CharacterProperty character, Buff buff)
     {
         character.AddBuff(buff);
     }

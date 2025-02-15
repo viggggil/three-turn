@@ -4,7 +4,7 @@ using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class CharaterProperty : MonoBehaviour
+public class CharacterProperty : MonoBehaviour
 {
     [SerializeField] private int maxHealth;//初始生命值
     [SerializeField] private int attackPower;//攻击力
@@ -17,6 +17,7 @@ public class CharaterProperty : MonoBehaviour
     [SerializeField] private float criticalHitDamageResistivityRate;//暴击伤害抵抗率
     [SerializeField] private int accurateValue;//命中值
     [SerializeField] private int evasiveValue;//闪避值
+
     public List<Buff> Buffs { get; private set; }
 
     public int HP { get; set; }
@@ -26,11 +27,14 @@ public class CharaterProperty : MonoBehaviour
     public int Speed { get; set; }
     public int CritVaule { get; set; }
     public int CritResis { get; set; }
-    public float CritDMGRate {  get; set; }
+    public float CritDMGRate { get; set; }
     public float CritDMGResisRate { get; set; }
 
-    public bool Marked {  get; set; }
+    public bool isMarked { get; set; }
+    public bool isCharge { get; set; }
+    public bool isdizzy { get; set; }
 
+    public bool isCursed { get; set; }
     private void Start()
     {
         HP = maxHealth;
@@ -42,7 +46,10 @@ public class CharaterProperty : MonoBehaviour
         CritResis = criticalHitResistivity;
         CritDMGRate = criticalHitDamageRate;
         CritDMGResisRate = criticalHitDamageResistivityRate;
-        Marked = false;
+        isMarked = false;
+        isCharge = false;
+        isdizzy = false;
+        isCursed = false;
         Buffs = new List<Buff>();
     }
 
