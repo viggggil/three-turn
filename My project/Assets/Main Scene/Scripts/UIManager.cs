@@ -80,13 +80,15 @@ public class UIManager : MonoBehaviour
         woods,
         forest,
         flowerfield,
-        mountain
+        mountain,
+        sea
     }
     private Dictionary<CellType, string> celldic = new Dictionary<CellType, string>()
     {{CellType.grass,"草坪"},
      {CellType.woods,"森林"},
       {CellType.flowerfield,"花地" },
-       { CellType.mountain,"山地"}
+       { CellType.mountain,"山地"},
+        {CellType.sea,"海洋" }
     };
     enum EnemyType
     {
