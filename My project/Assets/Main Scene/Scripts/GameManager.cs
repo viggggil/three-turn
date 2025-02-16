@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
+    public GameObject[] Enemies;
+    public GameObject[] Events;
     public GameObject selected;
     public GameObject[] Players;
     public int selectedID;
@@ -16,6 +18,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
+        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Events = GameObject.FindGameObjectsWithTag("Event");
         moveList = new List<GameObject>();
         ClearFog();
     }
@@ -65,6 +69,25 @@ public class GameManager : MonoBehaviour
             }
         }
         return result;
+    }
+
+    public bool TestDistance__(GameObject thisEvent)
+    {
+        foreach (var cell in cells)
+        {
+            if (Mathf.Abs(cell.transform.position.x - thisEvent.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - thisEvent.transform.position.y) <= 2)
+            {
+                cell.GetComponent<Cell>().moveCell.SetActive(true);
+                moveList.Add(cell);
+            }
+        }
+        foreach (var Enemy in Enemies)
+        {
+            if(Mathf.Abs(Enemy.transform.position.x - thisEvent.transform.position.x)
+                + Mathf.Abs(Enemy.transform.position.y - thisEvent.transform.position.y) <=2) return false;
+        }
+        return true;
     }
 
     public void ClearFog()
@@ -117,6 +140,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void BattleFailed()
+    {
+        foreach(var player in Players)
+        {
+            Carriage temp = player.GetComponent<Carriage>();
+            if (PlayerTeamState.PlayerState.isHere[temp.playerID - 1]) temp.Dead();
+        }
+    }
 
  
 

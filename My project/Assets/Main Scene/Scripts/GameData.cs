@@ -25,7 +25,8 @@ public class GameData : MonoBehaviour
         public  int[] maxMagic;
         public  int[] curStamina;
         public  int[] maxStamina;
-        public  int[] playerSpeed;
+        public  int[] minSpeed;
+        public int[] maxSpeed;
         public Vector3[] positions;
         public GameSaveData()
         {
@@ -65,7 +66,7 @@ public class GameData : MonoBehaviour
         gsd.maxHealth = PlayerTeamState.PlayerState.maxHealth;
         gsd.curMagic = PlayerTeamState.PlayerState.curMagic;
         gsd.maxMagic = PlayerTeamState.PlayerState.maxMagic;
-        gsd.playerSpeed = PlayerTeamState.PlayerState.minSpeed;
-        gsd.playerSpeed = PlayerTeamState.PlayerState.maxSpeed;
+        gsd.minSpeed = PlayerTeamState.PlayerState.minSpeed;
+        gsd.maxSpeed = PlayerTeamState.PlayerState.maxSpeed;
     }
 }

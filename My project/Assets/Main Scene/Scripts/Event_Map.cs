@@ -22,8 +22,11 @@ public class Event_Map : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        bool flag = GameManager.TestDistance(this.gameObject);
-        UIManager.DisplayEventInformation(type,this.gameObject,flag);
+        if (this.enabled)
+        {
+            bool flag = GameManager.TestDistance(this.gameObject);
+            UIManager.DisplayEventInformation(type, this.gameObject, flag);
+        }
     }
 
     public void EventOne()
@@ -38,6 +41,32 @@ public class Event_Map : MonoBehaviour
             case 1:
                 {
                     break;
+                }
+            case 5:
+                {
+                    if (PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1])
+                    {
+                        GetComponent<Carriage>().Reborn();
+                        PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = false;
+                        UIManager.CloseInfo();
+                        break;
+                    }
+                    else break;
+                }
+            case 7:
+                {
+                    if (GameManager.TestDistance__(this.gameObject))
+                    {
+                        PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = true;
+                        GameManager.CloseSelect();
+                        Destroy(this.gameObject);
+                        break;
+                    }
+                    else
+                    {
+                        UIManager.EnemyDescribe.text = "你听到附近怪物的嚎叫，这使你无法安心祈祷";
+                        break;
+                    }
                 }
         }
 

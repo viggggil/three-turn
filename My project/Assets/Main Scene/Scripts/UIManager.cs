@@ -74,6 +74,8 @@ public class UIManager : MonoBehaviour
     private bool isPause;
     public GameObject gamePausePanel;
 
+    public GameManager GameManager;
+
     enum CellType
     {
         grass,
@@ -100,7 +102,9 @@ public class UIManager : MonoBehaviour
         well,
         smithy,
         inn,
-        bigTree
+        bigTree,
+        tomb,
+        angel=7
     }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
@@ -117,6 +121,8 @@ public class UIManager : MonoBehaviour
         {EventType.inn,"克里特村的客栈" },
         {EventType.smithy,"克里特村的铁匠铺" },
         {EventType.bigTree,"村口的大树" },
+        {EventType.tomb,"坟墓" },
+        {EventType.angel,"天使雕像" }
 
     };
     private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
@@ -126,6 +132,8 @@ public class UIManager : MonoBehaviour
         {EventType.inn,"旅行者可以在这里休息，跳过回合回满生命值\n只需要花费5金币" },
         {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n铁匠拿出两张图纸让你挑选" },
         {EventType.bigTree,"树下的告示栏写有可供接取的任务" },
+        {EventType.tomb,"你的一位英雄在这里倒下，获得女神的恩赐来复活" },
+        {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动" }
     };
     private Dictionary<EventType, string> EventButton1Dictionary = new Dictionary<EventType, string>()
     {
@@ -134,6 +142,8 @@ public class UIManager : MonoBehaviour
         {EventType.inn,"休息" },
         {EventType.smithy,"选项一" },
         {EventType.bigTree,"接取任务一" },
+        {EventType.tomb,"复活" },
+        {EventType.angel,"祈祷" }
     };
     private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
     {
@@ -151,6 +161,7 @@ public class UIManager : MonoBehaviour
         eventButton1.onClick.AddListener(EventChoiceOne);
         eventButton2.onClick.AddListener(EventChoiceTwo);
         isPause = false;
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -315,5 +326,13 @@ public class UIManager : MonoBehaviour
     public void EnterBattleScene()
     {
         SceneLoader.Instance.LoadBattleScene();
+        switch (PlayerTeamState.PlayerState.BattleResult)
+        {
+            case 0:
+                {
+                    GameManager.BattleFailed();
+                    break;
+                }
+        }
     }
 }
