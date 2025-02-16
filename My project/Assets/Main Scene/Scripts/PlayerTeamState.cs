@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,18 +10,18 @@ public class PlayerTeamState : MonoBehaviour
     public static class PlayerState
     {
         [Header("PlayerStateInfo")]
-        public static bool[] isHere;//ÅÐ¶ÏÈËÎï»á²»»á½øÈëÕ½¶·³¡¾°
-        public static bool[] actAssigned;//ÅÐ¶ÏÈËÎïÊÇ·ñ±»·ÖÅäÁËÐÐ¶¯
-        public static bool[] haveActed;//ÅÐ¶ÏÈËÎïÊÇ²»ÊÇÒÑ¾­ÓÐ¹ý²Ù×÷ÁË
-        public static bool[] isDead;//ÓÐÃ»ÓÐ»ØºÏÄÚËÀÍö
+        public static bool[] isHere;//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½á²»ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        public static bool[] actAssigned;//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ñ±»·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
+        public static bool[] haveActed;//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        public static bool[] isDead;//ï¿½ï¿½Ã»ï¿½Ð»Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         public static int[] curHealth;
         public static int[] maxHealth;
         public static int[] curMagic;
         public static int[] maxMagic;
-        public static int[] playerPosition;//Î»ÖÃ
-        public static int[] minSpeed;//ËÙ¶È
+        public static int[] playerPosition;//Î»ï¿½ï¿½
+        public static int[] minSpeed;//ï¿½Ù¶ï¿½
         public static int[] maxSpeed;
-        public static int[] playerKind;//Ö°Òµ,Ä¿Ç°ÔõÃ´Ð´´ý¶¨
+        public static int[] playerKind;//Ö°Òµ,Ä¿Ç°ï¿½ï¿½Ã´Ð´ï¿½ï¿½ï¿½ï¿½
         public static int[] pla;
         static PlayerState()
         {
@@ -58,15 +58,16 @@ public class PlayerTeamState : MonoBehaviour
         PlayerState.maxHealth = GameData.gsd.maxHealth;
         PlayerState.curMagic = GameData.gsd.curMagic;
         PlayerState.maxMagic = GameData.gsd.maxMagic;
-        for(int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 3; i++)
         {
             UIManager.UpdateHealthSlider(PlayerState.curHealth[i - 1], PlayerState.maxHealth[i - 1], i);
             UIManager.UpdateMagicSlider(PlayerState.curMagic[i - 1], PlayerState.maxMagic[i - 1], i);
         }
-        PlayerState.playerSpeed = GameData.gsd.playerSpeed;
+        PlayerState.minSpeed = GameData.gsd.playerSpeed;
+        PlayerState.maxSpeed = GameData.gsd.playerSpeed;
     }
 
-    public void UpdateHealth(int serialNumber,int change)
+    public void UpdateHealth(int serialNumber, int change)
     {
         PlayerState.curHealth[serialNumber] -= change;
         UIManager.UpdateHealthSlider(PlayerState.curHealth[serialNumber], PlayerState.maxHealth[serialNumber], serialNumber);
@@ -74,7 +75,7 @@ public class PlayerTeamState : MonoBehaviour
     public void UpdateHealth(int change)
     {
         PlayerState.curHealth[selectedID] += change;
-        if(PlayerState.curHealth[selectedID] > PlayerState.maxHealth[selectedID])
+        if (PlayerState.curHealth[selectedID] > PlayerState.maxHealth[selectedID])
         {
             PlayerState.curHealth[selectedID] = PlayerState.maxHealth[selectedID];
         }
@@ -87,6 +88,6 @@ public class PlayerTeamState : MonoBehaviour
     }
     void Update()
     {
-        
+
     }
 }

@@ -19,6 +19,9 @@ public class Carriage : MonoBehaviour
     public int playerID;
     private PlayerTeamState PlayerTeamState;
     public GameData GameData;
+    public GameObject tomb;
+    public GameObject player;
+    public Event_Map _tomb;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -27,6 +30,9 @@ public class Carriage : MonoBehaviour
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         if(playerID!=-1)TurnStart();
+        tomb.SetActive(false);
+        player.SetActive(true);
+        _tomb = GetComponent<Event_Map>();
     }
 
     // Update is called once per frame
@@ -36,18 +42,22 @@ public class Carriage : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        UIManager.CloseInfo();
-        CameraFollower.ChangeSelected(this.gameObject);
-        PlayerTeamState.ChangeSelected(playerID);
-        if (!isSelected){ 
-        GameManager.selectedID = playerID;
-        GameManager.ShowMoveRange();
-            isSelected = true;
-        }
-        else
+        if (this.enabled)
         {
-            GameManager.CloseSelect();
-            isSelected = false;
+            UIManager.CloseInfo();
+            CameraFollower.ChangeSelected(this.gameObject);
+            PlayerTeamState.ChangeSelected(playerID);
+            if (!isSelected)
+            {
+                GameManager.selectedID = playerID;
+                GameManager.ShowMoveRange();
+                isSelected = true;
+            }
+            else
+            {
+                GameManager.CloseSelect();
+                isSelected = false;
+            }
         }
     }
 
@@ -80,5 +90,21 @@ public class Carriage : MonoBehaviour
         curStamina = maxStamina;
         StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
         GameData.SaveStaminaAndPosition(curStamina,transform.position, playerID);
+    }
+
+    public void Dead()
+    {
+        tomb.SetActive(true);
+        player.SetActive(false);
+        _tomb.enabled = true;
+        this.enabled = false;
+    }
+
+    public void Reborn()
+    {
+        tomb.SetActive(false);
+        player.SetActive(true);
+        _tomb.enabled = false;
+        this.enabled = true;
     }
 }

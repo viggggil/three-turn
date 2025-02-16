@@ -10,7 +10,8 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int attackPower;//攻击力
     [SerializeField] private int physicalResistivity;//物理抗性
     [SerializeField] private int magicalResistivity;//魔法抗性
-    [SerializeField] private int speed;//速度
+    [SerializeField] private int minSpeed;//最小速度
+    [SerializeField] private int maxSpeed;//最大速度
     [SerializeField] private int criticalHitValue;//暴击值
     [SerializeField] private int criticalHitResistivity;//暴击抵抗
     [SerializeField] private float criticalHitDamageRate;//暴击伤害率
@@ -24,7 +25,8 @@ public class CharacterProperty : MonoBehaviour
     public int ATK { get; set; }
     public int PR { get; set; }
     public int MR { get; set; }
-    public int Speed { get; set; }
+    public int MinSpeed { get; set; }
+    public int MaxSpeed { get; set; }
     public int CritVaule { get; set; }
     public int CritResis { get; set; }
     public float CritDMGRate { get; set; }
@@ -41,7 +43,8 @@ public class CharacterProperty : MonoBehaviour
         ATK = attackPower;
         PR = physicalResistivity;
         MR = magicalResistivity;
-        Speed = speed;
+        MinSpeed = minSpeed;
+        MaxSpeed = maxSpeed;
         CritVaule = criticalHitValue;
         CritResis = criticalHitResistivity;
         CritDMGRate = criticalHitDamageRate;
