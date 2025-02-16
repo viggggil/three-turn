@@ -42,10 +42,6 @@ public class BattleManager : MonoBehaviour
         /*回合准备阶段*/
     }
 
-    private void Attack(int damage, int diffofSpeed, params int[] AtkRange)
-    {//打算使用攻击性行动
-
-    }
 
     private int DamageCalculator(int rawDamage,int uncertainty,int diffofSpeed)
     {
@@ -59,5 +55,57 @@ public class BattleManager : MonoBehaviour
             ultimateDmg = 0;
         }
         return ultimateDmg;
+    }
+
+
+    public void Add2toBattleList(GameObject obj1,GameObject obj2)
+    {
+        // 标记是否找到包含其中一个物体的列表
+        bool foundList = false;
+
+        // 遍历所有列表
+        foreach (List<GameObject> list in battleLists)
+        {
+            if (list.Contains(obj1))
+            {
+                // 如果列表包含obj1，将obj2添加到该列表
+                if (!list.Contains(obj2))
+                {
+                    list.Add(obj2);
+                }
+                foundList = true;
+                break;
+            }
+            else if (list.Contains(obj2))
+            {
+                // 如果列表包含obj2，将obj1添加到该列表
+                if (!list.Contains(obj1))
+                {
+                    list.Add(obj1);
+                }
+                foundList = true;
+                break;
+            }
+        }
+
+        // 如果没有找到包含其中一个物体的列表，创建一个新列表
+        if (!foundList)
+        {
+            List<GameObject> newList = new List<GameObject>();
+            newList.Add(obj1);
+            newList.Add(obj2);
+            battleLists.Add(newList);
+        }
+
+
+        //测试代码，没有问题后应该删除
+        foreach (List<GameObject> list in battleLists)
+        {
+            foreach (GameObject obj in list)
+            {
+                Debug.Log(obj.name);
+            }
+        }
+        
     }
 }

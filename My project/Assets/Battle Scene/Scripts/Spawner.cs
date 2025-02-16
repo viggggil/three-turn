@@ -21,16 +21,19 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform transform5;
     [SerializeField] Transform transform6;
 
-    public Dictionary<int, GameObject> nodeDictionary;
+    static public Dictionary<int, GameObject> nodeDictionary;
 
     public List<GameObject> spawnList;
     public List<GameObject> nodeList;
     
     public int spawnCount = 0;
-    
-    private int position1;
-    private int position2;
-    private int position3;//这三个表示随机出来的几个位置
+
+    public int position1;
+    public int position2;
+    public int position3;//这三个表示随机出来的几个位置
+    public int position4;
+    public int position5;
+    public int position6;
     private int RDPosition = 0;
 
     private void Awake()
@@ -82,23 +85,23 @@ public class Spawner : MonoBehaviour
     public void LoadEnemies()
     {
         
-        position1 = Random.Range(6, 11);
+        position4 = Random.Range(6, 11);
         RDPosition = Random.Range(6, 11);
-        while (RDPosition == position1)
+        while (RDPosition == position4)
         {
             RDPosition = Random.Range(6, 11);
         }
-        position2 = RDPosition;
+        position5 = RDPosition;
 
-        while (RDPosition == position1 || RDPosition == position2)
+        while (RDPosition == position4 || RDPosition == position5)
         {
             RDPosition = Random.Range(6, 11);
         }
-        position3 = RDPosition;//确保三个随机数不一样
+        position6 = RDPosition;//确保三个随机数不一样
 
-        transform4 = nodeDictionary[position1].transform;
-        transform5 = nodeDictionary[position2].transform;
-        transform6 = nodeDictionary[position3].transform;
+        transform4 = nodeDictionary[position4].transform;
+        transform5 = nodeDictionary[position5].transform;
+        transform6 = nodeDictionary[position6].transform;
 
         Instantiate(Enemy1, transform4);
         Instantiate(Enemy2, transform5);

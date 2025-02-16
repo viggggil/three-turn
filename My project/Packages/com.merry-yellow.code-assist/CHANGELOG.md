@@ -1,5 +1,15 @@
 List of new features, bug fixes and improvements
 
+# Version 1.4.3
+* New gpt provider: OpenAI API Compatible, for web/cloud services that supports OpenAI SDK standards
+
+# Version 1.4.2
+* Bugfix for formatting and title of logging
+* Bugfix for CodeLens2Gpt when closing document
+
+# Version 1.4.1
+* New gpt provider: Ollama, can use LLMs from local machine or private network
+
 # Version 1.4.0
 * Gpt backend has been reimplemented for latest models and LLM trends
 * New gpt provider: Anthropic (Claude), can be used as an alternative to OpenAI ChatGPT and Google Gemini
