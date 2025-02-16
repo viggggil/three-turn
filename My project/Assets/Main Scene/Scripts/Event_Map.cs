@@ -59,6 +59,7 @@ public class Event_Map : MonoBehaviour
                     {
                         PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = true;
                         GameManager.CloseSelect();
+                        UIManager.CloseInfo();
                         Destroy(this.gameObject);
                         break;
                     }
