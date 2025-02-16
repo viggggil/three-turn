@@ -65,6 +65,7 @@ public class GameData : MonoBehaviour
         gsd.maxHealth = PlayerTeamState.PlayerState.maxHealth;
         gsd.curMagic = PlayerTeamState.PlayerState.curMagic;
         gsd.maxMagic = PlayerTeamState.PlayerState.maxMagic;
-        gsd.playerSpeed = PlayerTeamState.PlayerState.playerSpeed;
+        gsd.playerSpeed = PlayerTeamState.PlayerState.minSpeed;
+        gsd.playerSpeed = PlayerTeamState.PlayerState.maxSpeed;
     }
 }

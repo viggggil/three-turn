@@ -21,7 +21,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] Transform transform5;
     [SerializeField] Transform transform6;
 
-    private Dictionary<int, GameObject> nodeDictionary;
+    public Dictionary<int, GameObject> nodeDictionary;
 
     public List<GameObject> spawnList;
     public List<GameObject> nodeList;

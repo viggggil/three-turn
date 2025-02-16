@@ -19,7 +19,8 @@ public class PlayerTeamState : MonoBehaviour
         public static int[] curMagic;
         public static int[] maxMagic;
         public static int[] playerPosition;//位置
-        public static int[] playerSpeed;//速度
+        public static int[] minSpeed;//速度
+        public static int[] maxSpeed;
         public static int[] playerKind;//职业,目前怎么写待定
         public static int[] pla;
         static PlayerState()
@@ -31,7 +32,8 @@ public class PlayerTeamState : MonoBehaviour
             curMagic = new int[3] { 5, 5, 5 };
             maxMagic = new int[3] { 5, 5, 5 };
             playerPosition = new int[3];
-            playerSpeed = new int[3];
+            minSpeed = new int[3] { 1, 2, 3 };
+            maxSpeed = new int[3] { 3, 4, 5 };
         }
     }
     public UIManager UIManager;
