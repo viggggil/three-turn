@@ -23,6 +23,8 @@ public class PlayerTeamState : MonoBehaviour
         public static int[] maxSpeed;
         public static int[] playerKind;//ְҵ,Ŀǰ��ôд����
         public static int[] pla;
+        public static int BattleResult; //传出0表示失败，1表示逃跑，2表示胜利
+        public static bool[,] equips;
         static PlayerState()
         {
             isHere = new bool[3] { false, false, false };
@@ -34,6 +36,7 @@ public class PlayerTeamState : MonoBehaviour
             playerPosition = new int[3];
             minSpeed = new int[3] { 1, 2, 3 };
             maxSpeed = new int[3] { 3, 4, 5 };
+            equips = new bool[3, 30];
         }
     }
     public UIManager UIManager;
@@ -63,8 +66,8 @@ public class PlayerTeamState : MonoBehaviour
             UIManager.UpdateHealthSlider(PlayerState.curHealth[i - 1], PlayerState.maxHealth[i - 1], i);
             UIManager.UpdateMagicSlider(PlayerState.curMagic[i - 1], PlayerState.maxMagic[i - 1], i);
         }
-        PlayerState.minSpeed = GameData.gsd.playerSpeed;
-        PlayerState.maxSpeed = GameData.gsd.playerSpeed;
+        PlayerState.minSpeed = GameData.gsd.minSpeed;
+        PlayerState.maxSpeed = GameData.gsd.maxSpeed;
     }
 
     public void UpdateHealth(int serialNumber, int change)
