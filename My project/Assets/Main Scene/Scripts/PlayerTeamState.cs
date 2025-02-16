@@ -63,7 +63,8 @@ public class PlayerTeamState : MonoBehaviour
             UIManager.UpdateHealthSlider(PlayerState.curHealth[i - 1], PlayerState.maxHealth[i - 1], i);
             UIManager.UpdateMagicSlider(PlayerState.curMagic[i - 1], PlayerState.maxMagic[i - 1], i);
         }
-        PlayerState.playerSpeed = GameData.gsd.playerSpeed;
+        PlayerState.minSpeed = GameData.gsd.playerSpeed;
+        PlayerState.maxSpeed = GameData.gsd.playerSpeed;
     }
 
     public void UpdateHealth(int serialNumber,int change)
