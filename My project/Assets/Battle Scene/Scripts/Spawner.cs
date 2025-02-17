@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     public List<GameObject> spawnList;
     public List<GameObject> nodeList;
     
-    public int spawnCount = 0;
+    //public int spawnCount = 0;
 
     public int position1;
     public int position2;
@@ -68,6 +68,11 @@ public class Spawner : MonoBehaviour
             RDPosition = Random.Range(0, 5);
         }
         position3 = RDPosition;//确保三个随机数不一样
+
+        PlayerTeamState.PlayerState.playerPosition[0] = position1;
+        PlayerTeamState.PlayerState.playerPosition[1] = position2;
+        PlayerTeamState.PlayerState.playerPosition[2] = position3;
+        //去修改公共文件当中的值
 
         transform1 = nodeDictionary[position1].transform;
         transform2 = nodeDictionary[position2].transform;
