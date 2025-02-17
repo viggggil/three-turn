@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
+
 public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
@@ -16,20 +17,31 @@ public class GameManager : MonoBehaviour
     private List<GameObject> moveList;
     public bool toMove=false;
     public GameData GameData;
+    public SceneLoader SceneLoader;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Events = GameObject.FindGameObjectsWithTag("Event");
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
+        SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         moveList = new List<GameObject>();
         ClearFog();
     }
     void Update()
     {
-        
+        foreach (var Player in Players)
+        {
+            if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerOneProfession);
+            else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerTwoProfession);
+            else continue;
+        }
     }
 
+    void LoadPlayers()
+    {
+
+    }
     public void RefreshEvents()
     {
         foreach (var Event in Events)

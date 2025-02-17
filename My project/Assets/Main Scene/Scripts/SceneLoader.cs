@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance { get; private set; }
+    public GameSaveManager GameSaveManager;
+    public static int PlayerOneProfession;
+    public static int PlayerTwoProfession;
 
     private void Awake()
     {
@@ -18,13 +21,20 @@ public class SceneLoader : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    public void LoadMainScene()
+    public void LoadCurrentSave()
     {
         SceneManager.LoadScene("MainScene");
+        GameSaveManager = GameObject.Find("GameSaveManager").GetComponent<GameSaveManager>();
+        GameSaveManager.LoadGame();
     }
     public void LoadBattleScene()
     {
         SceneManager.LoadScene("BattleScene");
+    }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 
     public void LoadStartScene()

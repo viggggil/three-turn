@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class Carriage : MonoBehaviour
@@ -22,6 +23,7 @@ public class Carriage : MonoBehaviour
     public GameObject tomb;
     public GameObject player;
     public Event_Map _tomb;
+    public Sprite[] Images;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -106,5 +108,10 @@ public class Carriage : MonoBehaviour
         player.SetActive(true);
         _tomb.enabled = false;
         this.enabled = true;
+    }
+
+    public void LoadPlayer(int Profession)
+    {
+        player.GetComponent<SpriteRenderer>().sprite = Images[Profession];
     }
 }
