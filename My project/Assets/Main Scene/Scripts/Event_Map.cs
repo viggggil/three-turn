@@ -7,11 +7,14 @@ public class Event_Map : MonoBehaviour
     private UIManager UIManager;
     private PlayerTeamState PlayerTeamState;
     private GameManager GameManager;
+    private GameData GameData;
+    [SerializeField] public int SerialNumber;
     [SerializeField] public int type;
     void Start()
     {
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameData = GameObject.Find("GameData").GetComponent<GameData>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
     }
 
@@ -60,7 +63,8 @@ public class Event_Map : MonoBehaviour
                         PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = true;
                         GameManager.CloseSelect();
                         UIManager.CloseInfo();
-                        Destroy(this.gameObject);
+                        GameData.gsd.Events[SerialNumber] = true;
+                        this.gameObject.SetActive(false);
                         break;
                     }
                     else

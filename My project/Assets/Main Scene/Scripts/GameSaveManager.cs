@@ -8,7 +8,7 @@ public class GameSaveManager : MonoBehaviour
 {
     public GameData gameData;
     public PlayerTeamState playerTeamState;
-    
+    public GameManager GameManager;
     public void SaveGame()
     {
         Debug.Log(Application.persistentDataPath);
@@ -33,7 +33,12 @@ public class GameSaveManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file),gameData.gsd);
             gameData.LoadStaminaAndPosition();
             playerTeamState.LoadGameData();
+            GameManager.RefreshEvents();
             file.Close();
         }
+    }
+    public void Start()
+    {
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 }

@@ -15,17 +15,32 @@ public class GameManager : MonoBehaviour
     public int selectedID;
     private List<GameObject> moveList;
     public bool toMove=false;
+    public GameData GameData;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Events = GameObject.FindGameObjectsWithTag("Event");
+        GameData = GameObject.Find("GameData").GetComponent<GameData>();
         moveList = new List<GameObject>();
         ClearFog();
     }
     void Update()
     {
         
+    }
+
+    public void RefreshEvents()
+    {
+        foreach (var Event in Events)
+        {
+            Event_Map temp = Event.GetComponent<Event_Map>();
+            if (GameData.gsd.Events[temp.SerialNumber])
+            {
+                Event.SetActive(false);
+            }
+            else Event.SetActive(true);
+        }
     }
     public void ShowMoveRange()
     {

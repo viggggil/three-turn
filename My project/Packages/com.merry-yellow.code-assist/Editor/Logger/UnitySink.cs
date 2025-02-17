@@ -33,7 +33,7 @@ namespace Meryel.UnityCodeAssist.Editor.Logger
             if (logEvent == null)
                 return;
 
-            var message = logEvent.RenderMessage(_formatProvider);
+            var message = logEvent.RenderMessage(_formatProvider,true);
 
             switch (logEvent.Level)
             {
