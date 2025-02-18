@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] cells;
     public GameObject[] Enemies;
     public GameObject[] Events;
+    public int[] EventsNumber;
     public GameObject selected;
     public GameObject[] Players;
     public int selectedID;
@@ -22,10 +23,10 @@ public class GameManager : MonoBehaviour
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        Events = GameObject.FindGameObjectsWithTag("Event");
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         moveList = new List<GameObject>();
+        GenerateEvents();
         ClearFog();
     }
     void Update()
@@ -38,10 +39,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void LoadPlayers()
-    {
-
-    }
     public void RefreshEvents()
     {
         foreach (var Event in Events)
@@ -176,7 +173,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
- 
+    public void GenerateEvents()
+    {
+        foreach (var cell in cells)
+        {
+            if (cell.GetComponent<Cell>().type >= 4||cell.GetComponent<Cell>().TooNear) continue;
+            int randomNumber = Random.Range(0, 501);
+            if (randomNumber > 10) continue;
+            Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
+            int type = 0;
+            while (EventsNumber[type] < randomNumber) type++;
+            GameObject event_ = Instantiate(Events[type], position, Quaternion.identity);
+            event_.GetComponent<Event_Map>().GetNearbyTaggedObjects();
+        }
+    }
 
 
 }

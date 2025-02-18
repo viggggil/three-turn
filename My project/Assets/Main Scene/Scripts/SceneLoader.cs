@@ -24,6 +24,11 @@ public class SceneLoader : MonoBehaviour
     public void LoadCurrentSave()
     {
         SceneManager.LoadScene("MainScene");
+        Invoke("LoadCurrentSave_", 0.5f);
+    }
+
+    public void LoadCurrentSave_()
+    {
         GameSaveManager = GameObject.Find("GameSaveManager").GetComponent<GameSaveManager>();
         GameSaveManager.LoadGame();
     }

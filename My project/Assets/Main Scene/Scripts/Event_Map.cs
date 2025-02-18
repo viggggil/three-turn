@@ -81,4 +81,20 @@ public class Event_Map : MonoBehaviour
     {
 
     }
+
+    public void GetNearbyTaggedObjects()
+    {
+        List<GameObject> results = new List<GameObject>();
+        Collider[] hitColliders = Physics.OverlapSphere(
+            transform.position,
+            1f
+        );
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Cell"))
+            {
+                gameObject.GetComponent<Cell>().TooNear = true;
+            }
+        }
+    }
 }

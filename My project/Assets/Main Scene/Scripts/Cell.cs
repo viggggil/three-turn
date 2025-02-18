@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class Cell : MonoBehaviour
 {
     [SerializeField] public int type;
+    public bool TooNear;
     private GameManager GameManager;
     private UIManager UIManager;
     public GameObject moveCell;
