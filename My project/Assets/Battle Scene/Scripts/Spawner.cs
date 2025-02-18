@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
 
     static public Dictionary<int, GameObject> nodeDictionary;
 
-    public List<GameObject> spawnList;
+    //public List<GameObject> spawnList;
     public List<GameObject> nodeList;
     
     //public int spawnCount = 0;

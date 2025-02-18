@@ -18,15 +18,15 @@ public class ActioninBattleManager : MonoBehaviour
     {
         characterProperty = GetComponent<CharacterProperty>();
 
-        
-
         BattleManager.RandomSpeed += RandomSpeed;
+
+        characterProperty.SpeedThisRound = Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
     }
 
     private void Start()
     {
 
-        characterProperty.SpeedThisRound = Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
+        
 
     }
 

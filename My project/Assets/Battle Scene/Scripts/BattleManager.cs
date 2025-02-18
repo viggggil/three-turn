@@ -48,7 +48,18 @@ public class BattleManager : MonoBehaviour
         //RandomSpeed?.Invoke();
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        ActionOrder.Sort((a, b) => a.GetComponent<CharacterProperty>().SpeedThisRound.CompareTo(b.GetComponent<CharacterProperty>().SpeedThisRound));
+        ActionOrder.Sort((a, b) =>
+        {
+            CharacterProperty propA = a.GetComponent<CharacterProperty>();
+            CharacterProperty propB = b.GetComponent<CharacterProperty>();
+
+            return propA.SpeedThisRound.CompareTo(propB.SpeedThisRound);
+        });//按照每个人的速度进行排序
+
+        foreach(GameObject a in ActionOrder)
+        {
+            Debug.Log(a.name);
+        }
         /*回合准备阶段*/
     }
 

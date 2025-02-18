@@ -1626,6 +1626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+  ActionOrder: []
 --- !u!1 &642822219
 GameObject:
   m_ObjectHideFlags: 0
@@ -3395,8 +3396,6 @@ MonoBehaviour:
   transform4: {fileID: 0}
   transform5: {fileID: 0}
   transform6: {fileID: 0}
-  spawnList:
-  - {fileID: 8951060364126367895, guid: 5bd42f6f5599d9044afe92c5f0870dc6, type: 3}
   nodeList:
   - {fileID: 225548827}
   - {fileID: 362601771}
@@ -3743,6 +3742,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312154999}
   m_CullTransparentMesh: 1
+--- !u!1 &1352749759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1352749760}
+  m_Layer: 0
+  m_Name: PTS Inspector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1352749760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352749759}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1280, y: 720, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355580139
 GameObject:
   m_ObjectHideFlags: 0
@@ -9771,3 +9801,4 @@ SceneRoots:
   - {fileID: 1213249731}
   - {fileID: 1728965714}
   - {fileID: 1454849635}
+  - {fileID: 1352749760}

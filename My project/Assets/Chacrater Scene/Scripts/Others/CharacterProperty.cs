@@ -39,7 +39,7 @@ public class CharacterProperty : MonoBehaviour
     public bool isdizzy { get; set; }
 
     public bool isCursed { get; set; }
-    private void Start()
+    private void Awake()
     {
         HP = maxHealth;
         ATK = attackPower;
