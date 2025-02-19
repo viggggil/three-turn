@@ -5953,7 +5953,7 @@ SortingGroup:
   m_GameObject: {fileID: 5367084646108202728}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &6881885029250329022
@@ -6869,6 +6869,7 @@ GameObject:
   - component: {fileID: 5695043457065113796}
   - component: {fileID: 1195810868138259558}
   - component: {fileID: 5765756783132852503}
+  - component: {fileID: 6529946973475590517}
   m_Layer: 5
   m_Name: TestPlayer2
   m_TagString: Player
@@ -10598,6 +10599,18 @@ MonoBehaviour:
   characterProperty: {fileID: 0}
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+--- !u!114 &6529946973475590517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072304976273405000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc5f5124497e8146981bb84d1b5b02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6074077535716819375
 GameObject:
   m_ObjectHideFlags: 0

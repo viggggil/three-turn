@@ -19,6 +19,7 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private float criticalHitDamageResistivityRate;//±©ª˜…À∫¶µ÷øπ¬ 
     [SerializeField] private int accurateValue;//√¸÷–÷µ
     [SerializeField] private int evasiveValue;//…¡±‹÷µ
+    [SerializeField] private int position;//Œª÷√
 
     public List<Buff> Buffs { get; private set; }
 
@@ -39,6 +40,8 @@ public class CharacterProperty : MonoBehaviour
     public bool isdizzy { get; set; }
 
     public bool isCursed { get; set; }
+
+    public int Position { get; set; }
     private void Awake()
     {
         HP = maxHealth;
@@ -57,6 +60,7 @@ public class CharacterProperty : MonoBehaviour
         isdizzy = false;
         isCursed = false;
         Buffs = new List<Buff>();
+        Position = position;
     }
 
     public void AddBuff(Buff buff)

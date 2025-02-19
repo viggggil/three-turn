@@ -82,9 +82,15 @@ public class Spawner : MonoBehaviour
         Instantiate(Player2, transform2);
         Instantiate(Player3, transform3);
 
-        
+
         //扫描成员、使其成为某个node下面的子对象，并将成员加入列表，方便后面比较速度决定行动顺序
-      
+        nodeDictionary[position1].GetComponent<Nodes>().isPlayerHere = true;
+        nodeDictionary[position2].GetComponent<Nodes>().isPlayerHere = true;
+        nodeDictionary[position3].GetComponent<Nodes>().isPlayerHere = true;
+
+        nodeDictionary[position1].GetComponentInChildren<CharacterProperty>().Position = position1;
+        nodeDictionary[position2].GetComponentInChildren<CharacterProperty>().Position = position2;
+        nodeDictionary[position3].GetComponentInChildren<CharacterProperty>().Position = position3;
     }
 
     public void LoadEnemies()
@@ -114,7 +120,9 @@ public class Spawner : MonoBehaviour
 
 
         //扫描成员、使其成为某个node下面的子对象，并将成员加入列表，方便后面比较速度决定行动顺序
+        nodeDictionary[position4].GetComponent<Nodes>().isEnemyHere = true;
+        nodeDictionary[position5].GetComponent<Nodes>().isEnemyHere = true;
+        nodeDictionary[position6].GetComponent<Nodes>().isEnemyHere = true;
 
-        //在此补充进入场景前载入敌人的逻辑
     }
 }

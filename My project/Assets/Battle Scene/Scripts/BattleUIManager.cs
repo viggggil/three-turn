@@ -1,29 +1,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleUIManager : MonoBehaviour
 {
-    GameObject actionPanel;
+    [Header("UI Panels")]
+    [SerializeField] GameObject actionPanel;
+    [SerializeField] GameObject skillsPanel;
 
-    Nodes nodes;
+    public DataofNodes dataofNodes;
+    
+    public List<Image> Circles;
+    public List<Button> Buttons;
+
 
     private void Awake()
     {
-        actionPanel = GameObject.FindWithTag("ActionPanel");
+        List<Image> list = new List<Image>();
     }
 
     
 
-    public void OnPlayerNodeClick()
+    public void OpenActionPanel()
     {
-        if (!actionPanel.activeInHierarchy)
+        actionPanel.SetActive(true);
+    }
+
+    public void CloseActionPanel()
+    {
+        actionPanel.SetActive(false);
+    }
+
+    public void OpenSkillsPanel()
+    {
+        skillsPanel.SetActive(true);
+    }
+
+    public void CloseSkillsPanel()
+    {
+        skillsPanel.SetActive(false);
+        OpenActionPanel();
+        EnableAllButtons();
+    }
+
+    public void DisableAllButtons()
+    {
+        foreach (Button button in Buttons)
         {
-            actionPanel.SetActive(true);
+            button.enabled = false;
         }
-        else if(actionPanel.activeInHierarchy)
+    }
+
+    public void EnableAllButtons()
+    {
+        foreach (Button button in Buttons)
         {
-            actionPanel.SetActive(false);
+            button.enabled = true;
         }
+    }
+
+    public void OnAttackButtonClick()
+    {
+        //禁止按别的node了
+        DisableAllButtons();
+        //把所有东西复位
+        CloseActionPanel();
+        if(dataofNodes.SelectedPNodeCode != 12)
+            Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponent<Nodes>().isSelected = false;
+        if (dataofNodes.SelectedENodeCode != 12)
+        {
+            Spawner.nodeDictionary[dataofNodes.SelectedENodeCode].GetComponent<Nodes>().isSelected = false;
+            Circles[dataofNodes.SelectedENodeCode].gameObject.SetActive(false);
+        }
+        dataofNodes.isPNodesSelected = new bool[6] { false, false, false, false, false, false };
+        dataofNodes.isENodesSelected = new bool[6] { false, false, false, false, false, false };
+        dataofNodes.anyESelected = false;
+        dataofNodes.SelectedENodeCode = 12;
+        //打开技能面板
+        OpenSkillsPanel();
     }
 }

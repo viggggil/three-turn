@@ -56,6 +56,9 @@ TagManager:
   - name: Map
     uniqueID: 637302303
     locked: 0
+  - name: LowerUI
+    uniqueID: 925637075
+    locked: 0
   - name: Player&Enemy
     uniqueID: 2236387403
     locked: 0

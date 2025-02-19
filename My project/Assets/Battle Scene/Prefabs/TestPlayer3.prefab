@@ -1324,6 +1324,7 @@ GameObject:
   - component: {fileID: 2479288520889179354}
   - component: {fileID: -3385247854875090956}
   - component: {fileID: -4040733315639445846}
+  - component: {fileID: 5092369862653364084}
   m_Layer: 5
   m_Name: TestPlayer3
   m_TagString: Player
@@ -5053,6 +5054,18 @@ MonoBehaviour:
   characterProperty: {fileID: 0}
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+--- !u!114 &5092369862653364084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397737121359573874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc5f5124497e8146981bb84d1b5b02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1410186668398045922
 GameObject:
   m_ObjectHideFlags: 0
@@ -15282,7 +15295,7 @@ SortingGroup:
   m_GameObject: {fileID: 9222546725682094631}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &1127802478482905886
