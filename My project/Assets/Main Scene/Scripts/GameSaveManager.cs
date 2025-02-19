@@ -33,7 +33,7 @@ public class GameSaveManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file),gameData.gsd);
             gameData.LoadStaminaAndPosition();
             playerTeamState.LoadGameData();
-            GameManager.RefreshEvents();
+            GameManager.LoadEvent();
             file.Close();
         }
     }

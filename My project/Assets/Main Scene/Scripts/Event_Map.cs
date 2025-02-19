@@ -63,8 +63,8 @@ public class Event_Map : MonoBehaviour
                         PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = true;
                         GameManager.CloseSelect();
                         UIManager.CloseInfo();
-                        GameData.gsd.Events[SerialNumber] = true;
-                        this.gameObject.SetActive(false);
+                        GameData.gsd.types[SerialNumber] =-1;
+                        Destroy(gameObject);
                         break;
                     }
                     else
@@ -82,8 +82,9 @@ public class Event_Map : MonoBehaviour
 
     }
 
-    public void GetNearbyTaggedObjects()
+    public void GetNearbyTaggedObjects(int serialNumber)
     {
+        SerialNumber = serialNumber;
         List<GameObject> results = new List<GameObject>();
         Collider[] hitColliders = Physics.OverlapSphere(
             transform.position,

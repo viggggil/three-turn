@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
 
     private bool isPause;
     public GameObject gamePausePanel;
+    public GameObject blockPanel;
 
     public GameManager GameManager;
 
@@ -162,6 +163,7 @@ public class UIManager : MonoBehaviour
         eventButton2.onClick.AddListener(EventChoiceTwo);
         isPause = false;
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        blockPanel.SetActive(false);
     }
 
     void Update()
@@ -181,12 +183,14 @@ public class UIManager : MonoBehaviour
     private void ContinueGame()
     {
         gamePausePanel.SetActive(false);
+        blockPanel.SetActive(false);
         Time.timeScale = 1.0f;
         isPause = false;
     }
     private void PauseGame()
     {
         gamePausePanel.SetActive(true);
+        blockPanel.SetActive(true);
         Time.timeScale = 0;
         isPause = true;
     }
@@ -205,9 +209,12 @@ public class UIManager : MonoBehaviour
         EnemyTip.SetActive(false);
         Cellinfo.SetActive(false);
         EnemyInfo.SetActive(false);
+        blockPanel.SetActive(false);
+        GameManager.CloseSelect();
     }
     public void DisplayEnemyInformation(int type, bool flag)
     {
+        blockPanel.SetActive(true);
         EnemyInfo.SetActive(true);
         eButton1.SetActive(false);
         eButton2.SetActive(false);
@@ -222,6 +229,7 @@ public class UIManager : MonoBehaviour
     }
     public void DisplayEventInformation(int type,GameObject thisEvent,bool flag)
     {
+        blockPanel.SetActive(true);
         selectedEvent = thisEvent.GetComponent<Event_Map>();
         eButton1.SetActive(false);
         eButton2.SetActive(false);
@@ -334,5 +342,10 @@ public class UIManager : MonoBehaviour
                     break;
                 }
         }
+    }
+
+    public void SelectPlayerOne()
+    {
+
     }
 }

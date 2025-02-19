@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 
 public class GameManager : MonoBehaviour
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
     public bool toMove=false;
     public GameData GameData;
     public SceneLoader SceneLoader;
+    private int serialNumber;
+    private GameObject[] tempEvents;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         moveList = new List<GameObject>();
+        serialNumber = 0;
         GenerateEvents();
         ClearFog();
     }
@@ -36,19 +41,6 @@ public class GameManager : MonoBehaviour
             if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerOneProfession);
             else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerTwoProfession);
             else continue;
-        }
-    }
-
-    public void RefreshEvents()
-    {
-        foreach (var Event in Events)
-        {
-            Event_Map temp = Event.GetComponent<Event_Map>();
-            if (GameData.gsd.Events[temp.SerialNumber])
-            {
-                Event.SetActive(false);
-            }
-            else Event.SetActive(true);
         }
     }
     public void ShowMoveRange()
@@ -177,14 +169,39 @@ public class GameManager : MonoBehaviour
     {
         foreach (var cell in cells)
         {
+            if (serialNumber >= 10) break;
             if (cell.GetComponent<Cell>().type >= 4||cell.GetComponent<Cell>().TooNear) continue;
             int randomNumber = Random.Range(0, 501);
             if (randomNumber > 10) continue;
             Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
             int type = 0;
             while (EventsNumber[type] < randomNumber) type++;
+            GameData.gsd.Epositions[serialNumber]= position;
+            GameData.gsd.types[serialNumber] = type;
             GameObject event_ = Instantiate(Events[type], position, Quaternion.identity);
-            event_.GetComponent<Event_Map>().GetNearbyTaggedObjects();
+            event_.GetComponent<Event_Map>().GetNearbyTaggedObjects(serialNumber);
+            serialNumber++;
+        }
+    }
+
+    public void LoadEvent()
+    {
+        serialNumber = 0;
+        tempEvents = GameObject.FindGameObjectsWithTag("Event");
+        foreach(var event_ in tempEvents)
+        {
+            Destroy(event_);
+        }
+        while (serialNumber<10 && GameData.gsd.Epositions[serialNumber].x != 0)
+        {
+            if (GameData.gsd.types[serialNumber]==-1)
+            {
+                serialNumber++;
+                continue;
+            }
+            Vector3 position =GameData.gsd.Epositions[serialNumber];
+            GameObject event_ = Instantiate(Events[GameData.gsd.types[serialNumber]], position, Quaternion.identity);
+            serialNumber++;
         }
     }
 

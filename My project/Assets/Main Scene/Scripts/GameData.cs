@@ -28,7 +28,8 @@ public class GameData : MonoBehaviour
         public  int[] minSpeed;
         public int[] maxSpeed;
         public Vector3[] positions;
-        public bool[] Events;
+        public Vector3[] Epositions;
+        public int[] types;
         public GameSaveData()
         {
             isHere = new bool[3] { false, false, false };
@@ -40,10 +41,12 @@ public class GameData : MonoBehaviour
             curStamina = new int[3] { 5, 5, 5 };
             maxStamina = new int[3] { 5, 5, 5 };
             positions = new Vector3[3];
-            Events = new bool[20];
+            Epositions = new Vector3[10];
+            types = new int[10];
         }
-        
     }
+
+
 
     public void Start()
     {
