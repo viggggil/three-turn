@@ -48,7 +48,7 @@ public class BattleManager : MonoBehaviour
         //RandomSpeed?.Invoke();
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-        ActionOrder.Sort((a, b) =>
+        ActionOrder.Sort((b, a) =>
         {
             CharacterProperty propA = a.GetComponent<CharacterProperty>();
             CharacterProperty propB = b.GetComponent<CharacterProperty>();

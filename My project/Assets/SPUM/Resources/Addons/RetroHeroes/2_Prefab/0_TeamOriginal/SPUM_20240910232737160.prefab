@@ -667,7 +667,7 @@ SortingGroup:
   m_GameObject: {fileID: 900812975459752873}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &4833240464193769229
@@ -11292,6 +11292,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6439841790647950911}
   - component: {fileID: 4670075981287870475}
+  - component: {fileID: -5011102200123896589}
+  - component: {fileID: -4431818373453262890}
+  - component: {fileID: 6349052897271054375}
+  - component: {fileID: -5688227302118476174}
   m_Layer: 5
   m_Name: SPUM_20240910232737160
   m_TagString: Player
@@ -11308,8 +11312,8 @@ RectTransform:
   m_GameObject: {fileID: 8873173196267656181}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6352770439874264840}
   - {fileID: 6641544299955449930}
@@ -14931,6 +14935,74 @@ MonoBehaviour:
   DEBUFF_List: []
   DEATH_List: []
   OTHER_List: []
+--- !u!114 &-5011102200123896589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873173196267656181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b971f115a8799844f86fcea661ee7272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterProperty: {fileID: -4431818373453262890}
+  battleManager: {fileID: 0}
+  dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+--- !u!114 &-4431818373453262890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873173196267656181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  health: 0
+  code: 7
+  attackPower: 0
+  physicalResistivity: 0
+  magicalResistivity: 0
+  minSpeed: 0
+  maxSpeed: 0
+  speedThisRound: 0
+  criticalHitValue: 0
+  criticalHitResistivity: 0
+  criticalHitDamageRate: 0
+  criticalHitDamageResistivityRate: 0
+  accurateValue: 0
+  evasiveValue: 0
+  position: 0
+--- !u!114 &6349052897271054375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873173196267656181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc5f5124497e8146981bb84d1b5b02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleAtkRange: 
+--- !u!114 &-5688227302118476174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873173196267656181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8887167797803562372
 GameObject:
   m_ObjectHideFlags: 0

@@ -3137,6 +3137,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2576709539948141322}
   - component: {fileID: 3982324186414596681}
+  - component: {fileID: 182086049481940299}
+  - component: {fileID: -7790843790837895607}
+  - component: {fileID: 6636641736026816727}
+  - component: {fileID: -7635029304724554409}
   m_Layer: 5
   m_Name: SPUM_20240910232739674
   m_TagString: Enemy
@@ -3153,8 +3157,8 @@ RectTransform:
   m_GameObject: {fileID: 2284205943203354248}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6397751528566211140}
   - {fileID: 4777545329885487943}
@@ -6796,6 +6800,73 @@ MonoBehaviour:
   DEBUFF_List: []
   DEATH_List: []
   OTHER_List: []
+--- !u!114 &182086049481940299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc5f5124497e8146981bb84d1b5b02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleAtkRange: 
+--- !u!114 &-7790843790837895607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  code: 22
+  attackPower: 0
+  physicalResistivity: 0
+  magicalResistivity: 0
+  minSpeed: 0
+  maxSpeed: 0
+  speedThisRound: 0
+  criticalHitValue: 0
+  criticalHitResistivity: 0
+  criticalHitDamageRate: 0
+  criticalHitDamageResistivityRate: 0
+  accurateValue: 0
+  evasiveValue: 0
+  position: 0
+--- !u!114 &6636641736026816727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b971f115a8799844f86fcea661ee7272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterProperty: {fileID: -7790843790837895607}
+  battleManager: {fileID: 0}
+  dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+--- !u!114 &-7635029304724554409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2311959423601390980
 GameObject:
   m_ObjectHideFlags: 0
@@ -9807,7 +9878,7 @@ SortingGroup:
   m_GameObject: {fileID: 4485236944853254074}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &4394237707797984976

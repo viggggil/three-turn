@@ -7,6 +7,8 @@ using UnityEngine;
 public class CharacterProperty : MonoBehaviour
 {
     [SerializeField] private int maxHealth;//初始生命值
+    [SerializeField] private int health;//初始生命值
+    [SerializeField] private int code;//代码
     [SerializeField] private int attackPower;//攻击力
     [SerializeField] private int physicalResistivity;//物理抗性
     [SerializeField] private int magicalResistivity;//魔法抗性
@@ -23,6 +25,8 @@ public class CharacterProperty : MonoBehaviour
 
     public List<Buff> Buffs { get; private set; }
 
+    public int Health { get; set; }
+    public int Code { get; set; }
     public int HP { get; set; }
     public int ATK { get; set; }
     public int PR { get; set; }
@@ -61,6 +65,8 @@ public class CharacterProperty : MonoBehaviour
         isCursed = false;
         Buffs = new List<Buff>();
         Position = position;
+        Code = code;
+        Health = health;
     }
 
     public void AddBuff(Buff buff)

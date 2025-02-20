@@ -418,7 +418,7 @@ SortingGroup:
   m_GameObject: {fileID: 293361464917001305}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &7957262807159133252
@@ -1036,6 +1036,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4138644119591444936}
   - component: {fileID: 6695341196558487763}
+  - component: {fileID: -278468930679726302}
+  - component: {fileID: -6171434574330438320}
+  - component: {fileID: -6882525444251112646}
+  - component: {fileID: 7422104344830452369}
   m_Layer: 5
   m_Name: SPUM_20240910232739333
   m_TagString: Enemy
@@ -1052,8 +1056,8 @@ RectTransform:
   m_GameObject: {fileID: 922402674342576884}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4234248990052950598}
   - {fileID: 3340989231419005927}
@@ -4695,6 +4699,73 @@ MonoBehaviour:
   DEBUFF_List: []
   DEATH_List: []
   OTHER_List: []
+--- !u!114 &-278468930679726302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922402674342576884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dc5f5124497e8146981bb84d1b5b02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SampleAtkRange: 
+--- !u!114 &-6171434574330438320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922402674342576884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  code: 20
+  attackPower: 0
+  physicalResistivity: 0
+  magicalResistivity: 0
+  minSpeed: 0
+  maxSpeed: 0
+  speedThisRound: 0
+  criticalHitValue: 0
+  criticalHitResistivity: 0
+  criticalHitDamageRate: 0
+  criticalHitDamageResistivityRate: 0
+  accurateValue: 0
+  evasiveValue: 0
+  position: 0
+--- !u!114 &-6882525444251112646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922402674342576884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b971f115a8799844f86fcea661ee7272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterProperty: {fileID: -6171434574330438320}
+  battleManager: {fileID: 0}
+  dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+--- !u!114 &7422104344830452369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 922402674342576884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1021891273332718989
 GameObject:
   m_ObjectHideFlags: 0
