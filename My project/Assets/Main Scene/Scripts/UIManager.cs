@@ -76,6 +76,8 @@ public class UIManager : MonoBehaviour
     public GameObject blockPanel;
 
     public GameManager GameManager;
+    public GameObject[] Players;
+    public GameObject[] SelectPlayers;
 
     enum CellType
     {
@@ -346,6 +348,25 @@ public class UIManager : MonoBehaviour
 
     public void SelectPlayerOne()
     {
+        Players[0].GetComponent<Carriage>().OnMouseDown();
+        SelectPlayers[0].SetActive(true);
+        SelectPlayers[1].SetActive(false);
+        SelectPlayers[2].SetActive(false);
+    }
 
+    public void SelectPlayerTwo()
+    {
+        Players[1].GetComponent<Carriage>().OnMouseDown();
+        SelectPlayers[0].SetActive(false);
+        SelectPlayers[1].SetActive(true);
+        SelectPlayers[2].SetActive(false);
+    }
+
+    public void SelectPlayerThree()
+    {
+        Players[2].GetComponent<Carriage>().OnMouseDown();
+        SelectPlayers[0].SetActive(false);
+        SelectPlayers[1].SetActive(false);
+        SelectPlayers[2].SetActive(true);
     }
 }

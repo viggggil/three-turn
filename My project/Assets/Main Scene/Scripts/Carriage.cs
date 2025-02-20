@@ -13,7 +13,7 @@ public class Carriage : MonoBehaviour
     private GameManager GameManager;
     public int maxStamina;
     public int curStamina;
-    private bool isSelected;
+    public bool isSelected;
     public UIManager UIManager;
     public UnityEvent<float,float,int> StaminaUpdate;
     public CameraFollower CameraFollower;
@@ -42,7 +42,7 @@ public class Carriage : MonoBehaviour
     {
         
     }
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         if (this.enabled)
         {
@@ -51,8 +51,12 @@ public class Carriage : MonoBehaviour
             PlayerTeamState.ChangeSelected(playerID);
             if (!isSelected)
             {
-                GameManager.selectedID = playerID;
+                GameManager.ChangeSelected(playerID);
                 GameManager.ShowMoveRange();
+                UIManager.SelectPlayers[0].SetActive(false);
+                UIManager.SelectPlayers[1].SetActive(false);
+                UIManager.SelectPlayers[2].SetActive(false);
+                UIManager.SelectPlayers[playerID-1].SetActive(true);
                 isSelected = true;
             }
             else
@@ -73,9 +77,14 @@ public class Carriage : MonoBehaviour
             curStamina -= 1;
             StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
             GameData.SaveStaminaAndPosition(curStamina,transform.position, playerID);
-            isSelected = false;
+            GameManager.CloseSelect();
+            if(curStamina>=1)Invoke("NextStep", 0.2f);
         }
-       
+    }
+
+    public void NextStep()
+    {
+        GameManager.ShowMoveRange();
     }
 
     public void UpdateStaminaAndPosition(int[] arr, Vector3[]arr2)

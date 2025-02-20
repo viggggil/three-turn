@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
@@ -42,6 +43,41 @@ public class GameManager : MonoBehaviour
             else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerTwoProfession);
             else continue;
         }
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (toMove)
+            {
+                Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(0, -1, 0);
+                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (toMove)
+            {
+                Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(1, 0, 0);
+                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            if (toMove)
+            {
+                Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(0, 1, 0);
+                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            if (toMove)
+            {
+                Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(-1, 0, 0);
+                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+            }
+        }
     }
     public void ShowMoveRange()
     {
@@ -55,9 +91,9 @@ public class GameManager : MonoBehaviour
                 moveList.Add(cell);
             }
         }
+
         toMove = true;
     }
-
     public bool TestDistance(GameObject thisEvent)
     {
         if (Mathf.Abs(Players[selectedID - 1].transform.position.x - thisEvent.transform.position.x)
@@ -123,7 +159,6 @@ public class GameManager : MonoBehaviour
         if(toMove && moveList.Contains(selected)&& type<4)
         {
             Players[selectedID - 1].GetComponent<Carriage>().Move(selected.transform.position);
-            CloseSelect();
             return true;
         }
         else
@@ -131,9 +166,16 @@ public class GameManager : MonoBehaviour
             CloseSelect();
             moveList.Add(selected);
             toMove = false;
+            Players[selectedID - 1].GetComponent<Carriage>().isSelected = false;
             return false;
         }
-        
+    }
+
+    public void ChangeSelected(int ID)
+    {
+        Players[selectedID - 1].GetComponent<Carriage>().isSelected = false;
+        Players[ID-1].GetComponent<Carriage>().isSelected = true;
+        selectedID = ID;
     }
     public void CloseSelect()
     {
