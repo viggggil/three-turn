@@ -30,6 +30,9 @@ public class GameData : MonoBehaviour
         public Vector3[] positions;
         public Vector3[] Epositions;
         public int[] types;
+        public Vector3[] Epositions2;
+        public int[] types2;
+        public int TurnNumber;
         public GameSaveData()
         {
             isHere = new bool[3] { false, false, false };
@@ -43,6 +46,9 @@ public class GameData : MonoBehaviour
             positions = new Vector3[3];
             Epositions = new Vector3[10];
             types = new int[10];
+            Epositions2 = new Vector3[10];
+            types2 = new int[10];
+            TurnNumber = 1;
         }
     }
 

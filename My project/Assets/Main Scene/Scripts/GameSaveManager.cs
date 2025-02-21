@@ -34,6 +34,8 @@ public class GameSaveManager : MonoBehaviour
             gameData.LoadStaminaAndPosition();
             playerTeamState.LoadGameData();
             GameManager.LoadEvent();
+            GameManager.LoadEnemy();
+            GameManager.TurnNumber = gameData.gsd.TurnNumber;
             file.Close();
         }
     }

@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 1772794369194358369}
   - component: {fileID: 8106019983619113095}
   - component: {fileID: 8314095119261327321}
+  - component: {fileID: 5587667055788373154}
   m_Layer: 0
   m_Name: mountain2
   m_TagString: Cell
@@ -314,5 +315,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+  TooNear: 0
   moveCell: {fileID: 1762587305415158258}
   fog: {fileID: 5184646464448298746}
+  isOn: 0
+--- !u!50 &5587667055788373154
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412266883454946199}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

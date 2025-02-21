@@ -8,6 +8,7 @@ public class Enemy_Map : MonoBehaviour
     private UIManager UIManager;
     private GameManager GameManager;
     private PlayerTeamState PlayerTeamState;
+    public int SerialNumber;
     [SerializeField] public int type;
     void Start()
     {

@@ -180,6 +180,7 @@ GameObject:
   - component: {fileID: 598670884260331028}
   - component: {fileID: -839521211558827406}
   - component: {fileID: -7227613484743017205}
+  - component: {fileID: 2510513618568382744}
   m_Layer: 0
   m_Name: flowerfield
   m_TagString: Cell
@@ -269,8 +270,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  TooNear: 0
   moveCell: {fileID: 2797528225816677791}
   fog: {fileID: 3616512193717882754}
+  isOn: 0
 --- !u!61 &-7227613484743017205
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +286,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -316,3 +319,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0933334, y: 1.08}
   m_EdgeRadius: 0
+--- !u!50 &2510513618568382744
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9134905264715805465}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

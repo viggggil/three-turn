@@ -13,7 +13,8 @@ public class Cell : MonoBehaviour
     public GameObject moveCell;
     public GameObject fog;
     private bool isSelected;
-    private bool isOn=false;
+    public bool isOn=false;
+    public bool isFog = true;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -25,9 +26,9 @@ public class Cell : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (!isOn)
+        if (!isOn&&!isFog)
         {
             GameManager.selected = this.gameObject;
             if (!GameManager.SelectedCell(type))
@@ -35,7 +36,6 @@ public class Cell : MonoBehaviour
                 if (!isSelected)
                 {
                     moveCell.SetActive(true);
-                    Vector2 SceenPos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0.5f, 0, 0));
                     isSelected = true;
                 }
                 else

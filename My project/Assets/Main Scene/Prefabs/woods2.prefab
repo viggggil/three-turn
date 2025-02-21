@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1696269317335449532}
   - component: {fileID: 3650444471881458264}
-  - component: {fileID: 2405964193193671230}
   m_Layer: 0
   m_Name: smoke3
   m_TagString: Untagged
@@ -169,41 +168,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &2405964193193671230
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3863538633683079098}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.43
 --- !u!1 &5830351235706809861
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +180,7 @@ GameObject:
   - component: {fileID: 1833647172535535886}
   - component: {fileID: 7700155465850254856}
   - component: {fileID: 2129123122981543232}
+  - component: {fileID: 8144395055242982688}
   m_Layer: 0
   m_Name: woods2
   m_TagString: Cell
@@ -305,8 +270,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  TooNear: 0
   moveCell: {fileID: 2516530103738196874}
   fog: {fileID: 3863538633683079098}
+  isOn: 0
+  isFog: 1
 --- !u!61 &2129123122981543232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -319,7 +287,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -352,3 +320,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0366666, y: 1.05}
   m_EdgeRadius: 0
+--- !u!50 &8144395055242982688
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830351235706809861}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

@@ -18,6 +18,8 @@ public class Event_Map : MonoBehaviour
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
@@ -85,17 +87,14 @@ public class Event_Map : MonoBehaviour
     public void GetNearbyTaggedObjects(int serialNumber)
     {
         SerialNumber = serialNumber;
-        List<GameObject> results = new List<GameObject>();
-        Collider[] hitColliders = Physics.OverlapSphere(
-            transform.position,
-            1f
-        );
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position,1f);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("Cell"))
             {
-                gameObject.GetComponent<Cell>().TooNear = true;
+                hitCollider.gameObject.GetComponent<Cell>().TooNear = true;
             }
         }
     }
+
 }

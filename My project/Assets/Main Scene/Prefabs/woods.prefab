@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 6181198365671577605}
   - component: {fileID: -5802816670394826374}
   - component: {fileID: -6431547391011500785}
+  - component: {fileID: -4625764172719668589}
   m_Layer: 0
   m_Name: woods
   m_TagString: Cell
@@ -185,8 +186,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  TooNear: 0
   moveCell: {fileID: 6094541995866681441}
   fog: {fileID: 7477119863939522760}
+  isOn: 0
+  isFog: 1
 --- !u!61 &-6431547391011500785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,7 +203,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -232,6 +236,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1, y: 1.0466666}
   m_EdgeRadius: 0
+--- !u!50 &-4625764172719668589
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898219646087054402}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7477119863939522760
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,8 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8138137401377992057}
   - component: {fileID: 716291629421515047}
-  - component: {fileID: 7004321666911617288}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: smoke1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,38 +347,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &7004321666911617288
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7477119863939522760}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.23

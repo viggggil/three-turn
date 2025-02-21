@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] Enemies;
     public GameObject[] Events;
     public int[] EventsNumber;
+    public int[] EnemyNumber;
     public GameObject selected;
     public GameObject[] Players;
     public int selectedID;
@@ -23,16 +25,19 @@ public class GameManager : MonoBehaviour
     public GameData GameData;
     public SceneLoader SceneLoader;
     private int serialNumber;
+    private int serialNumber2;
     private GameObject[] tempEvents;
+
+    public int TurnNumber = 1;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
-        Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         moveList = new List<GameObject>();
         serialNumber = 0;
         GenerateEvents();
+        GenerateEnemies();
         ClearFog();
     }
     void Update()
@@ -48,7 +53,15 @@ public class GameManager : MonoBehaviour
             if (toMove)
             {
                 Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(0, -1, 0);
-                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+                foreach (var cell in cells)
+                {
+                    if (Mathf.Abs(cell.transform.position.x - Direction.x)
+                        + Mathf.Abs(cell.transform.position.y - Direction.y)<=0.1)
+                    {
+                        cell.GetComponent<Cell>().OnMouseDown();
+                        break;
+                    }
+                }
             }
         }
 
@@ -57,7 +70,15 @@ public class GameManager : MonoBehaviour
             if (toMove)
             {
                 Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(1, 0, 0);
-                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+                foreach (var cell in cells)
+                {
+                    if (Mathf.Abs(cell.transform.position.x - Direction.x)
+                        + Mathf.Abs(cell.transform.position.y - Direction.y) <= 0.1)
+                    {
+                        cell.GetComponent<Cell>().OnMouseDown();
+                        break;
+                    }
+                }
             }
         }
 
@@ -66,7 +87,15 @@ public class GameManager : MonoBehaviour
             if (toMove)
             {
                 Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(0, 1, 0);
-                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+                foreach (var cell in cells)
+                {
+                    if (Mathf.Abs(cell.transform.position.x - Direction.x)
+                        + Mathf.Abs(cell.transform.position.y - Direction.y) <= 0.1)
+                    {
+                        cell.GetComponent<Cell>().OnMouseDown();
+                        break;
+                    }
+                }
             }
         }
 
@@ -75,7 +104,15 @@ public class GameManager : MonoBehaviour
             if (toMove)
             {
                 Vector3 Direction = Players[selectedID - 1].transform.position - new Vector3(-1, 0, 0);
-                Players[selectedID - 1].GetComponent<Carriage>().Move(Direction);
+                foreach (var cell in cells)
+                {
+                    if (Mathf.Abs(cell.transform.position.x - Direction.x)
+                        + Mathf.Abs(cell.transform.position.y - Direction.y) <= 0.1)
+                    {
+                        cell.GetComponent<Cell>().OnMouseDown();
+                        break;
+                    }
+                }
             }
         }
     }
@@ -150,6 +187,7 @@ public class GameManager : MonoBehaviour
                 + Mathf.Abs(cell.transform.position.y - Players[selectedID-1].transform.position.y) <= 4)
             {
                 cell.GetComponent<Cell>().fog.SetActive(false);
+                cell.GetComponent<Cell>().isFog = false;
             }
         }
     }
@@ -191,6 +229,12 @@ public class GameManager : MonoBehaviour
 
     public void TurnStart()
     {
+        TurnNumber++;
+        GameData.gsd.TurnNumber = TurnNumber;
+        if (TurnNumber % 3 == 0)
+        {
+            GenerateEvents();
+        }
         foreach (var player in Players)
         {
             Carriage temp = player.GetComponent<Carriage>();
@@ -209,6 +253,12 @@ public class GameManager : MonoBehaviour
 
     public void GenerateEvents()
     {
+        tempEvents = GameObject.FindGameObjectsWithTag("Event");
+        serialNumber = 0;
+        foreach (var event_ in tempEvents)
+        {
+            Destroy(event_);
+        }
         foreach (var cell in cells)
         {
             if (serialNumber >= 10) break;
@@ -221,8 +271,49 @@ public class GameManager : MonoBehaviour
             GameData.gsd.Epositions[serialNumber]= position;
             GameData.gsd.types[serialNumber] = type;
             GameObject event_ = Instantiate(Events[type], position, Quaternion.identity);
-            event_.GetComponent<Event_Map>().GetNearbyTaggedObjects(serialNumber);
+            event_.GetComponent<Event_Map>().SerialNumber = serialNumber;
+            foreach(var cell_ in cells)
+            {
+                if (Mathf.Abs(cell_.transform.position.x - position.x)
+                + Mathf.Abs(cell_.transform.position.y - position.y) <= 1)
+                {
+                    cell_.GetComponent<Cell>().TooNear=true;
+                }
+            }
             serialNumber++;
+        }
+    }
+
+    public void GenerateEnemies()
+    {
+        GameObject[] tempEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        serialNumber2 = 0;
+        foreach (var enemy in tempEnemies)
+        {
+            Destroy(enemy);
+        }
+        foreach (var cell in cells)
+        {
+            if (serialNumber2 >= 10) break;
+            if (cell.GetComponent<Cell>().type >= 4 || cell.GetComponent<Cell>().TooNear) continue;
+            int randomNumber = Random.Range(0, 501);
+            if (randomNumber > 10) continue;
+            Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
+            int type = 0;
+            while (EnemyNumber[type] < randomNumber) type++;
+            GameData.gsd.Epositions2[serialNumber2] = position;
+            GameData.gsd.types2[serialNumber2] = type;
+            GameObject enemy = Instantiate(Enemies[type], position, Quaternion.identity);
+            enemy.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
+            foreach (var cell_ in cells)
+            {
+                if (Mathf.Abs(cell_.transform.position.x - position.x)
+                + Mathf.Abs(cell_.transform.position.y - position.y) <= 1)
+                {
+                    cell_.GetComponent<Cell>().TooNear = true;
+                }
+            }
+            serialNumber2++;
         }
     }
 
@@ -247,5 +338,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LoadEnemy()
+    {
+        serialNumber2 = 0;
+        GameObject[] tempEnemies= GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in tempEnemies)
+        {
+            Destroy(enemy);
+        }
+        while (serialNumber2 < 10 && GameData.gsd.Epositions2[serialNumber2].x != 0)
+        {
+            if (GameData.gsd.types2[serialNumber] == -1)
+            {
+                serialNumber2++;
+                continue;
+            }
+            Vector3 position = GameData.gsd.Epositions2[serialNumber2];
+            GameObject event_ = Instantiate(Enemies[GameData.gsd.types2[serialNumber2]], position, Quaternion.identity);
+            serialNumber2++;
+        }
+    }
 
 }
