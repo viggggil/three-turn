@@ -5,7 +5,9 @@ using UnityEngine;
 public class Nodes : MonoBehaviour
 {
     GameObject actionPanel;
+    public GameObject enemySkillsPanel;
     GameObject BattleUIManager;
+    public GameObject Bars;
 
     public DataofNodes dataofNodes;
 
@@ -26,6 +28,18 @@ public class Nodes : MonoBehaviour
         actionPanel = GameObject.FindWithTag("ActionPanel");
         BattleUIManager = GameObject.FindWithTag("BattleUIManager");
         battleUIManager = BattleUIManager.GetComponent<BattleUIManager>();
+    }
+
+    private void Update()
+    {
+        if (isPlayerHere || isEnemyHere)
+        {
+            Bars.SetActive(true);
+        }
+        else
+        {
+            Bars.SetActive(false);
+        }
     }
 
     public void OnPlayerNodeClick()
@@ -126,6 +140,7 @@ public class Nodes : MonoBehaviour
                 dataofNodes.isENodesSelected[nodeCode-6] = true;
                 isSelected = true;
                 dataofNodes.anyESelected = true;
+                enemySkillsPanel.gameObject.SetActive(true);
             }
 
 
@@ -147,6 +162,7 @@ public class Nodes : MonoBehaviour
                     dataofNodes.isENodesSelected[nodeCode-6] = false;
                     isSelected = false;
                     dataofNodes.anyESelected = false;
+                    enemySkillsPanel.gameObject.SetActive(false);
                 }
                 else
                 {

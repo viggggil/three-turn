@@ -8,6 +8,7 @@ public class BattleUIManager : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] GameObject actionPanel;
     [SerializeField] GameObject skillsPanel;
+    [SerializeField] GameObject enemySkillsPanel;
 
     public DataofNodes dataofNodes;
     
@@ -79,5 +80,6 @@ public class BattleUIManager : MonoBehaviour
         dataofNodes.SelectedENodeCode = 12;
         //打开技能面板
         OpenSkillsPanel();
+        enemySkillsPanel.gameObject.SetActive(false);
     }
 }

@@ -10,6 +10,7 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int health;//初始生命值
     [SerializeField] private int code;//代码
     [SerializeField] private int attackPower;//攻击力
+    [SerializeField] private int defensePower;//防御值
     [SerializeField] private int physicalResistivity;//物理抗性
     [SerializeField] private int magicalResistivity;//魔法抗性
     [SerializeField] private int minSpeed;//最小速度
@@ -22,6 +23,8 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int accurateValue;//命中值
     [SerializeField] private int evasiveValue;//闪避值
     [SerializeField] private int position;//位置
+    [SerializeField] private bool ontheDefense;//位置
+    
 
     public List<Buff> Buffs { get; private set; }
 
@@ -29,6 +32,8 @@ public class CharacterProperty : MonoBehaviour
     public int Code { get; set; }
     public int HP { get; set; }
     public int ATK { get; set; }
+
+    public int DEF { get; set; }
     public int PR { get; set; }
     public int MR { get; set; }
     public int MinSpeed { get; set; }
@@ -46,10 +51,13 @@ public class CharacterProperty : MonoBehaviour
     public bool isCursed { get; set; }
 
     public int Position { get; set; }
+
+    public bool OnTheDefense { get; set; }
     private void Awake()
     {
         HP = maxHealth;
         ATK = attackPower;
+        DEF = defensePower;
         PR = physicalResistivity;
         MR = magicalResistivity;
         MinSpeed = minSpeed;
@@ -67,6 +75,7 @@ public class CharacterProperty : MonoBehaviour
         Position = position;
         Code = code;
         Health = health;
+        OnTheDefense = ontheDefense;
     }
 
     public void AddBuff(Buff buff)

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class BattleManager : MonoBehaviour
     Spawner spawner;
 
     public static Action RandomSpeed;
+    public static Action RoundStart;
 
     public List<GameObject> ActionOrder;
     //private List<List<GameObject>> battleLists;//这是存储所有列表的集合
@@ -28,7 +30,8 @@ public class BattleManager : MonoBehaviour
     {
         Spawner = GameObject.FindWithTag("Spawner");
         spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
-        
+
+        RoundStart += Initialization;
         //battleLists = new List<List<GameObject>>();
         //battleList1 = new List<GameObject>();
         //battleList2 = new List<GameObject>();
@@ -46,6 +49,16 @@ public class BattleManager : MonoBehaviour
 
         //确认载入后回合开始
         //RandomSpeed?.Invoke();
+        
+        RoundStart?.Invoke();
+
+        /*回合准备阶段*/
+
+
+    }
+
+    private void Initialization()
+    {
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         ActionOrder.Sort((b, a) =>
@@ -56,13 +69,7 @@ public class BattleManager : MonoBehaviour
             return propA.SpeedThisRound.CompareTo(propB.SpeedThisRound);
         });//按照每个人的速度进行排序
 
-        foreach(GameObject a in ActionOrder)
-        {
-            Debug.Log(a.name);
-        }
-        /*回合准备阶段*/
     }
-
 
     private int DamageCalculator(int rawDamage,int uncertainty,int diffofSpeed)
     {
@@ -127,6 +134,14 @@ public class BattleManager : MonoBehaviour
     //            Debug.Log(obj.name);
     //        }
     //    }
-        
+
     //}
+    private void OnDestroy()
+    {
+        ActionOrder.Clear();
+        RoundStart -= Initialization;
+    }
+
+    
+    
 }

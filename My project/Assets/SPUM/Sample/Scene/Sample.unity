@@ -93166,7 +93166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d11b11817daa5435f92b04440958b38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabObj: {fileID: 2264593362713716666, guid: 4fd99ad1026eb4676b6ed98658f868a9, type: 3}
+  _prefabObj: {fileID: 1646664924}
   _savedUnitList:
   - {fileID: 1489441552072001456, guid: cf18b6c2741c1459baf4d5effef718b1, type: 3}
   - {fileID: 5912089797773717686, guid: c786d9da1b9dd4d7889f7026c78c0570, type: 3}
@@ -93234,7 +93234,7 @@ MonoBehaviour:
   - {fileID: 651579847}
   - {fileID: 482405414}
   - {fileID: 1295510107}
-  _nowObj: {fileID: 0}
+  _nowObj: {fileID: 1646664924}
   _playerObjCircle: {fileID: 148904907}
   _goalObjCircle: {fileID: 1395584150}
   _camera: {fileID: 1106009835}
@@ -376525,6 +376525,7 @@ GameObject:
   - component: {fileID: 1744412960}
   - component: {fileID: 1744412959}
   - component: {fileID: 1744412958}
+  - component: {fileID: 1744412961}
   m_Layer: 0
   m_Name: SPUM_20240910232738129
   m_TagString: Player
@@ -376626,6 +376627,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.3}
   m_Size: {x: 0.5, y: 0.7}
   m_Direction: 0
+--- !u!95 &1744412961
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744412956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87250caa4eec27040bc5650f38894ee7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1745054971
 GameObject:
   m_ObjectHideFlags: 0
