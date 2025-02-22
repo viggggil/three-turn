@@ -6,8 +6,8 @@ public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance { get; private set; }
     public GameSaveManager GameSaveManager;
-    public static int PlayerOneProfession;
-    public static int PlayerTwoProfession;
+    public static int PlayerOneProfession=0;
+    public static int PlayerTwoProfession=0;
 
     private void Awake()
     {

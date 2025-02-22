@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 
 public class Carriage : MonoBehaviour
@@ -23,7 +24,7 @@ public class Carriage : MonoBehaviour
     public GameObject tomb;
     public GameObject player;
     public Event_Map _tomb;
-    public Sprite[] Images;
+    public GameObject[] Professions;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,7 +34,6 @@ public class Carriage : MonoBehaviour
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         if(playerID!=-1)TurnStart();
         tomb.SetActive(false);
-        player.SetActive(true);
         _tomb = GetComponent<Event_Map>();
     }
 
@@ -122,6 +122,8 @@ public class Carriage : MonoBehaviour
     public void LoadPlayer(int Profession)
     {
         if (Profession == -1) return;
-        player.GetComponent<SpriteRenderer>().sprite = Images[Profession];
+        player=Instantiate(Professions[Profession], transform.position, Quaternion.identity);
+        player.transform.parent = transform;
+        player.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
     }
 }

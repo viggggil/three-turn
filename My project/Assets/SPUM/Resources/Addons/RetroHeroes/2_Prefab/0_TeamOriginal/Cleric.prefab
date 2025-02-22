@@ -6389,7 +6389,7 @@ GameObject:
   - component: {fileID: 6850801225037254623}
   - component: {fileID: -8991475030002998001}
   m_Layer: 5
-  m_Name: SPUM_20240910232736554
+  m_Name: Cleric
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

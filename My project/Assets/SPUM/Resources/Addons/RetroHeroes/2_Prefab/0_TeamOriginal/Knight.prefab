@@ -8959,7 +8959,7 @@ GameObject:
   - component: {fileID: -8815763339749779464}
   - component: {fileID: 6024059202660815332}
   m_Layer: 5
-  m_Name: SPUM_20240910232736052
+  m_Name: Knight
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8974,7 +8974,7 @@ RectTransform:
   m_GameObject: {fileID: 6774065929812205638}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5928968526464677961}
@@ -12660,7 +12660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProperty: {fileID: -6806011810731187168}
-  battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
 --- !u!114 &-6806011810731187168
 MonoBehaviour:
@@ -12678,6 +12677,7 @@ MonoBehaviour:
   health: 0
   code: 0
   attackPower: 0
+  defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
   minSpeed: 0
@@ -12690,6 +12690,7 @@ MonoBehaviour:
   accurateValue: 0
   evasiveValue: 0
   position: 0
+  ontheDefense: 0
 --- !u!114 &-8815763339749779464
 MonoBehaviour:
   m_ObjectHideFlags: 0
