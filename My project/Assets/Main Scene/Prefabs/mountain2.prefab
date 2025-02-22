@@ -314,11 +314,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529a901f162a62347a20e5186e9d84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 4
+  type: 5
   TooNear: 0
   moveCell: {fileID: 1762587305415158258}
   fog: {fileID: 5184646464448298746}
   isOn: 0
+  isFog: 1
 --- !u!50 &5587667055788373154
 Rigidbody2D:
   serializedVersion: 4

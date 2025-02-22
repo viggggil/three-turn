@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using DG.Tweening;
 
 
 public class Carriage : MonoBehaviour
@@ -25,6 +26,8 @@ public class Carriage : MonoBehaviour
     public GameObject player;
     public Event_Map _tomb;
     public GameObject[] Professions;
+
+    public Animator Animator;
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -32,7 +35,7 @@ public class Carriage : MonoBehaviour
         CameraFollower = GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
-        if(playerID!=-1)TurnStart();
+        if (playerID!=-1)TurnStart();
         tomb.SetActive(false);
         _tomb = GetComponent<Event_Map>();
     }
@@ -71,15 +74,29 @@ public class Carriage : MonoBehaviour
     {
         if (curStamina >=1)
         {
-            transform.position = direction;
-            transform.position -= new Vector3(0, 0, 0.01f);
-            GameManager.ClearFog();
-            curStamina -= 1;
-            StaminaUpdate?.Invoke(curStamina, maxStamina,playerID);
-            GameData.SaveStaminaAndPosition(curStamina,transform.position, playerID);
-            GameManager.CloseSelect();
-            if(curStamina>=1)Invoke("NextStep", 0.2f);
+            transform.DOMove(direction, 1);
+            if (direction.x > player.transform.position.x)
+            {
+                player.GetComponent<RectTransform>().localScale = new Vector3(-1.25f, 1.25f, 1.25f);
+            }
+            if (direction.x < player.transform.position.x)
+            {
+                player.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            }
+            Animator.SetBool("move_Map", true);
+            Invoke("Move_", 1f);
         }
+    }
+
+    public void Move_()
+    {
+        Animator.SetBool("move_Map", false);
+        GameManager.ClearFog();
+        curStamina -= 1;
+        StaminaUpdate?.Invoke(curStamina, maxStamina, playerID);
+        GameData.SaveStaminaAndPosition(curStamina, transform.position, playerID);
+        GameManager.CloseSelect();
+        if (curStamina >= 1) Invoke("NextStep", 0.2f);
     }
 
     public void NextStep()
@@ -125,5 +142,7 @@ public class Carriage : MonoBehaviour
         player=Instantiate(Professions[Profession], transform.position, Quaternion.identity);
         player.transform.parent = transform;
         player.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+        GameObject childObject = player.transform.GetChild(0).gameObject;
+        Animator = childObject.GetComponent<Animator>();
     }
 }

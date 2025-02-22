@@ -6404,7 +6404,7 @@ RectTransform:
   m_GameObject: {fileID: 5153136095332640475}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7584895991075846389}
@@ -10060,7 +10060,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProperty: {fileID: -5644461686617967603}
-  battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
 --- !u!114 &-5644461686617967603
 MonoBehaviour:
@@ -10078,6 +10077,7 @@ MonoBehaviour:
   health: 0
   code: 3
   attackPower: 0
+  defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
   minSpeed: 0
@@ -10090,6 +10090,7 @@ MonoBehaviour:
   accurateValue: 0
   evasiveValue: 0
   position: 0
+  ontheDefense: 0
 --- !u!114 &6850801225037254623
 MonoBehaviour:
   m_ObjectHideFlags: 0

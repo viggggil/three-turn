@@ -145,9 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529a901f162a62347a20e5186e9d84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 6
+  TooNear: 0
   moveCell: {fileID: 1630592183395142553}
   fog: {fileID: 6402758525710894218}
+  isOn: 0
+  isFog: 1
 --- !u!1 &1630592183395142553
 GameObject:
   m_ObjectHideFlags: 0

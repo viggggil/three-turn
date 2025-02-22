@@ -85,6 +85,7 @@ public class UIManager : MonoBehaviour
         woods,
         forest,
         flowerfield,
+        road,
         mountain,
         sea
     }

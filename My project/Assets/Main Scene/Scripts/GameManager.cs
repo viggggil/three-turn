@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public int[] EnemyNumber;
     public GameObject selected;
     public GameObject[] Players;
-    public int selectedID;
+    public int selectedID=2;
     private List<GameObject> moveList;
     public bool toMove=false;
     public GameData GameData;
@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
         GenerateEvents();
         GenerateEnemies();
         LoadPlayer();
+        ClearFog();
+        selectedID = 1;
         ClearFog();
     }
     void Update()
@@ -192,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
     public bool SelectedCell(int type)
     {
-        if(toMove && moveList.Contains(selected)&& type<4)
+        if(toMove && moveList.Contains(selected)&& type<5)
         {
             Players[selectedID - 1].GetComponent<Carriage>().Move(selected.transform.position);
             return true;
@@ -229,6 +231,7 @@ public class GameManager : MonoBehaviour
         GameData.gsd.TurnNumber = TurnNumber;
         if (TurnNumber % 3 == 0)
         {
+            ReTig();
             GenerateEvents();
             GenerateEnemies();
         }
@@ -312,6 +315,7 @@ public class GameManager : MonoBehaviour
     }
     public void LoadEvent()
     {
+        ReTig();
         serialNumber = 0;
         tempEvents = GameObject.FindGameObjectsWithTag("Event");
         foreach(var event_ in tempEvents)
@@ -328,6 +332,14 @@ public class GameManager : MonoBehaviour
             Vector3 position =GameData.gsd.Epositions[serialNumber];
             GameObject event_ = Instantiate(Events[GameData.gsd.types[serialNumber]], position, Quaternion.identity);
             serialNumber++;
+        }
+    }
+
+    public void ReTig()
+    {
+        foreach(var cell in cells)
+        {
+            cell.GetComponent<Cell>().TooNear = false;
         }
     }
     public void LoadEnemy()

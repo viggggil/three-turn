@@ -48,4 +48,22 @@ public class Cell : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Carriage temp = collision.GetComponent<Carriage>();
+        if (temp)
+        {
+            TooNear = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Carriage temp = collision.GetComponent<Carriage>();
+        if (temp)
+        {
+            TooNear = false;
+        }
+    }
 }
