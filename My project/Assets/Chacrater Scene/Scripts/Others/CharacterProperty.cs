@@ -23,7 +23,7 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int accurateValue;//命中值
     [SerializeField] private int evasiveValue;//闪避值
     [SerializeField] private int position;//位置
-    [SerializeField] private bool ontheDefense;//位置
+    [SerializeField] private bool ontheDefense;//正在防御
     
 
     public List<Buff> Buffs { get; private set; }

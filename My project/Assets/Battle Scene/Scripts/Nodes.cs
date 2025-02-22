@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Nodes : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Nodes : MonoBehaviour
     public GameObject enemySkillsPanel;
     GameObject BattleUIManager;
     public GameObject Bars;
+    public GameObject Shield;
 
     public DataofNodes dataofNodes;
 
@@ -42,51 +44,71 @@ public class Nodes : MonoBehaviour
         }
     }
 
+    public void OpenActionPanel()
+    {
+        if (!dataofNodes.anyPSelected)
+        {
+            battleUIManager.OpenActionPanel();
+            battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
+            dataofNodes.isPNodesSelected[nodeCode] = true;
+            isSelected = true;
+            dataofNodes.anyPSelected = true;
+        }
+
+
+        else
+        {
+            for (int i = 0; i < dataofNodes.isPNodesSelected.Length; i++)
+            {
+                if (dataofNodes.isPNodesSelected[i] == true)
+                {
+                    dataofNodes.SelectedPNodeCode = i;
+                    break;
+                }//结束之后i应该是选择了的node的下标
+            }
+
+            if (dataofNodes.SelectedPNodeCode == nodeCode)
+            {
+                battleUIManager.CloseActionPanel();
+                battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
+                dataofNodes.isPNodesSelected[nodeCode] = false;
+                isSelected = false;
+                dataofNodes.anyPSelected = false;
+            }
+            else
+            {
+                battleUIManager.OpenActionPanel();
+                battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
+                dataofNodes.isPNodesSelected[dataofNodes.SelectedPNodeCode] = false;
+                battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
+                dataofNodes.isPNodesSelected[nodeCode] = true;
+                isSelected = true;
+            }
+        }
+
+    }
+
     public void OnPlayerNodeClick()
     {//node被点击时候的方法
         if (isPlayerHere)
         {
-            if (!dataofNodes.anyPSelected)
+            if (!Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheDefense)
             {
-                battleUIManager.OpenActionPanel();
+                OpenActionPanel();
+            }
+            else
+            {
+                battleUIManager.OpenExitDefensePanel();
+                battleUIManager.CloseActionPanel();
+                battleUIManager.DisableAllNodeButtons();
+                battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
+                dataofNodes.isPNodesSelected[dataofNodes.SelectedPNodeCode] = false;
                 battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
                 dataofNodes.isPNodesSelected[nodeCode] = true;
                 isSelected = true;
-                dataofNodes.anyPSelected = true;
-            }
-
-
-            else
-            {
-                for (int i = 0; i < dataofNodes.isPNodesSelected.Length; i++)
-                {
-                    if (dataofNodes.isPNodesSelected[i] == true)
-                    {
-                        dataofNodes.SelectedPNodeCode = i;
-                        break;
-                    }//结束之后i应该是选择了的node的下标
-                }
-
-                if (dataofNodes.SelectedPNodeCode == nodeCode)
-                {
-                    battleUIManager.CloseActionPanel();
-                    battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
-                    dataofNodes.isPNodesSelected[nodeCode] = false;
-                    isSelected = false;
-                    dataofNodes.anyPSelected = false;
-                }
-                else
-                {
-                    battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
-                    dataofNodes.isPNodesSelected[dataofNodes.SelectedPNodeCode] = false;
-                    battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-                    dataofNodes.isPNodesSelected[nodeCode] = true;
-                    isSelected = true;
-                }
             }
 
             dataofNodes.SelectedPNodeCode = nodeCode;
-
 
 
 
@@ -137,7 +159,7 @@ public class Nodes : MonoBehaviour
             if (!dataofNodes.anyESelected)
             {
                 battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-                dataofNodes.isENodesSelected[nodeCode-6] = true;
+                dataofNodes.isENodesSelected[nodeCode - 6] = true;
                 isSelected = true;
                 dataofNodes.anyESelected = true;
                 enemySkillsPanel.gameObject.SetActive(true);
@@ -159,7 +181,7 @@ public class Nodes : MonoBehaviour
                 {
                     battleUIManager.CloseActionPanel();
                     battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
-                    dataofNodes.isENodesSelected[nodeCode-6] = false;
+                    dataofNodes.isENodesSelected[nodeCode - 6] = false;
                     isSelected = false;
                     dataofNodes.anyESelected = false;
                     enemySkillsPanel.gameObject.SetActive(false);
@@ -167,9 +189,9 @@ public class Nodes : MonoBehaviour
                 else
                 {
                     battleUIManager.Circles[dataofNodes.SelectedENodeCode].gameObject.SetActive(false);//关别人的
-                    dataofNodes.isENodesSelected[dataofNodes.SelectedENodeCode-6] = false;
+                    dataofNodes.isENodesSelected[dataofNodes.SelectedENodeCode - 6] = false;
                     battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-                    dataofNodes.isENodesSelected[nodeCode-6] = true;
+                    dataofNodes.isENodesSelected[nodeCode - 6] = true;
                     isSelected = true;
                 }
             }
@@ -182,4 +204,19 @@ public class Nodes : MonoBehaviour
     }
 
 
+    public void DisplayShield()
+    {
+        Vector3 position = gameObject.transform.position;
+        GameObject ThatShield =
+        GameObject.Instantiate(Shield,position + new Vector3 (0.6f,0f,0f ) , Quaternion.identity, gameObject.transform);
+        ThatShield.transform.name = "Shield";
+    }
+
+    public GameObject FindChildCharacter()
+    {
+        GameObject Child = Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().gameObject;
+        if ( Child != null )
+            return Child;
+        else return null;
+    }
 }

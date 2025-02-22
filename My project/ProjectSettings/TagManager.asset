@@ -10,6 +10,7 @@ TagManager:
   - ActionPanel
   - Spawner
   - BattleUIManager
+  - ShieldSign
   layers:
   - Default
   - TransparentFX

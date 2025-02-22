@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +10,13 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject actionPanel;
     [SerializeField] GameObject skillsPanel;
     [SerializeField] GameObject enemySkillsPanel;
+    [SerializeField] GameObject exitDefensePanel;
 
     public DataofNodes dataofNodes;
     
     public List<Image> Circles;
     public List<Button> Buttons;
+    public List<GameObject> Arrows;
 
 
     private void Awake()
@@ -45,7 +48,7 @@ public class BattleUIManager : MonoBehaviour
         EnableAllButtons();
     }
 
-    public void DisableAllButtons()
+    public void DisableAllNodeButtons()
     {
         foreach (Button button in Buttons)
         {
@@ -61,10 +64,18 @@ public class BattleUIManager : MonoBehaviour
         }
     }
 
+    public void DisableAllArrows()
+    {
+        foreach (GameObject i in Arrows)
+        {
+
+        }
+    }
+
     public void OnAttackButtonClick()
     {
         //禁止按别的node了
-        DisableAllButtons();
+        DisableAllNodeButtons();
         //把所有东西复位
         CloseActionPanel();
         if(dataofNodes.SelectedPNodeCode != 12)
@@ -82,4 +93,63 @@ public class BattleUIManager : MonoBehaviour
         OpenSkillsPanel();
         enemySkillsPanel.gameObject.SetActive(false);
     }
+
+    public void OnDefenseButtonClick()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaDefense();
+        CloseActionPanel();
+        DisplayShield();
+    }
+
+    public void DisplayShield()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponent<Nodes>().DisplayShield();
+    }
+
+    public void ExitDefense()
+    {
+        CloseExitDefensePanel();
+        OpenActionPanel();
+        Destroy(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].transform.Find("Shield").gameObject);
+        //把当前选中的node下面的盾牌弄掉
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheDefense = false;
+    }
+
+    public void OpenExitDefensePanel()
+    {
+        exitDefensePanel.gameObject.SetActive(true);
+    }
+
+    public void CloseExitDefensePanel()
+    {
+        exitDefensePanel.gameObject.SetActive(false);
+        EnableAllButtons();
+
+    }
+
+    public void DisplayArrows()
+    {
+        DisableAllNodeButtons();
+
+        switch (dataofNodes.SelectedPNodeCode)
+        {
+            case 0:
+                if (!Spawner.nodeDictionary[1].GetComponent<Nodes>().isPlayerHere)
+                {
+                    Arrows[1].SetActive(true);
+                    Buttons[1].enabled = true;
+                }
+                if (!Spawner.nodeDictionary[3].GetComponent<Nodes>().isPlayerHere)
+                {
+
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        
+    }
+    
 }

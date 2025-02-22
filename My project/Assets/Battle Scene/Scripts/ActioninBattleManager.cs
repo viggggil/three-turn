@@ -10,6 +10,8 @@ public class ActioninBattleManager : MonoBehaviour
 {
     public CharacterProperty characterProperty;
 
+    
+
     //public BattleManager battleManager;//用UI拖来的
     public DataofAttackers dataofAttackers;
 
@@ -36,11 +38,13 @@ public class ActioninBattleManager : MonoBehaviour
     private void RandomSpeed()
     {//用于订阅的提供具体速度的函数（已弃用）
         characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
+
+        
     }
 
 
     //这是回合准备阶段准备攻击速度判断的方法
-    private void GonnaAttack(params int[] AtkRange)
+    public void GonnaAttack(params int[] AtkRange)
     {//打算使用攻击性行动
         foreach (int i in AtkRange)
         {
@@ -107,7 +111,7 @@ public class ActioninBattleManager : MonoBehaviour
         }//原伤害，不打折
     }
 
-    private void GonnaDefense()
+    public void GonnaDefense()
     {
         characterProperty.OnTheDefense = true;
     }
