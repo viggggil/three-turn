@@ -121,6 +121,7 @@ public class Carriage : MonoBehaviour
 
     public void LoadPlayer(int Profession)
     {
+        if (Profession == -1) return;
         player.GetComponent<SpriteRenderer>().sprite = Images[Profession];
     }
 }

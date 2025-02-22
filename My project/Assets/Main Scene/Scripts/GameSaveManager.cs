@@ -36,6 +36,7 @@ public class GameSaveManager : MonoBehaviour
             GameManager.LoadEvent();
             GameManager.LoadEnemy();
             GameManager.TurnNumber = gameData.gsd.TurnNumber;
+            GameManager.LoadPlayer();
             file.Close();
         }
     }

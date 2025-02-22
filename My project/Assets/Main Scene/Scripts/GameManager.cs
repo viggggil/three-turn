@@ -38,16 +38,12 @@ public class GameManager : MonoBehaviour
         serialNumber = 0;
         GenerateEvents();
         GenerateEnemies();
+        LoadPlayer();
         ClearFog();
     }
     void Update()
     {
-        foreach (var Player in Players)
-        {
-            if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerOneProfession);
-            else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(SceneLoader.PlayerTwoProfession);
-            else continue;
-        }
+        
         if (Input.GetKeyDown(KeyCode.W))
         {
             if (toMove)
@@ -137,7 +133,6 @@ public class GameManager : MonoBehaviour
                 + Mathf.Abs(Players[selectedID - 1].transform.position.y - thisEvent.transform.position.y) <= 1) return true;
         return false;
     }
-
     public bool[] TestDistance_(GameObject thisEnemy)
     {
         bool[] result = new bool[3] { false,false,false};
@@ -159,7 +154,6 @@ public class GameManager : MonoBehaviour
         }
         return result;
     }
-
     public bool TestDistance__(GameObject thisEvent)
     {
         foreach (var cell in cells)
@@ -178,7 +172,6 @@ public class GameManager : MonoBehaviour
         }
         return true;
     }
-
     public void ClearFog()
     {
         foreach (var cell in cells)
@@ -188,10 +181,15 @@ public class GameManager : MonoBehaviour
             {
                 cell.GetComponent<Cell>().fog.SetActive(false);
                 cell.GetComponent<Cell>().isFog = false;
+                if (Mathf.Abs(cell.transform.position.x - Players[selectedID - 1].transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - Players[selectedID - 1].transform.position.y) <= 0.1)
+                {
+                    cell.GetComponent<Cell>().TooNear = true;
+                }
             }
+            
         }
     }
-
     public bool SelectedCell(int type)
     {
         if(toMove && moveList.Contains(selected)&& type<4)
@@ -208,7 +206,6 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
-
     public void ChangeSelected(int ID)
     {
         Players[selectedID - 1].GetComponent<Carriage>().isSelected = false;
@@ -226,7 +223,6 @@ public class GameManager : MonoBehaviour
         }
         moveList.Clear();
     }
-
     public void TurnStart()
     {
         TurnNumber++;
@@ -234,6 +230,7 @@ public class GameManager : MonoBehaviour
         if (TurnNumber % 3 == 0)
         {
             GenerateEvents();
+            GenerateEnemies();
         }
         foreach (var player in Players)
         {
@@ -241,7 +238,6 @@ public class GameManager : MonoBehaviour
             if (temp.playerID != -1) temp.TurnStart();
         }
     }
-
     public void BattleFailed()
     {
         foreach(var player in Players)
@@ -250,7 +246,6 @@ public class GameManager : MonoBehaviour
             if (PlayerTeamState.PlayerState.isHere[temp.playerID - 1]) temp.Dead();
         }
     }
-
     public void GenerateEvents()
     {
         tempEvents = GameObject.FindGameObjectsWithTag("Event");
@@ -283,7 +278,6 @@ public class GameManager : MonoBehaviour
             serialNumber++;
         }
     }
-
     public void GenerateEnemies()
     {
         GameObject[] tempEnemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -316,7 +310,6 @@ public class GameManager : MonoBehaviour
             serialNumber2++;
         }
     }
-
     public void LoadEvent()
     {
         serialNumber = 0;
@@ -337,7 +330,6 @@ public class GameManager : MonoBehaviour
             serialNumber++;
         }
     }
-
     public void LoadEnemy()
     {
         serialNumber2 = 0;
@@ -348,7 +340,7 @@ public class GameManager : MonoBehaviour
         }
         while (serialNumber2 < 10 && GameData.gsd.Epositions2[serialNumber2].x != 0)
         {
-            if (GameData.gsd.types2[serialNumber] == -1)
+            if (GameData.gsd.types2[serialNumber2] == -1)
             {
                 serialNumber2++;
                 continue;
@@ -356,6 +348,15 @@ public class GameManager : MonoBehaviour
             Vector3 position = GameData.gsd.Epositions2[serialNumber2];
             GameObject event_ = Instantiate(Enemies[GameData.gsd.types2[serialNumber2]], position, Quaternion.identity);
             serialNumber2++;
+        }
+    }
+    public void LoadPlayer()
+    {
+        foreach (var Player in Players)
+        {
+            if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[0]);
+            else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[1]);
+            else Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
         }
     }
 

@@ -250,7 +250,6 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
     public void EventChoiceOne()
     {
         selectedEvent.EventOne();
@@ -345,7 +344,6 @@ public class UIManager : MonoBehaviour
                 }
         }
     }
-
     public void SelectPlayerOne()
     {
         Players[0].GetComponent<Carriage>().OnMouseDown();
@@ -353,7 +351,6 @@ public class UIManager : MonoBehaviour
         SelectPlayers[1].SetActive(false);
         SelectPlayers[2].SetActive(false);
     }
-
     public void SelectPlayerTwo()
     {
         Players[1].GetComponent<Carriage>().OnMouseDown();
@@ -361,7 +358,6 @@ public class UIManager : MonoBehaviour
         SelectPlayers[1].SetActive(true);
         SelectPlayers[2].SetActive(false);
     }
-
     public void SelectPlayerThree()
     {
         Players[2].GetComponent<Carriage>().OnMouseDown();

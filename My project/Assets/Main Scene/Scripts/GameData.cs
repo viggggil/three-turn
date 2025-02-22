@@ -33,6 +33,7 @@ public class GameData : MonoBehaviour
         public Vector3[] Epositions2;
         public int[] types2;
         public int TurnNumber;
+        public int[] Professions;
         public GameSaveData()
         {
             isHere = new bool[3] { false, false, false };
@@ -49,6 +50,7 @@ public class GameData : MonoBehaviour
             Epositions2 = new Vector3[10];
             types2 = new int[10];
             TurnNumber = 1;
+            Professions = new int[3] { SceneLoader.PlayerOneProfession, SceneLoader.PlayerTwoProfession, -1 };
         }
     }
 
