@@ -10,6 +10,7 @@ public class Nodes : MonoBehaviour
     GameObject BattleUIManager;
     public GameObject Bars;
     public GameObject Shield;
+    public GameObject Arrow;
 
     public DataofNodes dataofNodes;
 
@@ -92,12 +93,8 @@ public class Nodes : MonoBehaviour
     {//node被点击时候的方法
         if (isPlayerHere)
         {
-            if (!Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheDefense)
-            {
-                OpenActionPanel();
-            }
-            else
-            {
+            if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheDefense)
+            {//如果已经为该角色选择了防御
                 battleUIManager.OpenExitDefensePanel();
                 battleUIManager.CloseActionPanel();
                 battleUIManager.DisableAllNodeButtons();
@@ -106,6 +103,22 @@ public class Nodes : MonoBehaviour
                 battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
                 dataofNodes.isPNodesSelected[nodeCode] = true;
                 isSelected = true;
+            }
+            else if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement)
+            {//如果已经为该角色选择了移动
+                battleUIManager.OpenExitMovementPanel();
+                //battleUIManager.ShowTargetpoint();
+                battleUIManager.CloseActionPanel();
+                battleUIManager.DisableAllNodeButtons();
+                battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
+                dataofNodes.isPNodesSelected[dataofNodes.SelectedPNodeCode] = false;
+                battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
+                dataofNodes.isPNodesSelected[nodeCode] = true;
+                isSelected = true;
+            }
+            else
+            {
+                OpenActionPanel();
             }
 
             dataofNodes.SelectedPNodeCode = nodeCode;
@@ -148,6 +161,22 @@ public class Nodes : MonoBehaviour
             //}
 
 
+        }
+
+        else
+        {//这里没有玩家
+            if (dataofNodes.SbisMoving)
+            {//有玩家打算移动到这里,这里其实算是接着BattleUIManager往下写
+                //return code
+                Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().TargetPosition = nodeCode;
+                battleUIManager.DisableAllArrows();
+                battleUIManager.EnableAllButtons();
+                battleUIManager.CloseExitMovementPanel();
+                Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Nodes>().DisplayArrow();
+                Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement = true;
+
+                dataofNodes.SbisMoving = false;
+            }
         }
     }
 
@@ -210,6 +239,14 @@ public class Nodes : MonoBehaviour
         GameObject ThatShield =
         GameObject.Instantiate(Shield,position + new Vector3 (0.6f,0f,0f ) , Quaternion.identity, gameObject.transform);
         ThatShield.transform.name = "Shield";
+    }
+
+    public void DisplayArrow()
+    {
+        Vector3 position = gameObject.transform.position;
+        GameObject ThatArrow =
+        GameObject.Instantiate(Arrow, position + new Vector3(0.6f, 0f, 0f), Quaternion.identity, gameObject.transform);
+        ThatArrow.transform.name = "Arrow";
     }
 
     public GameObject FindChildCharacter()

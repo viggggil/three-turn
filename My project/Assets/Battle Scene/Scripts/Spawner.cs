@@ -78,6 +78,10 @@ public class Spawner : MonoBehaviour
         transform2 = nodeDictionary[position2].transform;
         transform3 = nodeDictionary[position3].transform;
 
+        Player1.transform.localScale = new Vector3(2f,2f,2f);
+        Player2.transform.localScale = new Vector3(2f,2f,2f);
+        Player3.transform.localScale = new Vector3(2f,2f,2f);
+
         Instantiate(Player1, transform1);
         Instantiate(Player2, transform2);
         Instantiate(Player3, transform3);
@@ -113,6 +117,10 @@ public class Spawner : MonoBehaviour
         transform4 = nodeDictionary[position4].transform;
         transform5 = nodeDictionary[position5].transform;
         transform6 = nodeDictionary[position6].transform;
+
+        Enemy1.transform.localScale = new Vector3(2f, 2f, 2f);
+        Enemy2.transform.localScale = new Vector3(2f, 2f, 2f);
+        Enemy3.transform.localScale = new Vector3(2f, 2f, 2f);
 
         Instantiate(Enemy1, transform4);
         Instantiate(Enemy2, transform5);

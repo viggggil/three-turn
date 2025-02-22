@@ -11,6 +11,8 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject skillsPanel;
     [SerializeField] GameObject enemySkillsPanel;
     [SerializeField] GameObject exitDefensePanel;
+    [SerializeField] GameObject exitMovementPanel;
+    [SerializeField] GameObject exitMovementPanelAfter;
 
     public DataofNodes dataofNodes;
     
@@ -68,7 +70,7 @@ public class BattleUIManager : MonoBehaviour
     {
         foreach (GameObject i in Arrows)
         {
-
+            i.gameObject.SetActive(false);
         }
     }
 
@@ -106,6 +108,11 @@ public class BattleUIManager : MonoBehaviour
         Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponent<Nodes>().DisplayShield();
     }
 
+    public void DisplayArrow()
+    {
+
+    }
+
     public void ExitDefense()
     {
         CloseExitDefensePanel();
@@ -114,6 +121,25 @@ public class BattleUIManager : MonoBehaviour
         //把当前选中的node下面的盾牌弄掉
         Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheDefense = false;
     }
+
+    public void ExitMovement()
+    {
+        if (dataofNodes.SbisMoving)
+        {//属于有人正在确定移动的阶段
+            exitMovementPanel.gameObject.SetActive(false);
+            actionPanel.gameObject.SetActive(true);
+            DisableAllArrows();
+            EnableAllButtons();
+
+            dataofNodes.SbisMoving = false;
+        }
+        else
+        {//属于这个人已经确定了移动的状态
+
+        }
+    }
+
+    
 
     public void OpenExitDefensePanel()
     {
@@ -127,22 +153,57 @@ public class BattleUIManager : MonoBehaviour
 
     }
 
-    public void DisplayArrows()
+    public void OpenExitMovementPanel()
+    {
+        exitMovementPanel.gameObject.SetActive(true);
+    }
+
+    public void CloseExitMovementPanel()
+    {
+        exitMovementPanel.gameObject.SetActive(false);
+    }
+
+    public void OnMoveButtonClick()
     {
         DisableAllNodeButtons();
 
-        switch (dataofNodes.SelectedPNodeCode)
-        {
-            case 0:
-                if (!Spawner.nodeDictionary[1].GetComponent<Nodes>().isPlayerHere)
-                {
-                    Arrows[1].SetActive(true);
-                    Buttons[1].enabled = true;
-                }
-                if (!Spawner.nodeDictionary[3].GetComponent<Nodes>().isPlayerHere)
-                {
+        dataofNodes.SbisMoving = true;//标志着有人正在确定移动
+        actionPanel.gameObject.SetActive(false);
+        exitMovementPanel.gameObject.SetActive(true);
 
-                }
+        ReadyForMovement();
+    }
+
+    public void ReadyForMovement()
+    {
+
+        switch (dataofNodes.SelectedPNodeCode)
+        {//这里面根据选择的哪个node，直接设置了能去哪些node
+            case 0:
+                IisReadyForSelection(1);
+                IisReadyForSelection(3);
+                break;
+            case 1:
+                IisReadyForSelection(0);
+                IisReadyForSelection(2);
+                IisReadyForSelection(4);
+                break;
+            case 2:
+                IisReadyForSelection(1);
+                IisReadyForSelection(5);
+                break;
+            case 3:
+                IisReadyForSelection(0);
+                IisReadyForSelection(4);
+                break;
+            case 4:
+                IisReadyForSelection(1);
+                IisReadyForSelection(3);
+                IisReadyForSelection(5);
+                break;
+            case 5:
+                IisReadyForSelection(2);
+                IisReadyForSelection(4);
                 break;
 
             default:
@@ -152,4 +213,12 @@ public class BattleUIManager : MonoBehaviour
         
     }
     
+    public void IisReadyForSelection(int i)
+    {//让某个点变为可选
+        if (!Spawner.nodeDictionary[i].GetComponent<Nodes>().isPlayerHere)
+        {
+            Arrows[i].SetActive(true);
+            Buttons[i].enabled = true;
+        }
+    }
 }

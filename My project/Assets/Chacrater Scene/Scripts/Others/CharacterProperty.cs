@@ -23,7 +23,9 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int accurateValue;//命中值
     [SerializeField] private int evasiveValue;//闪避值
     [SerializeField] private int position;//位置
+    [SerializeField] private int targetPosition;//位置
     [SerializeField] private bool ontheDefense;//正在防御
+    [SerializeField] private bool ontheMovement;//正在移动
     
 
     public List<Buff> Buffs { get; private set; }
@@ -52,6 +54,10 @@ public class CharacterProperty : MonoBehaviour
 
     public int Position { get; set; }
 
+    public int TargetPosition { get; set; }
+
+    public bool OnTheMovement { get; set; }
+
     public bool OnTheDefense { get; set; }
     private void Awake()
     {
@@ -76,6 +82,8 @@ public class CharacterProperty : MonoBehaviour
         Code = code;
         Health = health;
         OnTheDefense = ontheDefense;
+        OnTheMovement = ontheMovement;
+        TargetPosition = targetPosition;
     }
 
     public void AddBuff(Buff buff)
