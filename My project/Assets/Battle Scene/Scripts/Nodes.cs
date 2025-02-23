@@ -89,7 +89,7 @@ public class Nodes : MonoBehaviour
 
     }
 
-    public void OnPlayerNodeClick()
+    public void OnPlayerNodeClick() 
     {//node被点击时候的方法
         if (isPlayerHere)
         {
@@ -107,7 +107,7 @@ public class Nodes : MonoBehaviour
             else if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement)
             {//如果已经为该角色选择了移动
                 battleUIManager.OpenExitMovementPanel();
-                //battleUIManager.ShowTargetpoint();
+                battleUIManager.ShowMoveTargetPoint();//顺带显示要去的地方
                 battleUIManager.CloseActionPanel();
                 battleUIManager.DisableAllNodeButtons();
                 battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
@@ -123,42 +123,6 @@ public class Nodes : MonoBehaviour
 
             dataofNodes.SelectedPNodeCode = nodeCode;
 
-
-
-            //for (int i = 0; i < 12; i++)
-            //{
-
-            //    if (dataofNodes.isNodesSelected[i])
-            //    {//某一个已经被选中了
-            //        othersSelected = true;
-            //        if(i == nodeCode)
-            //        {//选的就是它
-            //            battleUIManager.CloseActionPanel();
-            //            battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
-            //            dataofNodes.isNodesSelected[nodeCode] = false;
-            //            isSelected = false;
-            //            dataofNodes.anySelected = false;
-            //        }
-            //        else
-            //        {//选的不是它
-            //            battleUIManager.Circles[i].gameObject.SetActive(false);//关别人的
-            //            dataofNodes.isNodesSelected[i] = false;
-            //            battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-            //            dataofNodes.isNodesSelected[nodeCode] = true;
-            //            isSelected = true;
-            //        }
-            //    }
-            //}
-
-
-            //if (!othersSelected)
-            //{//每个都没有被选中
-            //    battleUIManager.OpenActionPanel();
-            //    battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-            //    dataofNodes.isNodesSelected[nodeCode] = true;
-            //    isSelected = true;
-            //    dataofNodes.anySelected = true;
-            //}
 
 
         }

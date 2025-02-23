@@ -135,7 +135,17 @@ public class BattleUIManager : MonoBehaviour
         }
         else
         {//属于这个人已经确定了移动的状态
+            CloseExitMovementPanel();
+            EnableAllButtons();
+            OpenActionPanel();
+            Destroy(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].transform.Find("Arrow").gameObject);
+            //把当前选中的node下面的箭头弄掉
+            Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement = false;
 
+            foreach (GameObject i in Arrows)
+            {
+                i.SetActive(false);
+            }//关掉所有的指示箭头
         }
     }
 
@@ -150,7 +160,6 @@ public class BattleUIManager : MonoBehaviour
     {
         exitDefensePanel.gameObject.SetActive(false);
         EnableAllButtons();
-
     }
 
     public void OpenExitMovementPanel()
@@ -173,6 +182,13 @@ public class BattleUIManager : MonoBehaviour
 
         ReadyForMovement();
     }
+
+    public void ShowMoveTargetPoint()
+    {
+        Arrows[Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().TargetPosition].gameObject.SetActive(true);
+        //显示现在选择的这个人要去哪个位置
+    }
+
 
     public void ReadyForMovement()
     {
