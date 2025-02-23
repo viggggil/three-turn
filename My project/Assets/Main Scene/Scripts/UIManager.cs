@@ -79,6 +79,15 @@ public class UIManager : MonoBehaviour
     public GameObject[] Players;
     public GameObject[] SelectPlayers;
 
+    public Image PlayerOne;
+    public Image PlayerTwo;
+    public Image PlayerThree;
+    public Sprite[] Professions;
+    public Text ProfessionOne;
+    public Text ProfessionTwo;
+    public Text ProfessionThree;
+    public string[] ProfessionNames;
+
     enum CellType
     {
         grass,
@@ -108,7 +117,9 @@ public class UIManager : MonoBehaviour
         inn,
         bigTree,
         tomb,
-        angel=7
+        angel=7,
+        start=9,
+        bar=11
     }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
@@ -126,7 +137,9 @@ public class UIManager : MonoBehaviour
         {EventType.smithy,"克里特村的铁匠铺" },
         {EventType.bigTree,"村口的大树" },
         {EventType.tomb,"坟墓" },
-        {EventType.angel,"天使雕像" }
+        {EventType.angel,"天使雕像" },
+        {EventType.start,"旅途的开始"  },
+        {EventType.bar,"酒馆"  }
 
     };
     private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
@@ -137,7 +150,9 @@ public class UIManager : MonoBehaviour
         {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n铁匠拿出两张图纸让你挑选" },
         {EventType.bigTree,"树下的告示栏写有可供接取的任务" },
         {EventType.tomb,"你的一位英雄在这里倒下，获得女神的恩赐来复活" },
-        {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动" }
+        {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动" },
+        {EventType.start,"点击角色或角色头像选中\n点击或WASD移动\n去西边的村庄开始冒险吧"  },
+        {EventType.bar,"一个八方来客都可聚集在此借酒浇愁的友善之地。对了，我们有提过他们是用拳头来解决分歧的吗？"  }
     };
     private Dictionary<EventType, string> EventButton1Dictionary = new Dictionary<EventType, string>()
     {
@@ -147,7 +162,9 @@ public class UIManager : MonoBehaviour
         {EventType.smithy,"选项一" },
         {EventType.bigTree,"接取任务一" },
         {EventType.tomb,"复活" },
-        {EventType.angel,"祈祷" }
+        {EventType.angel,"祈祷" },
+        {EventType.start,"好的"  },
+        {EventType.bar,"战斗！"  }
     };
     private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
     {
@@ -365,5 +382,23 @@ public class UIManager : MonoBehaviour
         SelectPlayers[0].SetActive(false);
         SelectPlayers[1].SetActive(false);
         SelectPlayers[2].SetActive(true);
+    }
+    public void LoadPlayer(int Profession,int playerID)
+    {
+        if (playerID == 1)
+        {
+            PlayerOne.sprite = Professions[Profession];
+            ProfessionOne.text = ProfessionNames[Profession];
+        }
+        else if (playerID == 2)
+        {
+            PlayerTwo.sprite = Professions[Profession];
+            ProfessionTwo.text = ProfessionNames[Profession];
+        }
+        else
+        {
+            PlayerThree.sprite = Professions[Profession];
+            ProfessionThree.text = ProfessionNames[Profession];
+        }
     }
 }

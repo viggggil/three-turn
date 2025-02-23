@@ -144,5 +144,6 @@ public class Carriage : MonoBehaviour
         player.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
         GameObject childObject = player.transform.GetChild(0).gameObject;
         Animator = childObject.GetComponent<Animator>();
+        UIManager.LoadPlayer(Profession, playerID);
     }
 }
