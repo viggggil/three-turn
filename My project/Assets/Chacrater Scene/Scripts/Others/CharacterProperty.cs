@@ -86,6 +86,11 @@ public class CharacterProperty : MonoBehaviour
         TargetPosition = targetPosition;
     }
 
+    public void BeDamaged(int damage)
+    {
+        this.HP -= damage;
+    }
+
     public void AddBuff(Buff buff)
     {
         Buffs.Add(buff);

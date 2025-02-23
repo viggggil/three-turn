@@ -12,29 +12,39 @@ public class Knight : MonoBehaviour
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
-    public void skill1(GameObject enemy)//攻击一个敌人
+    public void skill1(int position)//攻击一个敌人
     {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
             enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
     }
 
-    public void skill2(GameObject enemy1,GameObject enemy2,GameObject enemy3)//攻击前方三个敌人
+    public void skill2(int[] position)//攻击前方三个敌人
     {
-        CharacterProperty enemyProperty1 = enemy1.GetComponent<CharacterProperty>();
-        CharacterProperty enemyProperty2 = enemy2.GetComponent<CharacterProperty>();
-        CharacterProperty enemyProperty3 = enemy3.GetComponent<CharacterProperty>();
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty1.PR, charaterProperty.CritVaule,
-            enemyProperty1.CritResis, charaterProperty.CritDMGRate, enemyProperty1.CritDMGResisRate);
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty2.PR, charaterProperty.CritVaule,
-            enemyProperty2.CritResis, charaterProperty.CritDMGRate, enemyProperty2.CritDMGResisRate);
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty3.PR, charaterProperty.CritVaule,
-            enemyProperty3.CritResis, charaterProperty.CritDMGRate, enemyProperty3.CritDMGResisRate);
+        GameObject enemy;
+        int dmg;
+        for(int i =  0; i < position.Length; i++)
+        {
+            Spawner.nodeDictionary.TryGetValue(position[i], out enemy);
+            CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
+        }
     }
 
     public void skill3()
     {
-        charaterProperty.PR = (int)(charaterProperty.PR * 1.6f);
-        charaterProperty.MR = (int)(charaterProperty.MR * 1.2f);
+        Buff DefendBuff = new Buff(
+           name: "",
+           duration: 2,
+           buffType: BuffType.Buff,
+           applyEffect: (character) => { character.PR = (int)(character.PR * 1.6f);character.MR = (int)(character.MR * 1.2f); },
+           removeEffect: (character) => { character.PR = (int)(character.PR / 1.6f); character.MR = (int)(character.MR / 1.2f); }
+        );
+        Buff.AddBuff(charaterProperty, DefendBuff);
     }
 }
