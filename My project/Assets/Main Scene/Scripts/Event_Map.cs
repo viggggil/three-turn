@@ -75,6 +75,19 @@ public class Event_Map : MonoBehaviour
                         break;
                     }
                 }
+            case 9:
+                {
+                    GameManager.CloseSelect();
+                    UIManager.CloseInfo();
+                    Destroy(gameObject);
+                    break;
+                }
+            case 11:
+                {
+                    SceneLoader sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+                    sceneLoader.LoadBattleScene();
+                    break;
+                }
         }
 
     }

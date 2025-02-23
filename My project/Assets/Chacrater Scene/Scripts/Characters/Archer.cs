@@ -10,29 +10,48 @@ public class Archer : MonoBehaviour
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
-    public void skill1(GameObject enemy)//攻击一个敌人
+    public void skill1(int position)//攻击一个敌人
     {
+        GameObject enemy;
+        int dmg;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        if(enemyProperty.isMarked)
-            PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 1.6f), enemyProperty.PR, charaterProperty.CritVaule,
+        if (enemyProperty.isMarked)
+        {
+            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 1.6f), enemyProperty.PR, charaterProperty.CritVaule,
                 enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
+        }
         else
-            PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+        {
+            dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
                 enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
+        }
     }
 
-    public void skill2(GameObject enemy1,GameObject enemy2)//攻击前方两个敌人
+    public void skill2()//攻击前方两个敌人
     {
-        CharacterProperty enemyProperty1 = enemy1.GetComponent<CharacterProperty>();
-        CharacterProperty enemyProperty2 = enemy2.GetComponent<CharacterProperty>();
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty1.MR, charaterProperty.CritVaule,
-            enemyProperty1.CritResis, charaterProperty.CritDMGRate, enemyProperty1.CritDMGResisRate);
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.5f), enemyProperty2.MR, charaterProperty.CritVaule,
-            enemyProperty2.CritResis, charaterProperty.CritDMGRate, enemyProperty2.CritDMGResisRate);
+        int position = charaterProperty.Position;
+        GameObject enemy;
+        CharacterProperty enemyProperty;
+        int dmg;
+        Spawner.nodeDictionary.TryGetValue(position % 3 + 6, out enemy);
+        enemyProperty = enemy.GetComponent<CharacterProperty>();
+        dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty.MR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
+        Spawner.nodeDictionary.TryGetValue(position % 3 + 9, out enemy);
+        enemyProperty = enemy.GetComponent<CharacterProperty>();
+        dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.5f), enemyProperty.MR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
     }
 
-    public void skill3(GameObject enemy)
+    public void skill3(int position)
     {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         Buff MarkBuff = new Buff(
             name: "",

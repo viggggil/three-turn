@@ -11,6 +11,7 @@ TagManager:
   - Spawner
   - BattleUIManager
   - ShieldSign
+  - SpecialEvent
   layers:
   - Default
   - TransparentFX

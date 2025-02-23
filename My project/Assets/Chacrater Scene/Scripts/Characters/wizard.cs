@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class wizard : MonoBehaviour
 {
@@ -11,32 +12,51 @@ public class wizard : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1(GameObject enemy)//攻击一个敌人
+    public void skill1(int position)//攻击一个敌人
     {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
+        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
             enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
         Buff BurnBuff = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Debuff,
-            applyEffect: (character) => character.HP -= 30,
+            applyEffect: (character) => character.HP -= 10,
             removeEffect: null
             );
         Buff.AddBuff(enemyProperty, BurnBuff);
     }
 
-    public void skill2(GameObject teammate)//提高队友的魔抗，持续两回合
+    public void skill2(int position)//提高队友的魔抗，持续两回合
     {
+        GameObject teammate;
+        Spawner.nodeDictionary.TryGetValue(position, out teammate);
         CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
         Buff MRBuff = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Buff,
             applyEffect: (character) => character.MR += 40,
-            removeEffect: null
+            removeEffect: (character) => character.MR -= 40
         );
         Buff.AddBuff(teammateProperty, MRBuff);
     }
 
+    public void skill3(int position)
+    {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty teammateProperty = enemy.GetComponent<CharacterProperty>();
+        Buff FreezeBuff = new Buff(
+            name: "",
+            duration: 2,
+            buffType: BuffType.Debuff,
+            applyEffect: (character) => character.isdizzy = true,
+            removeEffect: (character) => character.isdizzy = false
+        );
+        Buff.AddBuff(teammateProperty, FreezeBuff);
+    }
 }

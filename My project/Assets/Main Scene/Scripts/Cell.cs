@@ -52,18 +52,20 @@ public class Cell : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Carriage temp = collision.GetComponent<Carriage>();
-        if (temp)
-        {
-            TooNear = true;
-        }
+        if (temp)TooNear = true;
+        Event_Map temp2 = collision.GetComponent<Event_Map>();
+        if (temp2) TooNear = true;
+        Enemy_Map temp3 = collision.GetComponent<Enemy_Map>();
+        if (temp3) TooNear = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         Carriage temp = collision.GetComponent<Carriage>();
-        if (temp)
-        {
-            TooNear = false;
-        }
+        if (temp)TooNear = false;
+        Event_Map temp2 = collision.GetComponent<Event_Map>();
+        if (temp2) TooNear =false;
+        Enemy_Map temp3 = collision.GetComponent<Enemy_Map>();
+        if (temp3) TooNear = false;
     }
 }
