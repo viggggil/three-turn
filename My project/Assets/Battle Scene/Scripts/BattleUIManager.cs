@@ -11,6 +11,7 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject skillsPanel;
     [SerializeField] GameObject enemySkillsPanel;
     [SerializeField] GameObject exitDefensePanel;
+    [SerializeField] GameObject exitAttackPanel;
     [SerializeField] GameObject exitMovementPanel;
     [SerializeField] GameObject exitMovementPanelAfter;
 
@@ -110,9 +111,14 @@ public class BattleUIManager : MonoBehaviour
         Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponent<Nodes>().DisplayShield();
     }
 
+    public void DisplaySword()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponent<Nodes>().DisplaySword();
+    }
+
     public void DisplayArrow()
     {
-
+        //未曾使用过，出于整齐放了一个在这里，实际上因为方便这个函数在Nodes这个类当中直接声明并使用了
     }
 
     public void ExitDefense()
@@ -151,7 +157,14 @@ public class BattleUIManager : MonoBehaviour
         }
     }
 
-    
+    public void ExitAttack()
+    {
+        CloseExitAttackPanel();
+        OpenActionPanel();
+        Destroy(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].transform.Find("Sword").gameObject);
+        //把当前选中的node下面的剑弄掉
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = false;
+    }
 
     public void OpenExitDefensePanel()
     {
@@ -174,6 +187,17 @@ public class BattleUIManager : MonoBehaviour
         exitMovementPanel.gameObject.SetActive(false);
     }
 
+    public void OpenExitAttackPanel()
+    {
+        exitAttackPanel.gameObject.SetActive(true);
+    }
+
+    public void CloseExitAttackPanel()
+    {
+        exitAttackPanel.gameObject.SetActive(false);
+        EnableAllButtons();
+    }
+
     public void OnMoveButtonClick()
     {
         DisableAllNodeButtons();
@@ -191,21 +215,35 @@ public class BattleUIManager : MonoBehaviour
         //显示现在选择的这个人要去哪个位置
     }
 
+    public void ShowAtkRange()
+    {
+        //读取攻击范围
+        //foreach (int i in AtkRange)
+        //{
+        //    ArrowsofEnemies[i].SetActive(true);
+        //}
+        //显示现在选择的这个人要去哪个位置
+    }
+
     public void OnSkillClick()
     {
-        //读取并显示攻击范围,假设下文的AtkRange就是攻击范围
+        //读取攻击范围,假设下文的AtkRange就是攻击范围
 
 
         List<int> AtkRange = new List<int>();
         AtkRange.Add(0);
         //读取攻击范围
-        foreach (int i in AtkRange)
-        {
-            ArrowsofEnemies[i].SetActive(true);
-        }
+        //foreach (int i in AtkRange)
+        //{
+        //    ArrowsofEnemies[i].SetActive(true);
+        //}
 
         CloseSkillsPanel();
         EnableAllButtons();
+        CloseActionPanel();
+        DisplaySword();
+
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
     }
 
 

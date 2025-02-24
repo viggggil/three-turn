@@ -61,7 +61,7 @@ public class CharacterProperty : MonoBehaviour
 
     public bool OnTheDefense { get; set; }
 
-    public bool OntheAttack { get; set; }
+    public bool OnTheAttack { get; set; }
     private void Awake()
     {
         HP = maxHealth;
@@ -87,7 +87,7 @@ public class CharacterProperty : MonoBehaviour
         OnTheDefense = ontheDefense;
         OnTheMovement = ontheMovement;
         TargetPosition = targetPosition;
-        OntheAttack = ontheAttack;
+        OnTheAttack = ontheAttack;
     }
 
     public void BeDamaged(int damage)

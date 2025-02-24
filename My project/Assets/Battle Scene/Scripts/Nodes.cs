@@ -11,6 +11,7 @@ public class Nodes : MonoBehaviour
     public GameObject Bars;
     public GameObject Shield;
     public GameObject Arrow;
+    public GameObject Sword;
 
     public DataofNodes dataofNodes;
 
@@ -104,10 +105,24 @@ public class Nodes : MonoBehaviour
                 dataofNodes.isPNodesSelected[nodeCode] = true;
                 isSelected = true;
             }
+
             else if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement)
             {//如果已经为该角色选择了移动
                 battleUIManager.OpenExitMovementPanel();
                 battleUIManager.ShowMoveTargetPoint();//顺带显示要去的地方
+                battleUIManager.CloseActionPanel();
+                battleUIManager.DisableAllNodeButtons();
+                battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
+                dataofNodes.isPNodesSelected[dataofNodes.SelectedPNodeCode] = false;
+                battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
+                dataofNodes.isPNodesSelected[nodeCode] = true;
+                isSelected = true;
+            }
+
+            else if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack)
+            {
+                battleUIManager.OpenExitAttackPanel();
+                battleUIManager.ShowAtkRange();//顺带显示攻击范围
                 battleUIManager.CloseActionPanel();
                 battleUIManager.DisableAllNodeButtons();
                 battleUIManager.Circles[dataofNodes.SelectedPNodeCode].gameObject.SetActive(false);//关别人的
@@ -213,6 +228,14 @@ public class Nodes : MonoBehaviour
         ThatArrow.transform.name = "Arrow";
     }
 
+    public void DisplaySword()
+    {
+        Vector3 position = gameObject.transform.position;
+        GameObject ThatSword =
+        GameObject.Instantiate(Sword, position + new Vector3(0.6f, -0.3f, 0f), Quaternion.identity, gameObject.transform);
+        ThatSword.transform.name = "Sword";
+    }
+
     public GameObject FindChildCharacter()
     {
         GameObject Child = Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().gameObject;
@@ -220,4 +243,6 @@ public class Nodes : MonoBehaviour
             return Child;
         else return null;
     }
+
+    
 }
