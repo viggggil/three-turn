@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     private int serialNumber;
     private int serialNumber2;
     private GameObject[] tempEvents;
-
     public int TurnNumber = 1;
     void Start()
     {
@@ -196,7 +195,9 @@ public class GameManager : MonoBehaviour
     {
         if(toMove && moveList.Contains(selected)&& type<5)
         {
-            Players[selectedID - 1].GetComponent<Carriage>().Move(selected.transform.position);
+            IMove_ player = Players[selectedID - 1].GetComponent<Carriage>();
+            player.Move(selected.transform.position);
+/*            Players[selectedID - 1].GetComponent<Carriage>().Move(selected.transform.position);*/
             return true;
         }
         else

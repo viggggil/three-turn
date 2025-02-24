@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 529a901f162a62347a20e5186e9d84cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 4
   TooNear: 0
   moveCell: {fileID: 411481423441898309}
   fog: {fileID: 697360553763880894}

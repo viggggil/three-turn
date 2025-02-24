@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 using DG.Tweening;
 
 
-public class Carriage : MonoBehaviour
+public class Carriage : MonoBehaviour,IMove_
 {
     // Start is called before the first frame update
     private GameManager GameManager;
@@ -142,6 +142,7 @@ public class Carriage : MonoBehaviour
         player=Instantiate(Professions[Profession], transform.position, Quaternion.identity);
         player.transform.parent = transform;
         player.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+        player.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
         GameObject childObject = player.transform.GetChild(0).gameObject;
         Animator = childObject.GetComponent<Animator>();
         UIManager.LoadPlayer(Profession, playerID);

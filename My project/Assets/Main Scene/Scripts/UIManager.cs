@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public Text infoText;
     public GameObject Cellinfo;
 
+    [Header("体力")]
     public Slider staminaSlider;
     public GameObject staminaBar;
     public Text staminaValue;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     public Text staminaValue3;
     private string _staminaValue3;
 
+    [Header("生命")]
     public Slider healthSlider;
     public GameObject healthBar;
     public Text healthValue;
@@ -38,6 +40,7 @@ public class UIManager : MonoBehaviour
     public Text healthValue3;
     private string _healthValue3;
 
+    [Header("魔力")]
     public Slider magicSlider;
     public GameObject magicBar;
     public Text magicValue;
@@ -54,11 +57,13 @@ public class UIManager : MonoBehaviour
     public Button turnNextButton;
     public UnityEvent turnStart;
 
+    [Header("敌人信息")]
     public GameObject EnemyInfo;
     public Text EnemyName;
     public Text EnemyDescribe;
     public GameObject EnemyTip;
 
+    [Header("按钮")]
     public Button battleSceneButton;
     public GameObject bsButton;
     public Button eventButton1;
@@ -70,6 +75,7 @@ public class UIManager : MonoBehaviour
     public Button closePanelButton;
 
     public Event_Map selectedEvent;
+    private bool FirstArriveTown=true;
 
     private bool isPause;
     public GameObject gamePausePanel;
@@ -79,6 +85,7 @@ public class UIManager : MonoBehaviour
     public GameObject[] Players;
     public GameObject[] SelectPlayers;
 
+    [Header("玩家头像")]
     public Image PlayerOne;
     public Image PlayerTwo;
     public Image PlayerThree;
@@ -88,6 +95,15 @@ public class UIManager : MonoBehaviour
     public Text ProfessionThree;
     public string[] ProfessionNames;
 
+    [Header("对话框")]
+    public GameObject Dialogue;
+    public Image Speaker;
+    public Text SpeakerName;
+    public Text dialogue;
+    public string[] dialogues;
+
+    private bool isDialogue;
+    private int i = 0;
     enum CellType
     {
         grass,
@@ -133,9 +149,9 @@ public class UIManager : MonoBehaviour
     {
         {EventType.fountain,"活力喷泉" },
         {EventType.well,"许愿井" },
-        {EventType.inn,"克里特村的客栈" },
-        {EventType.smithy,"克里特村的铁匠铺" },
-        {EventType.bigTree,"村口的大树" },
+        {EventType.inn,"鹈鹕镇的客栈" },
+        {EventType.smithy,"鹈鹕镇的铁匠铺" },
+        {EventType.bigTree,"鹈鹕镇的大树" },
         {EventType.tomb,"坟墓" },
         {EventType.angel,"天使雕像" },
         {EventType.start,"旅途的开始"  },
@@ -199,6 +215,23 @@ public class UIManager : MonoBehaviour
                 PauseGame();
             }
         }
+        if (isDialogue)
+        {
+            
+            dialogue.text = dialogues[i];
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                i++;
+                if (i == 4)
+                {
+                    isDialogue = false;
+                    Dialogue.SetActive(false);
+                    i = 0;
+                }
+                dialogue.text = dialogues[i];
+            }
+            
+        }
     }
     private void ContinueGame()
     {
@@ -259,6 +292,13 @@ public class UIManager : MonoBehaviour
         bsButton.SetActive(false);
         if (flag)
         {
+            if (type>=2 &&type<=4 && FirstArriveTown)
+            {
+                FirstArriveTown = false;
+                Dialogue.SetActive(true);
+                isDialogue = true;
+               
+            }
             eButton1.SetActive(true);
             eButton1text.text = EventButton1Dictionary[(EventType)type];
             if (type % 2 == 0)
@@ -401,4 +441,5 @@ public class UIManager : MonoBehaviour
             ProfessionThree.text = ProfessionNames[Profession];
         }
     }
+
 }
