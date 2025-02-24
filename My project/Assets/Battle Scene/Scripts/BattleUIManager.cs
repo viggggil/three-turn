@@ -19,6 +19,7 @@ public class BattleUIManager : MonoBehaviour
     public List<Image> Circles;
     public List<Button> Buttons;
     public List<GameObject> Arrows;
+    public List<GameObject> ArrowsofEnemies;
 
 
     private void Awake()
@@ -41,6 +42,7 @@ public class BattleUIManager : MonoBehaviour
     public void OpenSkillsPanel()
     {
         skillsPanel.SetActive(true);
+        //导入技能
     }
 
     public void CloseSkillsPanel()
@@ -185,8 +187,25 @@ public class BattleUIManager : MonoBehaviour
 
     public void ShowMoveTargetPoint()
     {
-        Arrows[Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().TargetPosition].gameObject.SetActive(true);
+        Arrows[Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().TargetPosition].SetActive(true);
         //显示现在选择的这个人要去哪个位置
+    }
+
+    public void OnSkillClick()
+    {
+        //读取并显示攻击范围,假设下文的AtkRange就是攻击范围
+
+
+        List<int> AtkRange = new List<int>();
+        AtkRange.Add(0);
+        //读取攻击范围
+        foreach (int i in AtkRange)
+        {
+            ArrowsofEnemies[i].SetActive(true);
+        }
+
+        CloseSkillsPanel();
+        EnableAllButtons();
     }
 
 

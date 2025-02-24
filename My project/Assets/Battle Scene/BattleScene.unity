@@ -446,7 +446,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 56114333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1728965715}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
+        m_MethodName: OnSkillClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &57046485
 GameObject:
   m_ObjectHideFlags: 0
@@ -11841,6 +11853,13 @@ MonoBehaviour:
   - {fileID: 383552884}
   - {fileID: 1459579442}
   - {fileID: 148325287}
+  ArrowsofEnemies:
+  - {fileID: 1068617913}
+  - {fileID: 1482431698}
+  - {fileID: 2047985545}
+  - {fileID: 1843488499}
+  - {fileID: 1473955152}
+  - {fileID: 2083172631}
 --- !u!1 &1733973132
 GameObject:
   m_ObjectHideFlags: 0

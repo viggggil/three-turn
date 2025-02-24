@@ -26,6 +26,7 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int targetPosition;//位置
     [SerializeField] private bool ontheDefense;//正在防御
     [SerializeField] private bool ontheMovement;//正在移动
+    [SerializeField] private bool ontheAttack;//正在攻击
     
 
     public List<Buff> Buffs { get; private set; }
@@ -59,6 +60,8 @@ public class CharacterProperty : MonoBehaviour
     public bool OnTheMovement { get; set; }
 
     public bool OnTheDefense { get; set; }
+
+    public bool OntheAttack { get; set; }
     private void Awake()
     {
         HP = maxHealth;
@@ -84,6 +87,7 @@ public class CharacterProperty : MonoBehaviour
         OnTheDefense = ontheDefense;
         OnTheMovement = ontheMovement;
         TargetPosition = targetPosition;
+        OntheAttack = ontheAttack;
     }
 
     public void BeDamaged(int damage)
