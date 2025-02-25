@@ -102,8 +102,7 @@ public class UIManager : MonoBehaviour
     public Text dialogue;
     public string[] dialogues;
 
-    private bool isDialogue;
-    private int i = 0;
+    public int dialogueIndex = 0;
     enum CellType
     {
         grass,
@@ -215,23 +214,6 @@ public class UIManager : MonoBehaviour
                 PauseGame();
             }
         }
-        if (isDialogue)
-        {
-            
-            dialogue.text = dialogues[i];
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                i++;
-                if (i == 4)
-                {
-                    isDialogue = false;
-                    Dialogue.SetActive(false);
-                    i = 0;
-                }
-                dialogue.text = dialogues[i];
-            }
-            
-        }
     }
     private void ContinueGame()
     {
@@ -284,29 +266,32 @@ public class UIManager : MonoBehaviour
     {
         blockPanel.SetActive(true);
         selectedEvent = thisEvent.GetComponent<Event_Map>();
-        eButton1.SetActive(false);
-        eButton2.SetActive(false);
-        EnemyInfo.SetActive(true);
-        EnemyName.text = EventNameDictionary[(EventType)type];
-        EnemyDescribe.text = EventDescribeDictionary[(EventType)type];
-        bsButton.SetActive(false);
-        if (flag)
+        if (type >= 2 && type <= 4 && FirstArriveTown)
         {
-            if (type>=2 &&type<=4 && FirstArriveTown)
+            FirstArriveTown = false;
+            Dialogue.SetActive(true);
+            Dialogue__();
+        }
+        else
+        {
+            eButton1.SetActive(false);
+            eButton2.SetActive(false);
+            EnemyInfo.SetActive(true);
+            EnemyName.text = EventNameDictionary[(EventType)type];
+            EnemyDescribe.text = EventDescribeDictionary[(EventType)type];
+            bsButton.SetActive(false);
+            if (flag)
             {
-                FirstArriveTown = false;
-                Dialogue.SetActive(true);
-                isDialogue = true;
-               
-            }
-            eButton1.SetActive(true);
-            eButton1text.text = EventButton1Dictionary[(EventType)type];
-            if (type % 2 == 0)
-            {
-                eButton2.SetActive(true);
-                eButton2text.text = EventButton2Dictionary[(EventType)(type)];
+                eButton1.SetActive(true);
+                eButton1text.text = EventButton1Dictionary[(EventType)type];
+                if (type % 2 == 0)
+                {
+                    eButton2.SetActive(true);
+                    eButton2text.text = EventButton2Dictionary[(EventType)(type)];
+                }
             }
         }
+        
     }
     public void EventChoiceOne()
     {
@@ -441,5 +426,22 @@ public class UIManager : MonoBehaviour
             ProfessionThree.text = ProfessionNames[Profession];
         }
     }
+    IEnumerator Dialogue_()
+    {
+        dialogue.text = dialogues[dialogueIndex];
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        dialogueIndex++;
+        if (dialogueIndex == 4)
+        {
+            Dialogue.SetActive(false);
+            blockPanel.SetActive(false);
+            GameManager.ExposeBar();
+        }
+        else Invoke("Dialogue__",0.1f);
+    }
 
+    private void Dialogue__()
+    {
+        StartCoroutine(Dialogue_());
+    }
 }

@@ -74,7 +74,7 @@ public class Carriage : MonoBehaviour,IMove_
     {
         if (curStamina >=1)
         {
-            transform.DOMove(direction, 1);
+            transform.DOMove(direction, 1.0f);
             if (direction.x > player.transform.position.x)
             {
                 player.GetComponent<RectTransform>().localScale = new Vector3(-1.25f, 1.25f, 1.25f);

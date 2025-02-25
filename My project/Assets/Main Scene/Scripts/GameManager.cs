@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public bool toMove=false;
     public GameData GameData;
     public SceneLoader SceneLoader;
+    public CameraFollower CameraFollower;
+    public GameObject bar;
     private int serialNumber;
     private int serialNumber2;
     private GameObject[] tempEvents;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
         cells = GameObject.FindGameObjectsWithTag("Cell");
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+        CameraFollower= GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         moveList = new List<GameObject>();
         serialNumber = 0;
         GenerateEvents();
@@ -119,7 +122,7 @@ public class GameManager : MonoBehaviour
         foreach (var cell in cells)
         {
             if(Mathf.Abs(cell.transform.position.x - Players[selectedID-1] .transform .position .x)
-                +Mathf.Abs(cell.transform.position .y- Players[selectedID-1].transform .position.y) <= 1)
+                +Mathf.Abs(cell.transform.position .y- Players[selectedID-1].transform .position.y) <= 1.1f)
             {
                 cell.GetComponent<Cell>().moveCell.SetActive(true);
                 moveList.Add(cell);
@@ -131,7 +134,7 @@ public class GameManager : MonoBehaviour
     public bool TestDistance(GameObject thisEvent)
     {
         if (Mathf.Abs(Players[selectedID - 1].transform.position.x - thisEvent.transform.position.x)
-                + Mathf.Abs(Players[selectedID - 1].transform.position.y - thisEvent.transform.position.y) <= 1) return true;
+                + Mathf.Abs(Players[selectedID - 1].transform.position.y - thisEvent.transform.position.y) <= 1.1f) return true;
         return false;
     }
     public bool[] TestDistance_(GameObject thisEnemy)
@@ -365,12 +368,33 @@ public class GameManager : MonoBehaviour
     }
     public void LoadPlayer()
     {
+        CloseSelect();
         foreach (var Player in Players)
         {
             if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[0]);
             else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[1]);
             else Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
         }
+    }
+
+    public void ExposeBar()
+    {
+        CameraFollower.ChangeSelected(bar);
+        foreach (var cell in cells)
+        {
+            if (Mathf.Abs(cell.transform.position.x - bar.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y - bar.transform.position.y) <= 1)
+            {
+                cell.GetComponent<Cell>().fog.SetActive(false);
+                cell.GetComponent<Cell>().isFog = false;
+            }
+        }
+        Invoke("ExposeBar_", 05f);
+    }
+
+    public void ExposeBar_()
+    {
+        CameraFollower.ChangeSelected(Players[selectedID-1]);
     }
 
 }

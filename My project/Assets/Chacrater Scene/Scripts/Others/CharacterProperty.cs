@@ -27,7 +27,8 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private bool ontheDefense;//正在防御
     [SerializeField] private bool ontheMovement;//正在移动
     [SerializeField] private bool ontheAttack;//正在攻击
-    
+    [SerializeField] private int SerialNumber;//编号
+
 
     public List<Buff> Buffs { get; private set; }
 

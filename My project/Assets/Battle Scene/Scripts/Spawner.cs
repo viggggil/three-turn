@@ -69,9 +69,9 @@ public class Spawner : MonoBehaviour
         }
         position3 = RDPosition;//确保三个随机数不一样
 
-        PlayerTeamState.PlayerState.playerPosition[0] = position1;
+/*        PlayerTeamState.PlayerState.playerPosition[0] = position1;
         PlayerTeamState.PlayerState.playerPosition[1] = position2;
-        PlayerTeamState.PlayerState.playerPosition[2] = position3;
+        PlayerTeamState.PlayerState.playerPosition[2] = position3;*/
         //去修改公共文件当中的值
 
         transform1 = nodeDictionary[position1].transform;
