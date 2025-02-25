@@ -10,7 +10,7 @@ public class Archer : MonoBehaviour
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
-    public void skill1(int position)//攻击一个敌人
+    public bool skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
         int dmg;
@@ -28,27 +28,29 @@ public class Archer : MonoBehaviour
                 enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
             enemyProperty.BeDamaged(dmg);
         }
+        return true;
     }
 
-    public void skill2()//攻击前方两个敌人
+    public bool skill2()//攻击前方两个敌人
     {
         int position = charaterProperty.Position;
         GameObject enemy;
         CharacterProperty enemyProperty;
         int dmg;
-        Spawner.nodeDictionary.TryGetValue(position % 3 + 6, out enemy);
-        enemyProperty = enemy.GetComponent<CharacterProperty>();
-        dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty.MR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        enemyProperty.BeDamaged(dmg);
-        Spawner.nodeDictionary.TryGetValue(position % 3 + 9, out enemy);
-        enemyProperty = enemy.GetComponent<CharacterProperty>();
-        dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.5f), enemyProperty.MR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        enemyProperty.BeDamaged(dmg);
+        for (int i = 0; i < 2; i++)
+        {
+            Spawner.nodeDictionary.TryGetValue(position % 3 + 6 + 3 * i, out enemy);
+            if (enemy == null)
+                continue;
+            enemyProperty = enemy.GetComponent<CharacterProperty>();
+            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty.MR, charaterProperty.CritVaule,
+                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
+        }
+        return true;
     }
 
-    public void skill3(int position)
+    public bool skill3(int position)
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
@@ -61,5 +63,6 @@ public class Archer : MonoBehaviour
             removeEffect: (character) => character.isMarked = false
         );
         Buff.AddBuff(enemyProperty, MarkBuff);
+        return true;
     }
 }

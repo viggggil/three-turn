@@ -25,13 +25,17 @@ public class Enemy1 : MonoBehaviour
         Buff.AddBuff(charaterProperty, Charging);
     }
 
-    public void skill2(GameObject enemy)
+    public void skill2(int position)
     {
+
         if (charaterProperty.isCharge)
         {
+            GameObject enemy;
+            Spawner.nodeDictionary.TryGetValue(position, out enemy);
             CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-            PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+            int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
                 enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
         }
     }
 }

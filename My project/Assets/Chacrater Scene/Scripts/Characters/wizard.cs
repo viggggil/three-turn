@@ -12,7 +12,7 @@ public class wizard : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1(int position)//攻击一个敌人
+    public bool skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
@@ -28,9 +28,10 @@ public class wizard : MonoBehaviour
             removeEffect: null
             );
         Buff.AddBuff(enemyProperty, BurnBuff);
+        return true;
     }
 
-    public void skill2(int position)//提高队友的魔抗，持续两回合
+    public bool skill2(int position)//提高队友的魔抗，持续两回合
     {
         GameObject teammate;
         Spawner.nodeDictionary.TryGetValue(position, out teammate);
@@ -43,13 +44,14 @@ public class wizard : MonoBehaviour
             removeEffect: (character) => character.MR -= 40
         );
         Buff.AddBuff(teammateProperty, MRBuff);
+        return true;
     }
 
-    public void skill3(int position)
+    public bool skill3(int position)
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty teammateProperty = enemy.GetComponent<CharacterProperty>();
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         Buff FreezeBuff = new Buff(
             name: "",
             duration: 2,
@@ -57,6 +59,7 @@ public class wizard : MonoBehaviour
             applyEffect: (character) => character.isdizzy = true,
             removeEffect: (character) => character.isdizzy = false
         );
-        Buff.AddBuff(teammateProperty, FreezeBuff);
+        Buff.AddBuff(enemyProperty, FreezeBuff);
+        return true;
     }
 }

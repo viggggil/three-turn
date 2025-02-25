@@ -43,7 +43,7 @@ public class Enemy3 : MonoBehaviour
             duration: 2,
             buffType: BuffType.Debuff,
             applyEffect: (character) => character.ATK += 30,
-            removeEffect: null
+            removeEffect: (character) => character.ATK -= 30
             );
         Buff.AddBuff(charaterProperty, ATKplus);
     }

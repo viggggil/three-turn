@@ -14,14 +14,19 @@ public class Enemy2 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1(GameObject teammate)
+    public void skill1(int position)//给队友加攻击力
     {
+        GameObject teammate;
+        Spawner.nodeDictionary.TryGetValue(position, out teammate);
         CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
         teammateProperty.HP += charaterProperty.ATK;
     }
 
-    public void skill2(GameObject enemy)
+    public void skill2(int position)//眩晕敌人
     {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         Buff dizzy = new Buff(
             name: "",
             duration: 2,
@@ -29,6 +34,6 @@ public class Enemy2 : MonoBehaviour
             applyEffect: (character) => character.isdizzy = true,
             removeEffect: (character) => character.isdizzy = false
             );
-        Buff.AddBuff(charaterProperty, dizzy);
+        Buff.AddBuff(enemyProperty, dizzy);
     }
 }
