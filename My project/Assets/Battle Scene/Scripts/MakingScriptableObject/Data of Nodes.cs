@@ -12,6 +12,7 @@ public class DataofNodes : ScriptableObject
     public bool anyPSelected;
     public bool anyESelected;
     public bool SbisMoving;//标志着某人正在确定移动
+    public bool SbisAttacking;//标志着某人正在确定攻击
 
     public int SelectedPNodeCode;
     public int SelectedENodeCode;

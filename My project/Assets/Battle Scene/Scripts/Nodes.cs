@@ -120,7 +120,7 @@ public class Nodes : MonoBehaviour
             }
 
             else if (Spawner.nodeDictionary[nodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack)
-            {
+            {//如果已经为该角色选择了攻击
                 battleUIManager.OpenExitAttackPanel();
                 battleUIManager.ShowAtkRange();//顺带显示攻击范围
                 battleUIManager.CloseActionPanel();
@@ -149,7 +149,7 @@ public class Nodes : MonoBehaviour
                 //return code
                 Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().TargetPosition = nodeCode;
                 battleUIManager.DisableAllArrows();
-                battleUIManager.EnableAllButtons();
+                battleUIManager.EnableAllNodeButtons();
                 battleUIManager.CloseExitMovementPanel();
                 Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Nodes>().DisplayArrow();
                 Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheMovement = true;
@@ -164,50 +164,60 @@ public class Nodes : MonoBehaviour
     {//node被点击时候的方法
         if (isEnemyHere)
         {
-            if (!dataofNodes.anyESelected)
+            if (dataofNodes.SbisAttacking)
             {
-                battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
-                dataofNodes.isENodesSelected[nodeCode - 6] = true;
-                isSelected = true;
-                dataofNodes.anyESelected = true;
-                enemySkillsPanel.gameObject.SetActive(true);
+                //if 某个技能范围不够 {
+
+                //}
+
+
             }
-
-
             else
             {
-                for (int i = 0; i < dataofNodes.isENodesSelected.Length; i++)
+                if (!dataofNodes.anyESelected)
                 {
-                    if (dataofNodes.isENodesSelected[i] == true)
-                    {
-                        dataofNodes.SelectedENodeCode = i + 6;
-                        break;
-                    }//结束之后i应该是选择了的node的下标
-                }
-
-                if (dataofNodes.SelectedENodeCode == nodeCode)
-                {
-                    battleUIManager.CloseActionPanel();
-                    battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
-                    dataofNodes.isENodesSelected[nodeCode - 6] = false;
-                    isSelected = false;
-                    dataofNodes.anyESelected = false;
-                    enemySkillsPanel.gameObject.SetActive(false);
-                }
-                else
-                {
-                    battleUIManager.Circles[dataofNodes.SelectedENodeCode].gameObject.SetActive(false);//关别人的
-                    dataofNodes.isENodesSelected[dataofNodes.SelectedENodeCode - 6] = false;
                     battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
                     dataofNodes.isENodesSelected[nodeCode - 6] = true;
                     isSelected = true;
+                    dataofNodes.anyESelected = true;
+                    enemySkillsPanel.gameObject.SetActive(true);
                 }
+
+
+                else
+                {
+                    for (int i = 0; i < dataofNodes.isENodesSelected.Length; i++)
+                    {
+                        if (dataofNodes.isENodesSelected[i] == true)
+                        {
+                            dataofNodes.SelectedENodeCode = i + 6;
+                            break;
+                        }//结束之后i应该是选择了的node的下标
+                    }
+
+                    if (dataofNodes.SelectedENodeCode == nodeCode)
+                    {
+                        battleUIManager.CloseActionPanel();
+                        battleUIManager.Circles[nodeCode].gameObject.SetActive(false);//关自己的
+                        dataofNodes.isENodesSelected[nodeCode - 6] = false;
+                        isSelected = false;
+                        dataofNodes.anyESelected = false;
+                        enemySkillsPanel.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        battleUIManager.Circles[dataofNodes.SelectedENodeCode].gameObject.SetActive(false);//关别人的
+                        dataofNodes.isENodesSelected[dataofNodes.SelectedENodeCode - 6] = false;
+                        battleUIManager.Circles[nodeCode].gameObject.SetActive(true);//开自己的
+                        dataofNodes.isENodesSelected[nodeCode - 6] = true;
+                        isSelected = true;
+                    }
+                }
+
+                dataofNodes.SelectedENodeCode = nodeCode;
+
+
             }
-
-            dataofNodes.SelectedENodeCode = nodeCode;
-
-
-
         }
     }
 

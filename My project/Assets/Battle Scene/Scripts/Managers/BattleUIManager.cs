@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +15,7 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject exitDefensePanel;
     [SerializeField] GameObject exitAttackPanel;
     [SerializeField] GameObject exitMovementPanel;
-    [SerializeField] GameObject exitMovementPanelAfter;
+    [SerializeField] GameObject outOfRangePanel;
 
     public DataofNodes dataofNodes;
     
@@ -29,6 +31,16 @@ public class BattleUIManager : MonoBehaviour
     }
 
     
+
+    public void OpenOutOfRangePanel()
+    {
+        GameObject.Instantiate(outOfRangePanel);
+    }
+
+    public void CloseOutofRangePanel()
+    {
+        outOfRangePanel.gameObject.SetActive(false);
+    }
 
     public void OpenActionPanel()
     {
@@ -50,7 +62,7 @@ public class BattleUIManager : MonoBehaviour
     {
         skillsPanel.SetActive(false);
         OpenActionPanel();
-        EnableAllButtons();
+        EnableAllNodeButtons();
     }
 
     public void DisableAllNodeButtons()
@@ -61,11 +73,19 @@ public class BattleUIManager : MonoBehaviour
         }
     }
 
-    public void EnableAllButtons()
+    public void EnableAllNodeButtons()
     {
         foreach (Button button in Buttons)
         {
             button.enabled = true;
+        }
+    }
+
+    public void EnableEnemyNodeButtons()
+    {
+        for(int i = 6;i < 12; i++)
+        {
+            Buttons[i].enabled = true;
         }
     }
 
@@ -94,7 +114,15 @@ public class BattleUIManager : MonoBehaviour
         dataofNodes.isENodesSelected = new bool[6] { false, false, false, false, false, false };
         dataofNodes.anyESelected = false;
         dataofNodes.SelectedENodeCode = 12;
+        //读取技能并且显示在面板里面
+
+        //if （isKnight） {
+        int SkillsCount = GetPublicMethodCount(typeof(Knight));
+
+        //待添加
+        //}
         //打开技能面板
+
         OpenSkillsPanel();
         enemySkillsPanel.gameObject.SetActive(false);
     }
@@ -137,14 +165,14 @@ public class BattleUIManager : MonoBehaviour
             exitMovementPanel.gameObject.SetActive(false);
             actionPanel.gameObject.SetActive(true);
             DisableAllArrows();
-            EnableAllButtons();
+            EnableAllNodeButtons();
 
             dataofNodes.SbisMoving = false;
         }
         else
         {//属于这个人已经确定了移动的状态
             CloseExitMovementPanel();
-            EnableAllButtons();
+            EnableAllNodeButtons();
             OpenActionPanel();
             Destroy(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].transform.Find("Arrow").gameObject);
             //把当前选中的node下面的箭头弄掉
@@ -174,7 +202,7 @@ public class BattleUIManager : MonoBehaviour
     public void CloseExitDefensePanel()
     {
         exitDefensePanel.gameObject.SetActive(false);
-        EnableAllButtons();
+        EnableAllNodeButtons();
     }
 
     public void OpenExitMovementPanel()
@@ -195,7 +223,7 @@ public class BattleUIManager : MonoBehaviour
     public void CloseExitAttackPanel()
     {
         exitAttackPanel.gameObject.SetActive(false);
-        EnableAllButtons();
+        EnableAllNodeButtons();
     }
 
     public void OnMoveButtonClick()
@@ -227,19 +255,21 @@ public class BattleUIManager : MonoBehaviour
 
     public void OnSkillClick()
     {
-        //读取攻击范围,假设下文的AtkRange就是攻击范围
-
-
-        List<int> AtkRange = new List<int>();
-        AtkRange.Add(0);
-        //读取攻击范围
-        //foreach (int i in AtkRange)
-        //{
-        //    ArrowsofEnemies[i].SetActive(true);
+        dataofNodes.SbisAttacking = true;
+        //if 是指定敌人的技能 {
+        //显示所有的敌人头上的箭头(待更新)
+        foreach (GameObject i in ArrowsofEnemies)
+        {
+            i.SetActive(true);
+        }
         //}
 
+        //接下来要判定能不能点到
+        
+        
+
         CloseSkillsPanel();
-        EnableAllButtons();
+        EnableAllNodeButtons();
         CloseActionPanel();
         DisplaySword();
 
@@ -293,5 +323,12 @@ public class BattleUIManager : MonoBehaviour
             Arrows[i].SetActive(true);
             Buttons[i].enabled = true;
         }
+    }
+
+    public int GetPublicMethodCount(Type targetType)
+    {//了解一下这个人物有多少个技能
+        MethodInfo[] publicMethods = targetType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+
+        return publicMethods.Length;
     }
 }

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class BattleAnimationManager : MonoBehaviour
 {
-    
+    public void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
 }
