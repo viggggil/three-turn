@@ -3142,7 +3142,7 @@ GameObject:
   - component: {fileID: 6636641736026816727}
   - component: {fileID: -7635029304724554409}
   m_Layer: 5
-  m_Name: SPUM_20240910232739674
+  m_Name: RobberMage
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

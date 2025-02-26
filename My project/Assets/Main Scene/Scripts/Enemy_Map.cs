@@ -10,6 +10,7 @@ public class Enemy_Map : MonoBehaviour
     private PlayerTeamState PlayerTeamState;
     public int SerialNumber;
     [SerializeField] public int type;
+    public GameObject Enemy;
     void Start()
     {
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
@@ -30,6 +31,11 @@ public class Enemy_Map : MonoBehaviour
         if (arr[0] == false && arr[1] == false && arr[2] == false) flag = false;
         else
         {
+            PlayerTeamState.PlayerState.EnemyType = type;
+            for(int i = 0; i < 3; i++)
+            {
+                if (arr[i]) PlayerTeamState.PlayerState.isHere[i] = true;
+            }
             PlayerTeamState.PlayerState.isHere = arr;
         }
         UIManager.DisplayEnemyInformation(type,flag);

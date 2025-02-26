@@ -108,7 +108,16 @@ public class UIManager : MonoBehaviour
     };
     enum EnemyType
     {
-        axeman
+        heresyCleric,
+        daggerRobber,
+        SwordShieldRobber,
+        RobberArcher,
+        RobberMage,
+        knifeRobber,
+        eliteDaggerRobber,
+        blackWizard,
+        robberBoss,
+
     }
     enum EventType 
     { 
@@ -124,11 +133,24 @@ public class UIManager : MonoBehaviour
     }
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
-        {EnemyType.axeman,"还没取好名字的怪" }
+        { EnemyType.heresyCleric,"异端牧师" },
+        { EnemyType.daggerRobber,"双刃劫掠者" },
+        { EnemyType.SwordShieldRobber,"剑盾劫掠者" },
+        { EnemyType.RobberArcher,"劫掠者弓箭手" },
+        { EnemyType.RobberMage,"劫掠者法师" },
+        { EnemyType.knifeRobber,"劫掠者刺客" },
+        { EnemyType.eliteDaggerRobber,"精英双刃劫掠者" },
+        { EnemyType.blackWizard,"黑巫师" },
+        { EnemyType.robberBoss,"劫掠者首领" }
     };
     private Dictionary<EnemyType, string> EnemyDescribeDictionary = new Dictionary<EnemyType, string>()
     {
-        {EnemyType.axeman,"怪物的描述" }
+        {EnemyType.heresyCleric,"这是信奉邪神的牧师，他会用魔法增益他的友军" },
+        { EnemyType.daggerRobber,"这个强盗善使双刃，进攻性很强" },
+        { EnemyType.SwordShieldRobber,"这个强盗善于防御，能用盾牌承受大量伤害" },
+        { EnemyType.RobberArcher,"这个强盗在用弓箭瞄准你" },
+        { EnemyType.RobberMage,"什么？强盗还会魔法？" },
+        { EnemyType.knifeRobber,"这个强盗喜欢cos艾吉奥" },
     };
     private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
     {
@@ -339,15 +361,16 @@ public class UIManager : MonoBehaviour
     }
     public void EnterBattleScene()
     {
+
         SceneLoader.Instance.LoadBattleScene();
-        switch (PlayerTeamState.PlayerState.BattleResult)
+/*        switch (PlayerTeamState.PlayerState.BattleResult)
         {
             case false:
                 {
                     GameManager.BattleFailed();
                     break;
                 }
-        }
+        }*/
     }
     public void SelectPlayerOne()
     {

@@ -1327,7 +1327,7 @@ GameObject:
   - component: {fileID: 1656635061495436560}
   - component: {fileID: 7495723272784590595}
   m_Layer: 5
-  m_Name: SPUM_20240910232737464
+  m_Name: knifeRobber
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

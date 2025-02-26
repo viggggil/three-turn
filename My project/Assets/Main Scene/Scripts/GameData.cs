@@ -50,8 +50,8 @@ public class GameData : MonoBehaviour
             positions = new Vector3[3];
             Epositions = new Vector3[10];
             types = new int[10];
-            Epositions2 = new Vector3[10];
-            types2 = new int[10];
+            Epositions2 = new Vector3[15];
+            types2 = new int[15];
             TurnNumber = 1;
             Professions = new int[3] { SceneLoader.PlayerOneProfession, SceneLoader.PlayerTwoProfession, -1 };
             curHealth = new int[3];

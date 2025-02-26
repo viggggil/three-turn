@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject[] cells;
     public GameObject[] Enemies;
+    public GameObject EnemyParent;
     public GameObject[] Events;
     public int[] EventsNumber;
     public int[] EnemyNumber;
@@ -295,17 +296,23 @@ public class GameManager : MonoBehaviour
         }
         foreach (var cell in cells)
         {
-            if (serialNumber2 >= 10) break;
+            if (serialNumber2 >= 15) break;
             if (cell.GetComponent<Cell>().type >= 4 || cell.GetComponent<Cell>().TooNear) continue;
             int randomNumber = Random.Range(0, 501);
-            if (randomNumber > 10) continue;
+            if (randomNumber > 17) continue;
             Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
             int type = 0;
             while (EnemyNumber[type] < randomNumber) type++;
             GameData.gsd.Epositions2[serialNumber2] = position;
             GameData.gsd.types2[serialNumber2] = type;
-            GameObject enemy = Instantiate(Enemies[type], position, Quaternion.identity);
-            enemy.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
+            GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
+            GameObject enemy= Instantiate(Enemies[type], position, Quaternion.identity);
+            enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+            enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            enemy.transform.parent = enemyParent.transform;
+            enemyParent.GetComponent<Enemy_Map>().Enemy = enemy;
+            enemyParent.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
+            enemyParent.GetComponent<Enemy_Map>().type = type;
             foreach (var cell_ in cells)
             {
                 if (Mathf.Abs(cell_.transform.position.x - position.x)
@@ -354,7 +361,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(enemy);
         }
-        while (serialNumber2 < 10 && GameData.gsd.Epositions2[serialNumber2].x != 0)
+        while (serialNumber2 < 15 && GameData.gsd.Epositions2[serialNumber2].x != 0)
         {
             if (GameData.gsd.types2[serialNumber2] == -1)
             {
@@ -362,7 +369,12 @@ public class GameManager : MonoBehaviour
                 continue;
             }
             Vector3 position = GameData.gsd.Epositions2[serialNumber2];
-            GameObject event_ = Instantiate(Enemies[GameData.gsd.types2[serialNumber2]], position, Quaternion.identity);
+            GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
+            GameObject enemy = Instantiate(Enemies[GameData.gsd.types2[serialNumber2]], position, Quaternion.identity);
+            enemy.transform.parent = enemyParent.transform;
+            enemy.GetComponent<Enemy_Map>().Enemy = enemy;
+            enemy.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
+            enemy.GetComponent<Enemy_Map>().type = GameData.gsd.types2[serialNumber2];
             serialNumber2++;
         }
     }

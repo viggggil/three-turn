@@ -52,9 +52,6 @@ TagManager:
   - name: New Layer 1
     uniqueID: 887858005
     locked: 0
-  - name: New Layer 2
-    uniqueID: 2934130717
-    locked: 0
   - name: Map
     uniqueID: 637302303
     locked: 0
@@ -63,6 +60,9 @@ TagManager:
     locked: 0
   - name: Player&Enemy
     uniqueID: 2236387403
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 2934130717
     locked: 0
   - name: UI
     uniqueID: 3873082543

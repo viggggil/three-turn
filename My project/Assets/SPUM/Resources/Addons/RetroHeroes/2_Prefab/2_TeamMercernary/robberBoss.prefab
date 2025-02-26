@@ -7495,7 +7495,7 @@ GameObject:
   - component: {fileID: 2479212807363335682}
   - component: {fileID: -5210423945225585870}
   m_Layer: 5
-  m_Name: SPUM_20240910232740452
+  m_Name: robberBoss
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
