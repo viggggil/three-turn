@@ -37,9 +37,10 @@ public class SceneLoader : MonoBehaviour
     public void LoadBattleScene()
     {
         GameObject[] childObjects=new GameObject[3];
-        childObjects[0] = players[0].transform.GetChild(0).gameObject;
-        childObjects[1] = players[1].transform.GetChild(0).gameObject;
-        childObjects[2] = players[2].transform.GetChild(0).gameObject;
+        for(int i = 0; i < 3; i++)
+        {
+            childObjects[i] = players[i].transform.GetChild(1).gameObject;
+        }
         PlayerTeamState.LoadCharacterProperties(childObjects);
         SceneManager.LoadScene("BattleScene");
     }

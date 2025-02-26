@@ -366,6 +366,19 @@ public class GameManager : MonoBehaviour
             serialNumber2++;
         }
     }
+    public void LoadPlayer(bool flag)
+    {
+        CloseSelect();
+        foreach (var Player in Players)
+        {
+            Destroy(Player.transform.GetChild(0).gameObject);
+            if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[0]);
+            else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[1]);
+            else Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
+        }
+
+    }
+
     public void LoadPlayer()
     {
         CloseSelect();

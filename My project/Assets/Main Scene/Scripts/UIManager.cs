@@ -40,20 +40,6 @@ public class UIManager : MonoBehaviour
     public Text healthValue3;
     private string _healthValue3;
 
-    [Header("Ä§Á¦")]
-    public Slider magicSlider;
-    public GameObject magicBar;
-    public Text magicValue;
-    private string _magicValue;
-    public Slider magicSlider2;
-    public GameObject magicBar2;
-    public Text magicValue2;
-    private string _magicValue2;
-    public Slider magicSlider3;
-    public GameObject magicBar3;
-    public Text magicValue3;
-    private string _magicValue3;
-
     public Button turnNextButton;
     public UnityEvent turnStart;
 
@@ -325,50 +311,26 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateHealthSlider(float currentHealth, float maxHealth, int ID)
     {
-        if (ID == 1)
+        if (ID == 0)
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
             _healthValue = string.Format("{0}/{1}", currentHealth, maxHealth);
             healthValue.text = _healthValue;
         }
-        else if (ID == 2)
+        else if (ID == 1)
         {
             healthSlider2.maxValue = maxHealth;
             healthSlider2.value = currentHealth;
             _healthValue2 = string.Format("{0}/{1}", currentHealth, maxHealth);
             healthValue2.text = _healthValue2;
         }
-        else if (ID == 3)
+        else if (ID == 2)
         {
             healthSlider3.maxValue = maxHealth;
             healthSlider3.value = currentHealth;
             _healthValue3 = string.Format("{0}/{1}", currentHealth, maxHealth);
             healthValue3.text = _healthValue3;
-        }
-    }
-    public void UpdateMagicSlider(float currentMagic, float maxMagic, int ID)
-    {
-        if (ID == 1)
-        {
-            magicSlider.maxValue = maxMagic;
-            magicSlider.value = currentMagic;
-            _magicValue = string.Format("{0}/{1}", currentMagic, maxMagic);
-            magicValue.text = _magicValue;
-        }
-        else if (ID == 2)
-        {
-            magicSlider2.maxValue = maxMagic;
-            magicSlider2.value = currentMagic;
-            _magicValue2 = string.Format("{0}/{1}", currentMagic, maxMagic);
-            magicValue2.text = _magicValue2;
-        }
-        else if (ID == 3)
-        {
-            magicSlider3.maxValue = maxMagic;
-            magicSlider3.value = currentMagic;
-            _magicValue3 = string.Format("{0}/{1}", currentMagic, maxMagic);
-            magicValue3.text = _magicValue3;
         }
     }
     public void TurnStart()
@@ -380,7 +342,7 @@ public class UIManager : MonoBehaviour
         SceneLoader.Instance.LoadBattleScene();
         switch (PlayerTeamState.PlayerState.BattleResult)
         {
-            case 0:
+            case false:
                 {
                     GameManager.BattleFailed();
                     break;

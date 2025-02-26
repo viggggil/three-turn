@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 
 
 public class Carriage : MonoBehaviour,IMove_
@@ -26,8 +27,12 @@ public class Carriage : MonoBehaviour,IMove_
     public GameObject player;
     public Event_Map _tomb;
     public GameObject[] Professions;
-
     public Animator Animator;
+
+    private Dictionary<int, int> ProfessionToMaxStamina = new Dictionary<int, int>()
+    {
+        {0,5 },{1,7},{2,4},{3,4 }
+    };
     void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -145,6 +150,8 @@ public class Carriage : MonoBehaviour,IMove_
         player.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
         GameObject childObject = player.transform.GetChild(0).gameObject;
         Animator = childObject.GetComponent<Animator>();
+        player.GetComponent<CharacterProperty>().SerialNumber = playerID - 1;
+        player.GetComponent<CharacterProperty>().Profession= Profession;
         UIManager.LoadPlayer(Profession, playerID);
     }
 }

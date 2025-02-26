@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class CharacterProperty : MonoBehaviour
 {
-    [SerializeField] private int maxHealth;//初始生命值
-    [SerializeField] private int health;//初始生命值
+    [SerializeField] public int maxHealth;//初始生命值
+    [SerializeField] public  int health;//生命值
     [SerializeField] private int code;//代码
     [SerializeField] private int attackPower;//攻击力
     [SerializeField] private int defensePower;//防御值
@@ -27,7 +27,8 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private bool ontheDefense;//正在防御
     [SerializeField] private bool ontheMovement;//正在移动
     [SerializeField] private bool ontheAttack;//正在攻击
-    [SerializeField] private int SerialNumber;//编号
+    [SerializeField] public int SerialNumber;//编号
+    [SerializeField] public int Profession;//职业 0骑士1弓箭手2牧师3法师
 
 
     public List<Buff> Buffs { get; private set; }

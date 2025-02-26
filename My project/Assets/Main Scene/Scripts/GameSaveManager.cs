@@ -12,7 +12,6 @@ public class GameSaveManager : MonoBehaviour
     public void SaveGame()
     {
         Debug.Log(Application.persistentDataPath);
-        gameData.SavePlayerTeamState();
         if (!Directory.Exists(Application.persistentDataPath + "/game_SaveData"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/game_SaveData");
@@ -32,11 +31,13 @@ public class GameSaveManager : MonoBehaviour
             FileStream file = File.Open(Application.persistentDataPath + "/game_SaveData/PlayerTeamState.txt", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file),gameData.gsd);
             gameData.LoadStaminaAndPosition();
-            playerTeamState.LoadGameData();
             GameManager.LoadEvent();
             GameManager.LoadEnemy();
             GameManager.TurnNumber = gameData.gsd.TurnNumber;
-            GameManager.LoadPlayer();
+            GameManager.LoadPlayer(true);
+            gameData.UpdateHealth(0,0);
+            gameData.UpdateHealth(1, 0);
+            gameData.UpdateHealth(2, 0);
             file.Close();
         }
     }

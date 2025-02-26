@@ -13,6 +13,13 @@ public class GameData : MonoBehaviour
     public PlayerTeamState playerTeamState;
 
     public GameManager GameManager;
+
+    public UIManager UIManager;
+
+    private Dictionary<int, int> ProfessionToMaxHealth = new Dictionary<int, int>()
+    {
+        {0,7 },{1,5},{2,4},{3,4 }
+    };
     public class GameSaveData
     {
         public bool[] isHere;
@@ -38,10 +45,6 @@ public class GameData : MonoBehaviour
         {
             isHere = new bool[3] { false, false, false };
             isDead = new bool[3] { false, false, false };
-            curHealth = new int[3] { 5, 5, 5 };
-            maxHealth = new int[3] { 5, 5, 5 };
-            curMagic = new int[3] { 5, 5, 5 };
-            maxMagic = new int[3] { 5, 5, 5 };
             curStamina = new int[3] { 5, 5, 5 };
             maxStamina = new int[3] { 5, 5, 5 };
             positions = new Vector3[3];
@@ -51,15 +54,25 @@ public class GameData : MonoBehaviour
             types2 = new int[10];
             TurnNumber = 1;
             Professions = new int[3] { SceneLoader.PlayerOneProfession, SceneLoader.PlayerTwoProfession, -1 };
+            curHealth = new int[3];
+            maxHealth = new int[3];
         }
     }
 
-
+    
 
     public void Start()
     {
         playerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        UIManager= GameObject.Find("UIManager").GetComponent<UIManager>();
+        for(int i = 0; i < 3; i++)
+        {
+            if (gsd.Professions[i] == -1) continue;
+            gsd.maxHealth[i] = ProfessionToMaxHealth[gsd.Professions[i]];
+            gsd.curHealth[i] = gsd.maxHealth[i];
+            UIManager.UpdateHealthSlider(gsd.curHealth[i], gsd.maxHealth[i], i);
+        }
     }
 
     public void SaveStaminaAndPosition(int currentStamina,Vector3 position, int ID)
@@ -72,10 +85,15 @@ public class GameData : MonoBehaviour
     {
         PlayersUpdate?.Invoke(gsd.curStamina,gsd.positions);
     }
-
-    public void SavePlayerTeamState()
+    public void UpdateHealth(int SerialNumber,int change)
     {
-        gsd.curHealth = PlayerTeamState.PlayerState.curHealth;
-        gsd.maxHealth = PlayerTeamState.PlayerState.maxHealth;
+        gsd.curHealth[SerialNumber] += change;
+        if (gsd.curHealth[SerialNumber]> gsd.maxHealth[SerialNumber])
+        {
+            gsd.curHealth[SerialNumber] =gsd.maxHealth[SerialNumber];
+        }
+        UIManager.UpdateHealthSlider(gsd.curHealth[SerialNumber], gsd.maxHealth[SerialNumber], SerialNumber);
     }
+
+
 }

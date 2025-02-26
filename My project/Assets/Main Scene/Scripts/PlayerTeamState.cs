@@ -11,18 +11,15 @@ public class PlayerTeamState : MonoBehaviour
     public static class PlayerState
     {
         [Header("PlayerStateInfo")]
-        public static bool[] isHere;//�ж�����᲻�����ս������
-        public static int[] curHealth;
-        public static int[] maxHealth;
-        public static int BattleResult; //传出0表示失败，1表示逃跑，2表示胜利
+        public static bool[] isHere;//有没有参与战斗
+        public static bool BattleResult; //传出0表示失败，1表示胜利
         public static bool[,] equips;
+        public static int EnemyType;
         public static CharacterProperty[] characterProperties;
 
         static PlayerState()
         {
             isHere = new bool[3] { false, false, false };
-            curHealth = new int[3] { 5, 5, 5 };
-            maxHealth = new int[3] { 5, 5, 5 };
             equips = new bool[3, 30];
             characterProperties = new CharacterProperty[3];
         }
@@ -43,30 +40,6 @@ public class PlayerTeamState : MonoBehaviour
         UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 
-    public void LoadGameData()
-    {
-        PlayerState.curHealth = GameData.gsd.curHealth;
-        PlayerState.maxHealth = GameData.gsd.maxHealth;
-        for (int i = 1; i <= 3; i++)
-        {
-            UIManager.UpdateHealthSlider(PlayerState.curHealth[i - 1], PlayerState.maxHealth[i - 1], i);
-        }
-    }
-
-    public void UpdateHealth(int serialNumber, int change)
-    {
-        PlayerState.curHealth[serialNumber] -= change;
-        UIManager.UpdateHealthSlider(PlayerState.curHealth[serialNumber], PlayerState.maxHealth[serialNumber], serialNumber);
-    }
-    public void UpdateHealth(int change)
-    {
-        PlayerState.curHealth[selectedID] += change;
-        if (PlayerState.curHealth[selectedID] > PlayerState.maxHealth[selectedID])
-        {
-            PlayerState.curHealth[selectedID] = PlayerState.maxHealth[selectedID];
-        }
-        UIManager.UpdateHealthSlider(PlayerState.curHealth[selectedID], PlayerState.maxHealth[selectedID], selectedID);
-    }
 
     public void ChangeSelected(int ID)
     {
@@ -79,8 +52,17 @@ public class PlayerTeamState : MonoBehaviour
 
     public void LoadCharacterProperties(GameObject[] arr)
     {
-        PlayerState.characterProperties[0] = arr[0].GetComponent<CharacterProperty>();
-        PlayerState.characterProperties[1] = arr[1].GetComponent<CharacterProperty>();
-        PlayerState.characterProperties[2] = arr[2].GetComponent<CharacterProperty>();
+        for(int i = 0; i < 3; i++)
+        {
+            CharacterProperty temp = arr[i].GetComponent<CharacterProperty>();
+            if (temp)
+            {
+                temp.maxHealth = GameData.gsd.maxHealth[i];
+                temp.Health = GameData.gsd.curHealth[i];
+                PlayerState.characterProperties[i] = arr[i].GetComponent<CharacterProperty>();
+            }
+            else PlayerState.characterProperties[i] = null;
+        }
+
     }
 }

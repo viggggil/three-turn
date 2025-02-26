@@ -40,7 +40,7 @@ public class Event_Map : MonoBehaviour
         {
             case 0:
                 {
-                    PlayerTeamState.UpdateHealth(10000);
+                    GameData.UpdateHealth(GameManager.selectedID - 1,10000);
                     break;
                 }
             case 1:
