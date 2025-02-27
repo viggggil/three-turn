@@ -23,17 +23,10 @@ public class GameData : MonoBehaviour
     public class GameSaveData
     {
         public bool[] isHere;
-        public  bool[] actAssigned;
-        public bool[] haveActed;
-        public  bool[] isDead;
         public  int[] curHealth;
         public  int[] maxHealth;
-        public  int[] curMagic;
-        public  int[] maxMagic;
         public  int[] curStamina;
         public  int[] maxStamina;
-        public  int[] minSpeed;
-        public int[] maxSpeed;
         public Vector3[] positions;
         public Vector3[] Epositions;
         public int[] types;
@@ -41,10 +34,10 @@ public class GameData : MonoBehaviour
         public int[] types2;
         public int TurnNumber;
         public int[] Professions;
+        public int PathIndex;
         public GameSaveData()
         {
             isHere = new bool[3] { false, false, false };
-            isDead = new bool[3] { false, false, false };
             curStamina = new int[3] { 5, 5, 5 };
             maxStamina = new int[3] { 5, 5, 5 };
             positions = new Vector3[3];
@@ -91,6 +84,10 @@ public class GameData : MonoBehaviour
         if (gsd.curHealth[SerialNumber]> gsd.maxHealth[SerialNumber])
         {
             gsd.curHealth[SerialNumber] =gsd.maxHealth[SerialNumber];
+        }
+        if (gsd.curHealth[SerialNumber] <0)
+        {
+            gsd.curHealth[SerialNumber] = 0;
         }
         UIManager.UpdateHealthSlider(gsd.curHealth[SerialNumber], gsd.maxHealth[SerialNumber], SerialNumber);
     }

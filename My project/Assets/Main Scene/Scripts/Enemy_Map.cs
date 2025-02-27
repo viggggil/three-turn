@@ -1,8 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Map : MonoBehaviour
+public class Enemy_Map : MonoBehaviour,IMove_
 {
     // Start is called before the first frame update
     private UIManager UIManager;
@@ -39,5 +40,21 @@ public class Enemy_Map : MonoBehaviour
             PlayerTeamState.PlayerState.isHere = arr;
         }
         UIManager.DisplayEnemyInformation(type,flag);
+    }
+
+    public void Move(Vector2 direction)
+    {
+        transform.DOMove(direction, 1.0f);
+        if (direction.x > Enemy.transform.position.x)
+        {
+            Enemy.GetComponent<RectTransform>().localScale = new Vector3(-1.25f, 1.25f, 1.25f);
+        }
+        if (direction.x <Enemy.transform.position.x)
+        {
+            Enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
+        }
+        Animator animator = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        animator.SetBool("move_Map", true);
+        Invoke("Move_", 1f);
     }
 }

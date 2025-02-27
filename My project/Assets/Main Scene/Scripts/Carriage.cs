@@ -129,6 +129,7 @@ public class Carriage : MonoBehaviour,IMove_
     {
         tomb.SetActive(true);
         player.SetActive(false);
+        GameData.UpdateHealth( playerID - 1,-10000);
         _tomb.enabled = true;
         this.enabled = false;
     }

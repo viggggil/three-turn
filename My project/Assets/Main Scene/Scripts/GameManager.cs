@@ -25,18 +25,23 @@ public class GameManager : MonoBehaviour
     public bool toMove=false;
     public GameData GameData;
     public SceneLoader SceneLoader;
+    public UIManager UIManager;
     public CameraFollower CameraFollower;
     public GameObject bar;
     private int serialNumber;
     private int serialNumber2;
     private GameObject[] tempEvents;
     public int TurnNumber = 1;
+    public GameObject BlackWizard;
+
+    public Vector3[] Path;
     void Start()
     {
         cells = GameObject.FindGameObjectsWithTag("Cell");
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
         SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         CameraFollower= GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
+        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         moveList = new List<GameObject>();
         serialNumber = 0;
         GenerateEvents();
@@ -45,6 +50,7 @@ public class GameManager : MonoBehaviour
         ClearFog();
         selectedID = 1;
         ClearFog();
+        if (PlayerTeamState.PlayerState.BattleResult == 0) BattleFailed();
     }
     void Update()
     {
@@ -245,13 +251,18 @@ public class GameManager : MonoBehaviour
             Carriage temp = player.GetComponent<Carriage>();
             if (temp.playerID != -1) temp.TurnStart();
         }
-    }
-    public void BattleFailed()
-    {
-        foreach(var player in Players)
+        if (BlackWizard)
         {
-            Carriage temp = player.GetComponent<Carriage>();
-            if (PlayerTeamState.PlayerState.isHere[temp.playerID - 1]) temp.Dead();
+            IMove_ enemy = BlackWizard.GetComponent<Enemy_Map>();
+            if (GameData.gsd.PathIndex==21)
+            {
+                GameFailed();
+            }
+            for (int i = 0; i < 7; i++)
+            {
+                enemy.Move(Path[GameData.gsd.PathIndex]);
+                GameData.gsd.PathIndex++;
+            }
         }
     }
     public void GenerateEvents()
@@ -371,6 +382,8 @@ public class GameManager : MonoBehaviour
             Vector3 position = GameData.gsd.Epositions2[serialNumber2];
             GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
             GameObject enemy = Instantiate(Enemies[GameData.gsd.types2[serialNumber2]], position, Quaternion.identity);
+            enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+            enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
             enemy.transform.parent = enemyParent.transform;
             enemy.GetComponent<Enemy_Map>().Enemy = enemy;
             enemy.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
@@ -401,7 +414,6 @@ public class GameManager : MonoBehaviour
             else Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
         }
     }
-
     public void ExposeBar()
     {
         CameraFollower.ChangeSelected(bar);
@@ -416,10 +428,62 @@ public class GameManager : MonoBehaviour
         }
         Invoke("ExposeBar_", 05f);
     }
-
     public void ExposeBar_()
     {
         CameraFollower.ChangeSelected(Players[selectedID-1]);
     }
+    public void BattleWin()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            if (!PlayerTeamState.PlayerState.isHere[i]) continue;
+            GameData.gsd.curHealth[i] = PlayerTeamState.PlayerState.characterProperties[i].GetComponent
+                <CharacterProperty>().health;
+            GameData.UpdateHealth(i, 0);
+            if (GameData.gsd.curHealth[i] == 0) Players[i].GetComponent<Carriage>().Dead();
+        }
+        if (PlayerTeamState.PlayerState.EnemyType == 6)
+        {
+            Vector3 position = new Vector3(-4.5f, 0.5f, -0.1f);
+            GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
+            GameObject enemy = Instantiate(Enemies[6], position, Quaternion.identity);
+            enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+            enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            enemy.transform.parent = enemyParent.transform;
+            enemyParent.GetComponent<Enemy_Map>().Enemy = enemy;
+            enemyParent.GetComponent<Enemy_Map>().SerialNumber = 16;
+            enemyParent.GetComponent<Enemy_Map>().type = 6;
+            Destroy(bar);
+            Players[2].transform.position = new Vector3(-3.5f, 0.5f, -0.1f);
+            for(int i = 0, j = 0; i < 3; i++)
+            {
+                if (GameData.gsd.Professions[0] == i || GameData.gsd.Professions[1] == i)j++;
+                else
+                {
+                    GameData.gsd.Professions[2] = j;
+                    break;
+                }
+            }
+            Players[2].GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
+            Players[2].GetComponent<Carriage>().playerID = 3;
+            BlackWizard = enemyParent;
+        }
+    }
+    public void BattleFailed()
+    {
+        foreach (var player in Players)
+        {
+            Carriage temp = player.GetComponent<Carriage>();
+            if (PlayerTeamState.PlayerState.isHere[temp.playerID - 1])
+            {
+                temp.Dead();
+            }
+        }
+    }
 
+    public void GameFailed()
+    {
+        UIManager.GameFailedPanel.SetActive(true);
+        UIManager.blockPanel.SetActive(true);
+    }
 }

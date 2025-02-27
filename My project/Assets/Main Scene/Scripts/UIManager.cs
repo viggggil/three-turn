@@ -89,6 +89,9 @@ public class UIManager : MonoBehaviour
     public string[] dialogues;
 
     public int dialogueIndex = 0;
+    public GameObject GameFailedPanel;
+    public GameObject PlayerThree_;
+    public int PlayerThreeProfession;
     enum CellType
     {
         grass,
@@ -131,6 +134,7 @@ public class UIManager : MonoBehaviour
         start=9,
         bar=11
     }
+
     private Dictionary<EnemyType, string> EnemyNameDictionary = new Dictionary<EnemyType, string>()
     {
         { EnemyType.heresyCleric,"“Ï∂Àƒ¡ ¶" },
@@ -407,6 +411,8 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            PlayerThree_.SetActive(true);
+            PlayerThreeProfession = Profession;
             PlayerThree.sprite = Professions[Profession];
             ProfessionThree.text = ProfessionNames[Profession];
         }
@@ -420,7 +426,19 @@ public class UIManager : MonoBehaviour
         {
             Dialogue.SetActive(false);
             blockPanel.SetActive(false);
+            SpeakerName.text = "æ∆π›¿œ∞Â";
+            Speaker.sprite = Professions[5];
             GameManager.ExposeBar();
+        }
+        else if (dialogueIndex == 7)
+        {
+            SpeakerName.text = ProfessionNames[PlayerThreeProfession];
+            Speaker.sprite = Professions[PlayerThreeProfession];
+        }
+        else if (dialogueIndex == 9)
+        {
+            Dialogue.SetActive(false);
+            blockPanel.SetActive(false);
         }
         else Invoke("Dialogue__",0.1f);
     }
@@ -428,5 +446,11 @@ public class UIManager : MonoBehaviour
     private void Dialogue__()
     {
         StartCoroutine(Dialogue_());
+    }
+
+    public void MissionStep2()
+    {
+        Dialogue.SetActive(true);
+        Dialogue__();
     }
 }

@@ -12,7 +12,7 @@ public class PlayerTeamState : MonoBehaviour
     {
         [Header("PlayerStateInfo")]
         public static bool[] isHere;//有没有参与战斗
-        public static bool BattleResult; //传出0表示失败，1表示胜利
+        public static int BattleResult; //传出0表示失败，1表示胜利
         public static bool[,] equips;
         public static int EnemyType;
         public static CharacterProperty[] characterProperties;
@@ -22,6 +22,7 @@ public class PlayerTeamState : MonoBehaviour
             isHere = new bool[3] { false, false, false };
             equips = new bool[3, 30];
             characterProperties = new CharacterProperty[3];
+            BattleResult = -1;
         }
     }
     public UIManager UIManager;
