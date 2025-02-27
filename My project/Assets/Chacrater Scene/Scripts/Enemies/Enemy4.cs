@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Enemy4 : MonoBehaviour
 {
-    //自爆兵
+    //双刃劫掠者
 
     CharacterProperty charaterProperty;
 
@@ -14,19 +14,31 @@ public class Enemy4 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1()//一般在几个回合后使用
+    public void skill1(int position)//双刃斩击（使用该技能时触发两次）
     {
-        for (int i = 3; i < 6; i++)
-        {
-            GameObject enemy;
-            Spawner.nodeDictionary.TryGetValue(i, out enemy);
-            if(enemy == null) 
-                continue;
-            CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-            enemyProperty = enemy.GetComponent<CharacterProperty>();
-            PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR,
-                charaterProperty.CritVaule, enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        }
-        charaterProperty.HP = 0;
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        int dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.7f), enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
+    }
+
+    public void skill2(int position)//破甲斩
+    {
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        int dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.5f), enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
+        Buff armorBreakBuff = new Buff(
+            name: "",
+            duration: 2,
+            buffType: BuffType.Debuff,
+            applyEffect: (character) => character.PR -= 20,
+            removeEffect: (character) => character.PR -= 20
+            );
+        Buff.AddBuff(enemyProperty, armorBreakBuff);
     }
 }

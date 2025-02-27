@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy2 : MonoBehaviour
 {
-    //敌人中的辅助
+    //异端牧师
 
     CharacterProperty charaterProperty;
 
@@ -14,26 +14,29 @@ public class Enemy2 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1(int position)//给队友加攻击力
+    public void skill1(int position)//给队友加buff
     {
         GameObject teammate;
         Spawner.nodeDictionary.TryGetValue(position, out teammate);
         CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
-        teammateProperty.HP += charaterProperty.ATK;
+        Buff PowerBuff = new Buff(
+           name: "",
+           duration: 2,
+           buffType: BuffType.Buff,
+           applyEffect: (character) => { character.ATK = (int)(character.ATK * 1.2f); },
+           removeEffect: (character) => { character.ATK = (int)(character.ATK / 1.2f); }
+           );
     }
 
-    public void skill2(int position)//眩晕敌人
+    public void skill2(int position)//灵魂汲取
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        Buff dizzy = new Buff(
-            name: "",
-            duration: 2,
-            buffType: BuffType.Debuff,
-            applyEffect: (character) => character.isdizzy = true,
-            removeEffect: (character) => character.isdizzy = false
-            );
-        Buff.AddBuff(enemyProperty, dizzy);
+        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        charaterProperty.HP += (int)(dmg * 0.2f);
+        enemyProperty.BeDamaged(dmg);
     }
+
 }

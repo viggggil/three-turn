@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy3 : MonoBehaviour
 {
-    //敌人中的术士
+    //黑巫师
 
     CharacterProperty charaterProperty;
 
@@ -13,38 +14,35 @@ public class Enemy3 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1(GameObject enemy1, GameObject enemy2, GameObject enemy3)
+    public void skill1(int position)//灵魂束缚
     {
-        CharacterProperty enemyProperty1 = enemy1.GetComponent<CharacterProperty>();
-        CharacterProperty enemyProperty2 = enemy2.GetComponent<CharacterProperty>();
-        CharacterProperty enemyProperty3 = enemy3.GetComponent<CharacterProperty>();
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty1.PR, charaterProperty.CritVaule,
-            enemyProperty1.CritResis, charaterProperty.CritDMGRate, enemyProperty1.CritDMGResisRate);
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty2.PR, charaterProperty.CritVaule,
-            enemyProperty2.CritResis, charaterProperty.CritDMGRate, enemyProperty2.CritDMGResisRate);
-        PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty3.PR, charaterProperty.CritVaule,
-            enemyProperty3.CritResis, charaterProperty.CritDMGRate, enemyProperty3.CritDMGResisRate);
-        Buff BurnBuff = new Buff(
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        Buff dizzy = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Debuff,
-            applyEffect: (character) => character.HP -= 30,
-            removeEffect: null
+            applyEffect: (character) => character.isdizzy = true,
+            removeEffect: (character) => character.isdizzy = false
             );
-        Buff.AddBuff(enemyProperty1, BurnBuff);
-        Buff.AddBuff(enemyProperty2, BurnBuff);
-        Buff.AddBuff(enemyProperty3, BurnBuff);
+        Buff.AddBuff(enemyProperty, dizzy);
     }
-
-    public void skill2()
+    public void skill2(int position)//灵魂收割
     {
-        Buff ATKplusBuff = new Buff(
+        GameObject enemy;
+        Spawner.nodeDictionary.TryGetValue(position, out enemy);
+        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        enemyProperty.BeDamaged(dmg);
+        Buff dizzy = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Debuff,
-            applyEffect: (character) => character.ATK += 30,
-            removeEffect: (character) => character.ATK -= 30
+            applyEffect: (character) => character.ATK += (int)(dmg * 0.3f),
+            removeEffect: (character) => character.ATK -= (int)(dmg * 0.3f)
             );
-        Buff.AddBuff(charaterProperty, ATKplusBuff);
+        Buff.AddBuff(charaterProperty, dizzy);
     }
 }
