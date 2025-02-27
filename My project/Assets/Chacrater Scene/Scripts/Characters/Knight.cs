@@ -35,9 +35,9 @@ public class Knight : MonoBehaviour
 
     public void skill1(int position)//攻击一个敌人
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
             enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
         enemyProperty.BeDamaged(dmg);
@@ -55,16 +55,16 @@ public class Knight : MonoBehaviour
 
     public List<int> skill2(int position)//攻击前方一排敌人
     {
-        GameObject enemy;
+        GameObject node;
         List<int> list = new List<int>();
         if(position < 9)
         {
             for (int i = 6; i < 9; i++)
             {
-                Spawner.nodeDictionary.TryGetValue(i, out enemy);
-                if (enemy == null)
+                Spawner.nodeDictionary.TryGetValue(i, out node);
+                if (node == null)
                     continue;
-                CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+                CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
                 list.Add(enemyProperty.Position);
             }
         }
@@ -72,23 +72,28 @@ public class Knight : MonoBehaviour
         {
             for (int i = 9; i < 12; i++)
             {
-                Spawner.nodeDictionary.TryGetValue(i, out enemy);
-                if (enemy == null)
+                Spawner.nodeDictionary.TryGetValue(i, out node);
+                if (node == null)
                     continue;
-                CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+                CharacterProperty enemyProperty = node.GetComponent<CharacterProperty>();
                 list.Add(enemyProperty.Position);
             }
         }
         return list;
     }
 
-    public void skill2()
+    public void skill2(List<int> position)
     {
         int dmg;
-        
-        //dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
-        //enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        //enemyProperty.BeDamaged(dmg);
+        for (int i = 0; i < position.Count; i++)
+        {
+            GameObject node;
+            Spawner.nodeDictionary.TryGetValue(position[i], out node);
+            CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
+            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
+            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            enemyProperty.BeDamaged(dmg);
+        }
     }
 
     public bool skill2Range(int position)
