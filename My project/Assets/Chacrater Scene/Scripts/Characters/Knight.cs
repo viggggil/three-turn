@@ -12,6 +12,27 @@ public class Knight : MonoBehaviour
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
+
+    public void Skills(int skillCode,int position)
+    {//技能在这里生效，这两个参数之后有逻辑传入
+        switch (skillCode)
+        {
+            case 0:
+                skill1(position);
+                break;
+            case 1:
+                skill2(position);
+                break;
+            case 2:
+                skill3();
+                break;
+            default:
+                break;
+        }
+    }
+
+    
+
     public void skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
@@ -26,7 +47,7 @@ public class Knight : MonoBehaviour
     {
         if(position > 6 && position < 9 || position < 12 && Spawner.nodeDictionary[position - 3] != null)
         {
-            skill1(position);
+             skill1(position);
             return true;
         }
         return false;
@@ -79,7 +100,7 @@ public class Knight : MonoBehaviour
         return false;
     }
 
-    public bool skill3()
+    public void skill3()
     {
         Buff DefendBuff = new Buff(
            name: "",
@@ -89,6 +110,10 @@ public class Knight : MonoBehaviour
            removeEffect: (character) => { character.PR = (int)(character.PR / 1.6f); character.MR = (int)(character.MR / 1.2f); }
         );
         Buff.AddBuff(charaterProperty, DefendBuff);
+    }
+
+    public bool skill3Range()
+    {
         return true;
     }
 

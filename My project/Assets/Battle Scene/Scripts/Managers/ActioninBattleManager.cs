@@ -15,24 +15,68 @@ public class ActioninBattleManager : MonoBehaviour
     //public BattleManager battleManager;//用UI拖来的
     public DataofAttackers dataofAttackers;
 
+    public int profession;
     
 
     private void Awake()
     {
         characterProperty = GetComponent<CharacterProperty>();
 
-        BattleManager.RandomSpeed += RandomSpeed;
-        BattleManager.RoundStart += ExitDefense;
 
-        characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
+        BattleManager.RandomSpeed += RandomSpeed;
+        BattleManager.ReadyStageStart += ExitDefense;
+
+        
         //给每个玩家一个初始速度
     }
 
     private void Start()
     {
+        GetRandomSpeed();
 
-        
+        profession = characterProperty.Profession;
+    }
 
+    public void Act()
+    {
+        if (characterProperty.OnTheAttack)
+        {
+            //播放动画
+
+            switch (profession)
+            {
+                case 0://骑士
+                    GetComponent<Knight>().Skills(characterProperty.SkillCode,characterProperty.AtkTargetPosition);
+                    break;
+                case 1://待补充
+                    break;
+                default:
+                    break;
+            }
+
+            characterProperty.OnTheAttack = false;
+        }
+        else if (characterProperty.OnTheDefense)
+        {
+            //播放动画
+        }
+        else if (characterProperty.OnTheMovement)
+        {
+            //播放动画
+        }
+        else
+        {
+            //Do nothing
+        }
+    }
+
+
+
+
+
+    public void GetRandomSpeed()
+    {
+        characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
     }
 
     private void RandomSpeed()

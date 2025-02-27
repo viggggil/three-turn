@@ -165,10 +165,76 @@ public class Nodes : MonoBehaviour
         if (isEnemyHere)
         {
             if (dataofNodes.SbisAttacking)
-            {
-                //if 某个技能范围不够 {
+            {//确定攻击阶段
+                switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().Profession)
+                {//看选中的人物的职业
+                    case 0://骑士
+                        switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
+                        {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
+                            case 0://技能1
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill1Range(nodeCode))
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack(new int[] { nodeCode });
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
 
-                //}
+                            case 1:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill2Range(nodeCode))
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack();
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            case 2:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill3Range())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack();
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+
+                    case 1://弓箭手
+                        break;
+
+                    case 2://牧师
+                        break;
+
+                    case 3://法师
+                        break;
+
+                    default:
+                        break;
+                }
+                
 
 
             }

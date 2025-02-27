@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour
     Spawner spawner;
 
     public static Action RandomSpeed;
+    public static Action ReadyStageStart;
     public static Action RoundStart;
 
     public List<GameObject> ActionOrder;
@@ -31,14 +32,15 @@ public class BattleManager : MonoBehaviour
         Spawner = GameObject.FindWithTag("Spawner");
         spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
 
-        RoundStart += Initialization;
+        ReadyStageStart += Initialization;
+        RoundStart += ActInOrder;
         //battleLists = new List<List<GameObject>>();
         //battleList1 = new List<GameObject>();
         //battleList2 = new List<GameObject>();
         //battleList3 = new List<GameObject>();//列表初始化
         //基本对象的载入
-        
-       
+
+
     }
 
     private void Start()
@@ -49,12 +51,22 @@ public class BattleManager : MonoBehaviour
 
         //确认载入后回合开始
         //RandomSpeed?.Invoke();
-        
+        /*回合准备阶段*/
+        ReadyStageStart?.Invoke();
+
+        /*回合进行阶段*/
+
         RoundStart?.Invoke();
 
-        /*回合准备阶段*/
 
+    }
 
+    public void ActInOrder()
+    {
+        foreach (GameObject ThisCharacter in ActionOrder)
+        {
+            ThisCharacter.GetComponent<ActioninBattleManager>().Act();
+        }
     }
 
     private void Initialization()
@@ -139,7 +151,8 @@ public class BattleManager : MonoBehaviour
     private void OnDestroy()
     {
         ActionOrder.Clear();
-        RoundStart -= Initialization;
+        ReadyStageStart -= Initialization;
+        RoundStart -= ActInOrder;
     }
 
     

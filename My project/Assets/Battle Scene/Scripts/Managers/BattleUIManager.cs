@@ -10,7 +10,10 @@ public class BattleUIManager : MonoBehaviour
 {
     [Header("UI Panels")]
     [SerializeField] GameObject actionPanel;
-    [SerializeField] GameObject skillsPanel;
+    [SerializeField] GameObject knightSkillsPanel;
+    [SerializeField] GameObject archerSkillsPanel;
+    [SerializeField] GameObject wizardSkillsPanel;
+    [SerializeField] GameObject clericSkillsPanel;
     [SerializeField] GameObject enemySkillsPanel;
     [SerializeField] GameObject exitDefensePanel;
     [SerializeField] GameObject exitAttackPanel;
@@ -37,11 +40,6 @@ public class BattleUIManager : MonoBehaviour
         GameObject.Instantiate(outOfRangePanel);
     }
 
-    public void CloseOutofRangePanel()
-    {
-        outOfRangePanel.gameObject.SetActive(false);
-    }
-
     public void OpenActionPanel()
     {
         actionPanel.SetActive(true);
@@ -54,13 +52,26 @@ public class BattleUIManager : MonoBehaviour
 
     public void OpenSkillsPanel()
     {
-        skillsPanel.SetActive(true);
+        if(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().Profession == 0)
+            knightSkillsPanel.SetActive(true);
+
+        else if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().Profession == 1)
+            archerSkillsPanel.SetActive(true);
+
+        else if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().Profession == 2)
+            clericSkillsPanel.SetActive(true);
+
+        else
+            wizardSkillsPanel.SetActive(true);
         //导入技能
     }
 
     public void CloseSkillsPanel()
     {
-        skillsPanel.SetActive(false);
+        knightSkillsPanel.SetActive(false);
+        archerSkillsPanel.SetActive(false);
+        wizardSkillsPanel.SetActive(false);
+        clericSkillsPanel.SetActive(false);//节省代码，直接全关
         OpenActionPanel();
         EnableAllNodeButtons();
     }
@@ -258,22 +269,58 @@ public class BattleUIManager : MonoBehaviour
         dataofNodes.SbisAttacking = true;
         //if 是指定敌人的技能 {
         //显示所有的敌人头上的箭头(待更新)
-        foreach (GameObject i in ArrowsofEnemies)
-        {
-            i.SetActive(true);
-        }
+        OpenArrowsOfEnemies();
         //}
 
-        //接下来要判定能不能点到
-        
-        
+        EnableEnemyNodeButtons();
+        dataofNodes.SbisAttacking = true;//记得解除
 
+        //从这里开始等待node那边给反应
+
+
+
+        //CloseSkillsPanel();
+        //EnableAllNodeButtons();
+        //CloseActionPanel();
+        //DisplaySword();
+
+        
+    }
+
+    public void SkillSelectionSucceeded()
+    {
+        dataofNodes.SbisAttacking = false;
+        CloseArrowsOfEnemies();
         CloseSkillsPanel();
         EnableAllNodeButtons();
         CloseActionPanel();
         DisplaySword();
+    }
 
-        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+    public void SkillSelectionFailed()
+    {
+        dataofNodes.SbisAttacking = false;
+        OpenOutOfRangePanel();
+        CloseArrowsOfEnemies();
+        CloseSkillsPanel();
+        EnableAllNodeButtons();
+        CloseActionPanel();
+    }
+
+    public void OpenArrowsOfEnemies()
+    {
+        foreach (GameObject i in ArrowsofEnemies)
+        {
+            i.SetActive(true);
+        }
+    }
+
+    public void CloseArrowsOfEnemies()
+    {
+        foreach (GameObject i in ArrowsofEnemies)
+        {
+            i.SetActive(false);
+        }
     }
 
 
@@ -323,6 +370,23 @@ public class BattleUIManager : MonoBehaviour
             Arrows[i].SetActive(true);
             Buttons[i].enabled = true;
         }
+    }
+
+    //下面三个放在按钮用来更改当前人物目前选中的技能
+
+    public void SetSkillCode0()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode = 0;
+    }
+
+    public void SetSkillCode1()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode = 1;
+    }
+
+    public void SetSkillCode2()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode = 2;
     }
 
     public int GetPublicMethodCount(Type targetType)

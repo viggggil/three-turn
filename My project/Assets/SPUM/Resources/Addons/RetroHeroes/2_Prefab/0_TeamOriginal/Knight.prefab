@@ -12681,8 +12681,8 @@ MonoBehaviour:
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
-  minSpeed: 0
-  maxSpeed: 0
+  minSpeed: 1
+  maxSpeed: 5
   speedThisRound: 0
   criticalHitValue: 0
   criticalHitResistivity: 0
@@ -12695,6 +12695,10 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  SerialNumber: 0
+  atkTargetPosition: 0
+  skillCode: 0
+  profession: 0
 --- !u!114 &-8815763339749779464
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,12 +23,14 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int accurateValue;//命中值
     [SerializeField] private int evasiveValue;//闪避值
     [SerializeField] private int position;//位置
-    [SerializeField] private int targetPosition;//位置
+    [SerializeField] private int targetPosition;//点击选择的要移动到的位置
     [SerializeField] private bool ontheDefense;//正在防御
     [SerializeField] private bool ontheMovement;//正在移动
     [SerializeField] private bool ontheAttack;//正在攻击
     [SerializeField] public int SerialNumber;//编号
-    [SerializeField] public int Profession;//职业 0骑士1弓箭手2牧师3法师
+    [SerializeField] public int atkTargetPosition;//点击选择的要攻击的位置
+    [SerializeField] private int skillCode;//要使用的技能的编号
+    [SerializeField] public int profession;//职业 0骑士1弓箭手2牧师3法师
 
 
     public List<Buff> Buffs { get; private set; }
@@ -59,11 +61,17 @@ public class CharacterProperty : MonoBehaviour
 
     public int TargetPosition { get; set; }
 
+    public int AtkTargetPosition { get; set; }
+
+    public int SkillCode { get; set; }
+
     public bool OnTheMovement { get; set; }
 
     public bool OnTheDefense { get; set; }
 
     public bool OnTheAttack { get; set; }
+
+    public int Profession { get; set; }
     private void Awake()
     {
         HP = maxHealth;
@@ -90,6 +98,9 @@ public class CharacterProperty : MonoBehaviour
         OnTheMovement = ontheMovement;
         TargetPosition = targetPosition;
         OnTheAttack = ontheAttack;
+        AtkTargetPosition = atkTargetPosition;
+        SkillCode = skillCode;
+        Profession = profession;
     }
 
     public void BeDamaged(int damage)
