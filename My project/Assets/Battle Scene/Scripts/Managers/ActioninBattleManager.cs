@@ -76,12 +76,12 @@ public class ActioninBattleManager : MonoBehaviour
 
     public void GetRandomSpeed()
     {
-        characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
+        characterProperty.SpeedThisRound = characterProperty.OriginalSpeed + UnityEngine.Random.Range(characterProperty.MinRandomSpeed, characterProperty.MaxRandomSpeed);
     }
 
     private void RandomSpeed()
     {//用于订阅的提供具体速度的函数（已弃用）
-        characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinSpeed, characterProperty.MaxSpeed);
+        characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinRandomSpeed, characterProperty.MaxRandomSpeed);
 
         
     }
@@ -92,7 +92,7 @@ public class ActioninBattleManager : MonoBehaviour
     {//打算使用攻击性行动
         foreach (int i in AtkRange)
         {
-            dataofAttackers.AttackersLists[i].Add(gameObject);
+            dataofAttackers.ThoseAttackingPi[i].Add(gameObject);
         }//如果在攻击某个点，把它移到对应的列表里面
 
 
@@ -127,9 +127,9 @@ public class ActioninBattleManager : MonoBehaviour
         int maxSpeedofAttakers = 0;
         int diffofSpeed = 0;
 
-        if (dataofAttackers.AttackersLists[characterProperty.Position] == null)
+        if (dataofAttackers.ThoseAttackingPi[characterProperty.Position] == null)
         {//如果说有人在打自己
-            foreach(GameObject i in dataofAttackers.AttackersLists[characterProperty.Position])
+            foreach(GameObject i in dataofAttackers.ThoseAttackingPi[characterProperty.Position])
             {//对于所有要打他自己位置的对象：
                 if (i.GetComponent<CharacterProperty>().SpeedThisRound > maxSpeedofAttakers)
                 {//检查每个人的速度，取出最大值

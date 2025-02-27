@@ -47,7 +47,7 @@ public class Knight : MonoBehaviour
     {
         if(position > 6 && position < 9 || position < 12 && Spawner.nodeDictionary[position - 3] != null)
         {
-             skill1(position);
+             //skill1(position);
             return true;
         }
         return false;

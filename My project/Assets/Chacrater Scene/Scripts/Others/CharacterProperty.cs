@@ -13,8 +13,9 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int defensePower;//防御值
     [SerializeField] private int physicalResistivity;//物理抗性
     [SerializeField] private int magicalResistivity;//魔法抗性
-    [SerializeField] private int minSpeed;//最小速度
-    [SerializeField] private int maxSpeed;//最大速度
+    [SerializeField] private int minRandomSpeed;//最小速度
+    [SerializeField] private int maxRandomSpeed;//最大速度
+    [SerializeField] private int originalSpeed;//最大速度
     [SerializeField] private int speedThisRound;//最终速度(本轮)
     [SerializeField] private int criticalHitValue;//暴击值
     [SerializeField] private int criticalHitResistivity;//暴击抵抗
@@ -43,8 +44,9 @@ public class CharacterProperty : MonoBehaviour
     public int DEF { get; set; }
     public int PR { get; set; }
     public int MR { get; set; }
-    public int MinSpeed { get; set; }
-    public int MaxSpeed { get; set; }
+    public int MinRandomSpeed { get; set; }
+    public int MaxRandomSpeed { get; set; }
+    public int OriginalSpeed { get; set; }
     public int SpeedThisRound { get; set; }
     public int CritVaule { get; set; }
     public int CritResis { get; set; }
@@ -79,8 +81,8 @@ public class CharacterProperty : MonoBehaviour
         DEF = defensePower;
         PR = physicalResistivity;
         MR = magicalResistivity;
-        MinSpeed = minSpeed;
-        MaxSpeed = maxSpeed;
+        MinRandomSpeed = minRandomSpeed;
+        MaxRandomSpeed = maxRandomSpeed;
         SpeedThisRound = speedThisRound;
         CritVaule = criticalHitValue;
         CritResis = criticalHitResistivity;
@@ -101,6 +103,7 @@ public class CharacterProperty : MonoBehaviour
         AtkTargetPosition = atkTargetPosition;
         SkillCode = skillCode;
         Profession = profession;
+        OriginalSpeed = originalSpeed;
     }
 
     public void BeDamaged(int damage)
