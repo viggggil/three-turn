@@ -47,16 +47,16 @@ public class Knight : MonoBehaviour
     {
         if(position > 6 && position < 9 || position < 12 && Spawner.nodeDictionary[position - 3] != null)
         {
-             //skill1(position);
+             skill1(position);
             return true;
         }
         return false;
     }
 
-    public void skill2(int position)//攻击前方一排敌人
+    public List<int> skill2(int position)//攻击前方一排敌人
     {
         GameObject enemy;
-        int dmg;
+        List<int> list = new List<int>();
         if(position < 9)
         {
             for (int i = 6; i < 9; i++)
@@ -65,9 +65,7 @@ public class Knight : MonoBehaviour
                 if (enemy == null)
                     continue;
                 CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-                dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-                enemyProperty.BeDamaged(dmg);
+                list.Add(enemyProperty.Position);
             }
         }
         else if(position < 10) 
@@ -78,11 +76,19 @@ public class Knight : MonoBehaviour
                 if (enemy == null)
                     continue;
                 CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-                dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-                enemyProperty.BeDamaged(dmg);
+                list.Add(enemyProperty.Position);
             }
         }
+        return list;
+    }
+
+    public void skill2()
+    {
+        int dmg;
+        
+        //dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.6f), enemyProperty.PR, charaterProperty.CritVaule,
+        //enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+        //enemyProperty.BeDamaged(dmg);
     }
 
     public bool skill2Range(int position)
