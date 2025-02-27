@@ -12,6 +12,24 @@ public class Cleric : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
+    public void Skills(int skillCode, int position)
+    {//技能在这里生效，这两个参数之后有逻辑传入
+        switch (skillCode)
+        {
+            case 0:
+                skill1(position);
+                break;
+            case 1:
+                skill2(position);
+                break;
+            case 2:
+                //skill3();
+                break;
+            default:
+                break;
+        }
+    }
+
     public bool skill1(int position)
     {
         GameObject teammate;

@@ -13,19 +13,19 @@ public class Enemy1 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
     }
 
-    public void skill1()
+    public void skill1()//ÐîÁ¦
     {
         Buff Charging = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Debuff,
-            applyEffect: (character) => character.isCharge = true,
-            removeEffect: (character) => character.isCharge = false
+            applyEffect: null,
+            removeEffect: (character) => character.isCharge = true
             );
         Buff.AddBuff(charaterProperty, Charging);
     }
 
-    public void skill2(int position)
+    public void skill2(int position)//¹¥»÷
     {
 
         if (charaterProperty.isCharge)
@@ -36,6 +36,7 @@ public class Enemy1 : MonoBehaviour
             int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
                 enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
             enemyProperty.BeDamaged(dmg);
+            charaterProperty.isCharge = false;
         }
     }
 }

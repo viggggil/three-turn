@@ -25,6 +25,7 @@ public class Buff : MonoBehaviour
     public void Apply(CharacterProperty character)
     {
         ApplyEffect(character);
+        RemoveEffect(character);
         Duration--;
     }
 

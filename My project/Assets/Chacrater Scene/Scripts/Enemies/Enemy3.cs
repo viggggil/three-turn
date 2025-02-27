@@ -38,13 +38,13 @@ public class Enemy3 : MonoBehaviour
 
     public void skill2()
     {
-        Buff ATKplus = new Buff(
+        Buff ATKplusBuff = new Buff(
             name: "",
             duration: 2,
             buffType: BuffType.Debuff,
             applyEffect: (character) => character.ATK += 30,
             removeEffect: (character) => character.ATK -= 30
             );
-        Buff.AddBuff(charaterProperty, ATKplus);
+        Buff.AddBuff(charaterProperty, ATKplusBuff);
     }
 }
