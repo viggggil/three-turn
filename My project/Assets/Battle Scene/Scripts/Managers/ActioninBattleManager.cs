@@ -10,7 +10,7 @@ public class ActioninBattleManager : MonoBehaviour
 {
     public CharacterProperty characterProperty;
 
-    
+    public BattleManager battleManager;
 
     //public BattleManager battleManager;//用UI拖来的
     public DataofAttackers dataofAttackers;
@@ -22,6 +22,7 @@ public class ActioninBattleManager : MonoBehaviour
     {
         characterProperty = GetComponent<CharacterProperty>();
 
+        battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
 
         BattleManager.RandomSpeed += RandomSpeed;
         BattleManager.ReadyStageStart += ExitDefense;
@@ -92,8 +93,9 @@ public class ActioninBattleManager : MonoBehaviour
     {//打算使用攻击性行动
         foreach (int i in AtkRange)
         {
-            dataofAttackers.ThoseAttackingPi[i].Add(gameObject);
+            battleManager.ThoseAttackingPi[i].Add(this.gameObject);
         }//如果在攻击某个点，把它移到对应的列表里面
+
 
 
         //先看攻击的范围内有多少个敌人
@@ -122,7 +124,7 @@ public class ActioninBattleManager : MonoBehaviour
     }
 
     //这是准备阶段结束要进入进行阶段时计算速度差对攻击伤害导致的影响的方法
-    private int AtkJudger(int OriginalDmg)
+    public int AtkJudger(int OriginalDmg)
     {//仅针对于要进行攻击行动的角色，首次进行的伤害计算
         int maxSpeedofAttakers = 0;
         int diffofSpeed = 0;

@@ -5950,7 +5950,7 @@ GameObject:
   - component: {fileID: 642671760}
   m_Layer: 0
   m_Name: BattleManager
-  m_TagString: Untagged
+  m_TagString: BattleManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13582,6 +13582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProperty: {fileID: 0}
+  battleManager: {fileID: 0}
   dataofAttackers: {fileID: 0}
   profession: 0
 --- !u!114 &1611101354
@@ -13603,8 +13604,9 @@ MonoBehaviour:
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
-  minSpeed: 0
-  maxSpeed: 0
+  minRandomSpeed: 0
+  maxRandomSpeed: 0
+  originalSpeed: 0
   speedThisRound: 0
   criticalHitValue: 0
   criticalHitResistivity: 0

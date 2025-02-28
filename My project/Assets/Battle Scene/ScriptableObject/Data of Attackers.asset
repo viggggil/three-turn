@@ -12,19 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b58ee564435b74086df20ee18198be, type: 3}
   m_Name: Data of Attackers
   m_EditorClassIdentifier: 
-  ThoseAtkingP0:
-  - {fileID: 0}
-  ThoseAtkingP1: []
-  ThoseAtkingP2: []
-  ThoseAtkingP3: []
-  ThoseAtkingP4: []
-  ThoseAtkingP5: []
-  ThoseAtkingP6: []
-  ThoseAtkingP7: []
-  ThoseAtkingP8: []
-  ThoseAtkingP9: []
-  ThoseAtkingP10: []
-  ThoseAtkingP11: []
   ActionOrder: []
+  Samplelist: []
   SpeedofPlayers: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   SortedSpeedofPlayers: 

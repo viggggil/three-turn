@@ -18,10 +18,8 @@ public class BattleManager : MonoBehaviour
     public static Action RoundStart;
 
     public List<GameObject> ActionOrder;
-    //private List<List<GameObject>> battleLists;//这是存储所有列表的集合
-    //private List<GameObject> battleList1;
-    //private List<GameObject> battleList2;
-    //private List<GameObject> battleList3;
+    [Header("Attackers' Lists")]
+    public List<GameObject>[] ThoseAttackingPi;
 
     static public int round;
 
@@ -34,10 +32,11 @@ public class BattleManager : MonoBehaviour
 
         ReadyStageStart += Initialization;
         RoundStart += ActInOrder;
-        //battleLists = new List<List<GameObject>>();
-        //battleList1 = new List<GameObject>();
-        //battleList2 = new List<GameObject>();
-        //battleList3 = new List<GameObject>();//列表初始化
+        ThoseAttackingPi = new List<GameObject>[12];
+        for (int i = 0; i < 12; i++)
+        {
+            ThoseAttackingPi[i] = new List<GameObject>();
+        }//列表初始化
         //基本对象的载入
 
 
@@ -56,10 +55,34 @@ public class BattleManager : MonoBehaviour
 
         /*回合进行阶段*/
 
+
         RoundStart?.Invoke();
 
 
+
     }
+
+
+    private void Update()
+    {
+        //仅供测试
+        //dataofAttackers.ThoseAttackingP7.AddRange( dataofAttackers.ThoseAttackingPi[7]);
+    }
+
+    public void SortListsOfAttackers()
+    {
+        foreach (List<GameObject> AttackersLists in dataofAttackers.ThoseAttackingPi)
+        {
+            AttackersLists.Sort((b, a) =>
+            {//按速度的降序
+                CharacterProperty propA = a.GetComponent<CharacterProperty>();
+                CharacterProperty propB = b.GetComponent<CharacterProperty>();
+
+                return propA.SpeedThisRound.CompareTo(propB.SpeedThisRound);
+            });//按照每个人的速度进行排序
+        }
+    }
+
 
     public void ActInOrder()
     {

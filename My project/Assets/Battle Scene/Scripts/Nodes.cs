@@ -209,7 +209,7 @@ public class Nodes : MonoBehaviour
                                     battleUIManager.SkillSelectionSucceeded();
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
                                     //»ØÈ¥¸ÄUI
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack(nodeCode);
                                 }
                                 else
                                 {

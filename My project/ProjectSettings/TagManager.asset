@@ -12,6 +12,7 @@ TagManager:
   - BattleUIManager
   - ShieldSign
   - SpecialEvent
+  - BattleManager
   layers:
   - Default
   - TransparentFX
