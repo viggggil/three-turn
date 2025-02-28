@@ -15,6 +15,7 @@ public class PlayerTeamState : MonoBehaviour
         public static int BattleResult; //传出0表示失败，1表示胜利
         public static bool[,] equips;
         public static int EnemyType;
+        public static int[] Professions;//职业
         public static CharacterProperty[] characterProperties;
 
         static PlayerState()
@@ -23,6 +24,7 @@ public class PlayerTeamState : MonoBehaviour
             equips = new bool[3, 30];
             characterProperties = new CharacterProperty[3];
             BattleResult = -1;
+            Professions = new int[3] { -1, -1, -1 };
         }
     }
     public UIManager UIManager;

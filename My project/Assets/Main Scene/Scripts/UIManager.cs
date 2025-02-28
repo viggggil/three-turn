@@ -92,6 +92,8 @@ public class UIManager : MonoBehaviour
     public GameObject GameFailedPanel;
     public GameObject PlayerThree_;
     public int PlayerThreeProfession;
+    public GameData GameData;
+    public bool BossFight = false;
     enum CellType
     {
         grass,
@@ -120,7 +122,6 @@ public class UIManager : MonoBehaviour
         eliteDaggerRobber,
         blackWizard,
         robberBoss,
-
     }
     enum EventType 
     { 
@@ -210,6 +211,7 @@ public class UIManager : MonoBehaviour
         eventButton2.onClick.AddListener(EventChoiceTwo);
         isPause = false;
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameData = GameObject.Find("GameData").GetComponent<GameData>();
         blockPanel.SetActive(false);
     }
 
@@ -283,6 +285,15 @@ public class UIManager : MonoBehaviour
             FirstArriveTown = false;
             Dialogue.SetActive(true);
             Dialogue__();
+        }
+        else if (type >= 2 && type <= 4 && BossFight)
+        {
+            EnemyInfo.SetActive(true);
+            eButton1.SetActive(false);
+            eButton2.SetActive(false);
+            bsButton.SetActive(false);
+            EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)8];
+            EnemyName.text = EnemyNameDictionary[(EnemyType)8];
         }
         else
         {
@@ -420,8 +431,10 @@ public class UIManager : MonoBehaviour
     IEnumerator Dialogue_()
     {
         dialogue.text = dialogues[dialogueIndex];
+        blockPanel.SetActive(true);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         dialogueIndex++;
+        GameData.gsd.dialogueIndex = dialogueIndex;
         if (dialogueIndex == 4)
         {
             Dialogue.SetActive(false);
@@ -434,16 +447,25 @@ public class UIManager : MonoBehaviour
         {
             SpeakerName.text = ProfessionNames[PlayerThreeProfession];
             Speaker.sprite = Professions[PlayerThreeProfession];
+            Invoke("Dialogue__", 0.1f);
         }
         else if (dialogueIndex == 9)
         {
+            SpeakerName.text = "’Ú≥§";
+            Speaker.sprite = Professions[4];
             Dialogue.SetActive(false);
             blockPanel.SetActive(false);
+        }
+        else if (dialogueIndex == 12)
+        {
+            Dialogue.SetActive(false);
+            blockPanel.SetActive(false);
+            GameManager.FocusVillage();
         }
         else Invoke("Dialogue__",0.1f);
     }
 
-    private void Dialogue__()
+    public  void Dialogue__()
     {
         StartCoroutine(Dialogue_());
     }

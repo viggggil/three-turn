@@ -154,5 +154,6 @@ public class Carriage : MonoBehaviour,IMove_
         player.GetComponent<CharacterProperty>().SerialNumber = playerID - 1;
         player.GetComponent<CharacterProperty>().Profession= Profession;
         UIManager.LoadPlayer(Profession, playerID);
+        GameData.gsd.Professions[playerID - 1] = Profession;
     }
 }

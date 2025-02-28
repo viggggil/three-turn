@@ -18,8 +18,6 @@ public class Event_Map : MonoBehaviour
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
     }
 
-
-
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +42,18 @@ public class Event_Map : MonoBehaviour
                     break;
                 }
             case 1:
+                {
+                    break;
+                }
+            case 2:
+                {
+                    break;
+                }
+            case 3:
+                {
+                    break;
+                }
+            case 4:
                 {
                     break;
                 }
