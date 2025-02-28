@@ -6,10 +6,12 @@ using UnityEngine.UIElements;
 public class wizard : MonoBehaviour
 {
     CharacterProperty charaterProperty;
+    ActioninBattleManager actioninBattleManager;
 
     private void Start()
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
+        actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
     public void Skills(int skillCode, int position)
@@ -30,13 +32,14 @@ public class wizard : MonoBehaviour
         }
     }
 
-    public bool skill1(int position)//攻击一个敌人
+    public void skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+        dmg = actioninBattleManager.AtkJudger(dmg);
         enemyProperty.BeDamaged(dmg);
         Buff BurnBuff = new Buff(
             name: "",
@@ -46,7 +49,6 @@ public class wizard : MonoBehaviour
             removeEffect: null
             );
         Buff.AddBuff(enemyProperty, BurnBuff);
-        return true;
     }
 
     public bool skill2(int position)//提高队友的魔抗，持续两回合
@@ -65,7 +67,7 @@ public class wizard : MonoBehaviour
         return true;
     }
 
-    public bool skill3(int position)
+    public void skill3(int position)
     {
         GameObject enemy;
         Spawner.nodeDictionary.TryGetValue(position, out enemy);
@@ -78,6 +80,5 @@ public class wizard : MonoBehaviour
             removeEffect: (character) => character.isdizzy = false
         );
         Buff.AddBuff(enemyProperty, FreezeBuff);
-        return true;
     }
 }

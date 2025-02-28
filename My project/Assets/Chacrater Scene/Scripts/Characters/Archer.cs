@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Archer : MonoBehaviour
 {
     CharacterProperty charaterProperty;
+    ActioninBattleManager actioninBattleManager;
 
     private void Start()
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
+        actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
     public void Skills(int skillCode, int position)
@@ -19,7 +23,7 @@ public class Archer : MonoBehaviour
                 skill1(position);
                 break;
             case 1:
-                skill2();
+                skill2(position);
                 break;
             case 2:
                 skill3(position);
@@ -37,36 +41,50 @@ public class Archer : MonoBehaviour
         CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
         if (enemyProperty.isMarked)
         {
-            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 1.6f), enemyProperty.PR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 2.5f), enemyProperty.MR, charaterProperty.CritVaule,
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
             enemyProperty.BeDamaged(dmg);
         }
         else
         {
-            dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
             enemyProperty.BeDamaged(dmg);
         }
         return true;
     }
 
-    public bool skill2()//攻击前方两个敌人
+    public List<int> skill2(int position)//攻击前方两个敌人**
     {
-        int position = charaterProperty.Position;
-        GameObject enemy;
-        CharacterProperty enemyProperty;
-        int dmg;
+        GameObject node;
+        Nodes _node;
+        List<int> list = new List<int>();
         for (int i = 0; i < 2; i++)
         {
-            Spawner.nodeDictionary.TryGetValue(position % 3 + 6 + 3 * i, out enemy);
-            if (enemy == null)
+            Spawner.nodeDictionary.TryGetValue(position % 3 + 6 + 3 * i, out node);
+            _node = node.GetComponent<Nodes>();
+            if (!_node.isPlayerHere)
                 continue;
-            enemyProperty = enemy.GetComponent<CharacterProperty>();
-            dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty.MR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-            enemyProperty.BeDamaged(dmg);
+            CharacterProperty enemyProperty = node.GetComponent<CharacterProperty>();
+            list.Add(enemyProperty.Position);
+            
         }
-        return true;
+        return list;
+    }
+
+    public void skill2(List<int> list)
+    {
+        for(int i = 0;i < list.Count; i++)
+        {
+            
+            //if (enemy == null)
+            //    continue;
+            //enemyProperty = enemy.GetComponent<CharacterProperty>();
+            //dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.8f), enemyProperty.MR, charaterProperty.CritVaule,
+            //    enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+            //enemyProperty.BeDamaged(dmg);
+        }
+        
     }
 
     public bool skill3(int position)

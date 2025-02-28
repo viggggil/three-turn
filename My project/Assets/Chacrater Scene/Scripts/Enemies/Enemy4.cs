@@ -8,29 +8,33 @@ public class Enemy4 : MonoBehaviour
     //双刃劫掠者
 
     CharacterProperty charaterProperty;
+    ActioninBattleManager actioninBattleManager;
 
     private void Start()
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
+        actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
-    public void skill1(int position)//双刃斩击（使用该技能时触发两次）
+    public void skill1(int position)//双刃斩击
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        int dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.7f), enemyProperty.PR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        enemyProperty.BeDamaged(dmg);
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
+        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+        dmg = actioninBattleManager.AtkJudger(dmg);
+        enemyProperty.BeDamaged(dmg * 2);
     }
 
     public void skill2(int position)//破甲斩
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         int dmg = PropertyCalculator.DamageValueCalculation((int)(charaterProperty.ATK * 0.5f), enemyProperty.PR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+        dmg = actioninBattleManager.AtkJudger(dmg);
         enemyProperty.BeDamaged(dmg);
         Buff armorBreakBuff = new Buff(
             name: "",

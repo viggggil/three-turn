@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class PropertyCalculator : MonoBehaviour
 {
-    public static int CriticalHitRateCalculation(int critVaule, int critResis)
-    {
-        int CriticalHitRate = critVaule - critResis > 0 
-            ? (int)((critVaule - critResis) / (66f + critVaule - critResis) * 100) : 0;
-        return CriticalHitRate;
-    }
-
-    public static bool CriticalHitDeterminationCalculation(int CriticalHitRate)
+    public static bool CriticalHitRateCalculation(int critVaule)
     {
         int randomValue = Random.Range(0, 100);
-        return randomValue < CriticalHitRate;
+        return randomValue < critVaule;
     }
 
-    public static float CriticalHitDamageMultiplierCalculation(float criticalHitDamageRate, float criticalHitDamageResistivityRate)
+    public static float CriticalHitDamageCalculation(bool isCrit,float critDMGRate)
     {
-        float criticalHitDamageMultiplier = criticalHitDamageRate - criticalHitDamageResistivityRate;
-        return criticalHitDamageMultiplier;
+        return isCrit ? critDMGRate : 1f;
     }
 
-    public static int DamageValueCalculation(int ATK,int Resistivity, int critVaule, int critResis, float criticalHitDamageRate, float criticalHitDamageResistivityRate)
+    public static int DamageValueCalculation(int ATK, int Risis, int critValue, float critDMGRate, int defensePower,bool ontheDefense)
     {
-        int damageValue = (int)(ATK * (100f - Resistivity) / 100f); ;
-        if (CriticalHitDeterminationCalculation(CriticalHitRateCalculation(critVaule, critResis)))
-            damageValue = (int)(damageValue * CriticalHitDamageMultiplierCalculation(criticalHitDamageRate, criticalHitDamageResistivityRate));
-        return damageValue;
+        int damageValue = (int)((int)(ATK * (100 -  Risis) / 100f) * CriticalHitDamageCalculation(CriticalHitRateCalculation(critValue), critDMGRate));
+        return ontheDefense ? damageValue : damageValue - defensePower;
     }
 }

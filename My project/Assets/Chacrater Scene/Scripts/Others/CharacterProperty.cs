@@ -17,12 +17,8 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private int maxRandomSpeed;//最大速度
     [SerializeField] private int originalSpeed;//最大速度
     [SerializeField] private int speedThisRound;//最终速度(本轮)
-    [SerializeField] private int criticalHitValue;//暴击值
-    [SerializeField] private int criticalHitResistivity;//暴击抵抗
-    [SerializeField] private float criticalHitDamageRate;//暴击伤害率
-    [SerializeField] private float criticalHitDamageResistivityRate;//暴击伤害抵抗率
-    [SerializeField] private int accurateValue;//命中值
-    [SerializeField] private int evasiveValue;//闪避值
+    [SerializeField] private int critHitValue;//暴击值
+    [SerializeField] private float critDMGRate;//暴击伤害率
     [SerializeField] private int position;//位置
     [SerializeField] private int targetPosition;//点击选择的要移动到的位置
     [SerializeField] private bool ontheDefense;//正在防御
@@ -51,7 +47,6 @@ public class CharacterProperty : MonoBehaviour
     public int CritVaule { get; set; }
     public int CritResis { get; set; }
     public float CritDMGRate { get; set; }
-    public float CritDMGResisRate { get; set; }
 
     public bool isMarked { get; set; }
     public bool isCharge { get; set; }
@@ -84,10 +79,8 @@ public class CharacterProperty : MonoBehaviour
         MinRandomSpeed = minRandomSpeed;
         MaxRandomSpeed = maxRandomSpeed;
         SpeedThisRound = speedThisRound;
-        CritVaule = criticalHitValue;
-        CritResis = criticalHitResistivity;
-        CritDMGRate = criticalHitDamageRate;
-        CritDMGResisRate = criticalHitDamageResistivityRate;
+        CritVaule = critHitValue;
+        CritDMGRate = critDMGRate;
         isMarked = false;
         isCharge = false;
         isdizzy = false;

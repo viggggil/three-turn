@@ -8,17 +8,19 @@ public class Enemy3 : MonoBehaviour
     //∫⁄Œ◊ ¶
 
     CharacterProperty charaterProperty;
+    ActioninBattleManager actioninBattleManager;
 
     private void Start()
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
+        actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
     public void skill1(int position)//¡ÈªÍ ¯∏ø
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         Buff dizzy = new Buff(
             name: "",
             duration: 2,
@@ -30,12 +32,12 @@ public class Enemy3 : MonoBehaviour
     }
     public void skill2(int position)//¡ÈªÍ ’∏Ó
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
-            enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
-        enemyProperty.BeDamaged(dmg);
+             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+        dmg = actioninBattleManager.AtkJudger(dmg);
         Buff dizzy = new Buff(
             name: "",
             duration: 2,

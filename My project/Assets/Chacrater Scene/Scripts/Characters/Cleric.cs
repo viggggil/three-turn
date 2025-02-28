@@ -30,16 +30,15 @@ public class Cleric : MonoBehaviour
         }
     }
 
-    public bool skill1(int position)
+    public void skill1(int position)
     {
         GameObject teammate;
         Spawner.nodeDictionary.TryGetValue(position, out teammate);
         CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
         teammateProperty.HP += charaterProperty.ATK;
-        return true;
     }
 
-    public bool skill2(int position)
+    public void skill2(int position)
     {
         GameObject teammate;
         if(position < 3)
@@ -64,6 +63,5 @@ public class Cleric : MonoBehaviour
                 teammateProperty.HP += (int)(charaterProperty.ATK * 0.6f);
             }
         }
-        return true;
     }
 }

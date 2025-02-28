@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class Enemy1 : MonoBehaviour
 {
-    //只会蓄力攻击
+    //劫掠者首领
 
     CharacterProperty charaterProperty;
+    ActioninBattleManager actioninBattleManager;
 
     private void Start()
     {
         charaterProperty = this.GetComponent<CharacterProperty>();
+        actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
-    public void skill1()//蓄力
+    public void skill1(int position)
     {
-        Buff Charging = new Buff(
-            name: "",
-            duration: 2,
-            buffType: BuffType.Debuff,
-            applyEffect: null,
-            removeEffect: (character) => character.isCharge = true
-            );
-        Buff.AddBuff(charaterProperty, Charging);
+        
     }
 
     public void skill2(int position)//攻击
@@ -30,11 +25,12 @@ public class Enemy1 : MonoBehaviour
 
         if (charaterProperty.isCharge)
         {
-            GameObject enemy;
-            Spawner.nodeDictionary.TryGetValue(position, out enemy);
-            CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+            GameObject node;
+            Spawner.nodeDictionary.TryGetValue(position, out node);
+            CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
             int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
-                enemyProperty.CritResis, charaterProperty.CritDMGRate, enemyProperty.CritDMGResisRate);
+                 charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+            dmg = actioninBattleManager.AtkJudger(dmg);
             enemyProperty.BeDamaged(dmg);
             charaterProperty.isCharge = false;
         }
