@@ -13,25 +13,29 @@ public class BattleManager : MonoBehaviour
 
     Spawner spawner;
 
+    public int RoundCount;
+
     public static Action RandomSpeed;
     public static Action ReadyStageStart;
     public static Action RoundStart;
 
     public List<GameObject> ActionOrder;
+    public List<GameObject> Testlist;
     [Header("Attackers' Lists")]
     public List<GameObject>[] ThoseAttackingPi;
 
     static public int round;
 
-    private bool isGameOver;
 
     private void Awake()
     {
         Spawner = GameObject.FindWithTag("Spawner");
         spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
-
+        
         ReadyStageStart += Initialization;
         RoundStart += ActInOrder;
+
+        Testlist = new List<GameObject>();
         ThoseAttackingPi = new List<GameObject>[12];
         for (int i = 0; i < 12; i++)
         {
@@ -39,7 +43,7 @@ public class BattleManager : MonoBehaviour
         }//列表初始化
         //基本对象的载入
 
-
+        RoundCount = 1;
     }
 
     private void Start()
@@ -50,16 +54,31 @@ public class BattleManager : MonoBehaviour
 
         //确认载入后回合开始
         //RandomSpeed?.Invoke();
-        /*回合准备阶段*/
-        ReadyStageStart?.Invoke();
 
-        /*回合进行阶段*/
+        //当战斗还没结束时(没有变量在存这个)
+
+            /*回合准备阶段*/
+            ReadyStageStart?.Invoke();
+            //(包含每个人的buff生效和速度重新随机)
+
+            /*回合进行阶段*/
+            //通过按钮激活
 
 
+        
+
+
+
+
+
+
+
+
+    }
+
+    public void RoundStartNow()
+    {
         RoundStart?.Invoke();
-
-
-
     }
 
 
@@ -67,6 +86,11 @@ public class BattleManager : MonoBehaviour
     {
         //仅供测试
         //dataofAttackers.ThoseAttackingP7.AddRange( dataofAttackers.ThoseAttackingPi[7]);
+    }
+
+    public void BattleIsOver()
+    {
+
     }
 
     public void SortListsOfAttackers()
@@ -120,57 +144,88 @@ public class BattleManager : MonoBehaviour
         return ultimateDmg;
     }
 
+    public void ActionConfirmed()
+    {
+        foreach (GameObject Atkers in ActionOrder)
+        {
+            if (Atkers.GetComponent<CharacterProperty>().OnTheAttack)
+            {/*********************这里也有一大堆东西要补充********************/
 
-    //public void Add2toBattleList(GameObject obj1,GameObject obj2)
-    //{
-    //    // 标记是否找到包含其中一个物体的列表
-    //    bool foundList = false;
+                List<int> AtkRangeOfthis = new List<int>();
 
-    //    // 遍历所有列表
-    //    foreach (List<GameObject> list in battleLists)
-    //    {
-    //        if (list.Contains(obj1))
-    //        {
-    //            // 如果列表包含obj1，将obj2添加到该列表
-    //            if (!list.Contains(obj2))
-    //            {
-    //                list.Add(obj2);
-    //            }
-    //            foundList = true;
-    //            break;
-    //        }
-    //        else if (list.Contains(obj2))
-    //        {
-    //            // 如果列表包含obj2，将obj1添加到该列表
-    //            if (!list.Contains(obj1))
-    //            {
-    //                list.Add(obj1);
-    //            }
-    //            foundList = true;
-    //            break;
-    //        }
-    //    }
+                switch (Atkers.GetComponent<CharacterProperty>().Profession)
+                {//这层switch区分各个职业
+                    case 0:
+                        switch (Atkers.GetComponent<CharacterProperty>().AtkTargetPosition)
+                        {
+                            case 0:
+                                //调用返回攻击范围的函数
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
 
-    //    // 如果没有找到包含其中一个物体的列表，创建一个新列表
-    //    if (!foundList)
-    //    {
-    //        List<GameObject> newList = new List<GameObject>();
-    //        newList.Add(obj1);
-    //        newList.Add(obj2);
-    //        battleLists.Add(newList);
-    //    }
+                    case 1:
+                        switch (Atkers.GetComponent<CharacterProperty>().AtkTargetPosition)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                        
+                    case 2:
+                        switch (Atkers.GetComponent<CharacterProperty>().AtkTargetPosition)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                        
+                    case 3:
+                        switch (Atkers.GetComponent<CharacterProperty>().AtkTargetPosition)
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        break;
+                    default:
+                        break;
+                }
+                //AtkRangeOfthis.AddRange(某个算范围的函数)
 
+                foreach (int Range in AtkRangeOfthis)
+                {
+                    ThoseAttackingPi[Range].Add(gameObject);
+                }
+            }
+        }
+        //调用所有要攻击的人的函数
+    }
 
-    //    //测试代码，没有问题后应该删除
-    //    foreach (List<GameObject> list in battleLists)
-    //    {
-    //        foreach (GameObject obj in list)
-    //        {
-    //            Debug.Log(obj.name);
-    //        }
-    //    }
-
-    //}
     private void OnDestroy()
     {
         ActionOrder.Clear();
@@ -178,6 +233,46 @@ public class BattleManager : MonoBehaviour
         RoundStart -= ActInOrder;
     }
 
-    
+    public bool IsBattleOver()
+    {//判断战斗是否结束
+        bool isover = false;
+        foreach (GameObject node in spawner.nodeList)
+        {
+            if (node.GetComponent<Nodes>().isEnemyHere)
+            {//任何一名敌人在场，isover不能为true
+                isover = true;
+            }
+            else if (node.GetComponent<Nodes>().isPlayerHere)
+            {
+                isover = true;
+            }
+            else
+            {
+                isover = false;
+            }
+        }
+
+        return isover;
+    }
+
+    //判断玩家有没有获胜,仅在战斗结束之后使用！
+    public bool PlayerWon()
+    {//判断玩家有没有获胜,仅在战斗结束之后使用！
+        bool isPlayerWon = false;
+
+        foreach (GameObject node in spawner.nodeList)
+        {
+            if (node.GetComponent<Nodes>().isPlayerHere)
+            {
+                isPlayerWon = true;
+            }
+            else
+            {
+                isPlayerWon = false;
+            }
+        }
+
+        return isPlayerWon;
+    }
     
 }

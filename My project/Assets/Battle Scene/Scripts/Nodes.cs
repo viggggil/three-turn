@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -19,6 +20,8 @@ public class Nodes : MonoBehaviour
 
     [SerializeField] int nodeCode;
 
+    private List<int> SampleList;
+
     public bool isPlayerHere;
     public bool isEnemyHere;//在角色移动之后记得修改
     private bool isUnderAtk;//跟角色的移动有关，如果遭受攻击则该格不能移到；
@@ -32,6 +35,7 @@ public class Nodes : MonoBehaviour
         actionPanel = GameObject.FindWithTag("ActionPanel");
         BattleUIManager = GameObject.FindWithTag("BattleUIManager");
         battleUIManager = BattleUIManager.GetComponent<BattleUIManager>();
+        SampleList = new List<int>();
     }
 
     private void Update()
@@ -160,7 +164,7 @@ public class Nodes : MonoBehaviour
     }
 
 
-    public void OnEnemyNodeClick()
+    public void OnEnemyNodeClick()/*这里还有一大堆东西要补充*/
     {//node被点击时候的方法
         if (isEnemyHere)
         {
@@ -178,7 +182,9 @@ public class Nodes : MonoBehaviour
                                     battleUIManager.SkillSelectionSucceeded();
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
                                     //回去改UI
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack(nodeCode);
+
+                                    //临时加入
+                                    SampleList.Add(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().atkTargetPosition);
                                 }
                                 else
                                 {
@@ -194,7 +200,6 @@ public class Nodes : MonoBehaviour
                                     battleUIManager.SkillSelectionSucceeded();
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
                                     //回去改UI
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack();
                                 }
                                 else
                                 {
@@ -209,7 +214,6 @@ public class Nodes : MonoBehaviour
                                     battleUIManager.SkillSelectionSucceeded();
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
                                     //回去改UI
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<ActioninBattleManager>().GonnaAttack(nodeCode);
                                 }
                                 else
                                 {

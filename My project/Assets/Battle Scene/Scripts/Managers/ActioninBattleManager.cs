@@ -89,7 +89,7 @@ public class ActioninBattleManager : MonoBehaviour
 
 
     //这是回合准备阶段准备攻击速度判断的方法
-    public void GonnaAttack(params int[] AtkRange)
+    public void GonnaAttack(List<int> AtkRange)
     {//打算使用攻击性行动
         foreach (int i in AtkRange)
         {
