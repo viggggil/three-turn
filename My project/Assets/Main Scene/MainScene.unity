@@ -17595,10 +17595,15 @@ MonoBehaviour:
   - "\u4F46\u8981\u5C0F\u5FC3\uFF0C\u8FD9\u4E2A\u654C\u4EBA\u662F\u4E2A\u5F3A\u5927\u7684\u9ED1\u5DEB\u5E08"
   - "\u4F60\u4EEC\u5728\u521A\u624D\u7684\u6218\u6597\u4E2D\u5F88\u82F1\u52C7\uFF0C\u6211\u4E5F\u60F3\u52A0\u5165\u4F60\u4EEC"
   - "\u8BA9\u6211\u4EEC\u5E76\u80A9\u4F5C\u6218\u5427\uFF01"
+  - "\u5927\u4E8B\u4E0D\u597D\u4E86\uFF0C\u5192\u9669\u8005\uFF01"
+  - "\u9E48\u9E55\u9547\u88AB\u5F3A\u76D7\u9996\u9886\u88AD\u51FB\u4E86"
+  - "\u5FEB\u6765\u6551\u6551\u6211\u4EEC\uFF01"
   dialogueIndex: 0
   GameFailedPanel: {fileID: 1952431674}
   PlayerThree_: {fileID: 1472616338}
   PlayerThreeProfession: 0
+  GameData: {fileID: 0}
+  BossFight: 0
 --- !u!4 &834002371
 Transform:
   m_ObjectHideFlags: 0
@@ -22423,6 +22428,7 @@ MonoBehaviour:
   gameData: {fileID: 100170264}
   playerTeamState: {fileID: 1209411516}
   GameManager: {fileID: 0}
+  UIManager: {fileID: 0}
 --- !u!1 &1609839792
 GameObject:
   m_ObjectHideFlags: 0
@@ -23962,7 +23968,32 @@ MonoBehaviour:
   bar: {fileID: 612845066}
   TurnNumber: 1
   BlackWizard: {fileID: 0}
-  Path: []
+  Villages:
+  - {fileID: 1452540000}
+  - {fileID: 29386206}
+  - {fileID: 733502819}
+  Path:
+  - {x: -4.5, y: -0.5, z: -0.1}
+  - {x: -4.5, y: -1.5, z: -0.1}
+  - {x: -5.5, y: -1.5, z: -0.1}
+  - {x: -6.5, y: -1.5, z: -0.1}
+  - {x: -7.5, y: -1.5, z: -0.1}
+  - {x: -8.5, y: -1.5, z: -0.1}
+  - {x: -8.5, y: -2.5, z: -0.1}
+  - {x: -8.5, y: -3.5, z: -0.1}
+  - {x: -8.5, y: -4.5, z: -0.1}
+  - {x: -7.5, y: -4.5, z: -0.1}
+  - {x: -6.5, y: -4.5, z: -0.1}
+  - {x: -5.5, y: -4.5, z: -0.1}
+  - {x: -5.5, y: -5.5, z: -0.1}
+  - {x: -5.5, y: -6.5, z: -0.1}
+  - {x: -4.5, y: -6.5, z: -0.1}
+  - {x: -3.5, y: -6.5, z: -0.1}
+  - {x: -2.5, y: -6.5, z: -0.1}
+  - {x: -1.5, y: -6.5, z: -0.1}
+  - {x: -1.5, y: -7.5, z: -0.1}
+  - {x: -1.5, y: -8.5, z: -0.1}
+  - {x: -2.5, y: -8.5, z: -0.1}
 --- !u!4 &1854837413
 Transform:
   m_ObjectHideFlags: 0

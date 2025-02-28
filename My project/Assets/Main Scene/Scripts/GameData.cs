@@ -35,6 +35,7 @@ public class GameData : MonoBehaviour
         public int TurnNumber;
         public int[] Professions;
         public int PathIndex;
+        public int dialogueIndex;
         public GameSaveData()
         {
             isHere = new bool[3] { false, false, false };
@@ -49,6 +50,7 @@ public class GameData : MonoBehaviour
             Professions = new int[3] { SceneLoader.PlayerOneProfession, SceneLoader.PlayerTwoProfession, -1 };
             curHealth = new int[3];
             maxHealth = new int[3];
+            dialogueIndex = 0;
         }
     }
 

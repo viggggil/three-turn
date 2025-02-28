@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     private GameObject[] tempEvents;
     public int TurnNumber = 1;
     public GameObject BlackWizard;
+    public GameObject[] Villages;
 
     public Vector3[] Path;
     void Start()
@@ -426,8 +427,14 @@ public class GameManager : MonoBehaviour
                 cell.GetComponent<Cell>().isFog = false;
             }
         }
-        Invoke("ExposeBar_", 05f);
+        Invoke("ExposeBar_", 0.5f);
     }
+    public void FocusVillage()
+    {
+        CameraFollower.ChangeSelected(Villages[0]);
+        Invoke("ExposeBar_", 0.5f);
+    }
+
     public void ExposeBar_()
     {
         CameraFollower.ChangeSelected(Players[selectedID-1]);
@@ -467,6 +474,12 @@ public class GameManager : MonoBehaviour
             Players[2].GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
             Players[2].GetComponent<Carriage>().playerID = 3;
             BlackWizard = enemyParent;
+            UIManager.Dialogue__();
+        }
+        if (PlayerTeamState.PlayerState.EnemyType == 7)
+        {
+            UIManager.BossFight = true;
+            UIManager.Dialogue__();
         }
     }
     public void BattleFailed()

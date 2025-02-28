@@ -9,6 +9,7 @@ public class GameSaveManager : MonoBehaviour
     public GameData gameData;
     public PlayerTeamState playerTeamState;
     public GameManager GameManager;
+    public UIManager UIManager;
     public void SaveGame()
     {
         Debug.Log(Application.persistentDataPath);
@@ -38,11 +39,13 @@ public class GameSaveManager : MonoBehaviour
             gameData.UpdateHealth(0,0);
             gameData.UpdateHealth(1, 0);
             gameData.UpdateHealth(2, 0);
+            UIManager.dialogueIndex = gameData.gsd.dialogueIndex;
             file.Close();
         }
     }
     public void Start()
     {
         GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        UIManager = GameObject.Find("UIManager").GetComponent<UIManager>();
     }
 }
