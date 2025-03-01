@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public int TurnNumber = 1;
     public GameObject BlackWizard;
     public GameObject[] Villages;
-
     public Vector3[] Path;
     void Start()
     {
@@ -278,6 +277,7 @@ public class GameManager : MonoBehaviour
         {
             if (serialNumber >= 10) break;
             if (cell.GetComponent<Cell>().type >= 4||cell.GetComponent<Cell>().TooNear) continue;
+            if (cell.transform.position == new Vector3(6.5f, 3.5f, 0)) continue;
             int randomNumber = Random.Range(0, 501);
             if (randomNumber > 10) continue;
             Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
@@ -310,6 +310,7 @@ public class GameManager : MonoBehaviour
         {
             if (serialNumber2 >= 15) break;
             if (cell.GetComponent<Cell>().type >= 4 || cell.GetComponent<Cell>().TooNear) continue;
+            if (cell.transform.position == new Vector3(6.5f, 3.5f, 0)) continue;
             int randomNumber = Random.Range(0, 501);
             if (randomNumber > 17) continue;
             Vector3 position = cell.transform.position - new Vector3(0, 0, 0.1f);
@@ -357,7 +358,6 @@ public class GameManager : MonoBehaviour
             serialNumber++;
         }
     }
-
     public void ReTig()
     {
         foreach(var cell in cells)
@@ -386,9 +386,9 @@ public class GameManager : MonoBehaviour
             enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
             enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
             enemy.transform.parent = enemyParent.transform;
-            enemy.GetComponent<Enemy_Map>().Enemy = enemy;
-            enemy.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
-            enemy.GetComponent<Enemy_Map>().type = GameData.gsd.types2[serialNumber2];
+            enemyParent.GetComponent<Enemy_Map>().Enemy = enemy;
+            enemyParent.GetComponent<Enemy_Map>().SerialNumber = serialNumber2;
+            enemyParent.GetComponent<Enemy_Map>().type = GameData.gsd.types2[serialNumber2];
             serialNumber2++;
         }
     }
@@ -404,7 +404,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
     public void LoadPlayer()
     {
         CloseSelect();
@@ -427,14 +426,13 @@ public class GameManager : MonoBehaviour
                 cell.GetComponent<Cell>().isFog = false;
             }
         }
-        Invoke("ExposeBar_", 0.5f);
+        Invoke("ExposeBar_", 1f);
     }
     public void FocusVillage()
     {
         CameraFollower.ChangeSelected(Villages[0]);
-        Invoke("ExposeBar_", 0.5f);
+        Invoke("ExposeBar_", 1f);
     }
-
     public void ExposeBar_()
     {
         CameraFollower.ChangeSelected(Players[selectedID-1]);
@@ -489,8 +487,11 @@ public class GameManager : MonoBehaviour
             Carriage temp = player.GetComponent<Carriage>();
             if (PlayerTeamState.PlayerState.isHere[temp.playerID - 1])
             {
+                GameData.gsd.curHealth[temp.playerID-1] = PlayerTeamState.PlayerState.characterProperties[temp.playerID - 1].GetComponent
+                <CharacterProperty>().health;
                 temp.Dead();
             }
+            if (GameData.gsd.curHealth[0] == 0 && GameData.gsd.curHealth[1] == 0 && GameData.gsd.curHealth[2] == 0) GameFailed();
         }
     }
 
@@ -499,4 +500,30 @@ public class GameManager : MonoBehaviour
         UIManager.GameFailedPanel.SetActive(true);
         UIManager.blockPanel.SetActive(true);
     }
+
+    public void BranchMission()
+    {
+        Vector3 position = new Vector3(6.5f, 3.5f, -0.1f);
+        GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
+        GameObject enemy = Instantiate(Enemies[0], position, Quaternion.identity);
+        enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
+        enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
+        enemy.transform.parent = enemyParent.transform;
+        enemyParent.GetComponent<Enemy_Map>().Enemy = enemy;
+        enemyParent.GetComponent<Enemy_Map>().SerialNumber = 16;
+        enemyParent.GetComponent<Enemy_Map>().type = 0;
+        CameraFollower.ChangeSelected(enemyParent);
+        foreach (var cell in cells)
+        {
+            if (Mathf.Abs(cell.transform.position.x - enemyParent.transform.position.x)
+                + Mathf.Abs(cell.transform.position.y -enemyParent.transform.position.y) <= 1)
+            {
+                cell.GetComponent<Cell>().fog.SetActive(false);
+                cell.GetComponent<Cell>().isFog = false;
+            }
+        }
+        Invoke("ExposeBar_", 1f);
+    }
+
+
 }

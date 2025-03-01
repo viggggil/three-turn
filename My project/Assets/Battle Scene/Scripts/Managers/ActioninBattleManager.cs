@@ -20,9 +20,11 @@ public class ActioninBattleManager : MonoBehaviour
 
     private void Awake()
     {
+        GameData temp= GameObject.Find("GameData").GetComponent<GameData>();
+        if (temp) this.enabled = false;
         characterProperty = GetComponent<CharacterProperty>();
 
-        battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
+        if(!temp)battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
 
         BattleManager.RandomSpeed += RandomSpeed;
         BattleManager.ReadyStageStart += ExitDefense;

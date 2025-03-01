@@ -129,8 +129,8 @@ public class UIManager : MonoBehaviour
         well,
         smithy,
         inn,
-        bigTree,
-        tomb,
+        bigTree=13,
+        tomb=5,
         angel=7,
         start=9,
         bar=11
@@ -173,9 +173,9 @@ public class UIManager : MonoBehaviour
     private Dictionary<EventType, string> EventDescribeDictionary = new Dictionary<EventType, string>()
     {
         {EventType.fountain,"rpg游戏里常见的泉水，显然是用来恢复的" },
-        {EventType.well,"一口神秘的水井，据说丢入硬币会获得随机的回报" },
-        {EventType.inn,"旅行者可以在这里休息，跳过回合回满生命值\n只需要花费5金币" },
-        {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n铁匠拿出两张图纸让你挑选" },
+        {EventType.well,"一口神秘的水井，据说丢入硬币会获得随机的回报\n(战斗系统里的装备还没做完)" },
+        {EventType.inn,"旅行者可以在这里休息，跳过回合回满生命值\n只需要花费5金币\n经济系统没做所以实际是免费的" },
+        {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n(战斗系统里的装备还没做完)" },
         {EventType.bigTree,"树下的告示栏写有可供接取的任务" },
         {EventType.tomb,"你的一位英雄在这里倒下，获得女神的恩赐来复活" },
         {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动" },
@@ -188,7 +188,7 @@ public class UIManager : MonoBehaviour
         {EventType.well,"投入硬币" },
         {EventType.inn,"休息" },
         {EventType.smithy,"选项一" },
-        {EventType.bigTree,"接取任务一" },
+        {EventType.bigTree,"接取任务" },
         {EventType.tomb,"复活" },
         {EventType.angel,"祈祷" },
         {EventType.start,"好的"  },
@@ -197,8 +197,7 @@ public class UIManager : MonoBehaviour
     private Dictionary<EventType, string> EventButton2Dictionary = new Dictionary<EventType, string>()
     {
         {EventType.fountain,"原地休息" },
-        {EventType.smithy,"选项二" },
-        {EventType.bigTree,"接取任务二" }
+        {EventType.smithy,"选项二" }
     };
 
     void Start()

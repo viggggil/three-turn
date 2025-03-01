@@ -94,5 +94,19 @@ public class GameData : MonoBehaviour
         UIManager.UpdateHealthSlider(gsd.curHealth[SerialNumber], gsd.maxHealth[SerialNumber], SerialNumber);
     }
 
+    public void UpdateStamina(int SerialNumber, int change)
+    {
+        gsd.curStamina[SerialNumber] += change;
+        if (gsd.curStamina[SerialNumber] > gsd.maxStamina[SerialNumber])
+        {
+            gsd.curStamina[SerialNumber] = gsd.maxStamina[SerialNumber];
+        }
+        if (gsd.curStamina[SerialNumber] < 0)
+        {
+            gsd.curStamina[SerialNumber] = 0;
+        }
+        UIManager.UpdateStaminaSlider(gsd.curStamina[SerialNumber], gsd.maxStamina[SerialNumber], SerialNumber+1);
+    }
+
 
 }

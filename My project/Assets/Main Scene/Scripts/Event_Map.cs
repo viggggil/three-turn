@@ -38,7 +38,13 @@ public class Event_Map : MonoBehaviour
         {
             case 0:
                 {
-                    GameData.UpdateHealth(GameManager.selectedID - 1,10000);
+                    GameData.UpdateStamina(GameManager.selectedID - 1, 1000);
+                    GameManager.Players[GameManager.selectedID - 1].GetComponent<Carriage>().curStamina
+                        = GameManager.Players[GameManager.selectedID - 1].GetComponent<Carriage>().maxStamina;
+                    GameManager.CloseSelect();
+                    UIManager.CloseInfo();
+                    GameData.gsd.types[SerialNumber] = -1;
+                    Destroy(gameObject);
                     break;
                 }
             case 1:
@@ -98,13 +104,34 @@ public class Event_Map : MonoBehaviour
                     sceneLoader.LoadBattleScene();
                     break;
                 }
+            case 13:
+                {
+                    GameManager.BranchMission();
+                    UIManager.EnemyDescribe.text = "鹈鹕镇的东北方向有一个传播邪教的牧师\n希望你去消灭他";
+                    break;
+                }
         }
 
     }
 
     public void EventTwo()
     {
+        switch (type) 
+        {
+            case 0:
+                {
+                    GameData.UpdateHealth(GameManager.selectedID - 1, 10000);
+                    GameData.UpdateStamina(GameManager.selectedID - 1, -1000);
+                    GameManager.Players[GameManager.selectedID - 1].GetComponent<Carriage>().curStamina=0;
+                    GameManager.CloseSelect();
+                    UIManager.CloseInfo();
+                    GameData.gsd.types[SerialNumber] = -1;
+                    Destroy(gameObject);
+                    break;
+                }
+        }
 
+            
     }
 
     public void GetNearbyTaggedObjects(int serialNumber)
