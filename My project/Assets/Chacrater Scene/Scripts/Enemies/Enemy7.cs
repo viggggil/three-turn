@@ -16,6 +16,12 @@ public class Enemy7 : MonoBehaviour
         actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
     public void skill1(int position)
     {
         GameObject node;
@@ -36,15 +42,15 @@ public class Enemy7 : MonoBehaviour
         }
     }
 
-    public void skill2(int position)
-    {
-        Buff Charging = new Buff(
-            name: "",
-            duration: 2,
-            buffType: BuffType.Debuff,
-            applyEffect: null,
-            removeEffect: (character) => character.isCharge = true
-            );
-        Buff.AddBuff(charaterProperty, Charging);
-    }
+    //public void skill2(int position)
+    //{
+    //    Buff Charging = new Buff(
+    //        name: "",
+    //        duration: 2,
+    //        buffType: BuffType.Debuff,
+    //        applyEffect: null,
+    //        removeEffect: (character) => character.isCharge = true
+    //        );
+    //    Buff.AddBuff(charaterProperty, Charging);
+    //}
 }

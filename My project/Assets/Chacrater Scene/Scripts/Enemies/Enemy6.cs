@@ -36,18 +36,18 @@ public class Enemy6 : MonoBehaviour
         }
     }
 
-    public void skill2(int position)
-    {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
-        Buff MarkBuff = new Buff(
-            name: "",
-            duration: 2,
-            buffType: BuffType.Buff,
-            applyEffect: (character) => character.isMarked = true,
-            removeEffect: (character) => character.isMarked = false
-        );
-        Buff.AddBuff(enemyProperty, MarkBuff);
-    }
+    //public void skill2(int position)
+    //{
+    //    GameObject enemy;
+    //    Spawner.nodeDictionary.TryGetValue(position, out enemy);
+    //    CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+    //    Buff MarkBuff = new Buff(
+    //        name: "",
+    //        duration: 2,
+    //        buffType: BuffType.Buff,
+    //        applyEffect: (character) => character.isMarked = true,
+    //        removeEffect: (character) => character.isMarked = false
+    //    );
+    //    Buff.AddBuff(enemyProperty, MarkBuff);
+    //}
 }

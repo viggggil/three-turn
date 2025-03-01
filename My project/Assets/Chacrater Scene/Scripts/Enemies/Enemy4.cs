@@ -16,18 +16,24 @@ public class Enemy4 : MonoBehaviour
         actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
-    public void skill1(int position)//Ë«ÈÐÕ¶»÷
+    public List<int> skill(int position)
     {
-        GameObject node;
-        Spawner.nodeDictionary.TryGetValue(position, out node);
-        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
-        int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
-             charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
-        dmg = actioninBattleManager.AtkJudger(dmg);
-        enemyProperty.BeDamaged(dmg * 2);
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
     }
+    //public void skill1(int position)//Ë«ÈÐÕ¶»÷
+    //{
+    //    GameObject node;
+    //    Spawner.nodeDictionary.TryGetValue(position, out node);
+    //    CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
+    //    int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.PR, charaterProperty.CritVaule,
+    //         charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
+    //    dmg = actioninBattleManager.AtkJudger(dmg);
+    //    enemyProperty.BeDamaged(dmg * 2);
+    //}
 
-    public void skill2(int position)//ÆÆ¼×Õ¶
+    public void skill1(int position)//ÆÆ¼×Õ¶
     {
         GameObject node;
         Spawner.nodeDictionary.TryGetValue(position, out node);

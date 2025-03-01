@@ -16,21 +16,27 @@ public class Enemy2 : MonoBehaviour
         actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
-    public void skill1(int position)//给队友加buff
+    public List<int> skill(int position)
     {
-        GameObject node;
-        Spawner.nodeDictionary.TryGetValue(position, out node);
-        CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
-        Buff PowerBuff = new Buff(
-           name: "",
-           duration: 2,
-           buffType: BuffType.Buff,
-           applyEffect: (character) => { character.ATK = (int)(character.ATK * 1.2f); },
-           removeEffect: (character) => { character.ATK = (int)(character.ATK / 1.2f); }
-           );
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
     }
+    //public void skill1(int position)//给队友加buff
+    //{
+    //    GameObject node;
+    //    Spawner.nodeDictionary.TryGetValue(position, out node);
+    //    CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
+    //    Buff PowerBuff = new Buff(
+    //       name: "",
+    //       duration: 2,
+    //       buffType: BuffType.Buff,
+    //       applyEffect: (character) => { character.ATK = (int)(character.ATK * 1.2f); },
+    //       removeEffect: (character) => { character.ATK = (int)(character.ATK / 1.2f); }
+    //       );
+    //}
 
-    public void skill2(int position)//灵魂汲取
+    public void skill1(int position)//灵魂汲取
     {
         GameObject node;
         Spawner.nodeDictionary.TryGetValue(position, out node);

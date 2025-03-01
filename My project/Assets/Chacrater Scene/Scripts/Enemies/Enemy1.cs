@@ -15,12 +15,13 @@ public class Enemy1 : MonoBehaviour
         actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
 
-    public void skill1(int position)
+    public List<int> skill(int position)
     {
-        
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
     }
-
-    public void skill2(int position)//¹¥»÷
+    public void skill1(int position)//¹¥»÷
     {
 
         if (charaterProperty.isCharge)

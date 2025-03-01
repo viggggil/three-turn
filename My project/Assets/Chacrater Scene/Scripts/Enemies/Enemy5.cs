@@ -14,8 +14,13 @@ public class Enemy5 : MonoBehaviour
         charaterProperty = this.GetComponent<CharacterProperty>();
         actioninBattleManager = this.GetComponent<ActioninBattleManager>();
     }
-
-    public void skill1(int position)//
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
+    public void skill1(int position)
     {
         GameObject node;
         Spawner.nodeDictionary.TryGetValue(position, out node);
@@ -26,15 +31,15 @@ public class Enemy5 : MonoBehaviour
         enemyProperty.BeDamaged(dmg);
     }
 
-    public void skill2(int position)
-    {
-        Buff DefendBuff = new Buff(
-           name: "",
-           duration: 2,
-           buffType: BuffType.Buff,
-           applyEffect: (character) => { character.PR = (int)(character.PR * 1.6f); character.MR = (int)(character.MR * 1.2f); },
-           removeEffect: (character) => { character.PR = (int)(character.PR / 1.6f); character.MR = (int)(character.MR / 1.2f); }
-        );
-        Buff.AddBuff(charaterProperty, DefendBuff);
-    }
+    //public void skill2(int position)
+    //{
+    //    Buff DefendBuff = new Buff(
+    //       name: "",
+    //       duration: 2,
+    //       buffType: BuffType.Buff,
+    //       applyEffect: (character) => { character.PR = (int)(character.PR * 1.6f); character.MR = (int)(character.MR * 1.2f); },
+    //       removeEffect: (character) => { character.PR = (int)(character.PR / 1.6f); character.MR = (int)(character.MR / 1.2f); }
+    //    );
+    //    Buff.AddBuff(charaterProperty, DefendBuff);
+    //}
 }
