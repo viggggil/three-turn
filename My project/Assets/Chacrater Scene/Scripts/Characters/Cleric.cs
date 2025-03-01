@@ -30,6 +30,12 @@ public class Cleric : MonoBehaviour
         }
     }
 
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
     public void skill1(int position)
     {
         GameObject teammate;

@@ -32,6 +32,12 @@ public class wizard : MonoBehaviour
         }
     }
 
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
     public void skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
@@ -51,7 +57,7 @@ public class wizard : MonoBehaviour
         Buff.AddBuff(enemyProperty, BurnBuff);
     }
 
-    public bool skill2(int position)//提高队友的魔抗，持续两回合
+    public void skill2(int position)//提高队友的魔抗，持续两回合
     {
         GameObject teammate;
         Spawner.nodeDictionary.TryGetValue(position, out teammate);
@@ -64,7 +70,6 @@ public class wizard : MonoBehaviour
             removeEffect: (character) => character.MR -= 40
         );
         Buff.AddBuff(teammateProperty, MRBuff);
-        return true;
     }
 
     public void skill3(int position)

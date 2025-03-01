@@ -4,6 +4,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 public class Archer : MonoBehaviour
 {
     CharacterProperty charaterProperty;
@@ -33,7 +34,13 @@ public class Archer : MonoBehaviour
         }
     }
 
-    public bool skill1(int position)//攻击一个敌人
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
+    public void skill1(int position)//攻击一个敌人
     {
         GameObject enemy;
         int dmg;
@@ -51,7 +58,6 @@ public class Archer : MonoBehaviour
              charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
             enemyProperty.BeDamaged(dmg);
         }
-        return true;
     }
 
     public List<int> skill2(int position)//攻击前方两个敌人**
