@@ -8,4 +8,9 @@ public class BattleAnimationManager : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    public void ActionCountPlus()
+    {
+        DataofAttackers.ActionCount++;
+    }
 }

@@ -14,6 +14,7 @@ public class BattleManager : MonoBehaviour
     Spawner spawner;
 
     public int RoundCount;
+    public int AC;
 
     public static Action RandomSpeed;
     public static Action ReadyStageStart;
@@ -84,8 +85,14 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        //仅供测试
-        //dataofAttackers.ThoseAttackingP7.AddRange( dataofAttackers.ThoseAttackingPi[7]);
+        if (DataofAttackers.ActionCount != DataofAttackers.ActionCount_P)
+        {
+            // 值发生变化时调用的方法
+            OnAcitionCountChanged();
+            DataofAttackers.ActionCount_P = DataofAttackers.ActionCount;
+        }
+
+        AC = DataofAttackers.ActionCount;
     }
 
     public void BattleIsOver()
@@ -110,16 +117,43 @@ public class BattleManager : MonoBehaviour
 
     public void ActInOrder()
     {
-        foreach (GameObject ThisCharacter in ActionOrder)
+        ActionOrder[0].GetComponent<ActioninBattleManager>().Act();
+        //实际上是所有人都行动了
+        //foreach (GameObject ThisCharacter in ActionOrder)
+        //{
+        //    ThisCharacter.GetComponent<ActioninBattleManager>().Act();
+        //}
+    }
+
+    public void OnAcitionCountChanged()
+    {
+        if (ActionOrder[DataofAttackers.ActionCount] != null)
         {
-            ThisCharacter.GetComponent<ActioninBattleManager>().Act();
+            ActionOrder[DataofAttackers.ActionCount].GetComponent<ActioninBattleManager>().Act();
+        }
+        else
+        {
+            NextRound();
         }
     }
 
     private void Initialization()
     {
+        
+
+        DataofAttackers.ActionCount = 0;
+        DataofAttackers.ActionCount_P = 0;
+
+
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+
+        foreach (GameObject character in ActionOrder)
+        {
+            character.GetComponent<ActioninBattleManager>().GetRandomSpeed();
+            //buff
+        }
+
         ActionOrder.Sort((b, a) =>
         {
             CharacterProperty propA = a.GetComponent<CharacterProperty>();
@@ -145,7 +179,7 @@ public class BattleManager : MonoBehaviour
     }
 
     public void ActionConfirmed()
-    {
+    {//确认操作后把该移进相关列表的移进去
         foreach (GameObject Atkers in ActionOrder)
         {
             if (Atkers.GetComponent<CharacterProperty>().OnTheAttack)
@@ -224,6 +258,11 @@ public class BattleManager : MonoBehaviour
             }
         }
         //调用所有要攻击的人的函数
+    }
+
+    public void NextRound()
+    {
+        Initialization();
     }
 
     private void OnDestroy()

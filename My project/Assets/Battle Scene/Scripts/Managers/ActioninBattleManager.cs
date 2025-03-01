@@ -16,26 +16,28 @@ public class ActioninBattleManager : MonoBehaviour
     public DataofAttackers dataofAttackers;
 
     public int profession;
+
+    public Animator _animator;
     
 
     private void Awake()
     {
-        GameData temp= GameObject.Find("GameData").GetComponent<GameData>();
+        GameObject temp = GameObject.Find("GameData");
         if (temp) this.enabled = false;
         characterProperty = GetComponent<CharacterProperty>();
 
-        if(!temp)battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
+        if (!temp) battleManager = GameObject.FindGameObjectWithTag("BattleManager").GetComponent<BattleManager>();
 
         BattleManager.RandomSpeed += RandomSpeed;
         BattleManager.ReadyStageStart += ExitDefense;
 
-        
+        _animator = gameObject.GetComponentInChildren<Animator>();
         //给每个玩家一个初始速度
     }
 
     private void Start()
     {
-        GetRandomSpeed();
+        //GetRandomSpeed();
 
         profession = characterProperty.Profession;
     }
@@ -50,6 +52,8 @@ public class ActioninBattleManager : MonoBehaviour
             {
                 case 0://骑士
                     GetComponent<Knight>().Skills(characterProperty.SkillCode,characterProperty.AtkTargetPosition);
+                    PlayPhysicsAtkAnimation();
+                    Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                     break;
                 case 1://待补充
                     break;
@@ -61,14 +65,17 @@ public class ActioninBattleManager : MonoBehaviour
         }
         else if (characterProperty.OnTheDefense)
         {
+            PlayDefAnimation();
             //播放动画
         }
         else if (characterProperty.OnTheMovement)
         {
+            PlayMoveAnimation();
             //播放动画
         }
         else
         {
+            DataofAttackers.ActionCount++;
             //Do nothing
         }
     }
@@ -131,9 +138,9 @@ public class ActioninBattleManager : MonoBehaviour
         int maxSpeedofAttakers = 0;
         int diffofSpeed = 0;
 
-        if (dataofAttackers.ThoseAttackingPi[characterProperty.Position] == null)
+        if (!(battleManager.ThoseAttackingPi[gameObject.GetComponent<CharacterProperty>().Position].Count == 0))
         {//如果说有人在打自己
-            foreach(GameObject i in dataofAttackers.ThoseAttackingPi[characterProperty.Position])
+            foreach(GameObject i in battleManager.ThoseAttackingPi[characterProperty.Position])
             {//对于所有要打他自己位置的对象：
                 if (i.GetComponent<CharacterProperty>().SpeedThisRound > maxSpeedofAttakers)
                 {//检查每个人的速度，取出最大值
@@ -178,5 +185,25 @@ public class ActioninBattleManager : MonoBehaviour
     private void OnDestroy()
     {
         BattleManager.RandomSpeed += RandomSpeed;
+    }
+
+    public void PlayPhysicsAtkAnimation()
+    {
+        _animator.SetTrigger("PhysicsAttack");
+    }
+
+    public void PlayDefAnimation()
+    {
+        _animator.SetTrigger("Defense");
+    }
+
+    public void PlayMoveAnimation()
+    {
+        _animator.SetTrigger("Move");
+    }
+
+    public void PlayHurtAnimation()
+    {
+        _animator.SetTrigger("Hurt");
     }
 }

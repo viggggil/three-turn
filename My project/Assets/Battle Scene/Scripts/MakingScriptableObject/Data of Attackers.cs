@@ -17,6 +17,9 @@ public class DataofAttackers : ScriptableObject
     //public List<GameObject> ThoseAttackingP9;
     //public List<GameObject> ThoseAttackingP10;
     //public List<GameObject> ThoseAttackingP11;
+    public static int ActionCount = 0;
+    public static int ActionCount_P = 0;
+    public int AC;
 
 
     public int[] SpeedofPlayers;
@@ -35,6 +38,11 @@ public class DataofAttackers : ScriptableObject
 
         //用于最后决定行动顺序
         SpeedofPlayers = new int[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    }
+
+    public void ActionCountPlus()
+    {
+        ActionCount++;
     }
 
     

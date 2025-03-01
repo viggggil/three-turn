@@ -2436,7 +2436,7 @@ SortingGroup:
   m_GameObject: {fileID: 1564643034941690314}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &211066800632221283
@@ -10022,7 +10022,7 @@ RectTransform:
   m_GameObject: {fileID: 8190809325552192013}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7226451779030899044}
@@ -13688,7 +13688,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProperty: {fileID: -4787072561017825400}
+  battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+  profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &-4787072561017825400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13701,22 +13704,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
+  maxHealth: 10
+  health: 10
   code: 1
   attackPower: 0
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
-  minSpeed: 1
-  maxSpeed: 4
+  minRandomSpeed: 0
+  maxRandomSpeed: 0
+  originalSpeed: 0
   speedThisRound: 0
-  criticalHitValue: 0
-  criticalHitResistivity: 0
-  criticalHitDamageRate: 0
-  criticalHitDamageResistivityRate: 0
-  accurateValue: 0
-  evasiveValue: 0
+  critHitValue: 0
+  critDMGRate: 0
   position: 0
   targetPosition: 0
   ontheDefense: 0
@@ -13725,7 +13725,12 @@ MonoBehaviour:
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
-  profession: 0
+  residualStunRound: 0
+  profession: 1
+  HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
+  barPosition: {fileID: 0}
+  _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
 --- !u!114 &-1828773209912316749
 MonoBehaviour:
   m_ObjectHideFlags: 0

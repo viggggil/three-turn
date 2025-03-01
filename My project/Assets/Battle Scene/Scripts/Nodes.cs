@@ -9,7 +9,6 @@ public class Nodes : MonoBehaviour
     GameObject actionPanel;
     public GameObject enemySkillsPanel;
     GameObject BattleUIManager;
-    public GameObject Bars;
     public GameObject Shield;
     public GameObject Arrow;
     public GameObject Sword;
@@ -40,14 +39,7 @@ public class Nodes : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerHere || isEnemyHere)
-        {
-            Bars.SetActive(true);
-        }
-        else
-        {
-            Bars.SetActive(false);
-        }
+
     }
 
     public void OpenActionPanel()

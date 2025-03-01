@@ -20,11 +20,13 @@ public class PlayerTeamState : MonoBehaviour
 
         static PlayerState()
         {
-            isHere = new bool[3] { false, false, false };
+            //暂时更改一下
+            isHere = new bool[3] { true,true,false };
             equips = new bool[3, 30];
             characterProperties = new CharacterProperty[3];
             BattleResult = -1;
-            Professions = new int[3] { -1, -1, -1 };
+            //这里也有更改
+            Professions = new int[3] { 0, 1, 2 };
         }
     }
     public UIManager UIManager;

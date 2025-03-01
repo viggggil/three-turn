@@ -5953,7 +5953,7 @@ SortingGroup:
   m_GameObject: {fileID: 5367084646108202728}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &6881885029250329022
@@ -10575,6 +10575,7 @@ MonoBehaviour:
   characterProperty: {fileID: -5132044323251811355}
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+  profession: 0
 --- !u!114 &-5132044323251811355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10587,22 +10588,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
+  maxHealth: 10
+  health: 10
   code: 5
   attackPower: 0
+  defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
-  minSpeed: 0
-  maxSpeed: 0
+  minRandomSpeed: 0
+  maxRandomSpeed: 0
+  originalSpeed: 0
   speedThisRound: 0
-  criticalHitValue: 0
-  criticalHitResistivity: 0
-  criticalHitDamageRate: 0
-  criticalHitDamageResistivityRate: 0
-  accurateValue: 0
-  evasiveValue: 0
+  critHitValue: 0
+  critDMGRate: 0
   position: 0
+  targetPosition: 0
+  ontheDefense: 0
+  ontheMovement: 0
+  ontheAttack: 0
+  SerialNumber: 0
+  atkTargetPosition: 0
+  skillCode: 0
+  residualStunRound: 0
+  profession: 0
+  HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
+  barPosition: {fileID: 0}
+  _HPbar: {fileID: 0}
 --- !u!114 &-16760921808325611
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterProperty : MonoBehaviour
 {
@@ -27,7 +28,14 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] public int SerialNumber;//编号
     [SerializeField] public int atkTargetPosition;//点击选择的要攻击的位置
     [SerializeField] private int skillCode;//要使用的技能的编号
+    [SerializeField] private int residualStunRound = 0;//还要眩晕多少个回合
     [SerializeField] public int profession;//职业 0骑士1弓箭手2牧师3法师
+
+    [SerializeField] public GameObject HPBar;
+    [SerializeField] public Transform barPosition;
+    [SerializeField] public Image _HPbar;
+
+    public ActioninBattleManager AIBManager;
 
 
     public List<Buff> Buffs { get; private set; }
@@ -38,6 +46,7 @@ public class CharacterProperty : MonoBehaviour
     public int ATK { get; set; }
 
     public int DEF { get; set; }
+    public int ResidualStunRound { get; set; }
     public int PR { get; set; }
     public int MR { get; set; }
     public int MinRandomSpeed { get; set; }
@@ -97,11 +106,37 @@ public class CharacterProperty : MonoBehaviour
         SkillCode = skillCode;
         Profession = profession;
         OriginalSpeed = originalSpeed;
+        ResidualStunRound = residualStunRound;
+        barPosition = gameObject.transform;
+
+        AIBManager = GetComponent<ActioninBattleManager>();
+    }
+
+    private void Start()
+    {
+        CreateBar();
+    }
+
+    private void Update()
+    {
+        _HPbar.fillAmount = Mathf.Lerp(_HPbar.fillAmount, (float)HP / (float)Health, Time.deltaTime * 5f);
+    }
+
+    public void CreateBar()
+    {
+        Vector3 thisBarPosition = new Vector3(barPosition.position.x, barPosition.position.y + 2f, barPosition.position.z);
+        GameObject newBar = Instantiate(HPBar, thisBarPosition, Quaternion.identity);
+        newBar.transform.SetParent(gameObject.transform);
+
+        HealthBar healthbar = newBar.GetComponent<HealthBar>();
+        _HPbar = healthbar.fillAmountImage;
     }
 
     public void BeDamaged(int damage)
     {
         this.HP -= damage;
+
+        AIBManager.PlayHurtAnimation();
     }
 
     public void AddBuff(Buff buff)

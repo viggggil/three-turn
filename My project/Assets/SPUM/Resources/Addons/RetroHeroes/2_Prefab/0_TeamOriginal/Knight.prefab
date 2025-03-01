@@ -3542,6 +3542,7 @@ GameObject:
   - component: {fileID: 5928968526464677961}
   - component: {fileID: 6676063022853705372}
   - component: {fileID: 4796802395963241974}
+  - component: {fileID: 4207787037591952386}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -3575,7 +3576,7 @@ SortingGroup:
   m_GameObject: {fileID: 3204623173280410393}
   m_Enabled: 1
   m_SortingLayerID: -2058579893
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_SortAtRoot: 0
 --- !u!95 &4796802395963241974
@@ -3599,6 +3600,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4207787037591952386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3204623173280410393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318d601d5147a7b419696fec3bfe5bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3260520336751013158
 GameObject:
   m_ObjectHideFlags: 0
@@ -12661,7 +12674,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterProperty: {fileID: -6806011810731187168}
+  battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
+  profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &-6806011810731187168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12674,22 +12690,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362ecaaf76d84a646a5401f3c63e3afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
+  maxHealth: 10
+  health: 10
   code: 0
-  attackPower: 0
+  attackPower: 1
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
-  minSpeed: 1
-  maxSpeed: 5
+  minRandomSpeed: 1
+  maxRandomSpeed: 3
+  originalSpeed: 2
   speedThisRound: 0
-  criticalHitValue: 0
-  criticalHitResistivity: 0
-  criticalHitDamageRate: 0
-  criticalHitDamageResistivityRate: 0
-  accurateValue: 0
-  evasiveValue: 0
+  critHitValue: 0
+  critDMGRate: 0
   position: 0
   targetPosition: 0
   ontheDefense: 0
@@ -12698,7 +12711,12 @@ MonoBehaviour:
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
+  residualStunRound: 0
   profession: 0
+  HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
+  barPosition: {fileID: 0}
+  _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
 --- !u!114 &-8815763339749779464
 MonoBehaviour:
   m_ObjectHideFlags: 0
