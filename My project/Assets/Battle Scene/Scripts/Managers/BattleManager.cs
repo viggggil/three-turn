@@ -20,6 +20,8 @@ public class BattleManager : MonoBehaviour
     public static Action ReadyStageStart;
     public static Action RoundStart;
 
+    public BattleUIManager _battleUIManager;
+
     public List<GameObject> ActionOrder;
     public List<GameObject> Testlist;
     [Header("Attackers' Lists")]
@@ -35,6 +37,7 @@ public class BattleManager : MonoBehaviour
         
         ReadyStageStart += Initialization;
         RoundStart += ActInOrder;
+        RoundStart += NodeReset;
 
         Testlist = new List<GameObject>();
         ThoseAttackingPi = new List<GameObject>[12];
@@ -44,7 +47,7 @@ public class BattleManager : MonoBehaviour
         }//列表初始化
         //基本对象的载入
 
-        RoundCount = 1;
+        RoundCount = 0;
     }
 
     private void Start()
@@ -114,6 +117,15 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public void NodeReset()
+    {
+        foreach (GameObject node in spawner.nodeList)
+        {
+            node.GetComponent<Nodes>().isSelected = false;
+            _battleUIManager.CloseAllCircles(); 
+        }
+    }
+
 
     public void ActInOrder()
     {
@@ -127,9 +139,18 @@ public class BattleManager : MonoBehaviour
 
     public void OnAcitionCountChanged()
     {
-        if (ActionOrder[DataofAttackers.ActionCount] != null)
+         
+
+        if (DataofAttackers.ActionCount < ActionOrder.Count)
         {
-            ActionOrder[DataofAttackers.ActionCount].GetComponent<ActioninBattleManager>().Act();
+            if (ActionOrder[DataofAttackers.ActionCount] != null)
+            {
+                ActionOrder[DataofAttackers.ActionCount].GetComponent<ActioninBattleManager>().Act();
+            }
+            else
+            {
+                DataofAttackers.ActionCount++;
+            }
         }
         else
         {
@@ -139,11 +160,14 @@ public class BattleManager : MonoBehaviour
 
     private void Initialization()
     {
-        
+        ActionOrder.Clear();
 
         DataofAttackers.ActionCount = 0;
         DataofAttackers.ActionCount_P = 0;
 
+        RoundCount++;
+
+        _battleUIManager.UpdateRoundText();
 
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         ActionOrder.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
@@ -262,7 +286,21 @@ public class BattleManager : MonoBehaviour
 
     public void NextRound()
     {
-        Initialization();
+        if (IsBattleOver())
+        {
+            if (PlayerWon())
+            {
+                _battleUIManager.ShowGameWonPanel();
+            }
+            else
+            {
+                _battleUIManager.ShowGameLosePanel();
+            }
+        }
+        else
+        {
+            Initialization();
+        }
     }
 
     private void OnDestroy()
@@ -274,44 +312,41 @@ public class BattleManager : MonoBehaviour
 
     public bool IsBattleOver()
     {//判断战斗是否结束
-        bool isover = false;
-        foreach (GameObject node in spawner.nodeList)
+        bool PlayerAllDead = true;
+        bool EnemyAllDead = true;
+        for (int i = 0; i < 6; i++)
         {
-            if (node.GetComponent<Nodes>().isEnemyHere)
-            {//任何一名敌人在场，isover不能为true
-                isover = true;
-            }
-            else if (node.GetComponent<Nodes>().isPlayerHere)
+            if (spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
             {
-                isover = true;
-            }
-            else
-            {
-                isover = false;
+                PlayerAllDead = false;
             }
         }
 
-        return isover;
+        for (int i = 6; i < 12; i++)
+        {
+            if (spawner.nodeList[i].GetComponent<Nodes>().isEnemyHere)
+            {
+                EnemyAllDead = false;
+            }
+        }
+
+
+        return (PlayerAllDead || EnemyAllDead);
     }
 
     //判断玩家有没有获胜,仅在战斗结束之后使用！
     public bool PlayerWon()
     {//判断玩家有没有获胜,仅在战斗结束之后使用！
-        bool isPlayerWon = false;
-
-        foreach (GameObject node in spawner.nodeList)
+        bool PlayerAllDead = true;
+        for (int i = 0; i < 6; i++)
         {
-            if (node.GetComponent<Nodes>().isPlayerHere)
+            if (spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
             {
-                isPlayerWon = true;
-            }
-            else
-            {
-                isPlayerWon = false;
+                PlayerAllDead = false;
             }
         }
 
-        return isPlayerWon;
+        return (!PlayerAllDead);
     }
     
 }

@@ -19,6 +19,13 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject exitAttackPanel;
     [SerializeField] GameObject exitMovementPanel;
     [SerializeField] GameObject outOfRangePanel;
+    [SerializeField] GameObject gameWonPanel;
+    [SerializeField] GameObject gameLosePanel;
+
+    [Header("Texts")]
+    [SerializeField] Text RoundText;
+
+    public BattleManager _battleManager;
 
     public DataofNodes dataofNodes;
     
@@ -394,5 +401,28 @@ public class BattleUIManager : MonoBehaviour
         MethodInfo[] publicMethods = targetType.GetMethods(BindingFlags.Public | BindingFlags.Instance);
 
         return publicMethods.Length;
+    }
+
+    public void ShowGameWonPanel()
+    {
+        gameWonPanel.SetActive(true);
+    }
+
+    public void ShowGameLosePanel()
+    {
+        gameLosePanel.SetActive(true);
+    }
+
+    public void UpdateRoundText()
+    {
+        RoundText.text = _battleManager.RoundCount.ToString();
+    }
+
+    public void CloseAllCircles()
+    {
+        foreach (Image circle in Circles)
+        {
+            circle.gameObject.SetActive(false);
+        }
     }
 }

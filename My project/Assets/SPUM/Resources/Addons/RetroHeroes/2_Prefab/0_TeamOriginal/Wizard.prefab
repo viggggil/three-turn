@@ -5966,6 +5966,7 @@ MonoBehaviour:
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
   profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &-4362231410627886500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6004,6 +6005,7 @@ MonoBehaviour:
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
 --- !u!114 &-7411621381386855995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11301,6 +11303,7 @@ GameObject:
   - component: {fileID: 3876279490382368900}
   - component: {fileID: 1496888261174834345}
   - component: {fileID: 4332048834508352449}
+  - component: {fileID: 6481155969657636615}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -11358,6 +11361,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6481155969657636615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084181733935151907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318d601d5147a7b419696fec3bfe5bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6088554330601086231
 GameObject:
   m_ObjectHideFlags: 0

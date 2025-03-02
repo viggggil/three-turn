@@ -42,42 +42,55 @@ public class ActioninBattleManager : MonoBehaviour
         profession = characterProperty.Profession;
     }
 
+    private void Update()
+    {
+        if (characterProperty.HP <= 0 && !(characterProperty.IsDying))
+        {
+            characterProperty.HP = 0;
+            Die();
+        }
+    }
+
     public void Act()
     {
-        if (characterProperty.OnTheAttack)
+        if (!characterProperty.IsDying == true)
         {
-            //播放动画
-
-            switch (profession)
+            if (characterProperty.OnTheAttack)
             {
-                case 0://骑士
-                    GetComponent<Knight>().Skills(characterProperty.SkillCode,characterProperty.AtkTargetPosition);
-                    PlayPhysicsAtkAnimation();
-                    Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
-                    break;
-                case 1://待补充
-                    break;
-                default:
-                    break;
-            }
+                //播放动画
 
-            characterProperty.OnTheAttack = false;
+                switch (profession)
+                {
+                    case 0://骑士
+                        GetComponent<Knight>().Skills(characterProperty.SkillCode,characterProperty.AtkTargetPosition);
+                        PlayPhysicsAtkAnimation();
+                        Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                        break;
+                    case 1://待补充
+                        break;
+                    default:
+                        break;
+                }
+
+                characterProperty.OnTheAttack = false;
+            }
+            else if (characterProperty.OnTheDefense)
+            {
+                PlayDefAnimation();
+                //播放动画
+            }
+            else if (characterProperty.OnTheMovement)
+            {
+                PlayMoveAnimation();
+                //播放动画
+            }
+            else
+            {
+                PlayDoNothingAnimation();
+                //Do nothing
+            }
         }
-        else if (characterProperty.OnTheDefense)
-        {
-            PlayDefAnimation();
-            //播放动画
-        }
-        else if (characterProperty.OnTheMovement)
-        {
-            PlayMoveAnimation();
-            //播放动画
-        }
-        else
-        {
-            DataofAttackers.ActionCount++;
-            //Do nothing
-        }
+        
     }
 
 
@@ -205,5 +218,33 @@ public class ActioninBattleManager : MonoBehaviour
     public void PlayHurtAnimation()
     {
         _animator.SetTrigger("Hurt");
+    }
+
+    public void PlayDoNothingAnimation()
+    {
+        _animator.SetTrigger("Vacant");
+    }
+
+
+    public void Die()
+    {
+        characterProperty.IsDying = true;
+        _animator.SetTrigger("Die");
+        if (characterProperty.Position >= 0 && characterProperty.Position <= 5)
+        {
+            Spawner.nodeDictionary[characterProperty.Position].GetComponent<Nodes>().isPlayerHere = false;
+        }
+        else
+        {
+            Spawner.nodeDictionary[characterProperty.Position].GetComponent<Nodes>().isEnemyHere = false;
+        }
+    }
+
+    public void RemoveThisFromList()
+    {
+        if (battleManager.ActionOrder.Contains(gameObject))
+        {
+            battleManager.ActionOrder.Remove(gameObject);
+        }
     }
 }

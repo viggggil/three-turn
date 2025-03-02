@@ -5515,6 +5515,7 @@ GameObject:
   - component: {fileID: 5987143714022380823}
   - component: {fileID: 9081395084046736219}
   - component: {fileID: 6250780155223273539}
+  - component: {fileID: 3034111423369488319}
   m_Layer: 0
   m_Name: UnitRoot
   m_TagString: Untagged
@@ -5572,6 +5573,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3034111423369488319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140163698808500604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318d601d5147a7b419696fec3bfe5bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5166310515546956307
 GameObject:
   m_ObjectHideFlags: 0
@@ -11234,6 +11247,7 @@ MonoBehaviour:
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
 --- !u!114 &2479212807363335682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11250,6 +11264,7 @@ MonoBehaviour:
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
   profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &-5210423945225585870
 MonoBehaviour:
   m_ObjectHideFlags: 0

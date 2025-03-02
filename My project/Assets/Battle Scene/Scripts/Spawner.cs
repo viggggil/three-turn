@@ -238,5 +238,10 @@ public class Spawner : MonoBehaviour
         nodeDictionary[Positions[4]].GetComponent<Nodes>().isEnemyHere = true;
         nodeDictionary[Positions[5]].GetComponent<Nodes>().isEnemyHere = true;
 
+
+        nodeDictionary[Positions[3]].GetComponentInChildren<CharacterProperty>().Position = Positions[3];
+        nodeDictionary[Positions[4]].GetComponentInChildren<CharacterProperty>().Position = Positions[4];
+
+        nodeDictionary[Positions[5]].GetComponentInChildren<CharacterProperty>().Position = Positions[5];
     }
 }

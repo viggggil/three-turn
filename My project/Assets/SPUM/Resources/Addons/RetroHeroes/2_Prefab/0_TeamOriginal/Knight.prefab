@@ -12693,7 +12693,7 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   code: 0
-  attackPower: 1
+  attackPower: 5
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
