@@ -112,4 +112,9 @@ public class Archer : MonoBehaviour
         Buff.AddBuff(enemyProperty, MarkBuff);
         return true;
     }
+
+    public bool skillRange()
+    {
+        return true;
+    }
 }

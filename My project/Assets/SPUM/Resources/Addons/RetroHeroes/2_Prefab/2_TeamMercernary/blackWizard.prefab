@@ -11009,6 +11009,7 @@ GameObject:
   - component: {fileID: -8029539149803442139}
   - component: {fileID: 4376946235226171921}
   - component: {fileID: 5038479358497011329}
+  - component: {fileID: -5620791394605123899}
   m_Layer: 5
   m_Name: blackWizard
   m_TagString: SpecialEvent
@@ -14682,15 +14683,17 @@ MonoBehaviour:
   ontheMovement: 0
   ontheAttack: 0
   isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
-  profession: 0
+  profession: 3
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-8029539149803442139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14732,6 +14735,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a499f5cdbcddd43b0fda3546c144e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5620791394605123899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822287842208179044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &8852561674371666437
 GameObject:
   m_ObjectHideFlags: 0

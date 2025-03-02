@@ -158,5 +158,6 @@ public class Carriage : MonoBehaviour,IMove_
         player.GetComponent<CharacterProperty>().Profession= Profession;
         UIManager.LoadPlayer(Profession, playerID);
         GameData.gsd.Professions[playerID - 1] = Profession;
+        PlayerTeamState.PlayerState.Professions[playerID - 1] = Profession;
     }
 }

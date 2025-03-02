@@ -11399,6 +11399,7 @@ GameObject:
   - component: {fileID: -4107313205615179440}
   - component: {fileID: -6006862226031792253}
   - component: {fileID: 3027105400541408074}
+  - component: {fileID: 7063179624946222806}
   m_Layer: 5
   m_Name: SPUM_20240910232740131
   m_TagString: Enemy
@@ -15081,6 +15082,8 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -15090,6 +15093,7 @@ MonoBehaviour:
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-6006862226031792253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15119,6 +15123,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7063179624946222806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940222441422043709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &8970563232084574002
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,7 @@ public class Knight : MonoBehaviour
                 skill1(position);
                 break;
             case 1:
-                skill2(position);
+                skill2Apply(position);
                 break;
             case 2:
                 skill3();

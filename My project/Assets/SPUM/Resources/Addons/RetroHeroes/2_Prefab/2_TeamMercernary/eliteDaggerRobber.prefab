@@ -3598,6 +3598,7 @@ GameObject:
   - component: {fileID: -2840754784893550631}
   - component: {fileID: 2192005006778609600}
   - component: {fileID: 78449153906615407}
+  - component: {fileID: 359555248329227229}
   m_Layer: 5
   m_Name: eliteDaggerRobber
   m_TagString: Enemy
@@ -7271,6 +7272,7 @@ MonoBehaviour:
   ontheMovement: 0
   ontheAttack: 0
   isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -7280,6 +7282,7 @@ MonoBehaviour:
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-2840754784893550631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7321,6 +7324,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fcef92f67f980845a48322b6b579990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &359555248329227229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2926582908550161442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &2994956066709720256
 GameObject:
   m_ObjectHideFlags: 0

@@ -82,4 +82,9 @@ public class Cleric : MonoBehaviour
                 teammateProperty.Buffs.Remove(teammateProperty.Buffs[i]);
         }
     }
+
+    public bool skillRange()
+    {
+        return true;
+    }
 }

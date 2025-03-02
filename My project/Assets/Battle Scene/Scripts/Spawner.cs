@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -41,10 +42,13 @@ public class Spawner : MonoBehaviour
         characterDictionary = new Dictionary<int, GameObject>();
     }
 
+
     public void LoadPlayers()
     {
-        
 
+        //PlayerTeamState.PlayerState.characterProperties[0].enabled = true;
+        //PlayerTeamState.PlayerState.characterProperties[1].enabled = true;
+        //PlayerTeamState.PlayerState.characterProperties[2].enabled = true;
 
         for (int i = 0; i < nodeList.Count; i++)
         { //向node字典中加入内容
@@ -62,13 +66,6 @@ public class Spawner : MonoBehaviour
             }
         }
 
-
-        Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[0]]);
-        Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[1]]);
-        if (PlayerCount == 3)
-        {
-            Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[2]]);
-        }
 
 
 
@@ -137,6 +134,18 @@ public class Spawner : MonoBehaviour
         }
 
 
+        Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[0]]);
+        if (PlayerCount >= 2)
+        {
+            Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[1]]);
+        }
+
+        if (PlayerCount == 3)
+        {
+            Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[2]]);
+        }
+
+
 
         //transform1 = nodeList[0].transform;
         //position1 = Random.Range(0, 5);
@@ -157,21 +166,32 @@ public class Spawner : MonoBehaviour
 
 
         transforms[0] = nodeDictionary[Positions[0]].transform;
-        transforms[1] = nodeDictionary[Positions[1]].transform;
+        if (PlayerCount >= 2)
+        {
+            transforms[1] = nodeDictionary[Positions[1]].transform;
+        }
+
         if (PlayerCount == 3)
         {
             transforms[2] = nodeDictionary[Positions[2]].transform;
         }
 
         Player[0].transform.localScale = new Vector3(2f,2f,2f);
-        Player[1].transform.localScale = new Vector3(2f,2f,2f);
+        if (PlayerCount >= 2)
+        {
+            Player[1].transform.localScale = new Vector3(2f,2f,2f);
+        }
         if (PlayerCount == 3)
         {
             Player[2].transform.localScale = new Vector3(2f, 2f, 2f);
         }
 
         Instantiate(Player[0], transforms[0]);
-        Instantiate(Player[1], transforms[1]);
+
+        if (PlayerCount >= 2)
+        {
+            Instantiate(Player[1], transforms[1]);
+        }
         if (PlayerCount == 3)
         {
             Instantiate(Player[0], transforms[0]);            
@@ -179,8 +199,11 @@ public class Spawner : MonoBehaviour
 
         nodeDictionary[Positions[0]].GetComponentInChildren<CharacterProperty>().HP = 
             PlayerTeamState.PlayerState.characterProperties[0].HP;
-        nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().HP =
+        if (PlayerCount >= 2)
+        {
+            nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().HP =
             PlayerTeamState.PlayerState.characterProperties[1].HP;
+        }
         if (PlayerCount == 3)
         {
             nodeDictionary[Positions[2]].GetComponentInChildren<CharacterProperty>().HP =
@@ -190,7 +213,10 @@ public class Spawner : MonoBehaviour
 
         //扫描成员、使其成为某个node下面的子对象，并将成员加入列表，方便后面比较速度决定行动顺序
         nodeDictionary[Positions[0]].GetComponent<Nodes>().isPlayerHere = true;
-        nodeDictionary[Positions[1]].GetComponent<Nodes>().isPlayerHere = true;
+        if (PlayerCount >= 2)
+        {
+            nodeDictionary[Positions[1]].GetComponent<Nodes>().isPlayerHere = true;
+        }   
         if (PlayerCount == 3)
         {
             nodeDictionary[Positions[2]].GetComponent<Nodes>().isPlayerHere = true;            
@@ -198,12 +224,28 @@ public class Spawner : MonoBehaviour
 
 
         nodeDictionary[Positions[0]].GetComponentInChildren<CharacterProperty>().Position = Positions[0];
-        nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().Position = Positions[1];
+        if (PlayerCount >= 2)
+        {
+            nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().Position = Positions[1];
+        }
         if (PlayerCount == 3)
         {
             nodeDictionary[Positions[2]].GetComponentInChildren<CharacterProperty>().Position = Positions[2];            
         }
 
+
+        //nodeDictionary[Positions[0]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        //if (PlayerCount == 2)
+        //{
+        //    nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        //}
+        //if (PlayerCount == 3)
+        //{
+        //    nodeDictionary[Positions[2]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        //}
+
+
+        
     }
 
 
@@ -250,7 +292,16 @@ public class Spawner : MonoBehaviour
 
         nodeDictionary[Positions[3]].GetComponentInChildren<CharacterProperty>().Position = Positions[3];
         nodeDictionary[Positions[4]].GetComponentInChildren<CharacterProperty>().Position = Positions[4];
-
         nodeDictionary[Positions[5]].GetComponentInChildren<CharacterProperty>().Position = Positions[5];
+
+        nodeDictionary[Positions[3]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        if (PlayerCount >= 2)
+        {
+            nodeDictionary[Positions[4]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        }
+        if (PlayerCount == 3)
+        {
+            nodeDictionary[Positions[5]].GetComponentInChildren<CharacterProperty>().enabled = true;
+        }
     }
 }

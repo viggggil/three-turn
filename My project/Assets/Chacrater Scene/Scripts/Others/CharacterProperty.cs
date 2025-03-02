@@ -26,6 +26,7 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] private bool ontheMovement;//正在移动
     [SerializeField] private bool ontheAttack;//正在攻击
     [SerializeField] private bool isDying;//正在死去
+    [SerializeField] private bool isEnemy;//是敌人
     [SerializeField] public int SerialNumber;//编号
     [SerializeField] public int atkTargetPosition;//点击选择的要攻击的位置
     [SerializeField] private int skillCode;//要使用的技能的编号
@@ -63,6 +64,7 @@ public class CharacterProperty : MonoBehaviour
     public bool isdizzy { get; set; }
 
     public bool isCursed { get; set; }
+    public bool IsEnemy { get; set; }
 
     public int Position { get; set; }
 
@@ -110,6 +112,7 @@ public class CharacterProperty : MonoBehaviour
         Profession = profession;
         OriginalSpeed = originalSpeed;
         ResidualStunRound = residualStunRound;
+        IsEnemy = isEnemy;
         barPosition = gameObject.transform;
 
         AIBManager = GetComponent<ActioninBattleManager>();
@@ -118,13 +121,12 @@ public class CharacterProperty : MonoBehaviour
     private void Start()
     {
         temp = GameObject.Find("GameData");
-        if (!temp) this.enabled = false;
-        if(!temp)CreateBar();
+        if (!temp) CreateBar();
     }
 
     private void Update()
     {
-        if(!temp)_HPbar.fillAmount = Mathf.Lerp(_HPbar.fillAmount, (float)HP / (float)Health, Time.deltaTime * 5f);
+        if (!temp) _HPbar.fillAmount = Mathf.Lerp(_HPbar.fillAmount, (float)HP / (float)Health, Time.deltaTime * 5f);
     }
 
     public void CreateBar()

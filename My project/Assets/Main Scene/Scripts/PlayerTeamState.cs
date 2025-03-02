@@ -21,7 +21,7 @@ public class PlayerTeamState : MonoBehaviour
         static PlayerState()
         {
             //暂时更改一下
-            isHere = new bool[3] { true,true,false };
+            isHere = new bool[3] { false,false,false };
             equips = new bool[3, 30];
             characterProperties = new CharacterProperty[3];
             BattleResult = -1;

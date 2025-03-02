@@ -176,7 +176,6 @@ public class Nodes : MonoBehaviour
                                     //回去改UI
 
                                     //临时加入
-                                    SampleList.Add(Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().atkTargetPosition);
                                 }
                                 else
                                 {
@@ -219,12 +218,162 @@ public class Nodes : MonoBehaviour
                         break;
 
                     case 1://弓箭手
+                        switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
+                        {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
+                            case 0://技能1
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+
+                                    //临时加入
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+
+                            case 1:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            case 2:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                         break;
 
                     case 2://牧师
+                        switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
+                        {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
+                            case 0://技能1
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Cleric>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+
+                                    //临时加入
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+
+                            case 1:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Cleric>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            case 2:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Cleric>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                         break;
 
                     case 3://法师
+                        switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
+                        {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
+                            case 0://技能1
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<wizard>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+
+                                    //临时加入
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+
+                            case 1:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<wizard>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            case 2:
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<wizard>().skillRange())
+                                {//把这个点代进去，如果在范围内，指派成功
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                                    battleUIManager.SkillSelectionSucceeded();
+                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                                    //回去改UI
+                                }
+                                else
+                                {
+                                    battleUIManager.SkillSelectionFailed();
+                                    //也是回去改UI
+                                }
+                                break;
+                            default:
+                                break;
+                        }
                         break;
 
                     default:

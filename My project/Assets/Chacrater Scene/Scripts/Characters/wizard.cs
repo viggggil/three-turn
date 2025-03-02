@@ -86,4 +86,9 @@ public class wizard : MonoBehaviour
         );
         Buff.AddBuff(enemyProperty, FreezeBuff);
     }
+
+    public bool skillRange()
+    {
+        return true;
+    }
 }
