@@ -4756,6 +4756,7 @@ GameObject:
   - component: {fileID: 2794388706698844311}
   - component: {fileID: -1830162389622719729}
   - component: {fileID: -1729145011762877840}
+  - component: {fileID: -4808701526594952789}
   m_Layer: 5
   m_Name: RobberArcher
   m_TagString: Enemy
@@ -8458,6 +8459,7 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -8494,6 +8496,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4808701526594952789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868928211636977453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 095d40ed9f30f9640bef68f9882cf291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3869556695536475137
