@@ -38,23 +38,23 @@ public class Cleric : MonoBehaviour
     }
     public void skill1(int position)
     {
-        GameObject teammate;
-        Spawner.nodeDictionary.TryGetValue(position, out teammate);
-        CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
         teammateProperty.HP += charaterProperty.ATK;
     }
 
     public void skill2(int position)
     {
-        GameObject teammate;
+        GameObject node;
         if(position < 3)
         {
             for (int i = 0; i < 3; i++)
             {
-                Spawner.nodeDictionary.TryGetValue(i, out teammate);
-                if (teammate == null)
+                Spawner.nodeDictionary.TryGetValue(i, out node);
+                if (node == null)
                     continue;
-                CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
+                CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
                 teammateProperty.HP += (int)(charaterProperty.ATK * 0.6f);
             }
         }
@@ -62,12 +62,24 @@ public class Cleric : MonoBehaviour
         {
             for (int i = 3; i < 6; i++)
             {
-                Spawner.nodeDictionary.TryGetValue(i, out teammate);
-                if (teammate == null)
+                Spawner.nodeDictionary.TryGetValue(i, out node);
+                if (node == null)
                     continue;
-                CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
+                CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
                 teammateProperty.HP += (int)(charaterProperty.ATK * 0.6f);
             }
+        }
+    }
+
+    public void skill3(int position)
+    {
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
+        for (int i = 0; i < teammateProperty.Buffs.Count; i++)
+        {
+            if (teammateProperty.Buffs[i].BuffType == BuffType.Debuff)
+                teammateProperty.Buffs.Remove(teammateProperty.Buffs[i]);
         }
     }
 }

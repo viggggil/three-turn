@@ -40,9 +40,9 @@ public class wizard : MonoBehaviour
     }
     public void skill1(int position)//攻击一个敌人
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         int dmg = PropertyCalculator.DamageValueCalculation(charaterProperty.ATK, enemyProperty.MR, charaterProperty.CritVaule,
              charaterProperty.CritDMGRate, enemyProperty.DEF, enemyProperty.OnTheDefense);
         dmg = actioninBattleManager.AtkJudger(dmg);
@@ -59,9 +59,9 @@ public class wizard : MonoBehaviour
 
     public void skill2(int position)//提高队友的魔抗，持续两回合
     {
-        GameObject teammate;
-        Spawner.nodeDictionary.TryGetValue(position, out teammate);
-        CharacterProperty teammateProperty = teammate.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty teammateProperty = node.GetComponentInChildren<CharacterProperty>();
         Buff MRBuff = new Buff(
             name: "",
             duration: 2,
@@ -74,9 +74,9 @@ public class wizard : MonoBehaviour
 
     public void skill3(int position)
     {
-        GameObject enemy;
-        Spawner.nodeDictionary.TryGetValue(position, out enemy);
-        CharacterProperty enemyProperty = enemy.GetComponent<CharacterProperty>();
+        GameObject node;
+        Spawner.nodeDictionary.TryGetValue(position, out node);
+        CharacterProperty enemyProperty = node.GetComponentInChildren<CharacterProperty>();
         Buff FreezeBuff = new Buff(
             name: "",
             duration: 2,
