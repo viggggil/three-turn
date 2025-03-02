@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource BGMAudio;
     [SerializeField] AudioSource SFXAudio;
     public AudioClip bgm;
+    public AudioClip run;
     void Start()
     {
         BGMAudio.clip = bgm;
@@ -17,5 +18,10 @@ public class AudioManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        SFXAudio.PlayOneShot(clip);
     }
 }

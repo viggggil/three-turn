@@ -28,6 +28,7 @@ public class Carriage : MonoBehaviour,IMove_
     public Event_Map _tomb;
     public GameObject[] Professions;
     public Animator Animator;
+    public AudioManager AudioManager;
 
     private Dictionary<int, int> ProfessionToMaxStamina = new Dictionary<int, int>()
     {
@@ -40,6 +41,7 @@ public class Carriage : MonoBehaviour,IMove_
         CameraFollower = GameObject.Find("CameraFollower").GetComponent<CameraFollower>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
         GameData = GameObject.Find("GameData").GetComponent<GameData>();
+        AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         if (playerID!=-1)TurnStart();
         tomb.SetActive(false);
         _tomb = GetComponent<Event_Map>();
@@ -80,6 +82,7 @@ public class Carriage : MonoBehaviour,IMove_
         if (curStamina >=1)
         {
             transform.DOMove(direction, 1.0f);
+            AudioManager.PlaySFX(AudioManager.run);
             if (direction.x > player.transform.position.x)
             {
                 player.GetComponent<RectTransform>().localScale = new Vector3(-1.25f, 1.25f, 1.25f);
@@ -88,14 +91,14 @@ public class Carriage : MonoBehaviour,IMove_
             {
                 player.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
             }
-            Animator.SetBool("move_Map", true);
+            Animator.SetBool("Move",true);
             Invoke("Move_", 1f);
         }
     }
 
     public void Move_()
     {
-        Animator.SetBool("move_Map", false);
+        Animator.SetBool("Move", false);
         GameManager.ClearFog();
         curStamina -= 1;
         StaminaUpdate?.Invoke(curStamina, maxStamina, playerID);
