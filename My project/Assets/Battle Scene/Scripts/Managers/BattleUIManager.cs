@@ -21,6 +21,9 @@ public class BattleUIManager : MonoBehaviour
     [SerializeField] GameObject outOfRangePanel;
     [SerializeField] GameObject gameWonPanel;
     [SerializeField] GameObject gameLosePanel;
+    [SerializeField] GameObject characterPropertyPanel;
+    [SerializeField] GameObject characterPropertyCardPrefab;
+    [SerializeField] Transform characterPropertyCardTransform;
 
     [Header("Texts")]
     [SerializeField] Text RoundText;
@@ -34,13 +37,20 @@ public class BattleUIManager : MonoBehaviour
     public List<GameObject> Arrows;
     public List<GameObject> ArrowsofEnemies;
 
-
+    private bool isOpenOfCharacterPropertyPanel = false;
     private void Awake()
     {
         List<Image> list = new List<Image>();
     }
 
-    
+    private void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.B) && !isOpenOfCharacterPropertyPanel)
+        {
+            OpenCharacterPropertyPanel();
+            isOpenOfCharacterPropertyPanel = true;
+        }
+    }
 
     public void OpenOutOfRangePanel()
     {
@@ -424,5 +434,42 @@ public class BattleUIManager : MonoBehaviour
         {
             circle.gameObject.SetActive(false);
         }
+    }
+
+    public void OpenCharacterPropertyPanel()
+    {
+        characterPropertyPanel.SetActive(true);
+        GameObject node;
+        CharacterProperty characterProperty;
+        for(int i = 0; i < 6; i++)
+        {
+            Spawner.nodeDictionary.TryGetValue(i, out node);
+            characterProperty = node.GetComponentInChildren<CharacterProperty>();
+            if (characterProperty == null)
+                continue;
+            CreateCharacterPropertyCard(characterProperty);
+        }
+    }
+
+    public void CloseCharacterProperlyPanel()
+    {
+        characterPropertyPanel.SetActive(false);
+        if(characterPropertyCardTransform.childCount > 0)
+        {
+            for(int i = 0;i < characterPropertyCardTransform.childCount; i++)
+            {
+                Destroy(characterPropertyCardTransform.GetChild(i).gameObject);
+            }
+        }
+        isOpenOfCharacterPropertyPanel = false;
+    }
+
+    public void CreateCharacterPropertyCard(CharacterProperty characterProperty)
+    {
+        GameObject newinstance = Instantiate(characterPropertyCardPrefab,characterPropertyCardTransform.position,Quaternion.identity);
+        newinstance.transform.SetParent(characterPropertyCardTransform);
+        newinstance.transform.localScale = Vector3.one;
+        CharacterPropertyCard characterPropertyCard = newinstance.GetComponent<CharacterPropertyCard>();
+        characterPropertyCard.SetupCharacterPropert(characterProperty);
     }
 }
