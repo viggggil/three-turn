@@ -94,6 +94,10 @@ public class UIManager : MonoBehaviour
     public int PlayerThreeProfession;
     public GameData GameData;
     public bool BossFight = false;
+
+    public Image[] equips;
+    public GameObject[] equips_;
+    public Sprite Necklace;
     enum CellType
     {
         grass,
@@ -178,7 +182,7 @@ public class UIManager : MonoBehaviour
         {EventType.smithy,"这里可以委托铁匠铸造武器和护甲\n(战斗系统里的装备还没做完)" },
         {EventType.bigTree,"树下的告示栏写有可供接取的任务" },
         {EventType.tomb,"你的一位英雄在这里倒下，获得女神的恩赐来复活" },
-        {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动" },
+        {EventType.angel,"这里矗立着一座天使雕像，但你需要清理掉周围的敌人才能与之互动\n（获得可以复活队友一次的道具）" },
         {EventType.start,"点击角色或角色头像选中\n点击或WASD移动\n去西边的村庄开始冒险吧"  },
         {EventType.bar,"一个八方来客都可聚集在此借酒浇愁的友善之地。对了，我们有提过他们是用拳头来解决分歧的吗？"  }
     };
@@ -464,7 +468,7 @@ public class UIManager : MonoBehaviour
         else Invoke("Dialogue__",0.1f);
     }
 
-    public  void Dialogue__()
+    public void Dialogue__()
     {
         StartCoroutine(Dialogue_());
     }
@@ -473,5 +477,11 @@ public class UIManager : MonoBehaviour
     {
         Dialogue.SetActive(true);
         Dialogue__();
+    }
+
+    public void DisplayEquip()
+    {
+        equips_[GameManager.selectedID - 1].SetActive(true);
+        equips[GameManager.selectedID - 1].sprite = Necklace;
     }
 }

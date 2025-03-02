@@ -79,6 +79,7 @@ public class Event_Map : MonoBehaviour
                     if (GameManager.TestDistance__(this.gameObject))
                     {
                         PlayerTeamState.PlayerState.equips[GameManager.selectedID - 1, 1] = true;
+                        UIManager.DisplayEquip();
                         GameManager.CloseSelect();
                         UIManager.CloseInfo();
                         GameData.gsd.types[SerialNumber] =-1;
