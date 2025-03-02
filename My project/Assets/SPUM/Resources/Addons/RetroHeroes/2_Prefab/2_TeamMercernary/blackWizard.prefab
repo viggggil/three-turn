@@ -11008,6 +11008,7 @@ GameObject:
   - component: {fileID: -7669583794250139831}
   - component: {fileID: -8029539149803442139}
   - component: {fileID: 4376946235226171921}
+  - component: {fileID: 5038479358497011329}
   m_Layer: 5
   m_Name: blackWizard
   m_TagString: SpecialEvent
@@ -14680,6 +14681,7 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -14688,6 +14690,7 @@ MonoBehaviour:
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
 --- !u!114 &-8029539149803442139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14704,6 +14707,7 @@ MonoBehaviour:
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
   profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &4376946235226171921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14714,6 +14718,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5038479358497011329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822287842208179044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a499f5cdbcddd43b0fda3546c144e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8852561674371666437

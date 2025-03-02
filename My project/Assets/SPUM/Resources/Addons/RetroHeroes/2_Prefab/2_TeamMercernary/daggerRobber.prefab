@@ -5685,6 +5685,7 @@ GameObject:
   - component: {fileID: 144687694245765043}
   - component: {fileID: 5453869362111107008}
   - component: {fileID: -3818404535724483972}
+  - component: {fileID: 6422971385033347652}
   m_Layer: 5
   m_Name: daggerRobber
   m_TagString: Enemy
@@ -9417,6 +9418,7 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -9453,6 +9455,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6422971385033347652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291294023888707750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcef92f67f980845a48322b6b579990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4297135626089649114
