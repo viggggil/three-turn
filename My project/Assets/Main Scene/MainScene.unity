@@ -14419,7 +14419,7 @@ GameObject:
   - component: {fileID: 429851314}
   - component: {fileID: 429851315}
   m_Layer: 0
-  m_Name: audiomanager
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14457,6 +14457,7 @@ MonoBehaviour:
   BGMAudio: {fileID: 544523656}
   SFXAudio: {fileID: 963874626}
   bgm: {fileID: 8300000, guid: 1a67407bc60424747baf9129fd27a3c5, type: 3}
+  run: {fileID: 8300000, guid: 3c04f576190ca5d46a2d281bba2c96a1, type: 3}
 --- !u!1 &469965386
 GameObject:
   m_ObjectHideFlags: 0
@@ -16224,6 +16225,7 @@ MonoBehaviour:
   - {fileID: 5153136095332640475, guid: adc2df73a535f48f09903015a0d1abe4, type: 3}
   - {fileID: 1367983366861570566, guid: 70e7d308b6e8e490da3ec5f66764c4e9, type: 3}
   Animator: {fileID: 0}
+  AudioManager: {fileID: 0}
 --- !u!4 &661377098
 Transform:
   m_ObjectHideFlags: 0
@@ -17604,6 +17606,15 @@ MonoBehaviour:
   PlayerThreeProfession: 0
   GameData: {fileID: 0}
   BossFight: 0
+  equips:
+  - {fileID: 1987498400}
+  - {fileID: 2117761821}
+  - {fileID: 1028031416}
+  equips_:
+  - {fileID: 1987498398}
+  - {fileID: 2117761819}
+  - {fileID: 1028031414}
+  Necklace: {fileID: 21300000, guid: e996170e7e035ed488f292b1cb3c4a20, type: 3}
 --- !u!4 &834002371
 Transform:
   m_ObjectHideFlags: 0
@@ -24395,6 +24406,7 @@ MonoBehaviour:
   _tomb: {fileID: 0}
   Professions: []
   Animator: {fileID: 0}
+  AudioManager: {fileID: 0}
 --- !u!4 &1928603834
 Transform:
   m_ObjectHideFlags: 0
@@ -24725,6 +24737,7 @@ MonoBehaviour:
   - {fileID: 5153136095332640475, guid: adc2df73a535f48f09903015a0d1abe4, type: 3}
   - {fileID: 1367983366861570566, guid: 70e7d308b6e8e490da3ec5f66764c4e9, type: 3}
   Animator: {fileID: 0}
+  AudioManager: {fileID: 0}
 --- !u!114 &1993137787
 MonoBehaviour:
   m_ObjectHideFlags: 0

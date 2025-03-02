@@ -42,6 +42,8 @@ public class SceneLoader : MonoBehaviour
             childObjects[i] = players[i].transform.GetChild(1).gameObject;
         }
         PlayerTeamState.LoadCharacterProperties(childObjects);
+        GameSaveManager = GameObject.Find("GameSaveManager").GetComponent<GameSaveManager>();
+        GameSaveManager.SaveGame();
         SceneManager.LoadScene("BattleScene");
     }
 
@@ -50,9 +52,16 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene("MainScene");
+        GameSaveManager.LoadGame();
+    }
+
     public void LoadStartScene()
     {
         SceneManager.LoadScene("StartScene");
+        Invoke("LoadCurrentSave_", 0.5f);
     }
 
     public void ExitGame()

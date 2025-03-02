@@ -38,7 +38,7 @@ public class CharacterProperty : MonoBehaviour
 
     public ActioninBattleManager AIBManager;
 
-
+    public GameObject temp;
     public List<Buff> Buffs { get; private set; }
 
     public int Health { get; set; }
@@ -117,12 +117,14 @@ public class CharacterProperty : MonoBehaviour
 
     private void Start()
     {
-        CreateBar();
+        temp = GameObject.Find("GameData");
+        if (!temp) this.enabled = false;
+        if(!temp)CreateBar();
     }
 
     private void Update()
     {
-        _HPbar.fillAmount = Mathf.Lerp(_HPbar.fillAmount, (float)HP / (float)Health, Time.deltaTime * 5f);
+        if(!temp)_HPbar.fillAmount = Mathf.Lerp(_HPbar.fillAmount, (float)HP / (float)Health, Time.deltaTime * 5f);
     }
 
     public void CreateBar()
