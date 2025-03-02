@@ -62,16 +62,16 @@ public class Spawner : MonoBehaviour
             }
         }
 
+
         Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[0]]);
-        Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[0]]);
+        Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[1]]);
         if (PlayerCount == 3)
         {
             Player.Add(characterDictionary[PlayerTeamState.PlayerState.Professions[2]]);
         }
 
-        //Player.Add(characterDictionary[0]);
-        //Player.Add(characterDictionary[1]);
-        //Player.Add(characterDictionary[2]);
+
+
 
         //根据编号生成两个或者三个角色的人物
         //首先确定每个人的位置
@@ -177,6 +177,15 @@ public class Spawner : MonoBehaviour
             Instantiate(Player[0], transforms[0]);            
         }
 
+        nodeDictionary[Positions[0]].GetComponentInChildren<CharacterProperty>().HP = 
+            PlayerTeamState.PlayerState.characterProperties[0].HP;
+        nodeDictionary[Positions[1]].GetComponentInChildren<CharacterProperty>().HP =
+            PlayerTeamState.PlayerState.characterProperties[1].HP;
+        if (PlayerCount == 3)
+        {
+            nodeDictionary[Positions[2]].GetComponentInChildren<CharacterProperty>().HP =
+            PlayerTeamState.PlayerState.characterProperties[2].HP;
+        }
 
 
         //扫描成员、使其成为某个node下面的子对象，并将成员加入列表，方便后面比较速度决定行动顺序
