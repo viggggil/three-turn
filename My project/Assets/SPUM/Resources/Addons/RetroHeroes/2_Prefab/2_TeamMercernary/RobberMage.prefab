@@ -3141,7 +3141,6 @@ GameObject:
   - component: {fileID: -7790843790837895607}
   - component: {fileID: 6636641736026816727}
   - component: {fileID: -7635029304724554409}
-  - component: {fileID: 5560101884951019776}
   - component: {fileID: 9035437084785655169}
   m_Layer: 5
   m_Name: RobberMage
@@ -6886,20 +6885,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5560101884951019776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2284205943203354248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RandomAction: 0
-  targetPosition: 0
 --- !u!114 &9035437084785655169
 MonoBehaviour:
   m_ObjectHideFlags: 0
