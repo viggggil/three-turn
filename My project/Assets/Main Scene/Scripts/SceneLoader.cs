@@ -11,7 +11,6 @@ public class SceneLoader : MonoBehaviour
     public static int PlayerTwoProfession=0;
     public GameObject[] players;
     public PlayerTeamState PlayerTeamState;
-    public GameManager GameManager;
 
     private void Awake()
     {
