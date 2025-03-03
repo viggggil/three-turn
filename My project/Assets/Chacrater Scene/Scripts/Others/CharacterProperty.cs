@@ -7,31 +7,31 @@ using UnityEngine.UI;
 
 public class CharacterProperty : MonoBehaviour
 {
-    [SerializeField] public int maxHealth;//³õÊ¼ÉúÃüÖµ
-    [SerializeField] public  int health;//ÉúÃüÖµ
-    [SerializeField] private int code;//´úÂë
-    [SerializeField] private int attackPower;//¹¥»÷Á¦
-    [SerializeField] private int defensePower;//·ÀÓùÖµ
-    [SerializeField] private int physicalResistivity;//ÎïÀí¿¹ÐÔ
-    [SerializeField] private int magicalResistivity;//Ä§·¨¿¹ÐÔ
-    [SerializeField] private int minRandomSpeed;//×îÐ¡ËÙ¶È
-    [SerializeField] private int maxRandomSpeed;//×î´óËÙ¶È
-    [SerializeField] private int originalSpeed;//×î´óËÙ¶È
-    [SerializeField] private int speedThisRound;//×îÖÕËÙ¶È(±¾ÂÖ)
-    [SerializeField] private int critHitValue;//±©»÷Öµ
-    [SerializeField] private float critDMGRate;//±©»÷ÉËº¦ÂÊ
-    [SerializeField] private int position;//Î»ÖÃ
-    [SerializeField] private int targetPosition;//µã»÷Ñ¡ÔñµÄÒªÒÆ¶¯µ½µÄÎ»ÖÃ
-    [SerializeField] private bool ontheDefense;//ÕýÔÚ·ÀÓù
-    [SerializeField] private bool ontheMovement;//ÕýÔÚÒÆ¶¯
-    [SerializeField] private bool ontheAttack;//ÕýÔÚ¹¥»÷
-    [SerializeField] private bool isDying;//ÕýÔÚËÀÈ¥
-    [SerializeField] private bool isEnemy;//ÊÇµÐÈË
-    [SerializeField] public int SerialNumber;//±àºÅ
-    [SerializeField] public int atkTargetPosition;//µã»÷Ñ¡ÔñµÄÒª¹¥»÷µÄÎ»ÖÃ
-    [SerializeField] private int skillCode;//ÒªÊ¹ÓÃµÄ¼¼ÄÜµÄ±àºÅ
-    [SerializeField] private int residualStunRound = 0;//»¹ÒªÑ£ÔÎ¶àÉÙ¸ö»ØºÏ
-    [SerializeField] public int profession;//Ö°Òµ 0ÆïÊ¿1¹­¼ýÊÖ2ÄÁÊ¦3·¨Ê¦
+    [SerializeField] public int maxHealth;//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Öµ
+    [SerializeField] public  int health;//ï¿½ï¿½ï¿½ï¿½Öµ
+    [SerializeField] private int code;//ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private int attackPower;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private int defensePower;//ï¿½ï¿½ï¿½ï¿½Öµ
+    [SerializeField] private int physicalResistivity;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private int magicalResistivity;//Ä§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private int minRandomSpeed;//ï¿½ï¿½Ð¡ï¿½Ù¶ï¿½
+    [SerializeField] private int maxRandomSpeed;//ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    [SerializeField] private int originalSpeed;//ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
+    [SerializeField] private int speedThisRound;//ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½(ï¿½ï¿½ï¿½ï¿½)
+    [SerializeField] private int critHitValue;//ï¿½ï¿½ï¿½ï¿½Öµ
+    [SerializeField] private float critDMGRate;//ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½
+    [SerializeField] private int position;//Î»ï¿½ï¿½
+    [SerializeField] private int targetPosition;//ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Òªï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    [SerializeField] private bool ontheDefense;//ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½
+    [SerializeField] private bool ontheMovement;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
+    [SerializeField] private bool ontheAttack;//ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½
+    [SerializeField] private bool isDying;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥
+    [SerializeField] private bool isEnemy;//ï¿½Çµï¿½ï¿½ï¿½
+    [SerializeField] public int SerialNumber;//ï¿½ï¿½ï¿½
+    [SerializeField] public int atkTargetPosition;//ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+    [SerializeField] private int skillCode;//ÒªÊ¹ï¿½ÃµÄ¼ï¿½ï¿½ÜµÄ±ï¿½ï¿½
+    [SerializeField] private int residualStunRound = 0;//ï¿½ï¿½ÒªÑ£ï¿½Î¶ï¿½ï¿½Ù¸ï¿½ï¿½Øºï¿½
+    [SerializeField] public int profession;//Ö°Òµ 0ï¿½ï¿½Ê¿1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½Ê¦3ï¿½ï¿½Ê¦
 
     [SerializeField] public GameObject HPBar;
     [SerializeField] public Transform barPosition;
@@ -121,7 +121,7 @@ public class CharacterProperty : MonoBehaviour
     private void Start()
     {
         temp = GameObject.Find("GameData");
-        if (!temp) CreateBar();
+        if(!temp)CreateBar();
     }
 
     private void Update()
