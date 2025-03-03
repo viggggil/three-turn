@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 
@@ -58,19 +59,68 @@ public class ActioninBattleManager : MonoBehaviour
             if (characterProperty.OnTheAttack)
             {
                 //播放动画
-
-                switch (profession)
+                if (gameObject.GetComponent<CharacterProperty>().IsEnemy)
                 {
-                    case 0://骑士
-                        GetComponent<Knight>().Skills(characterProperty.SkillCode,characterProperty.AtkTargetPosition);
-                        PlayPhysicsAtkAnimation();
-                        Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
-                        break;
-                    case 1://待补充
-                        break;
-                    default:
-                        break;
+                    int enemycode = gameObject.GetComponent<CharacterProperty>().Code;
+                        switch (enemycode)
+                        { 
+                        case 27:
+                            gameObject.GetComponent<Enemy1>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 24:
+                            gameObject.GetComponent<Enemy2>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 23:
+                            gameObject.GetComponent<Enemy3>().skill2(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 28:
+                            gameObject.GetComponent<Enemy4>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 19:
+                            gameObject.GetComponent<Enemy5>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 21:
+                            gameObject.GetComponent<Enemy6>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        case 22:
+                            gameObject.GetComponent<Enemy7>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            break;
+                        default:
+                            break;
+                        }
                 }
+                
+                else
+                {
+                    switch (profession)
+                    {
+
+
+                        case 0://骑士
+                            GetComponent<Knight>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
+                            PlayPhysicsAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            break;
+                        case 1://弓箭手
+                            GetComponent<Archer>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
+                            PlayPhysicsAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            break;
+                        case 2://牧师
+                            GetComponent<Cleric>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
+                            PlayMagicAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            break;
+                        case 3://法师
+                            GetComponent<wizard>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
+                            PlayMagicAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                    
 
                 characterProperty.OnTheAttack = false;
             }
@@ -203,6 +253,11 @@ public class ActioninBattleManager : MonoBehaviour
     public void PlayPhysicsAtkAnimation()
     {
         _animator.SetTrigger("PhysicsAttack");
+    }
+
+    public void PlayMagicAtkAnimation()
+    {
+        _animator.SetTrigger("MagicAttack");
     }
 
     public void PlayDefAnimation()

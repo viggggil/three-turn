@@ -4757,6 +4757,7 @@ GameObject:
   - component: {fileID: -1830162389622719729}
   - component: {fileID: -1729145011762877840}
   - component: {fileID: -4808701526594952789}
+  - component: {fileID: -2190710002072213059}
   m_Layer: 5
   m_Name: RobberArcher
   m_TagString: Enemy
@@ -8460,15 +8461,17 @@ MonoBehaviour:
   ontheMovement: 0
   ontheAttack: 0
   isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
-  profession: 0
+  profession: 1
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-1830162389622719729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8510,6 +8513,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095d40ed9f30f9640bef68f9882cf291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2190710002072213059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3868928211636977453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &3869556695536475137
 GameObject:
   m_ObjectHideFlags: 0

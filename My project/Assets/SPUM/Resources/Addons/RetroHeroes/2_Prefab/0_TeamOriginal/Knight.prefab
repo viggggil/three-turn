@@ -12694,7 +12694,7 @@ MonoBehaviour:
   health: 10
   code: 0
   attackPower: 5
-  defensePower: 0
+  defensePower: 4
   physicalResistivity: 0
   magicalResistivity: 0
   minRandomSpeed: 1
@@ -12708,6 +12708,7 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -12717,6 +12718,7 @@ MonoBehaviour:
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-8815763339749779464
 MonoBehaviour:
   m_ObjectHideFlags: 0

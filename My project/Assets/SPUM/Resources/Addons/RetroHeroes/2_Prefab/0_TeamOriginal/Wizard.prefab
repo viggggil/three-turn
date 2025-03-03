@@ -2278,6 +2278,7 @@ GameObject:
   - component: {fileID: 6001169425651998229}
   - component: {fileID: 9083332612835605079}
   - component: {fileID: -7552301084382670981}
+  - component: {fileID: 924335968019485644}
   - component: {fileID: -4362231410627886500}
   - component: {fileID: -7411621381386855995}
   - component: {fileID: 7862068074062289095}
@@ -5967,6 +5968,18 @@ MonoBehaviour:
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
   profession: 0
   _animator: {fileID: 0}
+--- !u!114 &924335968019485644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367983366861570566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b40a35d3a0a0b147bac23ae8bd8a70f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-4362231410627886500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5997,15 +6010,17 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
-  profession: 0
+  profession: 3
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-7411621381386855995
 MonoBehaviour:
   m_ObjectHideFlags: 0

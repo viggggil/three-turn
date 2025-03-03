@@ -10018,6 +10018,7 @@ GameObject:
   - component: {fileID: 3256792821338427402}
   - component: {fileID: -4787072561017825400}
   - component: {fileID: -1828773209912316749}
+  - component: {fileID: 6926764286686879598}
   - component: {fileID: -1817288439867721035}
   m_Layer: 5
   m_Name: Archer
@@ -13720,8 +13721,8 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   code: 1
-  attackPower: 0
-  defensePower: 0
+  attackPower: 5
+  defensePower: 1
   physicalResistivity: 0
   magicalResistivity: 0
   minRandomSpeed: 0
@@ -13735,6 +13736,7 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -13744,6 +13746,7 @@ MonoBehaviour:
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &-1828773209912316749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13757,6 +13760,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SampleAtkRange: 
+--- !u!114 &6926764286686879598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8190809325552192013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc3c7d85ee345d4989286a89129f450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-1817288439867721035
 MonoBehaviour:
   m_ObjectHideFlags: 0

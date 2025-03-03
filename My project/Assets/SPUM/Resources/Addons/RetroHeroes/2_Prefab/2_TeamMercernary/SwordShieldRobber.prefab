@@ -3505,6 +3505,7 @@ GameObject:
   - component: {fileID: 6396336142845306378}
   - component: {fileID: -6800727098153088548}
   - component: {fileID: -6184350069470445415}
+  - component: {fileID: 3343360848684174078}
   m_Layer: 5
   m_Name: SwordShieldRobber
   m_TagString: Enemy
@@ -7208,6 +7209,7 @@ MonoBehaviour:
   ontheMovement: 0
   ontheAttack: 0
   isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
@@ -7217,6 +7219,7 @@ MonoBehaviour:
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &6396336142845306378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7258,6 +7261,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08aa44b1e46294b98d2680c4dd202f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3343360848684174078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2715894814686511391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &2716555566034338469
 GameObject:
   m_ObjectHideFlags: 0

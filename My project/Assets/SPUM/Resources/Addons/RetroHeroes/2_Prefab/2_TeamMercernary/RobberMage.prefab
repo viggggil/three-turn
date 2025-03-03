@@ -3141,6 +3141,8 @@ GameObject:
   - component: {fileID: -7790843790837895607}
   - component: {fileID: 6636641736026816727}
   - component: {fileID: -7635029304724554409}
+  - component: {fileID: 5560101884951019776}
+  - component: {fileID: 9035437084785655169}
   m_Layer: 5
   m_Name: RobberMage
   m_TagString: Enemy
@@ -6843,15 +6845,18 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
+  isEnemy: 1
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
-  profession: 0
+  profession: 2
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &6636641736026816727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6879,6 +6884,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d93bd68c327ab954499b075888554d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5560101884951019776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
+--- !u!114 &9035437084785655169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe33d0731f97e034f93e88b97415d824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2311959423601390980

@@ -36,6 +36,13 @@ public class Enemy6 : MonoBehaviour
         }
     }
 
+    public List<int> skill(int position)
+    {
+        List<int> list = new List<int>();
+        list.Add(position);
+        return list;
+    }
+
     //public void skill2(int position)
     //{
     //    GameObject enemy;

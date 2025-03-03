@@ -56,6 +56,8 @@ public class BattleManager : MonoBehaviour
         spawner.LoadPlayers();
         spawner.LoadEnemies();
 
+
+
         //确认载入后回合开始
         //RandomSpeed?.Invoke();
 
@@ -176,6 +178,11 @@ public class BattleManager : MonoBehaviour
         {
             character.GetComponent<ActioninBattleManager>().GetRandomSpeed();
             //buff
+        }
+
+        foreach (List<GameObject> AtkersList in ThoseAttackingPi)
+        {
+            AtkersList.Clear();
         }
 
         ActionOrder.Sort((b, a) =>

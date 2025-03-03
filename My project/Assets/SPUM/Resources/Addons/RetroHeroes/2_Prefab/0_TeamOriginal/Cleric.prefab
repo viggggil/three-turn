@@ -6399,6 +6399,7 @@ GameObject:
   - component: {fileID: 5570698633646883560}
   - component: {fileID: 487229318344770190}
   - component: {fileID: -5644461686617967603}
+  - component: {fileID: 6929115540763383541}
   - component: {fileID: 6850801225037254623}
   - component: {fileID: -8991475030002998001}
   m_Layer: 5
@@ -10107,15 +10108,29 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
-  profession: 0
+  profession: 2
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
   barPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
+  temp: {fileID: 0}
+--- !u!114 &6929115540763383541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5153136095332640475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a20f4051d4ccd7944afb87c14572dc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6850801225037254623
 MonoBehaviour:
   m_ObjectHideFlags: 0
