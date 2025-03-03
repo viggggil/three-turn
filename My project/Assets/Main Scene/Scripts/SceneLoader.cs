@@ -6,6 +6,7 @@ public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance { get; private set; }
     public GameSaveManager GameSaveManager;
+    public GameManager GameManager;
     public static int PlayerOneProfession=0;
     public static int PlayerTwoProfession=0;
     public GameObject[] players;
@@ -37,7 +38,10 @@ public class SceneLoader : MonoBehaviour
     public void LoadBattleScene()
     {
         GameObject[] childObjects=new GameObject[3];
-        for(int i = 0; i < 3; i++)
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        PlayerTeamState= GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
+        players = GameManager.Players;
+        for (int i = 0; i < 3; i++)
         {
             childObjects[i] = players[i].transform.GetChild(1).gameObject;
         }

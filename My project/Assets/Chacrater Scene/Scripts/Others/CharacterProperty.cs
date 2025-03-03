@@ -118,7 +118,6 @@ public class CharacterProperty : MonoBehaviour
     private void Start()
     {
         temp = GameObject.Find("GameData");
-        if (!temp) this.enabled = false;
         if(!temp)CreateBar();
     }
 
