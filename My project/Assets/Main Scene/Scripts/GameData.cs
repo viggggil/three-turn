@@ -16,7 +16,7 @@ public class GameData : MonoBehaviour
 
     public UIManager UIManager;
 
-    private Dictionary<int, int> ProfessionToMaxHealth = new Dictionary<int, int>()
+    public  Dictionary<int, int> ProfessionToMaxHealth = new Dictionary<int, int>()
     {
         {0,7 },{1,5},{2,4},{3,4 }
     };

@@ -5,10 +5,17 @@ using UnityEngine;
 public class test : MonoBehaviour
 {
     public PlayerTeamState PlayerTeamState;
+    public SceneLoader SceneLoader;
     void Start()
     {
+        SceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
         PlayerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();
-        Debug.Log(PlayerTeamState.PlayerState.characterProperties[0].maxHealth);
+    }
+
+    public void TestButton()
+    {
+        PlayerTeamState.PlayerState.BattleResult = 1;
+        SceneLoader.LoadMainScene();
     }
 
     // Update is called once per frame

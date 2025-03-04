@@ -102,6 +102,7 @@ public class Event_Map : MonoBehaviour
             case 11:
                 {
                     SceneLoader sceneLoader = GameObject.Find("SceneLoader").GetComponent<SceneLoader>();
+                    PlayerTeamState.PlayerState.EnemyType = 6;
                     sceneLoader.LoadBattleScene();
                     break;
                 }

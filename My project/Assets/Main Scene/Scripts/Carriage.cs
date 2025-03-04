@@ -146,7 +146,12 @@ public class Carriage : MonoBehaviour,IMove_
 
     public void LoadPlayer(int Profession)
     {
-        if (Profession == -1) return;
+        if (Profession == -1)
+        {
+            player = Instantiate(Professions[0], transform.position, Quaternion.identity);
+            player.transform.parent = transform;
+            return;
+        }
         player=Instantiate(Professions[Profession], transform.position, Quaternion.identity);
         player.transform.parent = transform;
         player.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));

@@ -160,6 +160,7 @@ public class UIManager : MonoBehaviour
         { EnemyType.RobberArcher,"这个强盗在用弓箭瞄准你" },
         { EnemyType.RobberMage,"什么？强盗还会魔法？" },
         { EnemyType.knifeRobber,"这个强盗喜欢cos艾吉奥" },
+        {EnemyType.blackWizard,"这是一个强大的黑巫师，他会使用魔法力量打击他的敌人" }
     };
     private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
     {
@@ -429,6 +430,7 @@ public class UIManager : MonoBehaviour
             PlayerThreeProfession = Profession;
             PlayerThree.sprite = Professions[Profession];
             ProfessionThree.text = ProfessionNames[Profession];
+            UpdateHealthSlider(GameData.gsd.curHealth[2], GameData.gsd.maxHealth[2], 2);
         }
     }
     IEnumerator Dialogue_()

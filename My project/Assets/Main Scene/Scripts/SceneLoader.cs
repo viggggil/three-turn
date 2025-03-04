@@ -59,7 +59,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainScene()
     {
         SceneManager.LoadScene("MainScene");
-        GameSaveManager.LoadGame();
+        Invoke("LoadCurrentSave_", 0.5f);
     }
 
     public void LoadStartScene()

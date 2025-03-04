@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using Unity.VisualScripting.FullSerializer;
 public class GameSaveManager : MonoBehaviour
 {
     public GameData gameData;
@@ -35,11 +36,19 @@ public class GameSaveManager : MonoBehaviour
             GameManager.LoadEvent();
             GameManager.LoadEnemy();
             GameManager.TurnNumber = gameData.gsd.TurnNumber;
-            GameManager.LoadPlayer(true);
             gameData.UpdateHealth(0,0);
             gameData.UpdateHealth(1, 0);
             gameData.UpdateHealth(2, 0);
             UIManager.dialogueIndex = gameData.gsd.dialogueIndex;
+            if (PlayerTeamState.PlayerState.BattleResult == 1) {
+                PlayerTeamState.PlayerState.BattleResult = -1;
+                GameManager.BattleWin();
+            }
+            if (PlayerTeamState.PlayerState.BattleResult == 0) {
+                PlayerTeamState.PlayerState.BattleResult = -1;
+                GameManager.BattleFailed();
+            }
+            GameManager.LoadPlayer(true);
             file.Close();
         }
     }

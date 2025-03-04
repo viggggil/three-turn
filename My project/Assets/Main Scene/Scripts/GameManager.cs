@@ -395,8 +395,8 @@ public class GameManager : MonoBehaviour
     {
         CloseSelect();
         foreach (var Player in Players)
-        {
-            Destroy(Player.transform.GetChild(0).gameObject);
+        { 
+            Destroy(Player.transform.GetChild(1).gameObject);
             if (Player.GetComponent<Carriage>().playerID == 1) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[0]);
             else if (Player.GetComponent<Carriage>().playerID == 2) Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[1]);
             else Player.GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
@@ -450,16 +450,17 @@ public class GameManager : MonoBehaviour
         {
             Vector3 position = new Vector3(-4.5f, 0.5f, -0.1f);
             GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
-            GameObject enemy = Instantiate(Enemies[6], position, Quaternion.identity);
+            GameObject enemy = Instantiate(Enemies[7], position, Quaternion.identity);
             enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
             enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
             enemy.transform.parent = enemyParent.transform;
             enemyParent.GetComponent<Enemy_Map>().Enemy = enemy;
             enemyParent.GetComponent<Enemy_Map>().SerialNumber = 16;
-            enemyParent.GetComponent<Enemy_Map>().type = 6;
+            enemyParent.GetComponent<Enemy_Map>().type = 7;
             Destroy(bar);
             Players[2].transform.position = new Vector3(-3.5f, 0.5f, -0.1f);
-            for(int i = 0, j = 0; i < 3; i++)
+            Players[2].GetComponent<Carriage>().playerID = 3;
+            for (int i = 0, j = 0; i < 3; i++)
             {
                 if (GameData.gsd.Professions[0] == i || GameData.gsd.Professions[1] == i)j++;
                 else
@@ -468,8 +469,9 @@ public class GameManager : MonoBehaviour
                     break;
                 }
             }
-            Players[2].GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);
-            Players[2].GetComponent<Carriage>().playerID = 3;
+/*            Players[2].GetComponent<Carriage>().LoadPlayer(GameData.gsd.Professions[2]);*/
+            GameData.gsd.maxHealth[2] = GameData.ProfessionToMaxHealth[GameData.gsd.Professions[2]];
+            GameData.gsd.curHealth[2] = GameData.gsd.maxHealth[2];
             BlackWizard = enemyParent;
             UIManager.Dialogue__();
         }
