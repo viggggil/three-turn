@@ -11,10 +11,12 @@ public class BattleManager : MonoBehaviour
 
     GameObject Spawner;
 
-    Spawner spawner;
+    Spawner _spawner;
 
     public int RoundCount;
     public int AC;
+
+    public bool isMonitoringACChange;
 
     public static Action RandomSpeed;
     public static Action ReadyStageStart;
@@ -33,7 +35,7 @@ public class BattleManager : MonoBehaviour
     private void Awake()
     {
         Spawner = GameObject.FindWithTag("Spawner");
-        spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
+        _spawner = Spawner.GetComponent<Spawner>();//找到Spawner并获得它的脚本
         
         ReadyStageStart += Initialization;
         RoundStart += ActInOrder;
@@ -48,13 +50,14 @@ public class BattleManager : MonoBehaviour
         //基本对象的载入
 
         RoundCount = 0;
+        isMonitoringACChange = true;
     }
 
     private void Start()
     {
         /*加载阶段*/
-        spawner.LoadPlayers();
-        spawner.LoadEnemies();
+        _spawner.LoadPlayers();
+        _spawner.LoadEnemies();
 
 
 
@@ -90,12 +93,16 @@ public class BattleManager : MonoBehaviour
 
     private void Update()
     {
-        if (DataofAttackers.ActionCount != DataofAttackers.ActionCount_P)
+        if (isMonitoringACChange)
         {
-            // 值发生变化时调用的方法
-            OnAcitionCountChanged();
-            DataofAttackers.ActionCount_P = DataofAttackers.ActionCount;
+            if (DataofAttackers.ActionCount != DataofAttackers.ActionCount_P)
+            {
+                // 值发生变化时调用的方法
+                OnAcitionCountChanged();
+                DataofAttackers.ActionCount_P = DataofAttackers.ActionCount;
+            }
         }
+        
 
         AC = DataofAttackers.ActionCount;
     }
@@ -121,7 +128,7 @@ public class BattleManager : MonoBehaviour
 
     public void NodeReset()
     {
-        foreach (GameObject node in spawner.nodeList)
+        foreach (GameObject node in _spawner.nodeList)
         {
             node.GetComponent<Nodes>().isSelected = false;
             _battleUIManager.CloseAllCircles(); 
@@ -164,6 +171,8 @@ public class BattleManager : MonoBehaviour
     {
         ActionOrder.Clear();
 
+        isMonitoringACChange = false;
+
         DataofAttackers.ActionCount = 0;
         DataofAttackers.ActionCount_P = 0;
 
@@ -193,6 +202,7 @@ public class BattleManager : MonoBehaviour
             return propA.SpeedThisRound.CompareTo(propB.SpeedThisRound);
         });//按照每个人的速度进行排序
 
+        isMonitoringACChange = true;
     }
 
     private int DamageCalculator(int rawDamage,int uncertainty,int diffofSpeed)
@@ -323,7 +333,7 @@ public class BattleManager : MonoBehaviour
         bool EnemyAllDead = true;
         for (int i = 0; i < 6; i++)
         {
-            if (spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
+            if (_spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
             {
                 PlayerAllDead = false;
             }
@@ -331,7 +341,7 @@ public class BattleManager : MonoBehaviour
 
         for (int i = 6; i < 12; i++)
         {
-            if (spawner.nodeList[i].GetComponent<Nodes>().isEnemyHere)
+            if (_spawner.nodeList[i].GetComponent<Nodes>().isEnemyHere)
             {
                 EnemyAllDead = false;
             }
@@ -347,7 +357,7 @@ public class BattleManager : MonoBehaviour
         bool PlayerAllDead = true;
         for (int i = 0; i < 6; i++)
         {
-            if (spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
+            if (_spawner.nodeList[i].GetComponent<Nodes>().isPlayerHere)
             {
                 PlayerAllDead = false;
             }

@@ -98,7 +98,15 @@ public class ActioninBattleManager : MonoBehaviour
 
                         case 0://∆Ô ø
                             GetComponent<Knight>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
-                            PlayPhysicsAtkAnimation();
+                            if (characterProperty.SkillCode == 2)
+                            {
+                                PlayMagicAtkAnimation();
+                            }
+                            else
+                            {
+                                PlayPhysicsAtkAnimation();
+                            }
+                                
                             Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                             break;
                         case 1://π≠º˝ ÷
@@ -253,6 +261,11 @@ public class ActioninBattleManager : MonoBehaviour
     public void PlayPhysicsAtkAnimation()
     {
         _animator.SetTrigger("PhysicsAttack");
+    }
+
+    public void PlayBowAtkAnimation()
+    {
+        _animator.SetTrigger("BowAttack");
     }
 
     public void PlayMagicAtkAnimation()
