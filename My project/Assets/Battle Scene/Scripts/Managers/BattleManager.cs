@@ -316,7 +316,7 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            Initialization();
+            ReadyStageStart?.Invoke();
         }
     }
 

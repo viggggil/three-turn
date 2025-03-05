@@ -23,7 +23,7 @@ public class Knight : MonoBehaviour
                 skill1(position);
                 break;
             case 1:
-                skill2Apply(position);
+                skill2(position);
                 break;
             case 2:
                 skill3();
@@ -33,7 +33,14 @@ public class Knight : MonoBehaviour
         }
     }
 
-    public List<int> skill(int position)
+    //public List<int> skill(int position)
+    //{
+    //    List<int> list = new List<int>();
+    //    list.Add(position);
+    //    return list;
+    //}
+
+    public List<int> skill1Range(int position)
     {
         List<int> list = new List<int>();
         list.Add(position);
@@ -50,17 +57,23 @@ public class Knight : MonoBehaviour
         enemyProperty.BeDamaged(dmg);
     }
 
-    public bool skill1Range(int position)
+    //public bool skill1Range(int position)
+    //{
+    //    //if(position > 6 && position < 9 || position < 12 && Spawner.nodeDictionary[position - 3] != null)
+    //    //{
+    //    //     //skill1(position);
+    //    //    return true;
+    //    //}
+    //    //return false;
+    //}
+
+    public bool skill1Bool(int position)
     {
-        if(position > 6 && position < 9 || position < 12 && Spawner.nodeDictionary[position - 3] != null)
-        {
-             //skill1(position);
-            return true;
-        }
-        return false;
+        return true;
     }
 
-    public List<int> skill2(int position)//攻击前方一排敌人
+    //public List<int> skill2(int position)//攻击前方一排敌人
+    public List<int> skill2Range(int position)//攻击前方一排敌人
     {
         //GameObject node;
         //Nodes _node;
@@ -103,7 +116,9 @@ public class Knight : MonoBehaviour
             return list;
     }
 
-    public void skill2Apply(int position)
+
+    //public void skill2Apply(int position)
+    public void skill2(int position)
     {
         //int dmg;
         //GameObject node;
@@ -139,8 +154,10 @@ public class Knight : MonoBehaviour
         //        enemyProperty.BeDamaged(dmg);
         //    }
         //}
+
+        //改造后逻辑
         List<int> list = new List<int>();
-        list = skill2(position);
+        list = skill2Range(position);
         int dmg;
 
         foreach (int targetPosition in list)
@@ -159,7 +176,9 @@ public class Knight : MonoBehaviour
 
     }
 
-    public bool skill2Range(int position)
+
+    //public bool skill2Range(int position)
+    public bool skill2Bool(int position)
     {
         //for (int i = 6; i < 10; i++)
         //{
@@ -171,8 +190,16 @@ public class Knight : MonoBehaviour
         //        continue;
         //}
         //return false;
+        if (position >= 6 && position <= 8)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
-        return true;
+        
     }
 
     public void skill3()
@@ -187,7 +214,8 @@ public class Knight : MonoBehaviour
         Buff.AddBuff(charaterProperty, DefendBuff);
     }
 
-    public bool skill3Range()
+    //public bool skill3Range()
+    public bool skill3Bool()
     {
         return true;
     }

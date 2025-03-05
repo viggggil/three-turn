@@ -27,6 +27,7 @@ public class BattleUIManager : MonoBehaviour
 
     [Header("Texts")]
     [SerializeField] Text RoundText;
+    [SerializeField] List<Text> Damages;
 
     public BattleManager _battleManager;
 
@@ -34,6 +35,7 @@ public class BattleUIManager : MonoBehaviour
     
     public List<Image> Circles;
     public List<Button> Buttons;
+    public Button RoundStartButton;
     public List<GameObject> Arrows;
     public List<GameObject> ArrowsofEnemies;
 
@@ -41,6 +43,10 @@ public class BattleUIManager : MonoBehaviour
     private void Awake()
     {
         List<Image> list = new List<Image>();
+        Damages = new List<Text>();
+
+        BattleManager.ReadyStageStart += EnableRoundStartButton;
+        BattleManager.RoundStart += DisableRoundStartButton;
     }
 
     private void Update()
@@ -50,6 +56,16 @@ public class BattleUIManager : MonoBehaviour
             OpenCharacterPropertyPanel();
             isOpenOfCharacterPropertyPanel = true;
         }
+    }
+
+    public void EnableRoundStartButton()
+    {
+        RoundStartButton.enabled = true;
+    }
+
+    public void DisableRoundStartButton()
+    {
+        RoundStartButton.enabled = false;
     }
 
     public void OpenOutOfRangePanel()
@@ -304,6 +320,18 @@ public class BattleUIManager : MonoBehaviour
         
     }
 
+    public void OnFixedRangeSkillClick()
+    {
+        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+
+        dataofNodes.SbisAttacking = false;
+        CloseArrowsOfEnemies();
+        CloseSkillsPanel();
+        EnableAllNodeButtons();
+        CloseActionPanel();
+        DisplaySword();
+    }
+
     public void SkillSelectionSucceeded()
     {
         dataofNodes.SbisAttacking = false;
@@ -326,9 +354,17 @@ public class BattleUIManager : MonoBehaviour
 
     public void OpenArrowsOfEnemies()
     {
-        foreach (GameObject i in ArrowsofEnemies)
+        //foreach (GameObject i in ArrowsofEnemies)
+        //{
+        //    i.SetActive(true);
+        //}
+
+        for (int i = 0; i < 6; i++)
         {
-            i.SetActive(true);
+            if (Spawner.nodeDictionary[i + 6].GetComponent<Nodes>().isEnemyHere)
+            {
+                ArrowsofEnemies[i].SetActive(true);
+            }
         }
     }
 

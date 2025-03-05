@@ -168,7 +168,7 @@ public class Nodes : MonoBehaviour
                         switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
                         {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
                             case 0://技能1
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill1Range(nodeCode))
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill1Bool(nodeCode))
                                 {//把这个点代进去，如果在范围内，指派成功
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
                                     battleUIManager.SkillSelectionSucceeded();
@@ -185,7 +185,7 @@ public class Nodes : MonoBehaviour
                                 break;
 
                             case 1:
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill2Range(nodeCode))
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill2Bool(nodeCode))
                                 {//把这个点代进去，如果在范围内，指派成功
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
                                     battleUIManager.SkillSelectionSucceeded();
@@ -198,30 +198,30 @@ public class Nodes : MonoBehaviour
                                     //也是回去改UI
                                 }
                                 break;
-                            case 2:
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill3Range())
-                                {//把这个点代进去，如果在范围内，指派成功
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
-                                    battleUIManager.SkillSelectionSucceeded();
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
-                                    //回去改UI
-                                }
-                                else
-                                {
-                                    battleUIManager.SkillSelectionFailed();
-                                    //也是回去改UI
-                                }
-                                break;
+                            //case 2:
+                            //    if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Knight>().skill3Bool())
+                            //    {//把这个点代进去，如果在范围内，指派成功
+                            //        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                            //        battleUIManager.SkillSelectionSucceeded();
+                            //        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                            //        //回去改UI
+                            //    }
+                            //    else
+                            //    {
+                            //        battleUIManager.SkillSelectionFailed();
+                            //        //也是回去改UI
+                            //    }
+                            //    break;
                             default:
                                 break;
                         }
                         break;
-
-                    case 1://弓箭手
+                    //弓箭手
+                    case 1:
                         switch (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().SkillCode)
                         {//根据用的是哪个技能和点的哪里来判断能否成功指派行动
                             case 0://技能1
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skill1Bool())
                                 {//把这个点代进去，如果在范围内，指派成功
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
                                     battleUIManager.SkillSelectionSucceeded();
@@ -237,22 +237,22 @@ public class Nodes : MonoBehaviour
                                 }
                                 break;
 
-                            case 1:
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
-                                {//把这个点代进去，如果在范围内，指派成功
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
-                                    battleUIManager.SkillSelectionSucceeded();
-                                    Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
-                                    //回去改UI
-                                }
-                                else
-                                {
-                                    battleUIManager.SkillSelectionFailed();
-                                    //也是回去改UI
-                                }
-                                break;
+                            //case 1:
+                            //    if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skill2Bool())
+                            //    {//把这个点代进去，如果在范围内，指派成功
+                            //        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
+                            //        battleUIManager.SkillSelectionSucceeded();
+                            //        Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().OnTheAttack = true;
+                            //        //回去改UI
+                            //    }
+                            //    else
+                            //    {
+                            //        battleUIManager.SkillSelectionFailed();
+                            //        //也是回去改UI
+                            //    }
+                            //    break;
                             case 2:
-                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skillRange())
+                                if (Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<Archer>().skill3Bool())
                                 {//把这个点代进去，如果在范围内，指派成功
                                     Spawner.nodeDictionary[dataofNodes.SelectedPNodeCode].GetComponentInChildren<CharacterProperty>().AtkTargetPosition = nodeCode;
                                     battleUIManager.SkillSelectionSucceeded();
@@ -391,7 +391,7 @@ public class Nodes : MonoBehaviour
                     dataofNodes.isENodesSelected[nodeCode - 6] = true;
                     isSelected = true;
                     dataofNodes.anyESelected = true;
-                    enemySkillsPanel.gameObject.SetActive(true);
+                    //enemySkillsPanel.gameObject.SetActive(true);
                 }
 
 
@@ -413,7 +413,7 @@ public class Nodes : MonoBehaviour
                         dataofNodes.isENodesSelected[nodeCode - 6] = false;
                         isSelected = false;
                         dataofNodes.anyESelected = false;
-                        enemySkillsPanel.gameObject.SetActive(false);
+                        //enemySkillsPanel.gameObject.SetActive(false);
                     }
                     else
                     {

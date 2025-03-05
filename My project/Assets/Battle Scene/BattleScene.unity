@@ -4009,7 +4009,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 5
 --- !u!222 &452533117
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11997,6 +11997,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnFixedRangeSkillClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetSkillCode2
       objectReference: {fileID: 0}
@@ -14013,6 +14017,7 @@ MonoBehaviour:
   characterPropertyCardPrefab: {fileID: 4906887625729257463, guid: 142174401e2294847bc49bb9c76cfdd5, type: 3}
   characterPropertyCardTransform: {fileID: 1644865977}
   RoundText: {fileID: 1810569059}
+  Damages: []
   _battleManager: {fileID: 642671760}
   dataofNodes: {fileID: 11400000, guid: 4153a86b1b4d37b45b3224da399c0d1f, type: 2}
   Circles:
@@ -14041,6 +14046,7 @@ MonoBehaviour:
   - {fileID: 1312155001}
   - {fileID: 1723300506}
   - {fileID: 1957662655}
+  RoundStartButton: {fileID: 1022840824}
   Arrows:
   - {fileID: 387768920}
   - {fileID: 1240131318}
@@ -14571,7 +14577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4400752996076427960, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_Text
-      value: "\u653B\u51FB\u4E00\u5217\u7684\u654C\u4EBA"
+      value: "\u653B\u51FB\u4E00\u5217\u7684\u654C\u4EBA\n(\u53EA\u80FD\u653B\u51FB\u5230\u524D\u6392)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400752996076427960, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -14607,11 +14617,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5618435953271589713, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 202.43
       objectReference: {fileID: 0}
     - target: {fileID: 5618435953271589713, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5618435953271589713, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 8473939648600656849, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_Name
@@ -15886,7 +15900,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 3
 --- !u!222 &1935496373
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16619,6 +16633,10 @@ PrefabInstance:
     - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnFixedRangeSkillClick
       objectReference: {fileID: 0}
     - target: {fileID: 4839155997330388518, guid: 083c95acd2b6f2d448fa722494cc6e66, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -21761,8 +21779,8 @@ SceneRoots:
   - {fileID: 285189567}
   - {fileID: 2114057997}
   - {fileID: 1667650786}
-  - {fileID: 2072987017}
   - {fileID: 42024044}
+  - {fileID: 2072987017}
   - {fileID: 417437960}
   - {fileID: 443829894}
   - {fileID: 961399789}

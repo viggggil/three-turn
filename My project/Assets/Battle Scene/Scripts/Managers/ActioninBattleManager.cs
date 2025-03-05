@@ -110,9 +110,18 @@ public class ActioninBattleManager : MonoBehaviour
                             Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                             break;
                         case 1://¹­¼ýÊÖ
-                            GetComponent<Archer>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
-                            PlayPhysicsAtkAnimation();
-                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            if (characterProperty.SkillCode == 1)
+                            {
+                                GetComponent<Archer>().Skills(characterProperty.SkillCode, characterProperty.Position);
+                                PlayBowAtkAnimation();
+                                Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            }
+                            else
+                            {
+                                GetComponent<Archer>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
+                                PlayBowAtkAnimation();
+                                Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
+                            }
                             break;
                         case 2://ÄÁÊ¦
                             GetComponent<Cleric>().Skills(characterProperty.SkillCode, characterProperty.AtkTargetPosition);
