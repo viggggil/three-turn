@@ -67,14 +67,18 @@ public class ActioninBattleManager : MonoBehaviour
                         case 27:
                             gameObject.GetComponent<Enemy1>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
                             break;
-                        case 24:
+                        case 24://heresycleric 2
                             gameObject.GetComponent<Enemy2>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            PlayPhysicsAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                             break;
                         case 23:
                             gameObject.GetComponent<Enemy3>().skill2(gameObject.GetComponent<EnemyAI>().targetPosition);
                             break;
-                        case 28:
+                        case 26://daggerrobber 4
                             gameObject.GetComponent<Enemy4>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            PlayPhysicsAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                             break;
                         case 19:
                             gameObject.GetComponent<Enemy5>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
@@ -82,8 +86,10 @@ public class ActioninBattleManager : MonoBehaviour
                         case 21:
                             gameObject.GetComponent<Enemy6>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
                             break;
-                        case 22:
+                        case 22://robbermage 7
                             gameObject.GetComponent<Enemy7>().skill1(gameObject.GetComponent<EnemyAI>().targetPosition);
+                            PlayMagicAtkAnimation();
+                            Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Sword").gameObject);
                             break;
                         default:
                             break;
@@ -144,6 +150,7 @@ public class ActioninBattleManager : MonoBehaviour
             else if (characterProperty.OnTheDefense)
             {
                 PlayDefAnimation();
+                Destroy(Spawner.nodeDictionary[characterProperty.Position].transform.Find("Shield").gameObject);
                 //播放动画
             }
             else if (characterProperty.OnTheMovement)
@@ -170,7 +177,7 @@ public class ActioninBattleManager : MonoBehaviour
     }
 
     private void RandomSpeed()
-    {//用于订阅的提供具体速度的函数（已弃用）
+    {//用于订阅的提供具体速度的函数(已弃用)
         characterProperty.SpeedThisRound = UnityEngine.Random.Range(characterProperty.MinRandomSpeed, characterProperty.MaxRandomSpeed);
 
         
@@ -315,7 +322,13 @@ public class ActioninBattleManager : MonoBehaviour
         {
             Spawner.nodeDictionary[characterProperty.Position].GetComponent<Nodes>().isEnemyHere = false;
         }
+
+        battleManager.DeadCount++;
+
+        
     }
+
+    
 
     public void RemoveThisFromList()
     {

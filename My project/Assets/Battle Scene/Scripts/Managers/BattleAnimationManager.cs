@@ -26,4 +26,12 @@ public class BattleAnimationManager : MonoBehaviour
     {
         DataofAttackers.ActionCount++;
     }
+
+    public void DestroyIcon()
+    {
+        GameObject parentObject = transform.parent.gameObject;
+
+        Destroy(Spawner.nodeDictionary[parentObject. GetComponent<CharacterProperty>().Position].transform.Find("Shield").gameObject);
+        Destroy(Spawner.nodeDictionary[parentObject. GetComponent<CharacterProperty>().Position].transform.Find("Sword").gameObject);
+    }
 }

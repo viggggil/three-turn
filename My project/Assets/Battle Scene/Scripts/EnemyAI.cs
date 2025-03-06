@@ -12,13 +12,16 @@ public class EnemyAI : MonoBehaviour
 
     public int targetPosition;
 
+    //确定操作、找到对象、找到范围、ontheattack、使用技能
+
     private void Awake()
     {
         _battlemanager = GetComponent<ActioninBattleManager>().battleManager;
         _characterproperty = GetComponent<CharacterProperty>();
 
-        BattleManager.ReadyStageStart += GetTarget;
+        
         BattleManager.ReadyStageStart += ConfirmAcition;
+        BattleManager.ReadyStageStart += GetTarget;
     }
 
     public void GetTarget()
@@ -33,7 +36,7 @@ public class EnemyAI : MonoBehaviour
     {
         RandomAction = UnityEngine.Random.Range(0, 2);
 
-        if (_battlemanager.RoundCount == 1)
+        if (RandomAction == 1)
         {//执行攻击
             _characterproperty.OnTheAttack = true;
             gameObject.GetComponent<ActioninBattleManager>().GonnaAttack(SkillRanges(_characterproperty.Code));//分配攻击

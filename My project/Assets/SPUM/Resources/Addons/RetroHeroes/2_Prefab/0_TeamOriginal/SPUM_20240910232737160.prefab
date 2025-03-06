@@ -14951,6 +14951,7 @@ MonoBehaviour:
   battleManager: {fileID: 0}
   dataofAttackers: {fileID: 11400000, guid: 1a89d09af8fcc5e43b4db453a657e22e, type: 2}
   profession: 0
+  _animator: {fileID: 0}
 --- !u!114 &-4431818373453262890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14981,14 +14982,19 @@ MonoBehaviour:
   ontheDefense: 0
   ontheMovement: 0
   ontheAttack: 0
+  isDying: 0
+  isEnemy: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
   profession: 0
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
-  barPosition: {fileID: 0}
+  SpeedPad: {fileID: 1930033410419098141, guid: fa2b88af1fcd2a84589aefee0408a354, type: 3}
+  PlayerPosition: {fileID: 0}
   _HPbar: {fileID: 0}
+  AIBManager: {fileID: 0}
+  temp: {fileID: 0}
 --- !u!114 &6349052897271054375
 MonoBehaviour:
   m_ObjectHideFlags: 0

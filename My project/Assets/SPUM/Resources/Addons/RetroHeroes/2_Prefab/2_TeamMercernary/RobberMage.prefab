@@ -3142,6 +3142,7 @@ GameObject:
   - component: {fileID: 6636641736026816727}
   - component: {fileID: -7635029304724554409}
   - component: {fileID: 9035437084785655169}
+  - component: {fileID: 171748896724361859}
   m_Layer: 5
   m_Name: RobberMage
   m_TagString: Enemy
@@ -6829,13 +6830,13 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   code: 22
-  attackPower: 0
+  attackPower: 4
   defensePower: 0
   physicalResistivity: 0
   magicalResistivity: 0
   minRandomSpeed: 0
-  maxRandomSpeed: 0
-  originalSpeed: 0
+  maxRandomSpeed: 1
+  originalSpeed: 2
   speedThisRound: 0
   critHitValue: 0
   critDMGRate: 0
@@ -6852,7 +6853,8 @@ MonoBehaviour:
   residualStunRound: 0
   profession: 2
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
-  barPosition: {fileID: 0}
+  SpeedPad: {fileID: 1930033410419098141, guid: fa2b88af1fcd2a84589aefee0408a354, type: 3}
+  PlayerPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
   temp: {fileID: 0}
@@ -6897,6 +6899,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe33d0731f97e034f93e88b97415d824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &171748896724361859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2284205943203354248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &2311959423601390980
 GameObject:
   m_ObjectHideFlags: 0

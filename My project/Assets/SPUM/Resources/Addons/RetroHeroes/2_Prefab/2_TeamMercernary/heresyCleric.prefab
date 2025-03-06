@@ -11348,6 +11348,7 @@ GameObject:
   - component: {fileID: 1052885281455311542}
   - component: {fileID: 7535298436392928925}
   - component: {fileID: -5286080956723882123}
+  - component: {fileID: -301334944711512245}
   m_Layer: 5
   m_Name: heresyCleric
   m_TagString: Enemy
@@ -15065,12 +15066,12 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   code: 24
-  attackPower: 0
-  defensePower: 0
+  attackPower: 2
+  defensePower: 2
   physicalResistivity: 0
   magicalResistivity: 0
   minRandomSpeed: 0
-  maxRandomSpeed: 0
+  maxRandomSpeed: 3
   originalSpeed: 0
   speedThisRound: 0
   critHitValue: 0
@@ -15088,7 +15089,8 @@ MonoBehaviour:
   residualStunRound: 0
   profession: 3
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
-  barPosition: {fileID: 0}
+  SpeedPad: {fileID: 1930033410419098141, guid: fa2b88af1fcd2a84589aefee0408a354, type: 3}
+  PlayerPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
   temp: {fileID: 0}
@@ -15133,6 +15135,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5246caeef016c6640978317752b1176f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-301334944711512245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9072037889248276708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081431c77fe68b749a6de906d6eb3cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RandomAction: 0
+  targetPosition: 0
 --- !u!1 &9078744334700492329
 GameObject:
   m_ObjectHideFlags: 0

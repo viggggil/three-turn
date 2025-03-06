@@ -15,6 +15,7 @@ public class BattleManager : MonoBehaviour
 
     public int RoundCount;
     public int AC;
+    public int DeadCount = 0;
 
     public bool isMonitoringACChange;
 
@@ -55,6 +56,8 @@ public class BattleManager : MonoBehaviour
 
     private void Start()
     {
+
+        _battleUIManager.EnableRoundStartButton();
         /*加载阶段*/
         _spawner.LoadPlayers();
         _spawner.LoadEnemies();
@@ -138,7 +141,11 @@ public class BattleManager : MonoBehaviour
 
     public void ActInOrder()
     {
-        ActionOrder[0].GetComponent<ActioninBattleManager>().Act();
+        if (ActionOrder[0] != null)
+        {
+            ActionOrder[0].GetComponent<ActioninBattleManager>().Act();
+        }
+        
         //实际上是所有人都行动了
         //foreach (GameObject ThisCharacter in ActionOrder)
         //{
@@ -150,7 +157,7 @@ public class BattleManager : MonoBehaviour
     {
          
 
-        if (DataofAttackers.ActionCount < ActionOrder.Count)
+        if (DataofAttackers.ActionCount < (ActionOrder.Count/* - DeadCount*/))
         {
             if (ActionOrder[DataofAttackers.ActionCount] != null)
             {
@@ -175,6 +182,7 @@ public class BattleManager : MonoBehaviour
 
         DataofAttackers.ActionCount = 0;
         DataofAttackers.ActionCount_P = 0;
+        DeadCount = 0;
 
         RoundCount++;
 
@@ -187,6 +195,7 @@ public class BattleManager : MonoBehaviour
         {
             character.GetComponent<ActioninBattleManager>().GetRandomSpeed();
             //buff
+            //character.GetComponent<CharacterProperty>().UpdateSpeedText();
         }
 
         foreach (List<GameObject> AtkersList in ThoseAttackingPi)

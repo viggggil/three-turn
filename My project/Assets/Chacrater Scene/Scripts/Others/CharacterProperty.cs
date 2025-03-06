@@ -34,12 +34,17 @@ public class CharacterProperty : MonoBehaviour
     [SerializeField] public int profession;//ְҵ 0��ʿ1������2��ʦ3��ʦ
 
     [SerializeField] public GameObject HPBar;
-    [SerializeField] public Transform barPosition;
+    [SerializeField] public GameObject SpeedPad;
+    [SerializeField] public Transform PlayerPosition;
     [SerializeField] public Image _HPbar;
 
     public ActioninBattleManager AIBManager;
 
     public GameObject temp;
+
+    GameObject newBar;
+    GameObject newPad;
+
     public List<Buff> Buffs { get; private set; }
 
     public int Health { get; set; }
@@ -113,7 +118,7 @@ public class CharacterProperty : MonoBehaviour
         OriginalSpeed = originalSpeed;
         ResidualStunRound = residualStunRound;
         IsEnemy = isEnemy;
-        barPosition = gameObject.transform;
+        PlayerPosition = gameObject.transform;
 
         AIBManager = GetComponent<ActioninBattleManager>();
     }
@@ -121,7 +126,8 @@ public class CharacterProperty : MonoBehaviour
     private void Start()
     {
         temp = GameObject.Find("GameData");
-        if(!temp)CreateBar();
+        if(!temp) CreateBar();
+        if(!temp) CreateSpeedPad();
     }
 
     private void Update()
@@ -131,12 +137,37 @@ public class CharacterProperty : MonoBehaviour
 
     public void CreateBar()
     {
-        Vector3 thisBarPosition = new Vector3(barPosition.position.x, barPosition.position.y + 2f, barPosition.position.z);
-        GameObject newBar = Instantiate(HPBar, thisBarPosition, Quaternion.identity);
+        Vector3 thisBarPosition = new Vector3(PlayerPosition.position.x, PlayerPosition.position.y + 2f, PlayerPosition.position.z);
+        newBar = Instantiate(HPBar, thisBarPosition, Quaternion.identity);
         newBar.transform.SetParent(gameObject.transform);
 
         HealthBar healthbar = newBar.GetComponent<HealthBar>();
         _HPbar = healthbar.fillAmountImage;
+
+        UpdateHPText();
+    }
+
+    public void CreateSpeedPad()
+    {
+        Vector3 thisPadPosition = new Vector3(PlayerPosition.position.x, PlayerPosition.position.y - 0.15f, PlayerPosition.position.z);
+        newPad = Instantiate(SpeedPad, thisPadPosition, Quaternion.identity);
+        newPad.transform.SetParent(gameObject.transform);
+
+
+        UpdateSpeedText();
+    }
+
+    public void UpdateHPText()
+    {
+        string HPtext = HP.ToString();
+        string MaxHPtext = maxHealth.ToString();
+        string FinalText = HPtext + " / " + MaxHPtext;
+        newBar.GetComponentInChildren<Text>().text = FinalText;
+    }
+
+    public void UpdateSpeedText()
+    {//getcomponent优先取先拿到的component
+        newPad.GetComponentInChildren<Text>().text = SpeedThisRound.ToString();
     }
 
     public void BeDamaged(int damage)
@@ -144,6 +175,7 @@ public class CharacterProperty : MonoBehaviour
         this.HP -= damage;
 
         AIBManager.PlayHurtAnimation();
+        UpdateHPText();
     }
 
     public void AddBuff(Buff buff)

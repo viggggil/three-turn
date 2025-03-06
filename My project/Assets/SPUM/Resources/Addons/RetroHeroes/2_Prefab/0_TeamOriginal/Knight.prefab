@@ -12709,13 +12709,15 @@ MonoBehaviour:
   ontheMovement: 0
   ontheAttack: 0
   isDying: 0
+  isEnemy: 0
   SerialNumber: 0
   atkTargetPosition: 0
   skillCode: 0
   residualStunRound: 0
   profession: 0
   HPBar: {fileID: 1930033410419098141, guid: c7d8712813144d641b89a03cb2d31162, type: 3}
-  barPosition: {fileID: 0}
+  SpeedPad: {fileID: 1930033410419098141, guid: fa2b88af1fcd2a84589aefee0408a354, type: 3}
+  PlayerPosition: {fileID: 0}
   _HPbar: {fileID: 0}
   AIBManager: {fileID: 0}
   temp: {fileID: 0}
