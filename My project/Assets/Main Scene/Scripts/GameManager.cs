@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
                 moveList.Add(cell);
             }
         }
-
         toMove = true;
     }
     public bool TestDistance(GameObject thisEvent)
@@ -252,17 +251,39 @@ public class GameManager : MonoBehaviour
         }
         if (BlackWizard)
         {
-            IMove_ enemy = BlackWizard.GetComponent<Enemy_Map>();
-            if (GameData.gsd.PathIndex==21)
-            {
-                GameFailed();
-            }
-            for (int i = 0; i < 7; i++)
-            {
-                enemy.Move(Path[GameData.gsd.PathIndex]);
-                GameData.gsd.PathIndex++;
-            }
+            BlackWizardMove(GameData.gsd.PathIndex);
         }
+    }
+
+    public void BlackWizardMove(int i)
+    {
+        IMove_ enemy = BlackWizard.GetComponent<Enemy_Map>();
+        if (GameData.gsd.PathIndex == 21)
+        {
+            GameFailed();
+            return;
+        }
+        else if(GameData.gsd.PathIndex == 6)
+        {
+            enemy.Move(Path[GameData.gsd.PathIndex]);
+            GameData.gsd.PathIndex++;
+            return;
+        }
+        else if (GameData.gsd.PathIndex == 13)
+        {
+            enemy.Move(Path[GameData.gsd.PathIndex]);
+            GameData.gsd.PathIndex++;
+            return;
+        }
+        enemy.Move(Path[GameData.gsd.PathIndex]);
+        StartCoroutine(Move_(i));
+        GameData.gsd.PathIndex++;
+    }
+
+    IEnumerator Move_(int i)
+    {
+        yield return new WaitForSeconds(0.31f);
+        BlackWizardMove(i + 1);
     }
     public void GenerateEvents()
     {
@@ -441,8 +462,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < 3; i++)
         {
             if (!PlayerTeamState.PlayerState.isHere[i]) continue;
-            GameData.gsd.curHealth[i] = PlayerTeamState.PlayerState.characterProperties[i].GetComponent
-                <CharacterProperty>().health;
+            GameData.gsd.curHealth[i] = PlayerTeamState.PlayerState.characterProperties[i].health;
             GameData.UpdateHealth(i, 0);
             if (GameData.gsd.curHealth[i] == 0) Players[i].GetComponent<Carriage>().Dead();
         }
@@ -451,6 +471,7 @@ public class GameManager : MonoBehaviour
             Vector3 position = new Vector3(-4.5f, 0.5f, -0.1f);
             GameObject enemyParent = Instantiate(EnemyParent, position, Quaternion.identity);
             GameObject enemy = Instantiate(Enemies[7], position, Quaternion.identity);
+            enemyParent.tag = "SpecialEvent";
             enemy.GetComponent<RectTransform>().Translate(new Vector3(0f, -0.3f, 0f));
             enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
             enemy.transform.parent = enemyParent.transform;
@@ -473,10 +494,14 @@ public class GameManager : MonoBehaviour
             GameData.gsd.maxHealth[2] = GameData.ProfessionToMaxHealth[GameData.gsd.Professions[2]];
             GameData.gsd.curHealth[2] = GameData.gsd.maxHealth[2];
             BlackWizard = enemyParent;
+            TurnStart();
+            UIManager.SpeakerName.text = "æ∆π›¿œ∞Â";
+            UIManager.Speaker.sprite = UIManager.Professions[5];
             UIManager.Dialogue__();
         }
         if (PlayerTeamState.PlayerState.EnemyType == 7)
         {
+            Players[2].GetComponent<Carriage>().playerID = 3;
             UIManager.BossFight = true;
             UIManager.Dialogue__();
         }
@@ -495,13 +520,11 @@ public class GameManager : MonoBehaviour
             if (GameData.gsd.curHealth[0] == 0 && GameData.gsd.curHealth[1] == 0 && GameData.gsd.curHealth[2] == 0) GameFailed();
         }
     }
-
     public void GameFailed()
     {
         UIManager.GameFailedPanel.SetActive(true);
         UIManager.blockPanel.SetActive(true);
     }
-
     public void BranchMission()
     {
         Vector3 position = new Vector3(6.5f, 3.5f, -0.1f);
@@ -525,6 +548,4 @@ public class GameManager : MonoBehaviour
         }
         Invoke("ExposeBar_", 1f);
     }
-
-
 }

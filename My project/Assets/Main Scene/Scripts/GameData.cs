@@ -54,8 +54,6 @@ public class GameData : MonoBehaviour
         }
     }
 
-    
-
     public void Start()
     {
         playerTeamState = GameObject.Find("PlayerTeamState").GetComponent<PlayerTeamState>();

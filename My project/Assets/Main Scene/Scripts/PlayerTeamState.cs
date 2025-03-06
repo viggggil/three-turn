@@ -57,8 +57,10 @@ public class PlayerTeamState : MonoBehaviour
 
     public void LoadCharacterProperties(GameObject[] arr)
     {
+        GameData = GameObject.Find("GameData").GetComponent<GameData>();
         for(int i = 0; i < 3; i++)
         {
+            if (arr[i] == null) continue; 
             CharacterProperty temp = arr[i].GetComponent<CharacterProperty>();
             if (temp)
             {
@@ -68,6 +70,5 @@ public class PlayerTeamState : MonoBehaviour
             }
             else PlayerState.characterProperties[i] = null;
         }
-
     }
 }

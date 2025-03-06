@@ -160,7 +160,8 @@ public class UIManager : MonoBehaviour
         { EnemyType.RobberArcher,"这个强盗在用弓箭瞄准你" },
         { EnemyType.RobberMage,"什么？强盗还会魔法？" },
         { EnemyType.knifeRobber,"这个强盗喜欢cos艾吉奥" },
-        {EnemyType.blackWizard,"这是一个强大的黑巫师，他会使用魔法力量打击他的敌人" }
+        {EnemyType.blackWizard,"这是一个强大的黑巫师，他会使用魔法力量打击他的敌人" },
+        { EnemyType.robberBoss,"beta版本的最终boss\n一个身披铠甲的强大敌人" }
     };
     private Dictionary<EventType, string> EventNameDictionary = new Dictionary<EventType, string>()
     {
@@ -284,7 +285,7 @@ public class UIManager : MonoBehaviour
     {
         blockPanel.SetActive(true);
         selectedEvent = thisEvent.GetComponent<Event_Map>();
-        if (type >= 2 && type <= 4 && FirstArriveTown)
+        if (type >= 2 && type <= 4 && FirstArriveTown &&!BossFight)
         {
             FirstArriveTown = false;
             Dialogue.SetActive(true);
@@ -293,9 +294,10 @@ public class UIManager : MonoBehaviour
         else if (type >= 2 && type <= 4 && BossFight)
         {
             EnemyInfo.SetActive(true);
-            eButton1.SetActive(false);
+            eButton1.SetActive(true);
             eButton2.SetActive(false);
             bsButton.SetActive(false);
+            eButton1text.text = "战斗";
             EnemyDescribe.text = EnemyDescribeDictionary[(EnemyType)8];
             EnemyName.text = EnemyNameDictionary[(EnemyType)8];
         }
@@ -436,6 +438,7 @@ public class UIManager : MonoBehaviour
     IEnumerator Dialogue_()
     {
         dialogue.text = dialogues[dialogueIndex];
+        Dialogue.SetActive(true);
         blockPanel.SetActive(true);
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         dialogueIndex++;
@@ -444,11 +447,9 @@ public class UIManager : MonoBehaviour
         {
             Dialogue.SetActive(false);
             blockPanel.SetActive(false);
-            SpeakerName.text = "酒馆老板";
-            Speaker.sprite = Professions[5];
             GameManager.ExposeBar();
         }
-        else if (dialogueIndex == 7)
+        else if (dialogueIndex == 8)
         {
             SpeakerName.text = ProfessionNames[PlayerThreeProfession];
             Speaker.sprite = Professions[PlayerThreeProfession];
@@ -458,10 +459,12 @@ public class UIManager : MonoBehaviour
         {
             SpeakerName.text = "镇长";
             Speaker.sprite = Professions[4];
+            dialogueIndex++;
+            GameData.gsd.dialogueIndex = dialogueIndex;
             Dialogue.SetActive(false);
             blockPanel.SetActive(false);
         }
-        else if (dialogueIndex == 12)
+        else if (dialogueIndex == 13)
         {
             Dialogue.SetActive(false);
             blockPanel.SetActive(false);

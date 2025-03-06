@@ -33,10 +33,6 @@ public class Enemy_Map : MonoBehaviour,IMove_
         else
         {
             PlayerTeamState.PlayerState.EnemyType = type;
-            for(int i = 0; i < 3; i++)
-            {
-                if (arr[i]) PlayerTeamState.PlayerState.isHere[i] = true;
-            }
             PlayerTeamState.PlayerState.isHere = arr;
         }
         UIManager.DisplayEnemyInformation(type,flag);
@@ -44,7 +40,7 @@ public class Enemy_Map : MonoBehaviour,IMove_
 
     public void Move(Vector2 direction)
     {
-        transform.DOMove(direction, 1.0f);
+        transform.DOMove(direction, 0.3f);
         if (direction.x > Enemy.transform.position.x)
         {
             Enemy.GetComponent<RectTransform>().localScale = new Vector3(-1.25f, 1.25f, 1.25f);
@@ -54,7 +50,13 @@ public class Enemy_Map : MonoBehaviour,IMove_
             Enemy.GetComponent<RectTransform>().localScale = new Vector3(1.25f, 1.25f, 1.25f);
         }
         Animator animator = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-        animator.SetBool("move_Map", true);
-        Invoke("Move_", 1f);
+        animator.SetBool("Move", true);
+        Invoke("Move_", 0.3f);
+    }
+
+    public void Move_()
+    {
+        Animator animator = gameObject.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        animator.SetBool("Move", false);
     }
 }
